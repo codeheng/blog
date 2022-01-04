@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Yiheng">
   <meta name="keywords" content="">
-  <title>两数之和 - 寻归往</title>
+  <title>docker基础 - 寻归往</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -162,8 +162,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2022-01-03 17:42" pubdate>
-      2022年1月3日 下午
+    <time datetime="2022-01-04 09:27" pubdate>
+      2022年1月4日 上午
     </time>
   </div>
 
@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      884 字
+      1.2k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      16
        分钟
     </span>
   
@@ -213,148 +213,207 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">两数之和</h1>
+            <h1 style="display: none">docker基础</h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/two-sum/"> leetcode 第一题</a></p>
-<p>day1</p>
-<blockquote>
-<p>给定一个<strong>整数数组 nums</strong> 和一个<strong>整数目标值 target</strong></p>
-<p>请你在该数组中找出 和为目标值 target  的那 两个 整数，并<strong>返回它们的数组下标。</strong></p>
-<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
-<p>你可以按任意顺序返回答案。</p>
+              <h1 id="Docker基础"><a href="#Docker基础" class="headerlink" title="Docker基础"></a>Docker基础</h1><h2 id="1-综述"><a href="#1-综述" class="headerlink" title="1.综述"></a>1.综述</h2><blockquote>
+<p>docker学习</p>
 </blockquote>
-<p><strong>示例 1：</strong></p>
-<p>输入：nums = [2,7,11,15], target = 9<br>输出：[0,1]<br>解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。</p>
-<p><strong>示例 2：</strong></p>
-<p>输入：nums = [3,2,4], target = 6<br>输出：[1,2]</p>
-<p><strong>示例 3：</strong></p>
-<p>输入：nums = [3,3], target = 6<br>输出：[0,1]</p>
-<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><h2 id="法一"><a href="#法一" class="headerlink" title="法一"></a>法一</h2><p>暴力算法 ===&gt; </p>
 <ul>
-<li>i 和 j 双重遍历==&gt; 依次找对应数组元素两者之和是否等于target</li>
-<li>新建数组，长度为2。若上述找到，则将数组内的值赋值为 i 和 j</li>
-<li>将新数组作为最终结果进行return</li>
+<li>概述</li>
+<li>安装</li>
+<li>命令<ul>
+<li>镜像命令</li>
+<li>容器命令</li>
+<li>操作命令</li>
+<li>…</li>
 </ul>
-<pre><code class="hljs c"><span class="hljs-comment">//c语言实现</span>
-
-<span class="hljs-comment">/**</span>
-<span class="hljs-comment"> * Note: The returned array must be malloced, assume caller calls free().</span>
-<span class="hljs-comment"> */</span>
-<span class="hljs-function"><span class="hljs-keyword">int</span>* <span class="hljs-title">twoSum</span><span class="hljs-params">(<span class="hljs-keyword">int</span>* nums, <span class="hljs-keyword">int</span> numsSize, <span class="hljs-keyword">int</span> target, <span class="hljs-keyword">int</span>* returnSize)</span></span>&#123;
-        *returnSize = <span class="hljs-number">2</span>;<span class="hljs-comment">//因为要返回的数组大小为2</span>
-        <span class="hljs-comment">//新开辟数组，作为返回结果</span>
-       <span class="hljs-keyword">int</span> *result = (<span class="hljs-keyword">int</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>) * (*returnSize));
-       <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; numsSize; i++) &#123;
-           <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>;j &lt; numsSize;j++) &#123;
-               <span class="hljs-keyword">if</span>( *(nums + i) + *(nums + j) == target ) &#123;
-                    *result = i;
-                    *(result + <span class="hljs-number">1</span>) = j;
-               &#125;
-           &#125;
-       &#125;
-       <span class="hljs-keyword">return</span> result; <span class="hljs-comment">//返回最终结果</span>
-       <span class="hljs-built_in">free</span>(result);
-&#125;</code></pre>
-
-<pre><code class="hljs java"><span class="hljs-comment">//java实现</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] twoSum(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> target) &#123;
-        <span class="hljs-keyword">int</span> result[] = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">2</span>];
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; nums.length;i++) &#123;
-            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>;j &lt; nums.length;j++) &#123;
-                <span class="hljs-keyword">if</span> (nums[i] + nums[j] == target) &#123;
-                    result[<span class="hljs-number">0</span>] = i;
-                    result[<span class="hljs-number">1</span>] = j;
-                &#125;
-            &#125;
-        &#125;
-        <span class="hljs-keyword">return</span> result;
-    &#125;
-&#125;</code></pre>
-
-<ul>
-<li>效率太低了，时间复杂度高</li>
+</li>
+<li>docker镜像</li>
+<li>容器数据卷</li>
+<li>dockerFile</li>
+<li>docker网络原理</li>
+<li>idea整合docker</li>
+<li>docker Compose</li>
+<li>docker swarm</li>
+<li>CI/CD jenkins</li>
 </ul>
-<p><strong>如何才能把复杂度降到 0(n^2)以下？</strong></p>
-<h2 id="法二"><a href="#法二" class="headerlink" title="法二"></a>法二</h2><p>利用<strong>哈希查找</strong></p>
-<ul>
-<li>遍历nums,记 <strong>i 为当前的下标</strong>，看 i 对应nums中的值 是否 map中存在**target - nums[i]**的key值</li>
-<li>若存在，则找到了两个值，不存在则将当前**(num[i],i)** 放入map</li>
-<li>一直遍历至结束</li>
-</ul>
-<p>比如：nums = [2,7,11,15]</p>
+<h2 id="2-概述"><a href="#2-概述" class="headerlink" title="2.概述"></a>2.概述</h2><h3 id="Docker为何会出现？"><a href="#Docker为何会出现？" class="headerlink" title="Docker为何会出现？"></a>Docker为何会出现？</h3><p>一款产品：开发==&gt; 上线  应用环境，应用配置</p>
+<p>即开发 &amp; 运维。但常常有一个问题：在我的电脑可以运行，版本更新以及其他问题导致服务不可以，对于运维，考验就很大</p>
+<p>而且环境配置是十分麻烦的，每一个机器都要部署环境（集群Redis，ES，hadoop）===&gt; 费事费力！</p>
+<p>发布一个项目jar包（需要redis，mysql，jdk，es等环境）===&gt; 如果等<strong>带着jar包 和 环境</strong>一起发布岂不妙！</p>
+<p>docker的作用就是如此！</p>
 <blockquote>
-<p>1、开始i = 0 找2，target-num[0] = 13-2 = 11 ,该值不存在，即map表中记上 key-value==&gt; (2,0)</p>
-<p>2、此时i = 1 找到7 ，target - num[1] = 13 - 7 = 6 ,也不在，继续记上key-value===&gt;( 7, 1)</p>
-<p>3、此时 i = 2 ,找 11，target - num[2] = 13 - 11 = 2 , 此时key在表中，找到，进行返回 对应下标0和2</p>
+<p>传统：开发jar，其余运维来做</p>
+<p>现在，开发打包部署上线，一套流程</p>
 </blockquote>
-<p>map:</p>
-<table>
-<thead>
-<tr>
-<th>key</th>
-<th>2</th>
-<th>7</th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>value</td>
-<td>0</td>
-<td>1</td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<pre><code class="hljs java"><span class="hljs-comment">//java</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] twoSum(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> target) &#123;
-         HashMap&lt;Integer,Integer&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;(); 
-        <span class="hljs-keyword">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">2</span>];
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; nums.length;i++) &#123;
-            <span class="hljs-keyword">if</span>( map.containsKey( target-nums[i]) ) &#123;
-                res[<span class="hljs-number">0</span>] = map.get(target - nums[i]);
-                res[<span class="hljs-number">1</span>] = i;
-            &#125;
-            <span class="hljs-keyword">else</span> &#123;
-                map.put(nums[i],i);
-            &#125;
-        &#125;
-        <span class="hljs-keyword">return</span> res;
-    &#125;
-&#125;</code></pre>
+<p>类比: </p>
+<p>java — 开发apk—-发布(到应用商店) —- 使用的话只需下载apk—-安装即可</p>
+<p>java — jar(环境) —- 打包项目带上环境(<strong>镜像</strong>) — 放到docker仓库(即上述的商店) —  下载发布的镜像 — 直接可以运行</p>
+<blockquote>
+<p>docker的思想来自于 集装箱 ！</p>
+<p>jre – 多个应用，可能会产生端口冲突</p>
+<p>隔离 ===&gt; docker的核心思想，打包装箱，每个箱子是互相隔离的</p>
+<p>故docker利用隔离机制，可以将服务器利用到极致！</p>
+</blockquote>
+<h3 id="docker历史"><a href="#docker历史" class="headerlink" title="docker历史"></a>docker历史</h3><p><img src="/2022/01/04/Docker%E5%9F%BA%E7%A1%80/01.png" srcset="/img/loading.gif" alt="image-20220102155224157"></p>
+<p><a target="_blank" rel="noopener" href="https://www.docker.com/">Docker官网</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.docker.com/">docker官网文档</a> 超级详细！</p>
+<p><a target="_blank" rel="noopener" href="https://hub.docker.com/">docker仓库地址</a> 类似于github</p>
+<blockquote>
+<p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%95%9C%E5%83%8F/1574">镜像</a>中，然后发布到任何流行的 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Linux">Linux</a>或<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Windows/165458">Windows</a>操作系统的机器上，也可以实现<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%99%9A%E6%8B%9F%E5%8C%96/547949">虚拟化</a>。容器是完全使用<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%B2%99%E7%AE%B1/393318">沙箱</a>机制，相互之间不会有任何接口。</p>
+</blockquote>
+<h2 id="3-docker安装"><a href="#3-docker安装" class="headerlink" title="3.docker安装"></a>3.docker安装</h2><h3 id="docker的基本组成"><a href="#docker的基本组成" class="headerlink" title="docker的基本组成"></a>docker的基本组成</h3><p>架构图</p>
+<p><img src="/2022/01/04/Docker%E5%9F%BA%E7%A1%80/2.png" srcset="/img/loading.gif" alt="docker"></p>
+<p><strong>镜像(image)</strong>:</p>
+<blockquote>
+<p>​    docker镜像就好比是一个模板，可以通过这个模板来创建容器服务，tomcat镜像===&gt; run ===&gt; tomcat01容器(提供服务器)，</p>
+<p>可以通过这个镜像创建多个容器（最终服务运行或项目运行就在容器</p>
+</blockquote>
+<p><strong>容器(container)</strong></p>
+<blockquote>
+<p>docker利用容器技术，独立运行一个或一个组应用，通过镜像来创建的</p>
+<p>启动，停止，删除，基本命令</p>
+<p>目前可以把容器理解成一个简单的linux系统</p>
+</blockquote>
+<p><strong>仓库(repository)</strong></p>
+<blockquote>
+<p>仓库就是存放镜像的地方，分为共有仓库和私有仓库</p>
+<p>docker hub(默认是国外的)</p>
+<p>阿里云….也有容器服务器(需要配置镜像加速，类似于maven一样需要配置)</p>
+</blockquote>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><strong>环境准备：</strong></p>
+<blockquote>
+<p>​    1、会linux命令</p>
+<p>​    2、CentOS</p>
+<p>​    3、使用ssh(例如xshell等….)</p>
+</blockquote>
+<p><strong>环境查看</strong>：</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 系统内核是3.10以上的</span>
+[root@iZ2ze9nu608mhi5at5aufaZ ~]# uname -r
+3.10.0-1062.18.1.el7.x86_64</code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 系统版本</span>
+[root@iZ2ze9nu608mhi5at5aufaZ ~]# cat /etc/os-release 
+NAME=&quot;CentOS Linux&quot;
+VERSION=&quot;7 (Core)&quot;
+ID=&quot;centos&quot;
+ID_LIKE=&quot;rhel fedora&quot;
+VERSION_ID=&quot;7&quot;
+PRETTY_NAME=&quot;CentOS Linux 7 (Core)&quot;
+ANSI_COLOR=&quot;0;31&quot;
+CPE_NAME=&quot;cpe:/o:centos:centos:7&quot;
+HOME_URL=&quot;https://www.centos.org/&quot;
+BUG_REPORT_URL=&quot;https://bugs.centos.org/&quot;
+
+CENTOS_MANTISBT_PROJECT=&quot;CentOS-7&quot;
+CENTOS_MANTISBT_PROJECT_VERSION=&quot;7&quot;
+REDHAT_SUPPORT_PRODUCT=&quot;centos&quot;
+REDHAT_SUPPORT_PRODUCT_VERSION=&quot;7&quot;</code></pre>
+
+<p> <strong>安装</strong> ===&gt; 根据官方文档</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 1、Uninstall old versions</span>
+sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine
+
+<span class="hljs-meta">#</span><span class="bash"> 2.安装需要的安装包</span>
+ sudo yum install -y yum-utils
+
+<span class="hljs-meta">#</span><span class="bash"> 3.设置镜像的仓库</span>
+sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo # 默认是从国外下载
+
+<span class="hljs-meta">#</span><span class="bash"> 更新一下yum索引</span>
+yum makecache fast
+
+<span class="hljs-meta">#</span><span class="bash"> 4安装docker相关内容</span>
+ sudo yum install docker-ce docker-ce-cli containerd.io
+
+<span class="hljs-meta"> #</span><span class="bash"> 5 启动docker</span>
+ sudo systemctl start docker
+
+<span class="hljs-meta"> #</span><span class="bash"> 6 查看是否安装成功</span>
+[root@iZ2ze9nu608mhi5at5aufaZ ~]# docker version
+Client: Docker Engine - Community
+ Version:           20.10.12
+ API version:       1.41
+ Go version:        go1.16.12
+ Git commit:        e91ed57
+ Built:             Mon Dec 13 11:45:41 2021
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          20.10.12
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.16.12
+  Git commit:       459d0df
+  Built:            Mon Dec 13 11:44:05 2021
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.4.12
+  GitCommit:        7b11cfaabd73bb80907dd23182b9347b4245eb5d
+ runc:
+  Version:          1.0.2
+  GitCommit:        v1.0.2-0-g52b36a2
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0</code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 7 测试hello world</span>
+sudo docker run hello-world</code></pre>
+
+<p><img src="/2022/01/04/Docker%E5%9F%BA%E7%A1%80/03.png" srcset="/img/loading.gif" alt="image-20220103095017939"></p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 8 查看安装的镜像是否存在</span>
+[root@iZ2ze9nu608mhi5at5aufaZ ~]# docker images
+REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
+hello-world   latest    feb5d9fea6a5   3 months ago   13.3kB</code></pre>
+
+<p><strong>卸载</strong></p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 1卸载依赖</span>
+sudo yum remove docker-ce docker-ce-cli containerd.io
+
+<span class="hljs-meta">#</span><span class="bash"> 2 删除资源</span>
+ sudo rm -rf /var/lib/docker #docker的默认工作路径
+ sudo rm -rf /var/lib/containerd</code></pre>
 
 
 
+<h3 id="阿里云镜像加速"><a href="#阿里云镜像加速" class="headerlink" title="阿里云镜像加速"></a>阿里云镜像加速</h3><p><img src="/2022/01/04/Docker%E5%9F%BA%E7%A1%80/04.png" srcset="/img/loading.gif" alt="image-20220103095749769"></p>
+<pre><code class="hljs shell">sudo mkdir -p /etc/docker
 
+sudo tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;
+&#123;
+  &quot;registry-mirrors&quot;: [&quot;https://0wtfvcv1.mirror.aliyuncs.com&quot;]
+&#125;
+EOF
 
-<p>法二好好学习 体会 ！哈希表写法</p>
-<p>也可以不创建res数组，直接进行返回，减少空间复杂度</p>
-<pre><code class="hljs java">Class HashMap&lt;K,V&gt;
-<span class="hljs-comment">// K -钥匙的Map保持型    V -映射的值的类型</span>
+sudo systemctl daemon-reload
 
-
-Interface Map&lt;K,V&gt;
-<span class="hljs-comment">//以下均是map接口中的方法</span>
-
-<span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">containsKey</span><span class="hljs-params">(Object key)</span></span>
-<span class="hljs-function"><span class="hljs-comment">//返回 `true`如果这Map包含一个指定的键映射。更正式地说，返回  `true`当且仅当这个图中包含了一个关键的 `k`这样 `(key==null ? k==null :  key.equals(k))`映射。（最多可以有一个这样的映射。） </span></span>
-<span class="hljs-function"></span>
-<span class="hljs-function">V <span class="hljs-title">get</span><span class="hljs-params">(Object key)</span></span>
-<span class="hljs-function">返回指定的键映射的值，或 <span class="hljs-keyword">null</span>如果这个Map不包含的键映射。 </span>
-<span class="hljs-function">    </span>
-<span class="hljs-function">V <span class="hljs-title">put</span><span class="hljs-params">(K key,V value)</span></span>
-<span class="hljs-function">将指定的值与此映射中的指定键关联（可选操作）。如果映射以前包含一个键的映射，旧值将被指定的值替换</span></code></pre>
+sudo systemctl restart docker</code></pre>
 
 
 
-
-
-
-
-<p><img src="/2022/01/03/leetcode01/01.jpg" srcset="/img/loading.gif"></p>
+<h3 id="HelloWorld运行的原理"><a href="#HelloWorld运行的原理" class="headerlink" title="HelloWorld运行的原理"></a>HelloWorld运行的原理</h3><p><img src="/2022/01/04/Docker%E5%9F%BA%E7%A1%80/05.png" srcset="/img/loading.gif" alt="image-20220103100328777"></p>
+<h3 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h3><p><strong>docker如何工作的？</strong></p>
+<blockquote>
+<p>docker是一个Client-Server结构的系统，docker的守护进程运行在主机上，通过socket从客户端访问</p>
+<p>dockerServer接收到Docker-Client的指令，就会执行这个命令</p>
+</blockquote>
+<p><img src="/2022/01/04/Docker%E5%9F%BA%E7%A1%80/06.png" srcset="/img/loading.gif" alt="image-20220103101049775"></p>
+<p><strong>docker为何比虚拟机快？</strong></p>
+<p><img src="/2022/01/04/Docker%E5%9F%BA%E7%A1%80/07.png" srcset="/img/loading.gif" alt="image-20220103101338942"></p>
+<p><img src="/2022/01/04/Docker%E5%9F%BA%E7%A1%80/08.png" srcset="/img/loading.gif" alt="image-20220103101646104"></p>
 
             </div>
             <hr>
@@ -364,7 +423,7 @@ Interface Map&lt;K,V&gt;
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                      <a class="hover-with-bg" href="/categories/Docker/">Docker</a>
                     
                   </div>
                 
@@ -372,9 +431,7 @@ Interface Map&lt;K,V&gt;
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E7%BB%84/">数组</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%93%88%E5%B8%8C%E6%98%A0%E5%B0%84/">哈希映射</a>
+                      <a class="hover-with-bg" href="/tags/Docker%E5%AE%89%E8%A3%85/">Docker安装</a>
                     
                   </div>
                 
@@ -387,9 +444,9 @@ Interface Map&lt;K,V&gt;
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/01/04/Docker%E5%9F%BA%E7%A1%80/">
+                      <a href="/2022/01/04/JavaWeb/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">docker基础</span>
+                        <span class="hidden-mobile">JavaWeb</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -397,8 +454,8 @@ Interface Map&lt;K,V&gt;
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/18/html/">
-                        <span class="hidden-mobile">html</span>
+                      <a href="/2022/01/03/leetcode01/">
+                        <span class="hidden-mobile">两数之和</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -617,7 +674,7 @@ show_date_time();
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "两数之和&nbsp;",
+        "docker基础&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
