@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.6k 字
+      3.7k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      29
+      43
        分钟
     </span>
   
@@ -449,6 +449,128 @@ student1.sport();  <span class="hljs-comment">//调用具体实现类的方法</
 
 <pre><code class="hljs java">System.out.println(student <span class="hljs-keyword">instanceof</span> Student); <span class="hljs-comment">//打印true，因为student对应的类继承Student类</span></code></pre>
 
+<h3 id="5-4-final关键字"><a href="#5-4-final关键字" class="headerlink" title="5.4 final关键字"></a>5.4 final关键字</h3><p>final关键字可以使一个变量的值不可更改，如果放在类前面呢？</p>
+<pre><code class="hljs java"><span class="hljs-comment">// 此时类被声明为终态，无法再被继承，不允许子类的存在</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span> </span>&#123; 
+
+&#125;
+<span class="hljs-comment">//同样的 方法 定义为终态，也不能进行重写</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title">study</span><span class="hljs-params">()</span> </span>&#123;
+    System.out.println(<span class="hljs-string">&quot;学习！&quot;</span>);
+&#125;
+<span class="hljs-comment">//如何类的成员属性被声明为final，则必须在构造方法中或是在定义时赋初始值</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String name; <span class="hljs-comment">//引用类型不允许再指向其他对象</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> age; <span class="hljs-comment">//基本类型值不允许发生改变</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Student</span><span class="hljs-params">(String name, <span class="hljs-keyword">int</span> age)</span> </span>&#123;
+    <span class="hljs-keyword">this</span>.name = name;
+    <span class="hljs-keyword">this</span>.age = age;
+&#125;</code></pre>
+
+<blockquote>
+<p>故当一个成员属性不发生改变时，应该添加上final关键字</p>
+</blockquote>
+<h3 id="5-5抽象类"><a href="#5-5抽象类" class="headerlink" title="5.5抽象类"></a>5.5抽象类</h3><p>抽象类是在类的基础上继续抽象，<strong>只保留特征，而不保留具体呈现形式</strong>。即方法可以定义好，但不去实现它，而是由子类进行实现！</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span> </span>&#123; <span class="hljs-comment">//抽象类</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">//抽象方法</span>
+&#125;
+<span class="hljs-comment">//抽象方法不需要编写具体实现（无方法体）但是 必须 由子类实现（除非子类也是一个抽象类）</span>
+
+<span class="hljs-comment">//抽象类由于不是具体的类定义，因此无法直接通过new关键字来创建对象！</span>
+<span class="hljs-comment">//只能创建带实现的匿名内部类</span>
+Student s = <span class="hljs-keyword">new</span> Student() &#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>&#123;
+
+    &#125;
+&#125;</code></pre>
+
+<p>故抽象类一般作继承使用，使得继承关系之间更加明确</p>
+<pre><code class="hljs java"><span class="hljs-comment">////现在只能由子类编写，父类没有定义，更加明确了多态的定义！同一个方法多种实现！</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">study</span><span class="hljs-params">()</span> </span>&#123;
+    System.out.println(<span class="hljs-string">&quot;给你一些好康的！&quot;</span>)
+&#125;</code></pre>
+
+<h3 id="5-6-接口-interface"><a href="#5-6-接口-interface" class="headerlink" title="5.6 接口(interface)"></a>5.6 接口(interface)</h3><p>接口进一步继续抽象，<strong>只代表某个确切的功能，也就是只包含方法的定义</strong>，其实已经不是一个类了！</p>
+<p>接口包含了一些类方法的具体定义，类可以实现这个接口，表示类支持接口代表的功能（类似于一个插件，只能作为一个附属功能加在主体上，同时具体实现还需要由主体来实现）</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Eat</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span></span>;
+&#125;
+<span class="hljs-comment">//接口只包含public权限的抽象方法(java8之后有默认实现)</span>
+<span class="hljs-comment">//可以通过声明default关键字来给抽象方法一个默认实现</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Eat</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">default</span> <span class="hljs-keyword">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-comment">//do..</span>
+    &#125;
+&#125;
+
+<span class="hljs-comment">//接口中的变量，默认为public static final</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Eat</span> </span>&#123;
+    <span class="hljs-keyword">int</span> a = <span class="hljs-number">1</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre>
+
+<p>一个类可以实现很多个接口，但是不能理解为多继承！</p>
+<p>（实际上实现接口是附加功能，和继承的概念有一定出入，顶多说是多继承的一种替代方案）一个类可以附加很多个功能！</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SportStudent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Student</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Eat</span>,... </span>&#123;
+    <span class="hljs-meta">@override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span> </span>&#123;
+
+    &#125;
+&#125;
+
+<span class="hljs-comment">//类通过implements关键字来声明实现的接口！每个接口之间用逗号隔开！</span>
+<span class="hljs-comment">//实现接口的类也能通过instanceof关键字判断，也支持向上和向下转型！</span></code></pre>
+
+
+
+<h2 id="6-内部类"><a href="#6-内部类" class="headerlink" title="6.内部类"></a>6.内部类</h2><h3 id="成员内部类"><a href="#成员内部类" class="headerlink" title="成员内部类"></a>成员内部类</h3><p>我们的类中可以在嵌套一个类：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Inner</span></span>&#123;   <span class="hljs-comment">//类中定义的一个内部类</span>
+
+    &#125;
+&#125;
+<span class="hljs-comment">//就是Inner Class的实例不能单独存在，必须依附于一个Outer Class的实例</span></code></pre>
+
+<p>成员内部类和成员变量和成员方法一样，都是属于对象的，也就是说，必须存在外部对象，才能创建内部类的对象！</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+    Test test = <span class="hljs-keyword">new</span> Test();
+    Test.Inner inner = test.<span class="hljs-function">new <span class="hljs-title">Inner</span><span class="hljs-params">()</span></span>;   <span class="hljs-comment">//写法有那么一丝怪异，但是没毛病！</span>
+&#125;</code></pre>
+
+<h3 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h3><p>静态内部类其实就和类中的静态变量和静态方法一样，是属于类拥有的，我们可以直接通过<code>类名.</code>去访问:</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;
+    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Inner</span></span>&#123;
+
+    &#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+    Test.Inner inner = <span class="hljs-keyword">new</span> Test.Inner();   <span class="hljs-comment">//不用再创建外部类对象了！</span>
+&#125;</code></pre>
+
+<h3 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h3><p>和局部变量一样 ( 很少用 )</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Inner</span></span>&#123;
+
+        &#125;
+
+        Inner inner = <span class="hljs-keyword">new</span> Inner();
+    &#125;
+&#125;</code></pre>
+
+<h3 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h3><p>其实就是在new的时候，直接对接口或者抽象类的实现，是实现Lambda表达式的原理。</p>
+<pre><code class="hljs java">Runnable r = <span class="hljs-keyword">new</span> Runnable() &#123;
+    <span class="hljs-comment">// 实现必要的抽象方法...</span>
+&#125;;
+<span class="hljs-comment">//例如：</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        Eat eat = <span class="hljs-keyword">new</span> Eat() &#123;
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span> </span>&#123;
+                <span class="hljs-comment">//DO something...</span>
+        &#125;
+    &#125;;
+&#125;</code></pre>
 
             </div>
             <hr>
@@ -480,6 +602,12 @@ student1.sport();  <span class="hljs-comment">//调用具体实现类的方法</
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/01/09/leetcode02/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">217.存在重复元素</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
@@ -646,7 +774,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：20.8k</span>
+    <span class="post-count">总字数统计：22.7k</span>
 
     
   </div>

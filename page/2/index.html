@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Yiheng">
   <meta name="keywords" content="">
-  <title>归档 - 寻归往</title>
+  <title>寻归往</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -137,7 +137,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/lyf1.jpg') no-repeat center center;
+         style="background: url('/img/index_page.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -170,20 +170,73 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="list-group">
-  <p class="h4">共计 11 篇文章</p>
-  <hr>
-  
+
+  <div class="row mx-auto index-card">
     
-      
-      <p class="h5">2020</p>
     
-    <a href="/2020/08/11/%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA-hexo-github/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">博客的搭建-hexo-github</span>
-      <time style="float: right;">08-11</time>
-    </a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/08/11/%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA-hexo-github/">博客的搭建-hexo-github</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/08/11/%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA-hexo-github/">
+          
+          
+            
+          
+          1前提介绍：​    我用的是win10，下面会从win10来介绍，不过mac应该也差别不大
+正式搭建之前，我们先要做好提前的准备
+2需要提前安装的软件：(1)、node.js官网 ：https://nodejs.org/en/ 
+image-20200811072015514
+点击12.18.3 LTS 根据步骤安装即可，记得勾选添加到环境变量
+
+安装之后，打开命令行，即win+r 敲入cmd，
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-08-11 08:03" pubdate>
+              2020-08-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </span>
+  </nav>
   
-</div>
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 
@@ -327,7 +380,7 @@ show_date_time();
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "归档&nbsp;",
+        "读书 学习 锻炼 思考 总结&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
