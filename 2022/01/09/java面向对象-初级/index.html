@@ -1,0 +1,837 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/resizeApi.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Yiheng">
+  <meta name="keywords" content="">
+  <title>java面向对象(初级) - 寻归往</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Yiheng.blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/article_img.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2022-01-09 09:31" pubdate>
+      2022年1月9日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">java面向对象(初级)</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h1 id="面向对象-初级"><a href="#面向对象-初级" class="headerlink" title="面向对象(初级)"></a>面向对象(初级)</h1><h2 id="1-类和对象"><a href="#1-类和对象" class="headerlink" title="1.类和对象"></a>1.类和对象</h2><p><img src="/2022/01/09/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%88%9D%E7%BA%A7/01.png" srcset="/img/loading.gif" alt="image-20211231104708275"></p>
+<blockquote>
+<p>(1)类是抽象的,概念的,代表一类食物,比如人类,猫类.他是数据类型</p>
+<p>(2)对象是具体的,实际的,代表一个具体事物,即是实例</p>
+<p>(3)类是对象的模板,对象是类的一个个体,对应一个实例</p>
+</blockquote>
+<p><strong>java内存结构</strong></p>
+<blockquote>
+<p>栈：存放基本数据类型（局部变量</p>
+<p>堆：存放对象（Cat cat，数组）</p>
+<p>方法区：常量池（常量，比如字符串），类加载信息</p>
+</blockquote>
+<p><strong>方法的调用过程</strong></p>
+<p><img src="/2022/01/09/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%88%9D%E7%BA%A7/02.png" srcset="/img/loading.gif" alt="image-20211231105242496"></p>
+<p><strong>可变参数</strong></p>
+<blockquote>
+<p>java允许将同一类中多个同名同功能但参数个数不同的方法，封装成一个方法，就可以通过可变参数实现</p>
+<p>基本语法：</p>
+<p>访问修饰符  返回类型 方法名(数据类型… 形参名) {   }</p>
+</blockquote>
+<p><img src="/2022/01/09/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%88%9D%E7%BA%A7/03.png" srcset="/img/loading.gif" alt="image-20211231105638546"></p>
+<h2 id="2-构造方法"><a href="#2-构造方法" class="headerlink" title="2.构造方法"></a>2.构造方法</h2><p>又称为构造器，是类的一种特殊方法，完成对新对象的初始化</p>
+<blockquote>
+<p>特点：</p>
+<p>​    1.方法名和类名相同</p>
+<p>​    2.没有返回值</p>
+<p>​    3.在创建对象时，系统会自动的调用该类的构造器完成对象的初始化</p>
+<p>基本语法：</p>
+<p>[修饰符] 方法名(形参列表) { 方法体; }</p>
+</blockquote>
+<p>1.构造器的修饰符可以默认， 也可以是 public protected private</p>
+<ol start="2">
+<li>构造器没有返回值<ol start="3">
+<li>方法名 和类名字必须一样<ol start="4">
+<li>参数列表 和 成员方法一样的规则<ol start="5">
+<li>构造器的调用, 由系统完成  </li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2022/01/09/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%88%9D%E7%BA%A7/04.png" srcset="/img/loading.gif" alt="image-20211231120033568"></p>
+<p><img src="/2022/01/09/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%88%9D%E7%BA%A7/05.png" srcset="/img/loading.gif" alt="image-20211231120052604"></p>
+<p><strong>this关键字</strong></p>
+<blockquote>
+<p>java虚拟机会给每个对象分配this，代表当前对象</p>
+<p>简单来说：哪个对象调用，this就代表哪个对象</p>
+</blockquote>
+<p><strong>使用细节：</strong></p>
+<p>1、this 关键字可以用来访问本类的属性、 方法、 构造器  </p>
+<p>2、this 用于区分当前类的属性和局部变量</p>
+<p>3、访问成员方法的语法： this.方法名(参数列表); </p>
+<p>4、访问构造器语法： this(参数列表); 注意只能在构造器中使用(即只能在构造器中访问另外一个构造器, 必须放在第一<br>条语句)  </p>
+<p>5、this 不能在类定义的外部使用， 只能在类定义的方法中使用。  </p>
+<h3 id="2-1-IDEA简单使用"><a href="#2-1-IDEA简单使用" class="headerlink" title="2.1.IDEA简单使用"></a>2.1.IDEA简单使用</h3><p>常用快捷键设置</p>
+<p>file–&gt;setting–&gt;keymap进行设置</p>
+<p><img src="/2022/01/09/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%88%9D%E7%BA%A7/06.png" srcset="/img/loading.gif" alt="image-20211231143309908"></p>
+<pre><code class="hljs angelscript"><span class="hljs-number">1</span>) 删除当前行, 默认是 ctrl + Y 自己配置 ctrl + d
+<span class="hljs-number">2</span>) 复制当前行, 自己配置 ctrl + alt + 向下光标
+<span class="hljs-number">3</span>) 补全代码 alt + /
+<span class="hljs-number">4</span>) 添加注释和取消注释 ctrl + / 【第一次是添加注释， 第二次是取消注释】
+<span class="hljs-number">5</span>) 导入该行需要的类 先配置 <span class="hljs-built_in">auto</span> <span class="hljs-keyword">import</span> , 然后使用 alt+enter 即可
+<span class="hljs-number">6</span>) 快速格式化代码 ctrl + alt + L
+<span class="hljs-number">7</span>) 快速运行程序 自己定义 alt + R
+<span class="hljs-number">8</span>) 生成构造器等 alt + insert [提高开发效率]
+<span class="hljs-number">9</span>) 查看一个类的层级关系 ctrl + H [学习继承后， 非常有用]
+<span class="hljs-number">10</span>) 将光标放在一个方法上， 输入 ctrl + B , 可以定位到方法 [学继承后， 非常有用]
+<span class="hljs-number">11</span>) 自动的分配变量名 , 通过 在后面假 .var [老师最喜欢的] </code></pre>
+
+<h3 id="2-2包-package"><a href="#2-2包-package" class="headerlink" title="2.2包(package"></a>2.2包(package</h3><blockquote>
+<p>作用：1.区分相同名字的类；2当类很多时，可以很好的管理类(看java API文档) 3.控制访问范围</p>
+<p>包本质：就是创建不同的文件夹/目录保存类文件</p>
+<p>命名规则：只能包含数字，字母，下划线，小圆点，但不可以数字开头，不能是关键字</p>
+</blockquote>
+<p>规范：<strong>com.公司名.项目名.业务模块名</strong></p>
+<p>例如：com.sina.crm.user 用户模块</p>
+<p>如何引入包 ===&gt; import 包名;</p>
+<h3 id="2-3-访问修饰符"><a href="#2-3-访问修饰符" class="headerlink" title="2.3 访问修饰符"></a>2.3 访问修饰符</h3><p>用于控制方法和属性(成员变量)的访问权限(范围)</p>
+<ol>
+<li>公开级别 <strong>public</strong> ，对外公开</li>
+<li>受保护级别：<strong>protected</strong>，对子类和同一个包中的类公开</li>
+<li>默认，没有修饰符，对同一个包的类公开</li>
+<li>私有级别：用private修饰，只有类本身可以访问，不对外公开</li>
+</ol>
+<p><strong>访问范围</strong></p>
+<p><img src="/2022/01/09/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%88%9D%E7%BA%A7/07.png" srcset="/img/loading.gif" alt="image-20211231144625578"></p>
+<h3 id="2-4-方法的重载"><a href="#2-4-方法的重载" class="headerlink" title="2.4 方法的重载"></a>2.4 方法的重载</h3><blockquote>
+<p>一个类中可以包含多个同名的方法，但只是需要的形式参数不同</p>
+</blockquote>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">a</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">// 原本的方法</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">a</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>&#123; <span class="hljs-comment">//ok 形参不同</span>
+        <span class="hljs-keyword">return</span> i;
+    &#125;
+    <span class="hljs-comment">//ok 返回值和形参均不同</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">a</span><span class="hljs-params">(<span class="hljs-keyword">byte</span> i)</span> </span>&#123;
+
+    &#125;
+    <span class="hljs-comment">// 错误，仅返回值类型不同不能重载</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">a</span><span class="hljs-params">()</span> </span>&#123;
+
+    &#125;
+&#125;</code></pre>
+
+
+
+<h2 id="3-静态变量和静态方法"><a href="#3-静态变量和静态方法" class="headerlink" title="3.静态变量和静态方法"></a>3.静态变量和静态方法</h2><blockquote>
+<p>静态变量和静态方法是类具有的属性（后面还会提到静态类、静态代码块），也可以理解为是所有对象共享的内容。我们通过使用<code>static</code>关键字来声明一个变量或一个方法为静态的，一旦被声明为静态，那么通过这个类创建的所有对象，操作的都是同一个目标，也就是说，对象再多，也只有这一个静态的变量或方法。那么，一个对象改变了静态变量的值，那么其他的对象读取的就是被改变的值。</p>
+</blockquote>
+<ul>
+<li>所有被标记为静态的内容，会在类刚加载的时候就分配，而不是在对象创建的时候分配，所以说静态内容一定会在第一个对象初始化之前完成加载。</li>
+</ul>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span> </span>&#123;
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> a = test();  <span class="hljs-comment">//直接调用静态方法，只能调用静态方法</span>
+
+    Student()&#123;
+        System.out.println(<span class="hljs-string">&quot;构造类对象&quot;</span>);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>&#123;   <span class="hljs-comment">//静态方法刚加载时就有了</span>
+        System.out.println(<span class="hljs-string">&quot;初始化变量a&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    &#125;
+&#125;
+
+<span class="hljs-comment">//打印：</span>
+初始化变量a
+构造类对象</code></pre>
+
+
+
+
+
+<h2 id="3-封装-encaplation"><a href="#3-封装-encaplation" class="headerlink" title="3.封装(encaplation)"></a>3.封装(encaplation)</h2><p>封装就是把抽象出的**数据(属性)和对数据的操作(方法)**封装在一起，数据被 保护在内部，程序的其他部分只有通过被授权的操作(方法)，才能对数据进行操作</p>
+<blockquote>
+<p>封装的好处：1.隐藏实现细节 2.可以对数据进行验证，保证安全合理</p>
+<p>封装的实现步骤：</p>
+<p><img src="/2022/01/09/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%88%9D%E7%BA%A7/08.png" srcset="/img/loading.gif"></p>
+</blockquote>
+<h2 id="4-继承-extends"><a href="#4-继承-extends" class="headerlink" title="4.继承(extends)"></a>4.继承(extends)</h2><p>​        继承解决代码复用，当多个类存在相同的属性(变量)和方法时，可以从这些类中抽象出父类，在父类中定义这些相同的属性和方法，所有的子类不需要重新定义这些属性和方法，只需要通过extends来声明继承父类即可。</p>
+<p><img src="/2022/01/09/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%88%9D%E7%BA%A7/09.png" srcset="/img/loading.gif" alt="image-20211231185044322"></p>
+<pre><code class="hljs angelscript">语法：
+<span class="hljs-keyword">class</span> 子类 <span class="hljs-symbol">extends</span> 父类 &#123;    
+&#125;
+
+<span class="hljs-number">1.</span>子类就会自动拥有父类定义的属性和方法
+<span class="hljs-number">2.</span>父类又叫 超类，基类
+<span class="hljs-number">3.</span>子类又叫派生类
+
+继承的好处：代码复用性提高了 &amp; 拓展性和维护性提高了
+
+继承的细节：
+<span class="hljs-number">1.</span>子类继承了所有的属性和方法，非私有的属性和方法在子类可以直接访问，但私有属性和方法不能在子类直接访问，要通过父类提供公共的方法来访问
+<span class="hljs-number">2.</span>子类必须调用父类的构造器，完成父类的初始化
+<span class="hljs-number">3.</span>当创建子类对象时，不管使用子类的哪个构造器，默认情况下总会去调用父类的无参构造器，如果父类没有提供无参构造器，则必须在子类的构造器中用<span class="hljs-keyword">super</span>去指定使用父类的哪个构造器完成对父类的初始化工作，否则编译不通过
+<span class="hljs-number">4.</span>如果希望指定去调用父类的某个构造器，则显式的调用一下：<span class="hljs-keyword">super</span>(参数列表)
+<span class="hljs-number">5.</span><span class="hljs-keyword">super</span>在使用时，必须放在构造器第一行(<span class="hljs-keyword">super</span>只能在构造器中使用)
+<span class="hljs-number">6.</span><span class="hljs-keyword">super</span>()和<span class="hljs-keyword">this</span>() 都只能放在构造器第一行，因此这两个方法不能共存在一个构造器
+<span class="hljs-number">7.</span>java所有类都是Object类的子类，Object是所有类的基类
+<span class="hljs-number">8.</span>父类构造器的调用不限于直接父类，将一直往上追溯到Object类
+<span class="hljs-number">9.</span>子类最多只能继承一个父类(直接继承)，即java中式单继承机制
+问：如何让A类继承B类和C类？ ===&gt; 接口！
+<span class="hljs-number">10.</span>不能滥用继承，子类和父类直接必须满足 <span class="hljs-keyword">is</span> 的逻辑关系</code></pre>
+
+
+
+<h2 id="5-多态"><a href="#5-多态" class="headerlink" title="5.多态"></a>5.多态</h2><blockquote>
+<p>同一个行为具有多个不同表现形式或形态的能力。即同样的方法，因实现类的不同，执行结果也不同</p>
+</blockquote>
+<h3 id="5-1方法的重写"><a href="#5-1方法的重写" class="headerlink" title="5.1方法的重写"></a>5.1方法的重写</h3><blockquote>
+<p>注意区分和重载的区别==&gt;</p>
+<p>重载：原有方法的逻辑不变，可以支持更多的参数实现</p>
+<p>重写：直接覆盖原有的方法</p>
+</blockquote>
+<pre><code class="hljs java"><span class="hljs-comment">//父类中 </span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">study</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">&quot;studying....&quot;</span>);
+&#125;
+<span class="hljs-comment">//子类中</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">study</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">&quot;给你一些好康的！&quot;</span>);
+&#125;</code></pre>
+
+<p>再次定义同样的方法后，父类的方法就被覆盖！子类还可以给父类方法提升访问权限！</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+     SportsStudent student = <span class="hljs-keyword">new</span> SportsStudent(<span class="hljs-string">&quot;lbw&quot;</span>, <span class="hljs-number">20</span>);
+     student.study();   <span class="hljs-comment">//输出子类定义的内容</span>
+&#125;     </code></pre>
+
+<blockquote>
+<p>ps:静态方法不可以被重写，是属于类的一部分</p>
+</blockquote>
+<p>如果在重写时，要使用自己的逻辑，也想执行父类的逻辑，怎么办===&gt; super</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">study</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">super</span>.study();
+    System.out.println(<span class="hljs-string">&quot;给你看点好康的！&quot;</span>);
+&#125;</code></pre>
+
+<p>如果要访问父类的成员变量，也可以使用super关键字来访问。同时，子类也可以具有和父类相同的成员变量，而在方法中访问的默认是： <strong>形参列表中 &gt; 当前类的成员变量 &gt; 父类成员变量</strong> </p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setTest</span><span class="hljs-params">(<span class="hljs-keyword">int</span> test)</span> </span>&#123;
+    test = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">this</span>.test = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">super</span>.tesr = <span class="hljs-number">1</span>;
+&#125;</code></pre>
+
+<h3 id="5-2类型转换"><a href="#5-2类型转换" class="headerlink" title="5.2类型转换"></a>5.2类型转换</h3><pre><code class="hljs java">Student student = <span class="hljs-keyword">new</span> SportsStudent(<span class="hljs-string">&quot;yh&quot;</span>, <span class="hljs-number">20</span>);  <span class="hljs-comment">//父类变量引用子类实例</span>
+student.study();     <span class="hljs-comment">//得到依然是具体实现的结果，而不是当前类型的结果</span></code></pre>
+
+<p>也可以把已经明确是由哪个类实现的父类引用，强制转换为对应的类型： (向下转型)</p>
+<pre><code class="hljs java">Student student = <span class="hljs-keyword">new</span> SportsStudent(<span class="hljs-string">&quot;yh&quot;</span>, <span class="hljs-number">20</span>);  <span class="hljs-comment">//是由SportsStudent进行实现的</span>
+<span class="hljs-comment">//...</span>
+
+SportsStudent student1 = (SportsStudent)student;  <span class="hljs-comment">//让它变成一个具体的子类</span>
+student1.sport();  <span class="hljs-comment">//调用具体实现类的方法</span></code></pre>
+
+<h3 id="5-3-instanceof关键字"><a href="#5-3-instanceof关键字" class="headerlink" title="5.3 instanceof关键字"></a>5.3 instanceof关键字</h3><p>如果只是得到一个父类引用，但是不知道它到底是哪一个子类的实现怎么办？ ==&gt; instanceof 进行类型判断</p>
+<p>可以明确类的具体实现到底是哪个类！</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">(Student student)</span></span>&#123;
+    <span class="hljs-keyword">if</span> (student <span class="hljs-keyword">instanceof</span> SportsStudent)&#123;
+        SportsStudent sportsStudent = (SportsStudent) student;
+        sportsStudent.sport();
+    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (student <span class="hljs-keyword">instanceof</span> ArtStudent)&#123;
+        ArtStudent artStudent = (ArtStudent) student;
+        artStudent.art();
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java">System.out.println(student <span class="hljs-keyword">instanceof</span> Student); <span class="hljs-comment">//打印true，因为student对应的类继承Student类</span></code></pre>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">Java 面向对象</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/09/java%E5%9F%BA%E7%A1%80/">
+                        <span class="hidden-mobile">java基础</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    function loadGitalk() {
+      addScript('https://cdn.staticfile.org/blueimp-md5/2.13.0/js/md5.min.js');
+      addScript('https://cdn.staticfile.org/gitalk/1.6.2/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: 'a6ecdddb59c8bed4c4e0',
+          clientSecret: 'deecdd08fa166e81db2222df7514d6c2d2f357a0',
+          repo: 'codeheng.github.io',
+          owner: 'codeheng',
+          admin: ["codeheng"],
+          id: md5(location.pathname),
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    }
+    waitElementVisible('gitalk-container', loadGitalk);
+  </script>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="http://cslearner.cn/" target="_blank" rel="nofollow noopener"><span>CSlearner</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">京ICP证123456号</a>
+    
+      <a
+        href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+        rel="nofollow noopener"
+        class="beian-police"
+        target="_blank"
+      >
+        <span class="beian-police-sep">&nbsp;|&nbsp;</span>
+        
+          <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon" />
+        
+        <span>京公网安备12345678号</span>
+      </a>
+     
+  </div>
+
+
+
+    我在次已等候你:
+<span id="momk"></span>
+<script language=javascript>
+function show_date_time(){
+  window.setTimeout("show_date_time()", 1000);
+  BirthDay=new Date("08-09-2020 20:00:00");//建站日期
+  today=new Date();
+  timeold=(today.getTime()-BirthDay.getTime());
+  sectimeold=timeold/1000
+  secondsold=Math.floor(sectimeold);
+  msPerDay=24*60*60*1000
+  e_daysold=timeold/msPerDay
+  daysold=Math.floor(e_daysold);
+  e_hrsold=(daysold-e_daysold)*-24;
+  hrsold=Math.floor(e_hrsold);
+  e_minsold=(hrsold-e_hrsold)*-60;
+  minsold=Math.floor((hrsold-e_hrsold)*-60);
+  seconds=Math.floor((minsold-e_minsold)*-60);
+  momk.innerHTML=daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒" ;
+}
+show_date_time();
+</script>
+<style>
+#momk{animation:change 10s infinite;font-weight:800; }
+@keyframes change{0%{color:#5cb85c;}25%{color:#556bd8;}50%{color:#e40707;}75%{color:#66e616;}100% {color:#67bd31;}}
+</style>
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "java面向对象(初级)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<script type="text/javascript" src="\js\FunnyTitle.js"></script>
