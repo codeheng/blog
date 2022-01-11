@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Yiheng">
   <meta name="keywords" content="">
-  <title>关于 - 寻归往</title>
+  <title>977.有序数组的平方 - 寻归往</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -55,7 +55,7 @@
 
 
 <body>
-  <header style="height: 100vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -149,7 +149,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/my_img.jpg') no-repeat center center;
+         style="background: url('/img/article_img.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -159,12 +159,42 @@
             </span>
 
             
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2022-01-11 09:08" pubdate>
+      2022年1月11日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      689 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
           </div>
 
-          
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
           
         </div>
       </div>
@@ -173,84 +203,224 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          style=margin-top:0>
-          
-            <div class="about-avatar">
-              <img src="/img/avatar.png" srcset="/img/loading.gif"
-                   class="img-fluid" alt="avatar">
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">977.有序数组的平方</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><pre><code class="hljs shell">给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序。
+
+ 
+
+示例 1：
+输入：nums = [-4,-1,0,3,10]
+输出：[0,1,9,16,100]
+解释：平方后，数组变为 [16,1,0,9,100]
+排序后，数组变为 [0,1,9,16,100]
+
+示例 2：
+输入：nums = [-7,-3,2,3,11]
+输出：[4,9,9,49,121]
+ 
+
+提示：
+1 &lt;= nums.length &lt;= 10^4
+-10^4 &lt;= nums[i] &lt;= 10^4
+nums 已按 非递减顺序 排序
+ 
+
+进阶：
+请你设计时间复杂度为 O(n) 的算法解决本问题
+</code></pre>
+
+
+
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="法一"><a href="#法一" class="headerlink" title="法一"></a>法一</h2><p>第一思路===&gt; 对每个元素进行平方，然后排序即可 （暴力排序！</p>
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] sortedSquares(<span class="hljs-keyword">int</span>[] nums) &#123;
+        <span class="hljs-keyword">for</span>( <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; nums.length; i++) &#123;
+            nums[i] *= nums[i];
+        &#125;
+        Arrays.sort(nums);
+        <span class="hljs-keyword">return</span> nums;
+    &#125;
+&#125;</code></pre>
+
+<blockquote>
+<p>执行结果：</p>
+<p>通过</p>
+<p>显示详情</p>
+<p>执行用时：2 ms, 在所有 Java 提交中击败了39.61%的用户</p>
+<p>内存消耗：39.7 MB, 在所有 Java 提交中击败了96.37%的用户</p>
+<p>通过测试用例：137 / 137</p>
+</blockquote>
+<p>java中Arrays.sort使用了两种排序方法，quick sort 和优化的 merge sort</p>
+<p>故Java内置排序时间复杂度为o(nlogn)  ===&gt;  整体即是  o(nlogn  + n) </p>
+<h2 id="法二"><a href="#法二" class="headerlink" title="法二"></a>法二</h2><p><strong>双指针</strong></p>
+<blockquote>
+<p>数组是有序的，负数平方之后可能成为最大数了。</p>
+<p>那么数组平方的最大值就在数组的两端，不是最左边就是最右边，不可能是中间。</p>
+<p>考虑双指针法，i指向起始位置，j指向终止位置。</p>
+<p>定义一个新数组result，和A数组一样的大小，让k指向result数组终止位置。</p>
+<p>如果<code>A[i] * A[i] &lt; A[j] * A[j]</code> 那么<code>result[k--] = A[j] * A[j];</code> 。</p>
+<p>如果<code>A[i] * A[i] &gt;= A[j] * A[j]</code> 那么<code>result[k--] = A[i] * A[i];</code> 。</p>
+</blockquote>
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] sortedSquares(<span class="hljs-keyword">int</span>[] nums) &#123; 
+        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>,j = nums.length; - <span class="hljs-number">1</span>,n = nums.length - <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">int</span>[] result = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n]; <span class="hljs-comment">//大小不对！不然会越界，应该是new int[nums.length];</span>
+        <span class="hljs-keyword">while</span> (i &lt;= j ) &#123;
+            <span class="hljs-keyword">if</span> ( nums[i] * nums[i] &gt; nums[j] * nums[j]) &#123;
+                result[n--] = nums[i] * nums[i];
+                i++;
+             &#125;
+            <span class="hljs-keyword">else</span> &#123;
+                result[n--] = nums[j] * nums[j];
+                j --;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> result;
+       &#125;
+&#125;</code></pre>
+
+<p>更改：</p>
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] sortedSquares(<span class="hljs-keyword">int</span>[] nums) &#123; 
+        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>,j = nums.length-<span class="hljs-number">1</span>;
+        <span class="hljs-keyword">int</span> n = nums.length - <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">int</span>[] result = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[nums.length]; <span class="hljs-comment">//要保证长度够</span>
+        <span class="hljs-keyword">while</span> (i &lt;= j ) &#123;
+            <span class="hljs-keyword">if</span> ( nums[i] * nums[i] &gt; nums[j] * nums[j]) &#123;
+                result[n--] = nums[i] * nums[i];
+                i++;
+             &#125;
+            <span class="hljs-keyword">else</span> &#123;
+                result[n--] = nums[j] * nums[j];
+                j--;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> result;
+       &#125;
+&#125;</code></pre>
+
+<blockquote>
+<p>执行结果：</p>
+<p>通过</p>
+<p>显示详情</p>
+<p>执行用时：1 ms, 在所有 Java 提交中击败了100.00%的用户</p>
+<p>内存消耗：40.3 MB, 在所有 Java 提交中击败了39.21%的用户</p>
+<p>通过测试用例：137 / 137</p>
+</blockquote>
+<p>此时复杂度为 0(n) 比暴力更快！</p>
+
             </div>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
                 
-
-<div class="text-center">
-  <div class="about-info">
-    <div class="about-name">黄一恒</div>
-    <div class="about-intro">Student</div>
-    <div class="about-icons">
-      
-        
-        
-        
-        <a target="_blank" rel="noopener" href="https://github.com/codeheng" class="
-           hint--bottom hint--rounded"
-           aria-label=GitHub
-        >
-          <i class="iconfont icon-github-fill" aria-hidden="true"></i>
-          
-        </a>
-      
-        
-        
-        
-        <a target="_blank" rel="noopener" href="https://space.bilibili.com/346574970" class="
-           hint--bottom hint--rounded"
-           aria-label=bilibili
-        >
-          <i class="iconfont icon-bilibili-fill" aria-hidden="true"></i>
-          
-        </a>
-      
-        
-        
-        
-        <a href="javascript:;" class="qr-trigger
-           "
-           
-        >
-          <i class="iconfont icon-wechat-fill" aria-hidden="true"></i>
-          
-            <img class="qr-img" src="/img/WeChat.jpg" srcset="/img/loading.gif" alt="qrcode" />
-          
-        </a>
-      
-        
-        
-        
-        <a target="_blank" rel="noopener" href="http://wpa.qq.com/msgrd?v=3&amp;uin=1356410594&amp;site=qq&amp;menu=yes" class="
-           "
-           
-        >
-          <i class="iconfont icon-qq-fill" aria-hidden="true"></i>
-          
-        </a>
-      
-    </div>
-  </div>
-</div>
-<div class="mt-5 markdown-body">
-  
-</div>
-
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E7%BB%84/">数组</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
+                    
+                  </div>
+                
               </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/11/leetcode05/">
+                        <span class="hidden-mobile">35.搜索插入位置</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
             </div>
-          </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    function loadGitalk() {
+      addScript('https://cdn.staticfile.org/blueimp-md5/2.13.0/js/md5.min.js');
+      addScript('https://cdn.staticfile.org/gitalk/1.6.2/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: 'a6ecdddb59c8bed4c4e0',
+          clientSecret: 'deecdd08fa166e81db2222df7514d6c2d2f357a0',
+          repo: 'codeheng.github.io',
+          owner: 'codeheng',
+          admin: ["codeheng"],
+          id: md5(location.pathname),
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    }
+    waitElementVisible('gitalk-container', loadGitalk);
+  </script>
+
+
+              </article>
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
   </main>
 
@@ -379,6 +549,31 @@ show_date_time();
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
@@ -386,7 +581,7 @@ show_date_time();
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "关于&nbsp;",
+        "977.有序数组的平方&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
@@ -429,6 +624,20 @@ show_date_time();
   </script>
 
 
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
 
 
 

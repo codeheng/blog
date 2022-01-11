@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>977.有序数组的平方</title>
+    <link href="/2022/01/11/leetcode06/"/>
+    <url>/2022/01/11/leetcode06/</url>
+    
+    <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><pre><code class="hljs shell">给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序。 示例 1：输入：nums = [-4,-1,0,3,10]输出：[0,1,9,16,100]解释：平方后，数组变为 [16,1,0,9,100]排序后，数组变为 [0,1,9,16,100]示例 2：输入：nums = [-7,-3,2,3,11]输出：[4,9,9,49,121] 提示：1 &lt;= nums.length &lt;= 10^4-10^4 &lt;= nums[i] &lt;= 10^4nums 已按 非递减顺序 排序 进阶：请你设计时间复杂度为 O(n) 的算法解决本问题</code></pre><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="法一"><a href="#法一" class="headerlink" title="法一"></a>法一</h2><p>第一思路===&gt; 对每个元素进行平方，然后排序即可 （暴力排序！</p><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] sortedSquares(<span class="hljs-keyword">int</span>[] nums) &#123;        <span class="hljs-keyword">for</span>( <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; nums.length; i++) &#123;            nums[i] *= nums[i];        &#125;        Arrays.sort(nums);        <span class="hljs-keyword">return</span> nums;    &#125;&#125;</code></pre><blockquote><p>执行结果：</p><p>通过</p><p>显示详情</p><p>执行用时：2 ms, 在所有 Java 提交中击败了39.61%的用户</p><p>内存消耗：39.7 MB, 在所有 Java 提交中击败了96.37%的用户</p><p>通过测试用例：137 / 137</p></blockquote><p>java中Arrays.sort使用了两种排序方法，quick sort 和优化的 merge sort</p><p>故Java内置排序时间复杂度为o(nlogn)  ===&gt;  整体即是  o(nlogn  + n) </p><h2 id="法二"><a href="#法二" class="headerlink" title="法二"></a>法二</h2><p><strong>双指针</strong></p><blockquote><p>数组是有序的，负数平方之后可能成为最大数了。</p><p>那么数组平方的最大值就在数组的两端，不是最左边就是最右边，不可能是中间。</p><p>考虑双指针法，i指向起始位置，j指向终止位置。</p><p>定义一个新数组result，和A数组一样的大小，让k指向result数组终止位置。</p><p>如果<code>A[i] * A[i] &lt; A[j] * A[j]</code> 那么<code>result[k--] = A[j] * A[j];</code> 。</p><p>如果<code>A[i] * A[i] &gt;= A[j] * A[j]</code> 那么<code>result[k--] = A[i] * A[i];</code> 。</p></blockquote><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] sortedSquares(<span class="hljs-keyword">int</span>[] nums) &#123;         <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>,j = nums.length; - <span class="hljs-number">1</span>,n = nums.length - <span class="hljs-number">1</span>;        <span class="hljs-keyword">int</span>[] result = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n]; <span class="hljs-comment">//大小不对！不然会越界，应该是new int[nums.length];</span>        <span class="hljs-keyword">while</span> (i &lt;= j ) &#123;            <span class="hljs-keyword">if</span> ( nums[i] * nums[i] &gt; nums[j] * nums[j]) &#123;                result[n--] = nums[i] * nums[i];                i++;             &#125;            <span class="hljs-keyword">else</span> &#123;                result[n--] = nums[j] * nums[j];                j --;            &#125;        &#125;        <span class="hljs-keyword">return</span> result;       &#125;&#125;</code></pre><p>更改：</p><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] sortedSquares(<span class="hljs-keyword">int</span>[] nums) &#123;         <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>,j = nums.length-<span class="hljs-number">1</span>;        <span class="hljs-keyword">int</span> n = nums.length - <span class="hljs-number">1</span>;        <span class="hljs-keyword">int</span>[] result = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[nums.length]; <span class="hljs-comment">//要保证长度够</span>        <span class="hljs-keyword">while</span> (i &lt;= j ) &#123;            <span class="hljs-keyword">if</span> ( nums[i] * nums[i] &gt; nums[j] * nums[j]) &#123;                result[n--] = nums[i] * nums[i];                i++;             &#125;            <span class="hljs-keyword">else</span> &#123;                result[n--] = nums[j] * nums[j];                j--;            &#125;        &#125;        <span class="hljs-keyword">return</span> result;       &#125;&#125;</code></pre><blockquote><p>执行结果：</p><p>通过</p><p>显示详情</p><p>执行用时：1 ms, 在所有 Java 提交中击败了100.00%的用户</p><p>内存消耗：40.3 MB, 在所有 Java 提交中击败了39.21%的用户</p><p>通过测试用例：137 / 137</p></blockquote><p>此时复杂度为 0(n) 比暴力更快！</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>数组</tag>
+      
+      <tag>排序</tag>
+      
+      <tag>双指针</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>35.搜索插入位置</title>
     <link href="/2022/01/11/leetcode05/"/>
     <url>/2022/01/11/leetcode05/</url>
