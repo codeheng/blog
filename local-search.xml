@@ -4,6 +4,60 @@
   
   
   <entry>
+    <title>35.搜索插入位置</title>
+    <link href="/2022/01/11/leetcode05/"/>
+    <url>/2022/01/11/leetcode05/</url>
+    
+    <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><pre><code class="hljs java">给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。请必须使用时间复杂度为 O(log n) 的算法。 示例 <span class="hljs-number">1</span>:输入: nums = [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], target = <span class="hljs-number">5</span>输出: <span class="hljs-number">2</span>示例 <span class="hljs-number">2</span>:输入: nums = [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], target = <span class="hljs-number">2</span>输出: <span class="hljs-number">1</span>示例 <span class="hljs-number">3</span>:输入: nums = [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], target = <span class="hljs-number">7</span>输出: <span class="hljs-number">4</span>示例 <span class="hljs-number">4</span>:输入: nums = [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], target = <span class="hljs-number">0</span>输出: <span class="hljs-number">0</span>示例 <span class="hljs-number">5</span>:输入: nums = [<span class="hljs-number">1</span>], target = <span class="hljs-number">0</span>输出: <span class="hljs-number">0</span> 提示:<span class="hljs-number">1</span> &lt;= nums.length &lt;= <span class="hljs-number">10</span>^<span class="hljs-number">4</span>-<span class="hljs-number">104</span> &lt;= nums[i] &lt;= <span class="hljs-number">10</span>^<span class="hljs-number">4</span>nums 为无重复元素的升序排列数组-<span class="hljs-number">104</span> &lt;= target &lt;= <span class="hljs-number">10</span>^<span class="hljs-number">4</span></code></pre><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>如果目标值在===&gt;  二分查找搞定，复杂度满足</p><p>如果不在，怎么找到对应位置？ ===&gt; 最终i &gt; j ,故直接返回 j + 1即是所找的位置 （可通过示例分析出来！</p><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">searchInsert</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> target)</span> </span>&#123;        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>,j = nums.length - <span class="hljs-number">1</span>;        <span class="hljs-keyword">while</span> ( i &lt;= j) &#123;            <span class="hljs-keyword">int</span> mid = i + (j - i) / <span class="hljs-number">2</span>   <span class="hljs-comment">//取mid更安全！</span>            <span class="hljs-keyword">if</span>( target &lt; nums[mid]) &#123;                j = mid - <span class="hljs-number">1</span>;            &#125;            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (target &gt; nums[mid]) &#123;                i = mid + <span class="hljs-number">1</span>;            &#125;            <span class="hljs-keyword">else</span> &#123;                <span class="hljs-keyword">return</span> mid;            &#125;        &#125;        <span class="hljs-keyword">return</span> j + <span class="hljs-number">1</span>;    &#125;&#125;</code></pre><blockquote><p>执行结果：</p><p>通过</p><p>显示详情</p><p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户</p><p>内存消耗：38 MB, 在所有 Java 提交中击败了61.66%的用户</p><p>通过测试用例：64 / 64</p></blockquote><p>抛开别的，另一种思路</p><p><strong>直接遍历一趟进行寻找，如果找到值大于 target 则返回相对应的下标，否则返回数组长度</strong> （更简便！</p><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">searchInsert</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> target)</span> </span>&#123;         <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++) &#123;            <span class="hljs-keyword">if</span> ( target &lt; nums[i] )&#123;                <span class="hljs-keyword">return</span> i;            &#125;              &#125;        <span class="hljs-keyword">return</span> nums.length;    &#125;&#125;</code></pre><blockquote><p>执行结果：</p><p>通过</p><p>显示详情</p><p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户</p><p>内存消耗：37.8 MB, 在所有 Java 提交中击败了92.45%的用户</p><p>通过测试用例：64 / 64</p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>数组</tag>
+      
+      <tag>二分查找</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>278.第一个错误版本</title>
+    <link href="/2022/01/11/leetcode04/"/>
+    <url>/2022/01/11/leetcode04/</url>
+    
+    <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><pre><code class="hljs shell">你是产品经理，目前正在带领一个团队开发新的产品。不幸的是，你的产品的最新版本没有通过质量检测。由于每个版本都是基于之前的版本开发的，所以错误的版本之后的所有版本都是错的。假设你有 n 个版本 [1, 2, ..., n]，你想找出导致之后所有版本出错的第一个错误的版本。你可以通过调用 bool isBadVersion(version) 接口来判断版本号 version 是否在单元测试中出错。实现一个函数来查找第一个错误的版本。你应该尽量减少对调用 API 的次数。示例 1：输入：n = 5, bad = 4输出：4解释：调用 isBadVersion(3) -&gt; false 调用 isBadVersion(5) -&gt; true 调用 isBadVersion(4) -&gt; true所以，4 是第一个错误的版本。示例 2：输入：n = 1, bad = 1输出：1提示：1 &lt;= bad &lt;= n &lt;= 2^31 - 1</code></pre><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>二分查找！</p><pre><code class="hljs java"><span class="hljs-comment">/* The isBadVersion API is defined in the parent class VersionControl.</span><span class="hljs-comment">      boolean isBadVersion(int version); */</span><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">VersionControl</span> </span>&#123;    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">firstBadVersion</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;        <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>,j = n;        <span class="hljs-keyword">while</span> (i &lt;= j) &#123;            <span class="hljs-keyword">int</span> mid = (i + j ) / <span class="hljs-number">2</span>;            <span class="hljs-keyword">if</span>( isBadVersion(mid) ) &#123;                j = mid - <span class="hljs-number">1</span>;            &#125;            <span class="hljs-keyword">else</span> &#123;                i = mid + <span class="hljs-number">1</span>;            &#125;        &#125;        <span class="hljs-keyword">return</span> i;    &#125;&#125;</code></pre><blockquote><p> 以上代码，超出时间限制！</p></blockquote><p>原因为何 ？ ===&gt; 只有while 循环中<strong>mid 取值不对</strong>，导致溢出</p><p>题目中还一条件：即bad 和 n范围 </p><p>因为是int 如果取值过大，比如刚好取值2^31 -1 即int的最大值，其实mid进行运算将溢出</p><pre><code class="hljs java"><span class="hljs-keyword">int</span> mid = left + (right - left ) / <span class="hljs-number">2</span> <span class="hljs-comment">//取中间值的另一种方法,不会溢出===&gt; 要get√ </span></code></pre><p>改了之后进行提交，结果如图</p><blockquote><p>执行结果：</p><p>通过</p><p>显示详情</p><p>执行用时：11 ms, 在所有 Java 提交中击败了99.95%的用户</p><p>内存消耗：34.8 MB, 在所有 Java 提交中击败了94.21%的用户</p><p>通过测试用例：22 / 22</p></blockquote><p>总：</p><p>二分查找取中值的方法：</p><pre><code class="hljs java"><span class="hljs-keyword">int</span> mid = (left + right) / <span class="hljs-number">2</span>; <span class="hljs-comment">//可能会溢出</span><span class="hljs-keyword">int</span> mid = (left + right - left) / <span class="hljs-number">2</span>  <span class="hljs-comment">// 不会溢出，重点掌握</span></code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>二分查找</tag>
+      
+      <tag>交互</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>53.最大子数组和</title>
     <link href="/2022/01/09/leetcode03/"/>
     <url>/2022/01/09/leetcode03/</url>
