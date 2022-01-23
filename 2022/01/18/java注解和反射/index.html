@@ -1,0 +1,999 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/resizeApi.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Yiheng">
+  <meta name="keywords" content="">
+  <title>java注解和反射 - 寻归往</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Yiheng.blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/article_img.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2022-01-18 09:21" pubdate>
+      2022年1月18日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">java注解和反射</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h1 id="1-注解"><a href="#1-注解" class="headerlink" title="1.注解"></a>1.注解</h1><h2 id="1-1什么是注解"><a href="#1-1什么是注解" class="headerlink" title="1.1什么是注解"></a>1.1什么是注解</h2><p><strong>注解：Annotation</strong>(特殊的注释)</p>
+<p><strong>注释：comment</strong></p>
+<p>​    jdk5.0引入的新技术</p>
+<p>作用：</p>
+<ul>
+<li>不是程序本身，可以对程序做出解释(与注释并无区别)</li>
+<li><strong>可以被其他程序(如：编译器)读取</strong> </li>
+</ul>
+<p>格式：</p>
+<blockquote>
+<p>以 ”@注释名”在代码中存在，甚至可以添加一些参数 </p>
+</blockquote>
+<p>在哪使用:</p>
+<blockquote>
+<p>可附加在 package，class，method，field上，相当于添加了额外的辅助信息</p>
+<p>然后通过反射机制编程实现对这些元数据的访问</p>
+</blockquote>
+<h2 id="1-2内置注解"><a href="#1-2内置注解" class="headerlink" title="1.2内置注解"></a>1.2内置注解</h2><ul>
+<li>@Override：定义在java.lang.Override中，只适用于修饰方法<ul>
+<li>表示一个方法声明打算重写父类的另一个方法声明</li>
+</ul>
+</li>
+<li>@Deprecated：定义在java.lang.Deprecated中，可修饰方法，属性，类<ul>
+<li>表示不推荐使用此类元素，通常是因为危险或存在其余更好的选择</li>
+</ul>
+</li>
+<li>@SuppressWarnings：定义在java.lang.SuppressWarnings中，用于抑制编译时的警告信息</li>
+</ul>
+<pre><code class="hljs java"><span class="hljs-comment">//需要添加参数才可以使用</span>
+<span class="hljs-meta">@SuppressWarnings(&quot;all&quot;)</span>
+<span class="hljs-meta">@SuppressWarnings(&quot;unchecked&quot;)</span></code></pre>
+
+
+
+<h2 id="1-3元注解"><a href="#1-3元注解" class="headerlink" title="1.3元注解"></a>1.3元注解</h2><p>(meta-annotation)</p>
+<p>作用：解释其他注解, 提供对其他annotation类型的作说明</p>
+<ul>
+<li><strong>@Target</strong>：用于描述注解的使用范围(被描述的注解可以在哪用)</li>
+<li><strong>@Retention</strong>: 表示需要在什么级别保存该注解信息，用于描述注解的声明周期<ul>
+<li>SOURCE &lt; CLASS &lt; RUNTIME</li>
+</ul>
+</li>
+<li>@Document: 说明 注解将被包含在javadoc中</li>
+<li>@Inherited: 说明子类可以继承父类中的该注解</li>
+</ul>
+<h2 id="1-4自定义注解"><a href="#1-4自定义注解" class="headerlink" title="1.4自定义注解"></a>1.4自定义注解</h2><p>使用@interface自定义，自动继承了java.lang.annotation.Annotation接口</p>
+<p> <img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/Users\13564\AppData\Roaming\Typora\typora-user-images\image-20220119063355717.png" srcset="/img/loading.gif" alt="image-20220119063355717"></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>&#123;
+    <span class="hljs-comment">//可以进行显示赋值,与顺序无关，若没有默认值，则必须给注解赋值</span>
+    <span class="hljs-meta">@myAnnotation(age = 18,name = &quot;yiheng&quot;)</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>&#123; &#125;
+
+    <span class="hljs-meta">@myAnnotation01(&quot;Alice&quot;)</span> <span class="hljs-comment">// 此时可直接传入即可，不用写value = “Alice” (规范</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test01</span><span class="hljs-params">()</span> </span>&#123;&#125;
+&#125;
+
+<span class="hljs-meta">@Target(&#123;ElementType.TYPE,ElementType.METHOD&#125;)</span>
+<span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span>
+<span class="hljs-meta">@interface</span> myAnnotation&#123;
+    <span class="hljs-function">String <span class="hljs-title">name</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> &quot;&quot;</span>;  <span class="hljs-comment">//参数：  参数类型 + 参数名()</span>
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">age</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> 0</span>;
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">id</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> -1</span>;
+
+    String[] schools() <span class="hljs-keyword">default</span> &#123;<span class="hljs-string">&quot;pku&quot;</span>,<span class="hljs-string">&quot;cmu&quot;</span>&#125;;
+&#125;
+
+<span class="hljs-meta">@Target(&#123;ElementType.TYPE,ElementType.METHOD&#125;)</span>
+<span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span>
+<span class="hljs-meta">@interface</span> myAnnotation01&#123;
+    <span class="hljs-function">String <span class="hljs-title">value</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">//若只要一个参数，用value</span>
+&#125;</code></pre>
+
+
+
+
+
+<h1 id="2-反射"><a href="#2-反射" class="headerlink" title="2.反射"></a>2.反射</h1><p><strong>Reflection</strong></p>
+<h2 id="2-1java反射概述"><a href="#2-1java反射概述" class="headerlink" title="2.1java反射概述"></a>2.1java反射概述</h2><p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/01.png" srcset="/img/loading.gif" alt="image-20220119065433643"></p>
+<p>反射机制允许程序在执行期借助于Reflection API取得任何类的内部信息，并能直接操作任意对象的内部属性及方法</p>
+<p><code>Class c = Class.forName(&quot;java.lang.String&quot;)</code></p>
+<p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/02.png" srcset="/img/loading.gif" alt="image-20220119070004240"></p>
+<p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/03.png" srcset="/img/loading.gif" alt="image-20220119071046834"></p>
+<p><strong>优点</strong> ：</p>
+<ul>
+<li>可以实现动态创建对象和编译</li>
+<li>灵活性高</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<p>​    对性能有影响，是一种解释操作，比直接执行相同的操作慢</p>
+<p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/04.png" srcset="/img/loading.gif" alt="image-20220119071312355"></p>
+<h2 id="2-2理解class类并获取class实例"><a href="#2-2理解class类并获取class实例" class="headerlink" title="2.2理解class类并获取class实例"></a>2.2理解class类并获取class实例</h2><p><strong>Class类</strong>：</p>
+<p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/05.png" srcset="/img/loading.gif" alt="image-20220119075234418"></p>
+<p><strong>Class类的功能</strong>：</p>
+<p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/06.png" srcset="/img/loading.gif" alt="image-20220119075357574"></p>
+<pre><code class="hljs java"><span class="hljs-comment">// 1 通过对象方式获取</span>
+        Person p1 = <span class="hljs-keyword">new</span> Student();
+        Class c1  = p1.getClass();
+        System.out.println(c1.hashCode());
+<span class="hljs-comment">//2 通过forName 获取</span>
+        Class c2 = Class.forName(<span class="hljs-string">&quot;test.day04.test03.Student&quot;</span>); <span class="hljs-comment">//Student的路径</span>
+        System.out.println(c2.hashCode());
+<span class="hljs-comment">//3 通过类名.class获取</span>
+        Class c3 = Student.class;
+        System.out.println(c3.hashCode());
+
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment">356573597</span>
+<span class="hljs-comment">356573597</span>
+<span class="hljs-comment">356573597</span>
+<span class="hljs-comment">*/</span></code></pre>
+
+<p><strong>哪些类型有Class对象</strong></p>
+<p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/07.png" srcset="/img/loading.gif" alt="image-20220119081133308"></p>
+<pre><code class="hljs java"> Class c1 = Integer.class;
+ Class c2 = Override.class;
+ Class c3 = Object.class;
+ Class c4 = Comparable.class;
+ Class c5 = String[].class;
+ Class c6 = <span class="hljs-keyword">int</span>[][].class;
+ Class c7 = ElementType.class;
+ Class c8 = <span class="hljs-keyword">void</span>.class;
+ Class c9 = Class.class;
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment">打印：</span>
+<span class="hljs-comment">class java.lang.Integer</span>
+<span class="hljs-comment">interface java.lang.Override</span>
+<span class="hljs-comment">class java.lang.Object</span>
+<span class="hljs-comment">interface java.lang.Comparable</span>
+<span class="hljs-comment">class [Ljava.lang.String;</span>
+<span class="hljs-comment">class [[I</span>
+<span class="hljs-comment">class java.lang.annotation.ElementType</span>
+<span class="hljs-comment">void</span>
+<span class="hljs-comment">class java.lang.Class</span>
+<span class="hljs-comment">*/</span></code></pre>
+
+
+
+
+
+<h2 id="2-3-类的加载与ClassLoader"><a href="#2-3-类的加载与ClassLoader" class="headerlink" title="2.3 类的加载与ClassLoader"></a>2.3 类的加载与ClassLoader</h2><p>内存分析</p>
+<p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/08.png" srcset="/img/loading.gif" alt="image-20220119081952225"></p>
+<p><strong>类加载过程</strong>：</p>
+<p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/09.png" srcset="/img/loading.gif" alt="image-20220119082107807"></p>
+<p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/10.png" srcset="/img/loading.gif" alt="image-20220119083702892"></p>
+<pre><code class="hljs java"><span class="hljs-comment">/*</span>
+<span class="hljs-comment">1.加载到内存，会产生一个类对应的Class对象</span>
+<span class="hljs-comment">2.链接，链接结束后 x = 0(默认)</span>
+<span class="hljs-comment">3.初始化 </span>
+<span class="hljs-comment">    &lt;clinit&gt;() &#123;</span>
+<span class="hljs-comment">        System.out.println(&quot;A类静态代码块初始&quot;);</span>
+<span class="hljs-comment">         x = 20;</span>
+<span class="hljs-comment">         x = 10;</span>
+<span class="hljs-comment">    &#125;</span>
+<span class="hljs-comment">*/</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span></span>&#123;
+    <span class="hljs-keyword">static</span>  &#123;
+        System.out.println(<span class="hljs-string">&quot;A类静态代码块初始&quot;</span>);
+        x = <span class="hljs-number">20</span>;
+    &#125;
+
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> x = <span class="hljs-number">10</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">A</span><span class="hljs-params">()</span></span>&#123;
+        System.out.println(<span class="hljs-string">&quot;A类构造方法初始&quot;</span>);
+    &#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+    A a = <span class="hljs-keyword">new</span> A();
+    System.out.println(a.x);
+&#125;
+
+<span class="hljs-comment">/* 故打印结果</span>
+<span class="hljs-comment">A类静态代码块初始</span>
+<span class="hljs-comment">A类构造方法初始</span>
+<span class="hljs-comment">10</span>
+<span class="hljs-comment">*/</span></code></pre>
+
+
+
+<p><strong>什么时候会发生类初始化 ？</strong></p>
+<p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/11.png" srcset="/img/loading.gif" alt="image-20220119084510203"></p>
+<p><strong>类加载器</strong></p>
+<p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/12.png" srcset="/img/loading.gif" alt="image-20220119150313613">.</p>
+<p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/13.png" srcset="/img/loading.gif" alt="image-20220119150339508"></p>
+<p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/14.png" srcset="/img/loading.gif" alt="image-20220119150420155"></p>
+<h2 id="2-4获取运行时类的对象"><a href="#2-4获取运行时类的对象" class="headerlink" title="2.4获取运行时类的对象"></a>2.4获取运行时类的对象</h2><p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/15.png" srcset="/img/loading.gif" alt="image-20220119151416083"></p>
+<p>有了Class类，能做什么？</p>
+<p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/16.png" srcset="/img/loading.gif" alt="image-20220120074411795"></p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> test.day05.test01;
+<span class="hljs-comment">//User类</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;
+
+        <span class="hljs-keyword">private</span> String name;
+        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> id;
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+            <span class="hljs-keyword">return</span> name;
+        &#125;
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setName</span><span class="hljs-params">(String name)</span> </span>&#123;
+            <span class="hljs-keyword">this</span>.name = name;
+        &#125;
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getId</span><span class="hljs-params">()</span> </span>&#123;
+            <span class="hljs-keyword">return</span> id;
+        &#125;
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setId</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id)</span> </span>&#123;
+            <span class="hljs-keyword">this</span>.id = id;
+        &#125;
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getAge</span><span class="hljs-params">()</span> </span>&#123;
+            <span class="hljs-keyword">return</span> age;
+        &#125;
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setAge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> age)</span> </span>&#123;
+            <span class="hljs-keyword">this</span>.age = age;
+        &#125;
+
+        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> age;
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User</span><span class="hljs-params">()</span> </span>&#123;
+        &#125;
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User</span><span class="hljs-params">(String name, <span class="hljs-keyword">int</span> id, <span class="hljs-keyword">int</span> age)</span> </span>&#123;
+            <span class="hljs-keyword">this</span>.name = name;
+            <span class="hljs-keyword">this</span>.id = id;
+            <span class="hljs-keyword">this</span>.age = age;
+        &#125;
+
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;User&#123;&quot;</span> +
+                    <span class="hljs-string">&quot;name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +
+                    <span class="hljs-string">&quot;, id=&quot;</span> + id +
+                    <span class="hljs-string">&quot;, age=&quot;</span> + age +
+                    <span class="hljs-string">&#x27;&#125;&#x27;</span>;
+        &#125;
+&#125;
+</code></pre>
+
+
+
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> ClassNotFoundException, IllegalAccessException, InstantiationException </span>&#123;
+        <span class="hljs-comment">//获得对象</span>
+        Class c1 = Class.forName(<span class="hljs-string">&quot;test.day05.test01.User&quot;</span>);
+        <span class="hljs-comment">//构造一个对象  本质调用了User类中的无参构造器</span>
+        User user =(User) c1.newInstance();
+        System.out.println(user);<span class="hljs-comment">//  打印  User&#123;name=&#x27;null&#x27;, id=0, age=0&#125;</span>
+    &#125;</code></pre>
+
+<p>若没有无参构造器，则如何操作？ ===&gt;  <strong>只需明确调用类中的构造器，并把参数传递过去</strong></p>
+<p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/17.png" srcset="/img/loading.gif" alt="image-20220120074626851"></p>
+<pre><code class="hljs java"><span class="hljs-comment">//带有参数的构造器</span>
+      Constructor c2 = c1.getDeclaredConstructor(String.class, <span class="hljs-keyword">int</span>.class, <span class="hljs-keyword">int</span>.class);
+      User user2 = (User)c2.newInstance(<span class="hljs-string">&quot;yiheng&quot;</span>, <span class="hljs-number">001</span>, <span class="hljs-number">20</span>);
+      System.out.println(user2); <span class="hljs-comment">//打印： User&#123;name=&#x27;yiheng&#x27;, id=1, age=20&#125;</span></code></pre>
+
+<p><strong>反射操作方法</strong></p>
+<pre><code class="hljs java">User user3 = (User)c1.newInstance();
+Method declaredMethod = c1.getDeclaredMethod(<span class="hljs-string">&quot;setName&quot;</span>, String.class);
+<span class="hljs-comment">//invoke激活==&gt; ( 对象 , &quot;对象的值&quot;)</span>
+declaredMethod.invoke(user3,<span class="hljs-string">&quot;恒&quot;</span>);
+System.out.println(user3.getName());  <span class="hljs-comment">// 打印 ： 恒</span></code></pre>
+
+<p><strong>反射操作属性</strong></p>
+<pre><code class="hljs java">User user4 = (User)c1.newInstance();
+Field name = c1.getDeclaredField(<span class="hljs-string">&quot;name&quot;</span>);
+name.setAccessible(<span class="hljs-keyword">true</span>);
+name.set(user4,<span class="hljs-string">&quot;heng&quot;</span>);
+System.out.println(user4.getName());  <span class="hljs-comment">//加上之后，打印：heng</span>
+<span class="hljs-comment">//报错，因为属性私有 不可以自己访问，只需关掉程序的安全检测 ==&gt; name.setAccessible(true);</span></code></pre>
+
+<p><strong>setAccessible:</strong></p>
+<p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/18.png" srcset="/img/loading.gif" alt="image-20220120083625885"></p>
+<h2 id="2-5反射操作泛型"><a href="#2-5反射操作泛型" class="headerlink" title="2.5反射操作泛型"></a>2.5反射操作泛型</h2><p>(了解)</p>
+<p><img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/19.png" srcset="/img/loading.gif" alt="image-20220120085157551"></p>
+<h2 id="2-6反射操作注解"><a href="#2-6反射操作注解" class="headerlink" title="2.6反射操作注解"></a>2.6反射操作注解</h2><p> <img src="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/20.png" srcset="/img/loading.gif" alt="image-20220120090418721"></p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> test.day05.test03;
+<span class="hljs-keyword">import</span> java.lang.annotation.*;
+<span class="hljs-keyword">import</span> java.lang.reflect.Field;
+
+<span class="hljs-comment">//反射操作注解</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> ClassNotFoundException, NoSuchFieldException </span>&#123;
+        Class c1 = Class.forName(<span class="hljs-string">&quot;test.day05.test03.Student&quot;</span>);
+        <span class="hljs-comment">//反射获得注解</span>
+        Annotation[] annotations = c1.getAnnotations();
+        <span class="hljs-keyword">for</span> (Annotation annotation : annotations) &#123;
+            System.out.println(annotation);
+        &#125;
+        <span class="hljs-comment">//获得注解value的值</span>
+        TableHeng annotation = (TableHeng) c1.getAnnotation(TableHeng.class);
+        String value = annotation.value();
+        System.out.println(value);
+
+        <span class="hljs-comment">//获得类指定的注解</span>
+        Field name = c1.getDeclaredField(<span class="hljs-string">&quot;name&quot;</span>);
+        fieldHeng annotation1 = name.getAnnotation(fieldHeng.class);
+        System.out.println(annotation1.columnName());
+        System.out.println(annotation1.type());
+        System.out.println(annotation1.length());
+    &#125;
+&#125;
+
+<span class="hljs-meta">@TableHeng(&quot;db_student&quot;)</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span> </span>&#123;
+    <span class="hljs-meta">@fieldHeng(columnName = &quot;db_name&quot;,type = &quot;int&quot;,length = 10)</span>
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-meta">@fieldHeng(columnName = &quot;db_age&quot;,type = &quot;int&quot;,length = 10)</span>
+    <span class="hljs-keyword">int</span> age;
+    <span class="hljs-meta">@fieldHeng(columnName = &quot;db_id&quot;,type = &quot;varchar&quot;,length = 3)</span>
+    <span class="hljs-keyword">int</span> id;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Student</span><span class="hljs-params">(String name, <span class="hljs-keyword">int</span> age, <span class="hljs-keyword">int</span> id)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+        <span class="hljs-keyword">this</span>.age = age;
+        <span class="hljs-keyword">this</span>.id = id;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Student&#123;&quot;</span> +
+                <span class="hljs-string">&quot;name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +
+                <span class="hljs-string">&quot;, age=&quot;</span> + age +
+                <span class="hljs-string">&quot;, id=&quot;</span> + id +
+                <span class="hljs-string">&#x27;&#125;&#x27;</span>;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setName</span><span class="hljs-params">(String name)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getAge</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> age;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setAge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> age)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.age = age;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getId</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> id;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setId</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.id = id;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Student</span><span class="hljs-params">()</span> </span>&#123;
+    &#125;
+&#125;
+
+
+<span class="hljs-comment">//类名的注解</span>
+<span class="hljs-meta">@Target(ElementType.TYPE)</span>
+<span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span>
+<span class="hljs-meta">@interface</span> TableHeng &#123;
+    <span class="hljs-function">String <span class="hljs-title">value</span><span class="hljs-params">()</span></span>;
+&#125;
+
+<span class="hljs-comment">//属性的注解</span>
+<span class="hljs-meta">@Target(ElementType.FIELD)</span>
+<span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span>
+<span class="hljs-meta">@interface</span> fieldHeng &#123;
+    <span class="hljs-function">String <span class="hljs-title">columnName</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">length</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function">String <span class="hljs-title">type</span><span class="hljs-params">()</span></span>;
+&#125;
+
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment">打印：</span>
+<span class="hljs-comment">@test.day05.test03.TableHeng(value=db_student)</span>
+<span class="hljs-comment">db_student</span>
+<span class="hljs-comment">db_name</span>
+<span class="hljs-comment">int</span>
+<span class="hljs-comment">10</span>
+<span class="hljs-comment">*/</span></code></pre>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/">Java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java-%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/">Java 注解和反射</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/19/leetcode08/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">125.验证回文串</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/15/css/">
+                        <span class="hidden-mobile">css基础</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    function loadGitalk() {
+      addScript('https://cdn.staticfile.org/blueimp-md5/2.13.0/js/md5.min.js');
+      addScript('https://cdn.staticfile.org/gitalk/1.6.2/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: 'a6ecdddb59c8bed4c4e0',
+          clientSecret: 'deecdd08fa166e81db2222df7514d6c2d2f357a0',
+          repo: 'codeheng.github.io',
+          owner: 'codeheng',
+          admin: ["codeheng"],
+          id: md5(location.pathname),
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    }
+    waitElementVisible('gitalk-container', loadGitalk);
+  </script>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="http://cslearner.cn/" target="_blank" rel="nofollow noopener"><span>CSlearner</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">京ICP证123456号</a>
+    
+      <a
+        href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+        rel="nofollow noopener"
+        class="beian-police"
+        target="_blank"
+      >
+        <span class="beian-police-sep">&nbsp;|&nbsp;</span>
+        
+          <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon" />
+        
+        <span>京公网安备12345678号</span>
+      </a>
+     
+  </div>
+
+
+
+    我在次已等候你:
+<span id="momk"></span>
+<script language=javascript>
+function show_date_time(){
+  window.setTimeout("show_date_time()", 1000);
+  BirthDay=new Date("08-09-2020 20:00:00");//建站日期
+  today=new Date();
+  timeold=(today.getTime()-BirthDay.getTime());
+  sectimeold=timeold/1000
+  secondsold=Math.floor(sectimeold);
+  msPerDay=24*60*60*1000
+  e_daysold=timeold/msPerDay
+  daysold=Math.floor(e_daysold);
+  e_hrsold=(daysold-e_daysold)*-24;
+  hrsold=Math.floor(e_hrsold);
+  e_minsold=(hrsold-e_hrsold)*-60;
+  minsold=Math.floor((hrsold-e_hrsold)*-60);
+  seconds=Math.floor((minsold-e_minsold)*-60);
+  momk.innerHTML=daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒" ;
+}
+show_date_time();
+</script>
+<style>
+#momk{animation:change 10s infinite;font-weight:800; }
+@keyframes change{0%{color:#5cb85c;}25%{color:#556bd8;}50%{color:#e40707;}75%{color:#66e616;}100% {color:#67bd31;}}
+</style>
+
+    <i class="fa fa-area-chart"></i>
+    <span class="post-count">总字数统计：34.3k</span>
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "java注解和反射&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<script type="text/javascript" src="\js\FunnyTitle.js"></script>
