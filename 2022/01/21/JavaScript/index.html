@@ -217,12 +217,12 @@
             
             <div class="markdown-body" id="post-body">
               <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h1><p>(行为层)</p>
-<h2 id="1-1什么是JavaScript？"><a href="#1-1什么是JavaScript？" class="headerlink" title="1.1什么是JavaScript？"></a>1.1什么是JavaScript？</h2><p><img src="/2022/01/21/JavaScript/Users\13564\AppData\Roaming\Typora\typora-user-images\image-20220121194910154.png" srcset="/img/loading.gif" alt="image-20220121194910154"></p>
+<h2 id="1-1什么是JavaScript？"><a href="#1-1什么是JavaScript？" class="headerlink" title="1.1什么是JavaScript？"></a>1.1什么是JavaScript？</h2><p><img src="/2022/01/21/JavaScript/01.png" srcset="/img/loading.gif" alt="image-20220121194910154"></p>
 <p><em>合格的后端开发人员必须<strong>精通</strong> JavaScript！</em></p>
 <p><strong>JavaScript框架</strong></p>
-<p><img src="/2022/01/21/JavaScript/Users\13564\AppData\Roaming\Typora\typora-user-images\image-20220121194953823.png" srcset="/img/loading.gif" alt="image-20220121194953823"></p>
+<p><img src="/2022/01/21/JavaScript/02.png" srcset="/img/loading.gif" alt="image-20220121194953823"></p>
 <p><strong>主流框架：VUE.js</strong></p>
-<p><img src="/2022/01/21/JavaScript/Users\13564\AppData\Roaming\Typora\typora-user-images\image-20220121195301812.png" srcset="/img/loading.gif" alt="image-20220121195301812"></p>
+<p><img src="/2022/01/21/JavaScript/03.png" srcset="/img/loading.gif" alt="image-20220121195301812"></p>
 <h2 id="1-2-js历史"><a href="#1-2-js历史" class="headerlink" title="1.2 js历史"></a>1.2 js历史</h2><p><strong><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2011/06/birth_of_javascript.html">JavaScript历史</a></strong></p>
 <h1 id="2-基本语法"><a href="#2-基本语法" class="headerlink" title="2 基本语法"></a>2 基本语法</h1><p><strong>引入js</strong></p>
 <pre><code class="hljs javascript"><span class="hljs-comment">//内部引用 script必须成对出现</span>
@@ -239,7 +239,7 @@ alert(<span class="hljs-string">&quot;Hello World!&quot;</span>);</code></pre>
 <h2 id="2-1变量"><a href="#2-1变量" class="headerlink" title="2.1变量"></a><strong>2.1变量</strong></h2><pre><code class="hljs js"><span class="hljs-keyword">var</span> number = <span class="hljs-number">2</span>; 
 <span class="hljs-keyword">let</span> num = <span class="hljs-number">1</span>;</code></pre>
 
-<p><img src="/2022/01/21/JavaScript/Users\13564\AppData\Roaming\Typora\typora-user-images\image-20220122083505160.png" srcset="/img/loading.gif" alt="image-20220122083505160"></p>
+<p><img src="/2022/01/21/JavaScript/04.png" srcset="/img/loading.gif" alt="image-20220122083505160"></p>
 <p>可在浏览器此处进行输入js代码，观察</p>
 <h2 id="2-2数据类型"><a href="#2-2数据类型" class="headerlink" title="2.2数据类型"></a>2.2<strong>数据类型</strong></h2><p><strong>number</strong></p>
 <pre><code class="hljs js"><span class="hljs-number">123</span> <span class="hljs-comment">//整数123</span>
@@ -395,7 +395,7 @@ num.forEach(<span class="hljs-function"><span class="hljs-keyword">function</spa
     <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">arguments</span>[i]);
 &#125;</code></pre>
 
-<p><img src="/2022/01/21/JavaScript/Users\13564\AppData\Roaming\Typora\typora-user-images\image-20220122181527949.png" srcset="/img/loading.gif" alt="image-20220122181527949"></p>
+<p><img src="/2022/01/21/JavaScript/05.png" srcset="/img/loading.gif" alt="image-20220122181527949"></p>
 <p>问题：因为arguments获取所有的参数，如果我们想获取除传递以外的参数，如何办？</p>
 <blockquote>
 <p>rest ===&gt; es6引入的新特性，可获取除定义外的所有参数</p>
@@ -413,7 +413,7 @@ num.forEach(<span class="hljs-function"><span class="hljs-keyword">function</spa
     <span class="hljs-built_in">console</span>.log(rest);
 &#125;</code></pre>
 
-<p><img src="/2022/01/21/JavaScript/Users\13564\AppData\Roaming\Typora\typora-user-images\image-20220122183233655.png" srcset="/img/loading.gif" alt="image-20220122183233655"></p>
+<p><img src="/2022/01/21/JavaScript/06.png" srcset="/img/loading.gif" alt="image-20220122183233655"></p>
 <p><strong>作用域</strong></p>
 <pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>) </span>&#123;
     <span class="hljs-keyword">var</span> x = <span class="hljs-number">1</span>;
@@ -559,7 +559,7 @@ heng.__proto__ = student; <span class="hljs-comment">//将heng指向student，�
 </li>
 </ul>
 </blockquote>
-<p><img src="/2022/01/21/JavaScript/Users\13564\AppData\Roaming\Typora\typora-user-images\image-20220123155241306.png" srcset="/img/loading.gif" alt="image-20220123155241306"></p>
+<p><img src="/2022/01/21/JavaScript/07.png" srcset="/img/loading.gif" alt="image-20220123155241306"></p>
 <h1 id="4-常用对象"><a href="#4-常用对象" class="headerlink" title="4.常用对象"></a>4.常用对象</h1><h2 id="4-1Date"><a href="#4-1Date" class="headerlink" title="4.1Date"></a>4.1Date</h2><pre><code class="hljs js"><span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
 date.getFullYear();
 date.getMonth();
@@ -607,7 +607,7 @@ date.toGMTString()
 </ul>
 <h1 id="5操作Dom元素"><a href="#5操作Dom元素" class="headerlink" title="5操作Dom元素"></a>5操作Dom元素</h1><p>Document Object Model  文档对象化模型</p>
 <p><strong>浏览器网页即是一个Dom树结构</strong></p>
-<p><img src="/2022/01/21/JavaScript/Users\13564\AppData\Roaming\Typora\typora-user-images\image-20220123183002561.png" srcset="/img/loading.gif" alt="image-20220123183002561"></p>
+<p><img src="/2022/01/21/JavaScript/08.png" srcset="/img/loading.gif" alt="image-20220123183002561"></p>
 <p><strong>核心：增删改查</strong></p>
 <p>要操作Dom结点，则必须<strong>获得此节点</strong></p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span> = <span class="hljs-string">&quot;father&quot;</span>&gt;</span>
@@ -643,7 +643,7 @@ date.toGMTString()
 <pre><code class="hljs js"><span class="hljs-comment">//浏览器执行追加</span>
 list.append(js)</code></pre>
 
-<p>如图<img src="/2022/01/21/JavaScript/Users\13564\AppData\Roaming\Typora\typora-user-images\image-20220123200924488.png" srcset="/img/loading.gif" alt="image-20220123200924488"></p>
+<p>如图<img src="/2022/01/21/JavaScript/09.png" srcset="/img/loading.gif" alt="image-20220123200924488"></p>
 <p><strong>创建新结点</strong></p>
 <pre><code class="hljs js"><span class="hljs-comment">//通过js创建新结点</span>
 <span class="hljs-keyword">var</span> newP = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&#x27;p&#x27;</span>);
@@ -655,21 +655,21 @@ list.append(newP);
 <span class="hljs-comment">//还可以利用 insertBefore() 方法在已有的子节点前插入一个新的子节点。</span>
 node.insertBefore(要插入的节点对象,要添加新的节点前的子节点)</code></pre>
 
-<p>可看到<img src="/2022/01/21/JavaScript/Users\13564\AppData\Roaming\Typora\typora-user-images\image-20220123201719110.png" srcset="/img/loading.gif" alt="image-20220123201719110"></p>
+<p>可看到<img src="/2022/01/21/JavaScript/10.png" srcset="/img/loading.gif" alt="image-20220123201719110"></p>
 <pre><code class="hljs js"><span class="hljs-comment">//可以插入各种标签，比如js</span>
 <span class="hljs-keyword">var</span> myScript = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&#x27;script&#x27;</span>)
 myScript.setAttribute(<span class="hljs-string">&#x27;type&#x27;</span>,<span class="hljs-string">&#x27;text/javascript&#x27;</span>);
 list.append(myScript);</code></pre>
 
-<p><img src="/2022/01/21/JavaScript/Users\13564\AppData\Roaming\Typora\typora-user-images\image-20220123202857433.png" srcset="/img/loading.gif" alt="image-20220123202857433"></p>
+<p><img src="/2022/01/21/JavaScript/11.png" srcset="/img/loading.gif" alt="image-20220123202857433"></p>
 <pre><code class="hljs js"><span class="hljs-comment">//甚至修改body的属性，可以添加css进行改变</span>
 <span class="hljs-keyword">var</span> myStyle = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&#x27;style&#x27;</span>);
 myStyle.setAttribute(<span class="hljs-string">&#x27;type&#x27;</span>,<span class="hljs-string">&#x27;text/css&#x27;</span>);
 myStyle.innerHTML = <span class="hljs-string">&#x27;body&#123;background-color:chartreuse&#125;&#x27;</span>; <span class="hljs-comment">//设置样式</span>
 <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">&#x27;head&#x27;</span>)[<span class="hljs-number">0</span>].append(myStyle); <span class="hljs-comment">//在head内部添加css代码，此时就会生效</span></code></pre>
 
-<p><img src="/2022/01/21/JavaScript/Users\13564\AppData\Roaming\Typora\typora-user-images\image-20220123203852757.png" srcset="/img/loading.gif" alt="image-20220123203852757"></p>
-<p><img src="/2022/01/21/JavaScript/Users\13564\AppData\Roaming\Typora\typora-user-images\image-20220123204006113.png" srcset="/img/loading.gif" alt="image-20220123204006113"></p>
+<p><img src="/2022/01/21/JavaScript/12.png" srcset="/img/loading.gif" alt="image-20220123203852757"></p>
+<p><img src="/2022/01/21/JavaScript/13.png" srcset="/img/loading.gif" alt="image-20220123204006113"></p>
 <h2 id="5-2-更新Dom"><a href="#5-2-更新Dom" class="headerlink" title="5.2 更新Dom"></a>5.2 更新Dom</h2><p><strong>操作文本</strong>  设置之后将会在对应网页显示出来</p>
 <pre><code class="hljs js">id1.innerHTML = <span class="hljs-string">&#x27;&lt;strong&gt;123&lt;/strong&gt;&#x27;</span>
 <span class="hljs-string">&#x27;&lt;strong&gt;123&lt;/strong&gt;&#x27;</span>
