@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Yiheng">
   <meta name="keywords" content="">
-  <title>JavaWeb - 寻归往</title>
+  <title>Web介绍 - 寻归往</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.7k 字
+      905 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      38
+      10
        分钟
     </span>
   
@@ -213,7 +213,7 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">JavaWeb</h1>
+            <h1 style="display: none">Web介绍</h1>
             
             <div class="markdown-body" id="post-body">
               <h1 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1.基本概念"></a>1.基本概念</h1><p>(1)web开发 ：即网页开发</p>
@@ -354,243 +354,9 @@
                 -style.css
             -js
             -img
-        -...
-&lt;!--hexoPostRenderEscape:&lt;pre&gt;&lt;code class=&quot;hljs markdown&quot;&gt;
-&lt;span class=&quot;hljs-section&quot;&gt;# 4.Http&lt;/span&gt;
-</code></pre>
+        -...</code></pre>
 </li>
 </ul>
-<p><span class="hljs-section">## 4.1 什么是http</span></p>
-<p>超文本传输协议（Hyper Text Transfer Protocol，HTTP）是一个简单的请求-响应协议，它通常运行在[<span class="hljs-string">TCP</span>](<span class="hljs-link"><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/TCP/33012">https://baike.baidu.com/item/TCP/33012</a></span>)之上。</p>
-<p><span class="hljs-bullet">-</span> 文本：html，字符串<br><span class="hljs-bullet">-</span> 超文本：图片，音乐，视频，定位，地图<br><span class="hljs-bullet">-</span> 端口：80</p>
-<p><span class="hljs-section">## 4.2两个时代</span></p>
-<p><span class="hljs-bullet">-</span> http1.0<br><span class="hljs-bullet">  -</span> http/1.0 : 客户端对web服务器连接后，只能获得一个web资源，断开连接<br><span class="hljs-bullet">-</span> http2.0<br><span class="hljs-bullet">  -</span> http/1.1：客户端对web服务器连接后，可以获得多个web资源，</p>
-<p><span class="hljs-section">## 4.3 http请求</span></p>
-<p><span class="hljs-bullet">-</span> 客服端–&gt;发请求(request) –&gt; 服务器</p>
-<p>百度：</p>
-<p><span class="hljs-code">```java</span><br><span class="hljs-code">Request URL: <a target="_blank" rel="noopener" href="https://www.baidu.com/">https://www.baidu.com/</a> </span><br><span class="hljs-code">Request method: GET    </span><br><span class="hljs-code">Status code: 200 OK</span><br><span class="hljs-code">Remote address: 127.0.0.1:7890</span>:hexoPostRenderEscape–&gt;</p>
-<pre><code class="hljs java">Accept: text/html
-Accept-Encoding: gzip, deflate, br
-Accept-Language: zh-CN,zh;q=<span class="hljs-number">0.9</span>
-Cache-Control: max-age=<span class="hljs-number">0</span>
-Connection: keep-alive</code></pre>
-
-<h3 id="1-请求行"><a href="#1-请求行" class="headerlink" title="1.请求行"></a>1.<strong>请求行</strong></h3><ul>
-<li>请求方式：get / post<ul>
-<li>get:请求能够携带的参数比较少，大小有限制，会在浏览器的URL地址栏显示数据内容，不安全，但高效</li>
-<li>post：请求能够携带的参数和大小没有限制，不会在浏览器的URL地址栏显示数据内容，安全，但不高效</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-消息头"><a href="#2-消息头" class="headerlink" title="2.消息头"></a>2.消息头</h3><pre><code class="hljs shell">Accept: 告诉浏览器，支持的数据类型
-Accept-Encoding: 支持哪种编码格式 gbk utf-8 GB2312 ISO8859-1
-Accept-Language: 告诉浏览器，他的语言环境
-Cache-Control: 缓存控制
-Connection: 告诉浏览器，请求完是断开还是保持连接
-host: 主机</code></pre>
-
-
-
-<h2 id="4-4-http响应"><a href="#4-4-http响应" class="headerlink" title="4.4 http响应"></a>4.4 http响应</h2><pre><code class="hljs java">Cache-Control: <span class="hljs-keyword">private</span>
-Connection: keep-alive
-Content-Encoding: gzip
-Content-Type: text/html;charset=utf-<span class="hljs-number">8</span> </code></pre>
-
-<h3 id="1-响应体"><a href="#1-响应体" class="headerlink" title="1.响应体"></a>1.<strong>响应体</strong></h3><pre><code class="hljs groovy"><span class="hljs-attr">Accept:</span> 告诉浏览器，支持的数据类型
-Accept-<span class="hljs-attr">Encoding:</span> 支持哪种编码格式 gbk utf<span class="hljs-number">-8</span> GB2312 ISO8859<span class="hljs-number">-1</span>
-Accept-<span class="hljs-attr">Language:</span> 告诉浏览器，他的语言环境
-Cache-<span class="hljs-attr">Control:</span> 缓存控制
-<span class="hljs-attr">Connection:</span> 告诉浏览器，请求完是断开还是保持连接
-<span class="hljs-attr">host:</span> 主机
-<span class="hljs-attr">refresh :</span> 告诉客户端，多久刷新一次
-location ： 让网页重新定位 </code></pre>
-
-<h3 id="2-响应状态码"><a href="#2-响应状态码" class="headerlink" title="2.响应状态码"></a>2.响应状态码</h3><ul>
-<li>200 ：请求相应成功</li>
-<li>3xx : 请求重定向 （你重新到我给你的新位置去</li>
-<li>4xx：找不到资源 404 </li>
-<li>5xx: 服务器代码错误  502 网关错误</li>
-</ul>
-<blockquote>
-<p>面试题：当浏览器输入网址并回车一瞬间到页面显示出来，经历了什么？！</p>
-</blockquote>
-<h1 id="5-Maven"><a href="#5-Maven" class="headerlink" title="5 Maven"></a>5 Maven</h1><p>为何要学习Maven</p>
-<blockquote>
-<p>1.在javaweb开发中，需要使用大量的jar包，我们手动去导入</p>
-<p>2.如何才能让一个东西自动帮我导入和配置这些jar包</p>
-<p>于是  maven就诞生了！</p>
-</blockquote>
-<h2 id="5-1-maven项目管理工具"><a href="#5-1-maven项目管理工具" class="headerlink" title="5.1 maven项目管理工具"></a>5.1 maven项目管理工具</h2><p>方便导入jar包</p>
-<p><strong>核心思想: 约定大于配置</strong></p>
-<ul>
-<li>有约束，不要去违反</li>
-</ul>
-<p>他会规定你如何去编写java代码，必须安装这个规范</p>
-<h2 id="5-2-下载maven"><a href="#5-2-下载maven" class="headerlink" title="5.2 下载maven"></a>5.2 下载maven</h2><p><a target="_blank" rel="noopener" href="https://maven.apache.org/">maven官网 </a>下载完解压即可</p>
-<p><img src="/2022/01/04/JavaWeb/10.png" srcset="/img/loading.gif" alt="image-20220101144018665"></p>
-<h2 id="5-3配置maven"><a href="#5-3配置maven" class="headerlink" title="5.3配置maven"></a>5.3配置maven</h2><p>环境变量</p>
-<ul>
-<li>M2_HOME : maven目录下的bin目录</li>
-<li>MAVEN_HOME ：maven 的目录</li>
-<li>在系统的path中配置%MAVEN_HOME%\bin </li>
-</ul>
-<blockquote>
-<p>命令行输入 <code>mvn -v</code> 进行验证环境变量</p>
-</blockquote>
-<h2 id="5-4-阿里云镜像"><a href="#5-4-阿里云镜像" class="headerlink" title="5.4 阿里云镜像"></a>5.4 阿里云镜像</h2><p>mirrors(镜像)</p>
-<ul>
-<li>加速我们的下载</li>
-</ul>
-<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">mirrors</span>&gt;</span>    <span class="hljs-tag">&lt;<span class="hljs-name">mirror</span>&gt;</span>      <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>alimaven<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span>      <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>aliyun maven<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span>      <span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span>      <span class="hljs-tag">&lt;<span class="hljs-name">mirrorOf</span>&gt;</span>central<span class="hljs-tag">&lt;/<span class="hljs-name">mirrorOf</span>&gt;</span>            <span class="hljs-tag">&lt;/<span class="hljs-name">mirror</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">mirrors</span>&gt;</span></code></pre>
-
-<h2 id="5-5本地仓库"><a href="#5-5本地仓库" class="headerlink" title="5.5本地仓库"></a>5.5本地仓库</h2><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">localRepository</span>&gt;</span>E:\environment\apache-maven-3.8.4\maven_repo<span class="hljs-tag">&lt;/<span class="hljs-name">localRepository</span>&gt;</span></code></pre>
-
-<h2 id="5-6在idea中使用IDEA"><a href="#5-6在idea中使用IDEA" class="headerlink" title="5.6在idea中使用IDEA"></a>5.6在idea中使用IDEA</h2><p>创建maven web项目 如图</p>
-<p><img src="/2022/01/04/JavaWeb/11.png" srcset="/img/loading.gif" alt="image-20220101192126444"></p>
-<p><img src="/2022/01/04/JavaWeb/12.png" srcset="/img/loading.gif" alt="image-20220101192357597"></p>
-<p><img src="/2022/01/04/JavaWeb/13.png" srcset="/img/loading.gif" alt="image-20220101192825075"></p>
-<p>成功后  若报错==&gt; 上述直接弄成idea的默认，然后新创建maven项目</p>
-<p>进行疯狂下东西</p>
-<p><img src="/2022/01/04/JavaWeb/14.png" srcset="/img/loading.gif" alt="image-20220101194550504"></p>
-<p>出现 BUILD SUCESS 代表成功</p>
-<p><img src="/2022/01/04/JavaWeb/15.png" srcset="/img/loading.gif" alt="image-20220101201841681"></p>
-<p>在文件中多了文件</p>
-<p><img src="/2022/01/04/JavaWeb/16.png" srcset="/img/loading.gif" alt="image-20220101195042365"></p>
-<p>也没配置本地仓库，比如在d盘。而这个.m2文件是系统默认的，自动生成的</p>
-<p>在maven web程序下</p>
-<p><img src="/2022/01/04/JavaWeb/17.png" srcset="/img/loading.gif" alt="image-20220102085500377"></p>
-<h2 id="5-7-创建普通的maven项目"><a href="#5-7-创建普通的maven项目" class="headerlink" title="5.7 创建普通的maven项目"></a>5.7 创建普通的maven项目</h2><p>不勾选模板<img src="/2022/01/04/JavaWeb/18.png" srcset="/img/loading.gif" alt="image-20220102084704298"></p>
-<p> 干净的maven项目 <img src="/2022/01/04/JavaWeb/19.png" srcset="/img/loading.gif" alt="image-20220102085250133"></p>
-<h2 id="5-8标记文件夹功能"><a href="#5-8标记文件夹功能" class="headerlink" title="5.8标记文件夹功能"></a>5.8标记文件夹功能</h2><p>在idea中对文件夹右键 </p>
-<p><img src="/2022/01/04/JavaWeb/20.png" srcset="/img/loading.gif" alt="image-20220102085749308"></p>
-<h2 id="5-9配置tomcat"><a href="#5-9配置tomcat" class="headerlink" title="5.9配置tomcat"></a>5.9配置tomcat</h2><p><img src="/2022/01/04/JavaWeb/21.png" srcset="/img/loading.gif" alt="image-20220102090742277"></p>
-<p><img src="/2022/01/04/JavaWeb/22.png" srcset="/img/loading.gif" alt="image-20220102090805674"></p>
-<p><img src="/2022/01/04/JavaWeb/23.png" srcset="/img/loading.gif" alt="image-20220102091333094"></p>
-<p><img src="/2022/01/04/JavaWeb/24.png" srcset="/img/loading.gif" alt="image-20220102091453659"></p>
-<p><img src="/2022/01/04/JavaWeb/25.png" srcset="/img/loading.gif" alt="image-20220102091629517"></p>
-<p>进行启动</p>
-<p><img src="/2022/01/04/JavaWeb/26.png" srcset="/img/loading.gif" alt="image-20220102092343654"></p>
-<p>成功会进行弹出！</p>
-<p><img src="/2022/01/04/JavaWeb/27.png" srcset="/img/loading.gif" alt="image-20220102092357538"></p>
-<p>显示出的hello world 就是index.jsp中的内容</p>
-<p><img src="/2022/01/04/JavaWeb/28.png" srcset="/img/loading.gif" alt="image-20220102092513473"></p>
-<p>此时成功！</p>
-<p><strong>maven结构</strong></p>
-<p><img src="/2022/01/04/JavaWeb/29.png" srcset="/img/loading.gif" alt="image-20220102092717582"></p>
-<h2 id="5-10-pom-xml文件"><a href="#5-10-pom-xml文件" class="headerlink" title="5.10 pom.xml文件"></a>5.10 pom.xml文件</h2> <pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-<span class="hljs-comment">&lt;!--maven版本和头文件--&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span>
-<span class="hljs-tag">  <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span>
-<span class="hljs-comment">&lt;!--  下面这是我们配置的GAV--&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.example<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>untitled<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0-SNAPSHOT<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
-<span class="hljs-comment">&lt;!--  package 项目的打包方式</span>
-<span class="hljs-comment">jar：java应用</span>
-<span class="hljs-comment">war：javaweb应用</span>
-<span class="hljs-comment">--&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">packaging</span>&gt;</span>war<span class="hljs-tag">&lt;/<span class="hljs-name">packaging</span>&gt;</span>
-<span class="hljs-comment">&lt;!--name url 可删除--&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>untitled Maven Webapp<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- FIXME change it to the project&#x27;s website --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>http://www.example.com<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span>
-<span class="hljs-comment">&lt;!--配置--&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">properties</span>&gt;</span>
-<span class="hljs-comment">&lt;!--    项目的默认构建编码--&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="hljs-tag">&lt;/<span class="hljs-name">project.build.sourceEncoding</span>&gt;</span>
-<span class="hljs-comment">&lt;!--    编码版本--&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">maven.compiler.source</span>&gt;</span>1.7<span class="hljs-tag">&lt;/<span class="hljs-name">maven.compiler.source</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">maven.compiler.target</span>&gt;</span>1.7<span class="hljs-tag">&lt;/<span class="hljs-name">maven.compiler.target</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">properties</span>&gt;</span>
-<span class="hljs-comment">&lt;!--项目依赖--&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
-<span class="hljs-comment">&lt;!--    具体依赖的jar包配置文件--&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>junit<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>junit<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>4.11<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.mortbay.jetty<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>servlet-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.5-20081211<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span>
-
-<span class="hljs-comment">&lt;!--  项目构建用的--&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">finalName</span>&gt;</span>untitled<span class="hljs-tag">&lt;/<span class="hljs-name">finalName</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">pluginManagement</span>&gt;</span><span class="hljs-comment">&lt;!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) --&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>maven-clean-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.1.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span>
-        <span class="hljs-comment">&lt;!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging --&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>maven-resources-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.8.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>maven-surefire-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.22.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>maven-war-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.2.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>maven-install-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.5.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>maven-deploy-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.8.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">pluginManagement</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span></code></pre>
-
-<p><strong>maven高级之处就在于他帮你导入这个jar包所依赖的其他jar包</strong></p>
-<p><a target="_blank" rel="noopener" href="https://mvnrepository.com/">maven仓库</a></p>
-<p>只需加上dependency。在maven仓库中，选择自己需要的即可，maven将自己导入</p>
-<p><img src="/2022/01/04/JavaWeb/30.png" srcset="/img/loading.gif" alt="image-20220102095217578"></p>
-<p>由于maven 约定大于配置 的规定，所以再之后写的配置文件，<strong>会出现无法导出或生效的问题</strong>，解决方法：</p>
-<p>在mybatis 会遇到</p>
-<pre><code class="hljs xml"><span class="hljs-comment">&lt;!--在build中配置resources,来防止我们资源导出失败的问题--&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">resources</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">resource</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">directory</span>&gt;</span>src/main/resources<span class="hljs-tag">&lt;/<span class="hljs-name">directory</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">includes</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">include</span>&gt;</span>**/*.properties<span class="hljs-tag">&lt;/<span class="hljs-name">include</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">include</span>&gt;</span>**/*.xml<span class="hljs-tag">&lt;/<span class="hljs-name">include</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">includes</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">filtering</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">filtering</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-name">resource</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">resource</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">directory</span>&gt;</span>src/main/java<span class="hljs-tag">&lt;/<span class="hljs-name">directory</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">includes</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">include</span>&gt;</span>**/*.properties<span class="hljs-tag">&lt;/<span class="hljs-name">include</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">include</span>&gt;</span>**/*.xml<span class="hljs-tag">&lt;/<span class="hljs-name">include</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">includes</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">filtering</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">filtering</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-name">resource</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">resources</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span>
-</code></pre>
-
-
-
-<p>若每次都需要重新配置，修改全局配置</p>
-<p><img src="/2022/01/04/JavaWeb/31.png" srcset="/img/loading.gif" alt="image-20220102102303101"></p>
 
             </div>
             <hr>
@@ -600,9 +366,7 @@ location ： 让网页重新定位 </code></pre>
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
-                    
-                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/">Java</a>
+                      <a class="hover-with-bg" href="/categories/JavaWeb/">JavaWeb</a>
                     
                   </div>
                 
@@ -794,7 +558,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：34.7k</span>
+    <span class="post-count">总字数统计：34.6k</span>
 
     
   </div>
@@ -856,7 +620,7 @@ show_date_time();
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "JavaWeb&nbsp;",
+        "Web介绍&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
