@@ -513,7 +513,9 @@ heng.age() <span class="hljs-comment">//打印22    </span>
 getAge()  <span class="hljs-comment">//打印NaN  this并没有指向heng    </span>
 getAge.apply(heng,[]);  <span class="hljs-comment">//此时this指向了heng，打印22</span></code></pre>
 
-<h2 id="3-3-闭包-难"><a href="#3-3-闭包-难" class="headerlink" title="3.3 闭包(难)"></a>3.3 闭包(难)</h2><h2 id="3-4-箭头函数-新特性"><a href="#3-4-箭头函数-新特性" class="headerlink" title="3.4 箭头函数(新特性)"></a>3.4 箭头函数(新特性)</h2><h2 id="3-5创建对象"><a href="#3-5创建对象" class="headerlink" title="3.5创建对象"></a>3.5创建对象</h2><pre><code class="hljs js"><span class="hljs-keyword">var</span> student  =  &#123;    
+
+
+<h2 id="3-3创建对象"><a href="#3-3创建对象" class="headerlink" title="3.3创建对象"></a>3.3创建对象</h2><pre><code class="hljs js"><span class="hljs-keyword">var</span> student  =  &#123;    
     name : <span class="hljs-string">&quot;jack&quot;</span>,    
     age : <span class="hljs-string">&#x27;20&#x27;</span>,    
     run : <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
@@ -525,7 +527,7 @@ getAge.apply(heng,[]);  <span class="hljs-comment">//此时this指向了heng，�
 &#125;
 heng.__proto__ = student; <span class="hljs-comment">//将heng指向student，即heng的原型为student</span></code></pre>
 
-<h2 id="3-6class继承-新特性"><a href="#3-6class继承-新特性" class="headerlink" title="3.6class继承(新特性)"></a>3.6class继承(新特性)</h2><blockquote>
+<h2 id="3-4class继承-新特性"><a href="#3-4class继承-新特性" class="headerlink" title="3.4class继承(新特性)"></a>3.4class继承(新特性)</h2><blockquote>
 <p><code>class</code>在es6引入</p>
 </blockquote>
 <pre><code class="hljs js"><span class="hljs-comment">//定义Student类，js中叫做  原型对象 JavaScript仍然是基于原型的。</span>
@@ -552,7 +554,7 @@ heng.__proto__ = student; <span class="hljs-comment">//将heng指向student，�
 &#125;
 <span class="hljs-keyword">var</span> jack = <span class="hljs-keyword">new</span> pupil(<span class="hljs-string">&quot;jack&quot;</span>,<span class="hljs-number">2</span>);</code></pre>
 
-<h2 id="3-7原型链继承-难"><a href="#3-7原型链继承-难" class="headerlink" title="3.7原型链继承(难)"></a>3.7原型链继承(难)</h2><blockquote>
+<h2 id="3-5原型链继承-难"><a href="#3-5原型链继承-难" class="headerlink" title="3.5原型链继承(难)"></a>3.5原型链继承(难)</h2><blockquote>
 <ul>
 <li><p>每个对象都有一个<code>__proto__</code>，它指向它的<code>prototype</code>原型对象，而<code>prototype</code>原型对象又具有一个自己的<code>prototype</code>原型对象，就这样层层往上直到一个对象的原型<code>prototype</code>为<code>null</code></p>
 <p>这个查询的路径就是<code>原型链</code></p>
@@ -763,7 +765,7 @@ document.cookie</code></pre>
 <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
 
 <p>前端一般会采用<code>MD5</code>进行加密</p>
-<h2 id="6-8-操作文件"><a href="#6-8-操作文件" class="headerlink" title="6.8 操作文件"></a>6.8 操作文件</h2><h1 id="7-jQuery"><a href="#7-jQuery" class="headerlink" title="7.jQuery"></a>7.jQuery</h1><p>是一个库，里面包含了大量的js函数</p>
+<h1 id="7-jQuery"><a href="#7-jQuery" class="headerlink" title="7.jQuery"></a>7.jQuery</h1><p>是一个库，里面包含了大量的js函数</p>
 <p> <a target="_blank" rel="noopener" href="https://jquery.com/download/">jQuery下载</a></p>
 <pre><code class="hljs html">//引用
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;lib/jquery-3.6.0.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
