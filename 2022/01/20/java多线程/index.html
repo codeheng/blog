@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      2.3k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19
+      33
        分钟
     </span>
   
@@ -439,7 +439,199 @@ PrimeRun p = <span class="hljs-keyword">new</span> PrimeRun();
 <span class="hljs-comment">after hello</span>
 <span class="hljs-comment">*/</span></code></pre>
 
-<h2 id="5-Lamda表达式"><a href="#5-Lamda表达式" class="headerlink" title="5.Lamda表达式"></a>5.Lamda表达式</h2><h1 id="三-线程状态"><a href="#三-线程状态" class="headerlink" title="三.线程状态"></a>三.线程状态</h1><h1 id="四-线程同步-重点"><a href="#四-线程同步-重点" class="headerlink" title="四.线程同步(重点)"></a>四.线程同步(重点)</h1><h1 id="五-线程通信"><a href="#五-线程通信" class="headerlink" title="五.线程通信"></a>五.线程通信</h1><h1 id="高级部分"><a href="#高级部分" class="headerlink" title="高级部分"></a>高级部分</h1>
+<h2 id="5-Lamda表达式"><a href="#5-Lamda表达式" class="headerlink" title="5.Lamda表达式"></a>5.Lamda表达式</h2><p>避免匿名内部类定义过多</p>
+<p>实质属于<strong>函数式编程</strong>的概念</p>
+<p><code>(parama) -&gt; expression[表达式]</code></p>
+<p><code>(params) -&gt; statement[语句] </code></p>
+<p><code>(params) -&gt; &#123;statements&#125;</code></p>
+<pre><code class="hljs java"><span class="hljs-keyword">new</span> Thread( ()-&gt; System.out.println(<span class="hljs-string">&quot;多线程学习.....&quot;</span>) ).start();</code></pre>
+
+<p><strong>Functional Interface ( 函数式接口 )</strong>  学习java8 lamda表达式的关键</p>
+<pre><code class="hljs java"><span class="hljs-comment">//定义： 任何接口，若只包含唯一一个抽象方法，则就是一个函数式接口</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Runnable</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre>
+
+<p>对于函数式接口，我们可以通过lamda表达式来创建该接口的对象</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestLamda</span> </span>&#123;
+    <span class="hljs-comment">//3.静态内部类</span>
+    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">like2</span> <span class="hljs-keyword">implements</span>  <span class="hljs-title">Ilike</span> </span>&#123;
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lamda</span><span class="hljs-params">()</span> </span>&#123;
+            System.out.println(<span class="hljs-string">&quot;I like lamda2...&quot;</span>);
+        &#125;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        <span class="hljs-comment">//调用2</span>
+        <span class="hljs-keyword">new</span> like().lamda();
+        <span class="hljs-comment">//调用3</span>
+        <span class="hljs-keyword">new</span> like2().lamda();
+
+        <span class="hljs-comment">//4局部内部类</span>
+        <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">like3</span> <span class="hljs-keyword">implements</span>  <span class="hljs-title">Ilike</span> </span>&#123;
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lamda</span><span class="hljs-params">()</span> </span>&#123;
+                System.out.println(<span class="hljs-string">&quot;I like lamda3...&quot;</span>);
+            &#125;
+        &#125;
+        <span class="hljs-comment">//调用4</span>
+        <span class="hljs-keyword">new</span> like3().lamda();
+
+        <span class="hljs-comment">//5.匿名内部类</span>
+        Ilike like = <span class="hljs-keyword">new</span> like();
+        like = <span class="hljs-keyword">new</span> Ilike() &#123;
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lamda</span><span class="hljs-params">()</span> </span>&#123;
+                System.out.println(<span class="hljs-string">&quot;I like lamda4...&quot;</span>);
+            &#125;
+        &#125;;
+        <span class="hljs-comment">//调用5</span>
+        like.lamda();
+        <span class="hljs-comment">//6 lamda表达式</span>
+        like = () -&gt;  &#123;
+            System.out.println(<span class="hljs-string">&quot;I like lamda5...&quot;</span>);
+        &#125;;
+        like.lamda();
+    &#125;
+&#125;
+<span class="hljs-comment">//1接口</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Ilike</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lamda</span><span class="hljs-params">()</span></span>;
+&#125;
+<span class="hljs-comment">//2.实现类</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">like</span> <span class="hljs-keyword">implements</span>  <span class="hljs-title">Ilike</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lamda</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">&quot;I like lamda1...&quot;</span>);
+    &#125;
+&#125;</code></pre>
+
+<h1 id="三-线程状态"><a href="#三-线程状态" class="headerlink" title="三.线程状态"></a>三.线程状态</h1><p><img src="/2022/01/20/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/05.png" srcset="/img/loading.gif" alt="image-20220127111512199"></p>
+<p><strong>线程方法</strong></p>
+<p><img src="/2022/01/20/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/06.png" srcset="/img/loading.gif" alt="image-20220127112036363"></p>
+<h2 id="1-线程停止"><a href="#1-线程停止" class="headerlink" title="1.线程停止"></a>1.线程停止</h2><ul>
+<li><p>不推荐jdk推荐的<code>stop()</code> 和 <code>destroy()</code> 方法  (官方已废弃)</p>
+</li>
+<li><p>推荐让线程自己停下来</p>
+</li>
+<li><p>建议使用标志位进行中止，当<code>flag = false</code>,则中止</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestStop</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>&#123;
+  <span class="hljs-comment">//标志位</span>
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> flag = <span class="hljs-keyword">true</span>;
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
+      <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;
+      <span class="hljs-keyword">while</span> (flag) &#123;
+          System.out.println(<span class="hljs-string">&quot;run..&quot;</span> + i++);
+      &#125;
+  &#125;
+  <span class="hljs-comment">//提供方法停止线程</span>
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">stop</span><span class="hljs-params">()</span> </span>&#123;
+      flag = <span class="hljs-keyword">false</span>;
+  &#125;
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+      TestStop testStop = <span class="hljs-keyword">new</span> TestStop();
+      <span class="hljs-keyword">new</span> Thread(testStop).start(); <span class="hljs-comment">//启动线程</span>
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100</span>; i++) &#123;
+          System.out.println(<span class="hljs-string">&quot;main...&quot;</span> + i);
+          <span class="hljs-keyword">if</span> ( i == <span class="hljs-number">80</span> ) &#123;
+              testStop.stop();
+              System.out.println(<span class="hljs-string">&quot;this thread stopped!&quot;</span>);
+          &#125;
+      &#125;
+  &#125;
+&#125;</code></pre>
+
+</li>
+</ul>
+<h2 id="2-线程睡眠"><a href="#2-线程睡眠" class="headerlink" title="2.线程睡眠"></a>2.线程睡眠</h2><p><img src="/2022/01/20/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/07.png" srcset="/img/loading.gif" alt="image-20220127113355513"> </p>
+ <pre><code class="hljs java"><span class="hljs-comment">//倒计时</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestSleep</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        <span class="hljs-keyword">try</span> &#123;
+            tenDown();
+        &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+
+     <span class="hljs-comment">//获取系统时间,并进行比变化</span>
+        Date date = <span class="hljs-keyword">new</span> Date(System.currentTimeMillis());
+        <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;
+            <span class="hljs-keyword">try</span> &#123;
+                Thread.sleep(<span class="hljs-number">1000</span>);
+                System.out.println(<span class="hljs-keyword">new</span> SimpleDateFormat(<span class="hljs-string">&quot;HH:mm:ss&quot;</span>).format(date));
+                date = <span class="hljs-keyword">new</span> Date(System.currentTimeMillis());<span class="hljs-comment">//更新时间</span>
+            &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;
+                e.printStackTrace();
+            &#125;
+        &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">tenDown</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;
+        <span class="hljs-keyword">int</span> num = <span class="hljs-number">10</span>;
+        <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;
+            <span class="hljs-comment">//每一次一秒钟进行倒计时</span>
+            Thread.sleep(<span class="hljs-number">1000</span>) ;
+            System.out.println(num --);
+            <span class="hljs-keyword">if</span> (num &lt; <span class="hljs-number">0</span>) &#123;
+                <span class="hljs-keyword">break</span>;
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<h2 id="3-线程礼让"><a href="#3-线程礼让" class="headerlink" title="3.线程礼让"></a>3.线程礼让</h2><ul>
+<li>让正在执行的线程暂停，但不阻塞</li>
+<li>将线程从运行变为就绪</li>
+<li>cpu重新调度，是否礼让成功，根据cpu而定，仍然又可能让了之后，还继续执行 </li>
+</ul>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestYield</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        MyYield myYield = <span class="hljs-keyword">new</span> MyYield();
+        <span class="hljs-keyword">new</span> Thread(myYield,<span class="hljs-string">&quot;a==&gt;&quot;</span>).start();
+        <span class="hljs-keyword">new</span> Thread(myYield,<span class="hljs-string">&quot;b==&gt;&quot;</span>).start();
+    &#125;
+&#125;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyYield</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot;start...&quot;</span>); <span class="hljs-comment">//线程开始</span>
+        Thread.yield(); <span class="hljs-comment">//当前线程进行礼让</span>
+        System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot;end...&quot;</span>); <span class="hljs-comment">//线程结束</span>
+
+    &#125;
+&#125;</code></pre>
+
+<p><strong>Join 合并线程</strong></p>
+<ul>
+<li>让线程强制等待，待此线程执行完成后，再执行其他线程，其他线程阻塞 ( <strong>理解为插队</strong> )</li>
+</ul>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestJoin</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;
+        TestJoin testJoin = <span class="hljs-keyword">new</span> TestJoin();
+        Thread thread = <span class="hljs-keyword">new</span> Thread(testJoin);
+        thread.start(); <span class="hljs-comment">//启动run</span>
+        <span class="hljs-comment">//主线程</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100</span>; i++) &#123;
+            <span class="hljs-keyword">if</span>( i == <span class="hljs-number">50</span>) &#123;
+                System.out.println(<span class="hljs-string">&quot;插队!main等待我执行完才可执行!!&quot;</span>);
+                thread.join(); <span class="hljs-comment">//进行插队,此时vip一直打印到结束</span>
+            &#125;
+            System.out.println(<span class="hljs-string">&quot;main ..&quot;</span> +i);
+        &#125;
+    &#125;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">200</span>; i++) &#123;
+            System.out.println(<span class="hljs-string">&quot;I am vip ..&quot;</span> + i) ;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p><code>Thread.state</code> <strong>线程状态</strong></p>
+<p><img src="/2022/01/20/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/blog\source_posts\java多线程\08.png" srcset="/img/loading.gif" alt="image-20220127121229233"></p>
+<p><strong>线程优先级</strong></p>
+<h1 id="四-线程同步-重点"><a href="#四-线程同步-重点" class="headerlink" title="四.线程同步(重点)"></a>四.线程同步(重点)</h1><h1 id="五-线程通信"><a href="#五-线程通信" class="headerlink" title="五.线程通信"></a>五.线程通信</h1><h1 id="高级部分"><a href="#高级部分" class="headerlink" title="高级部分"></a>高级部分</h1>
             </div>
             <hr>
             <div>
@@ -642,7 +834,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：35.9k</span>
+    <span class="post-count">总字数统计：36.7k</span>
 
     
   </div>
