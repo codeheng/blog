@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.3k 字
+      3.2k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      33
+      46
        分钟
     </span>
   
@@ -631,7 +631,145 @@ PrimeRun p = <span class="hljs-keyword">new</span> PrimeRun();
 <p><code>Thread.state</code> <strong>线程状态</strong></p>
 <p><img src="/2022/01/20/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/blog\source_posts\java多线程\08.png" srcset="/img/loading.gif" alt="image-20220127121229233"></p>
 <p><strong>线程优先级</strong></p>
-<h1 id="四-线程同步-重点"><a href="#四-线程同步-重点" class="headerlink" title="四.线程同步(重点)"></a>四.线程同步(重点)</h1><h1 id="五-线程通信"><a href="#五-线程通信" class="headerlink" title="五.线程通信"></a>五.线程通信</h1><h1 id="高级部分"><a href="#高级部分" class="headerlink" title="高级部分"></a>高级部分</h1>
+<ul>
+<li><p>java提供了一个线程调度器来监控程序中启动后进入就绪状态的所有线程，线程调度器按照优先级决定应该调度哪个线程来执行</p>
+</li>
+<li><p>优先级用数字表示，0~10</p>
+<pre><code class="hljs JAVA">Thread.MIN_PRIORITY = <span class="hljs-number">1</span>;
+Thread.MAX_PRIORITY = <span class="hljs-number">10</span>;
+Thread.NORM_PRIORITY = <span class="hljs-number">5</span>;</code></pre>
+</li>
+<li><p>使用<code>getPriority().setPriority(int xx)</code>改变优先级</p>
+</li>
+</ul>
+<blockquote>
+<p>优先级低，不代表调度概论低，要看cpu调度</p>
+</blockquote>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestPriority</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        System.out.println(Thread.currentThread().getName() +<span class="hljs-string">&quot;===&gt;&quot;</span> + Thread.currentThread().getPriority());
+        MyPriority myPriority = <span class="hljs-keyword">new</span> MyPriority();
+        Thread t1 = <span class="hljs-keyword">new</span> Thread(myPriority);
+        Thread t2 = <span class="hljs-keyword">new</span> Thread(myPriority);
+        Thread t3 = <span class="hljs-keyword">new</span> Thread(myPriority);
+        Thread t4 = <span class="hljs-keyword">new</span> Thread(myPriority);
+        <span class="hljs-comment">//先设置优先级，再启动</span>
+        t1.start(); <span class="hljs-comment">//t1默认优先级</span>
+        t2.setPriority(<span class="hljs-number">1</span>);
+        t2.start(); <span class="hljs-comment">//t2优先级设置为1</span>
+        t3.setPriority(<span class="hljs-number">6</span>);
+        t3.start(); <span class="hljs-comment">//t3.</span>
+        t4.setPriority(Thread.MAX_PRIORITY);
+        t4.start();<span class="hljs-comment">//t4..</span>
+    &#125;
+&#125;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyPriority</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span>  </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(Thread.currentThread().getName() +<span class="hljs-string">&quot;===&gt;&quot;</span> + Thread.currentThread().getPriority());
+    &#125;
+&#125;</code></pre>
+
+<p><strong>守护线程</strong> <code>daemon</code></p>
+<ul>
+<li>线程分为<strong>用户线程和守护线程</strong></li>
+<li>虚拟机必须确保用户线程执行完毕</li>
+<li>虚拟机不用等待守护线程执行完毕 ==&gt; 如：后台记录操作日志，监控内存，垃圾回收…..</li>
+</ul>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestDaemon</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        God god = <span class="hljs-keyword">new</span> God();
+        You you = <span class="hljs-keyword">new</span> You();
+        Thread thread = <span class="hljs-keyword">new</span> Thread(god);
+        thread.setDaemon(<span class="hljs-keyword">true</span>);<span class="hljs-comment">//默认false是用户进程</span>
+        thread.start(); <span class="hljs-comment">//守护线程启动</span>
+        <span class="hljs-comment">//用户线程开启</span>
+        <span class="hljs-keyword">new</span> Thread(you).start();
+    &#125;
+&#125;
+<span class="hljs-class"><span class="hljs-keyword">class</span>  <span class="hljs-title">God</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;
+            System.out.println(<span class="hljs-string">&quot;God always bless you!&quot;</span>);
+        &#125;
+    &#125;
+&#125;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">You</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">365</span>; i++) &#123;
+            System.out.println(<span class="hljs-string">&quot;I...&quot;</span> + i);
+        &#125;
+        System.out.println(<span class="hljs-string">&quot;bye!!!!&quot;</span>);
+    &#125;
+&#125;</code></pre>
+
+<h1 id="四-线程同步-重点"><a href="#四-线程同步-重点" class="headerlink" title="四.线程同步(重点)"></a>四.线程同步(重点)</h1><p>多个线程操作同一个资源 </p>
+<blockquote>
+<p>并发： <strong>同一个对象</strong>被<strong>多个线程</strong>同时操作</p>
+</blockquote>
+<p>当多个线程访问一个对象，并且某些线程要修改对象，这时需要<strong>线程同步</strong></p>
+<p>线程同步其实是一种<strong>等待机制</strong>，多个需要同时访问此对象的线程进入这个<strong>对象的等待池</strong>形成队列，等待前面线程使用完毕，下一个线程再使用</p>
+<blockquote>
+<p><strong>队列 + 锁</strong> 才可保证线程同步的安全性</p>
+</blockquote>
+<p><img src="/2022/01/20/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/09.png" srcset="/img/loading.gif" alt="image-20220127152403260"></p>
+<pre><code class="hljs java"><span class="hljs-comment">//线程不安全的集合，因为线程会操作同一个地方，导致覆盖，最终打印并非10000</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnSafeList</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        List&lt;String&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;String &gt;();
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000</span>; i++) &#123;
+            <span class="hljs-keyword">new</span> Thread( ()-&gt; &#123;
+                list.add(Thread.currentThread().getName());
+            &#125;).start();
+        &#125;
+        System.out.println(list.size());
+    &#125;
+&#125;</code></pre>
+
+<p>在这个例子里，有两个问题</p>
+<ul>
+<li>第一是有些线程执行的太慢了，main线程执行完了，还有部分线程没执行完</li>
+<li>第二是是可能会好多线程操作list的同一个l位置。</li>
+</ul>
+<p>加上<code>synchronized  (list) &#123; &#125;</code>之后解决了第二个问题。</p>
+<p>第一个问题的原因，是<code>main</code>线程执行完了之后，还会有部分线程没执行完，在最后加上<code>sleep</code>，使得main线程先停止下，等待其他的线程执行完，然后输出就能正常了。</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnSafeList</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        List&lt;String&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;String &gt;();
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000</span>; i++) &#123;
+            <span class="hljs-keyword">new</span> Thread( ()-&gt; &#123;
+                <span class="hljs-keyword">synchronized</span> (list) &#123;
+                    list.add(Thread.currentThread().getName());
+                &#125;
+            &#125;).start();
+        &#125;
+        <span class="hljs-keyword">try</span> &#123;
+            Thread.sleep(<span class="hljs-number">1000</span>);
+        &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+        System.out.println(list.size());
+    &#125;
+&#125;</code></pre>
+
+<p><code>synchronized</code>关键字 可分为<code>synchronized</code>方法 和 <code>synchronized</code>块</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method</span><span class="hljs-params">(<span class="hljs-keyword">int</span> args)</span> </span>&#123;&#125;</code></pre>
+
+<p>同步块：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">synchronized</span>(Obj) &#123;  &#125;</code></pre>
+
+<p><strong>Obj为同步监视器，</strong>可以使任何对象，但一般使用共享资源作为同步监视器</p>
+<p>同步方法中则不需要指定同步监视器，因为就是this对象本身</p>
+<p>执行过程：</p>
+<ul>
+<li>a访问，锁定obj，执行代码</li>
+<li>b访问，发现被锁，无法进行访问</li>
+<li>a执行完毕，解锁</li>
+<li>b访问，发现没锁，进行访问</li>
+</ul>
+<h1 id="五-线程通信"><a href="#五-线程通信" class="headerlink" title="五.线程通信"></a>五.线程通信</h1><h1 id="高级部分"><a href="#高级部分" class="headerlink" title="高级部分"></a>高级部分</h1>
             </div>
             <hr>
             <div>
@@ -834,7 +972,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：36.7k</span>
+    <span class="post-count">总字数统计：38.2k</span>
 
     
   </div>

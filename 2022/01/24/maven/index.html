@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      1.7k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19
+      27
        分钟
     </span>
   
@@ -231,6 +231,7 @@
 <h1 id="2-下载maven"><a href="#2-下载maven" class="headerlink" title="2. 下载maven"></a>2. 下载maven</h1><p><a target="_blank" rel="noopener" href="https://maven.apache.org/">maven官网 </a>下载完解压即可</p>
 <p><img src="/2022/01/24/maven/10.png" srcset="/img/loading.gif" alt="image-20220101144018665"></p>
 <h1 id="3-配置maven"><a href="#3-配置maven" class="headerlink" title="3.配置maven"></a>3.配置maven</h1><p>环境变量</p>
+<p><img src="/2022/01/24/maven/10_1.png" srcset="/img/loading.gif" alt="image-20220128153722723"></p>
 <ul>
 <li>M2_HOME : maven目录下的bin目录</li>
 <li>MAVEN_HOME ：maven 的目录</li>
@@ -239,11 +240,18 @@
 <blockquote>
 <p>命令行输入 <code>mvn -v</code> 进行验证环境变量</p>
 </blockquote>
-<h1 id="4-阿里云镜像"><a href="#4-阿里云镜像" class="headerlink" title="4 .阿里云镜像"></a>4 .阿里云镜像</h1><p>mirrors(镜像)</p>
+<h1 id="4-阿里云镜像"><a href="#4-阿里云镜像" class="headerlink" title="4 .阿里云镜像"></a>4 .阿里云镜像</h1><p>在<code>E:\environment\apache-maven-3.6.2\conf ==&gt;  setting.xml</code>中添加 <strong>镜像和本地仓库</strong></p>
+<p>mirrors(镜像)</p>
 <ul>
 <li>加速我们的下载</li>
 </ul>
-<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">mirrors</span>&gt;</span>    <span class="hljs-tag">&lt;<span class="hljs-name">mirror</span>&gt;</span>      <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>alimaven<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span>      <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>aliyun maven<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span>      <span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span>      <span class="hljs-tag">&lt;<span class="hljs-name">mirrorOf</span>&gt;</span>central<span class="hljs-tag">&lt;/<span class="hljs-name">mirrorOf</span>&gt;</span>            <span class="hljs-tag">&lt;/<span class="hljs-name">mirror</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">mirrors</span>&gt;</span></code></pre>
+<pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 配置中央仓库的镜像（改用：阿里云中央仓库镜像）--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">mirror</span>&gt;</span>        
+      <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>alimaven<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>aliyun-maven<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">mirrorOf</span>&gt;</span>central<span class="hljs-tag">&lt;/<span class="hljs-name">mirrorOf</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">mirror</span>&gt;</span></code></pre>
 
 <h1 id="5-本地仓库"><a href="#5-本地仓库" class="headerlink" title="5.本地仓库"></a>5.本地仓库</h1><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">localRepository</span>&gt;</span>E:\environment\apache-maven-3.8.4\maven_repo<span class="hljs-tag">&lt;/<span class="hljs-name">localRepository</span>&gt;</span></code></pre>
 
@@ -269,12 +277,12 @@
 <p><img src="/2022/01/24/maven/22.png" srcset="/img/loading.gif" alt="image-20220102090805674"></p>
 <p><img src="/2022/01/24/maven/23.png" srcset="/img/loading.gif" alt="image-20220102091333094"></p>
 <p><img src="/2022/01/24/maven/24.png" srcset="/img/loading.gif" alt="image-20220102091453659"></p>
-<p><img src="/2022/01/24/maven/25.png" srcset="/img/loading.gif" alt="image-20220102091629517"></p>
+<p><img src="/2022/01/24/maven/25.png" srcset="/img/loading.gif" alt="image-20220128152412421"></p>
 <p>进行启动</p>
 <p><img src="/2022/01/24/maven/26.png" srcset="/img/loading.gif" alt="image-20220102092343654"></p>
 <p>成功会进行弹出！</p>
 <p><img src="/2022/01/24/maven/27.png" srcset="/img/loading.gif" alt="image-20220102092357538"></p>
-<p>显示出的hello world 就是index.jsp中的内容</p>
+<p>显示出的<code>hello world</code> 就是<code>index.jsp</code>中的内容</p>
 <p><img src="/2022/01/24/maven/28.png" srcset="/img/loading.gif" alt="image-20220102092513473"></p>
 <p>此时成功！</p>
 <p><strong>maven结构</strong></p>
@@ -386,13 +394,89 @@
         <span class="hljs-tag">&lt;<span class="hljs-name">filtering</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">filtering</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">resource</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">resources</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span>
-</code></pre>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span></code></pre>
 
 
 
-<p>若每次都需要重新配置，修改全局配置</p>
-<p><img src="/2022/01/24/maven/31.png" srcset="/img/loading.gif" alt="image-20220102102303101"></p>
+<p>若每次都需要重新配置，修改<strong>全局配置</strong></p>
+<p><img src="/2022/01/24/maven/31.png" srcset="/img/loading.gif" alt="image-20220128151726838"></p>
+<p><img src="/2022/01/24/maven/32.png" srcset="/img/loading.gif" alt="image-20220128151823590"></p>
+<p>若maven配置完之后，创建项目出现<code>Error reading file E:/idea_project/Maven_pro/pom.xml</code></p>
+<p>重新安装maven，然后配置环境，则可进行解决</p>
+<h1 id="11-简单编写HelloServlet"><a href="#11-简单编写HelloServlet" class="headerlink" title="11.简单编写HelloServlet"></a>11.简单编写HelloServlet</h1><p>maven app结构</p>
+<p><img src="/2022/01/24/maven/32_1.png" srcset="/img/loading.gif" alt="image-20220128152809852"></p>
+<p><code>HelloServlet.java</code>中</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;
+    <span class="hljs-comment">//重写doGet 和 doPost方法</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doGet</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> ServletException,IOException </span>&#123;
+        response.setContentType(<span class="hljs-string">&quot;text/html&quot;</span>);
+        response.setCharacterEncoding(<span class="hljs-string">&quot;utf-8&quot;</span>);  <span class="hljs-comment">//解决中文乱码！</span>
+        PrintWriter out = response.getWriter();
+        out.println(<span class="hljs-string">&quot;&lt;html&gt;&quot;</span>);
+        out.println(<span class="hljs-string">&quot;&lt;head&gt;&quot;</span>);
+        out.println(<span class="hljs-string">&quot;&lt;title&gt;你好&lt;/title&gt;&quot;</span>);
+        out.println(<span class="hljs-string">&quot;&lt;/head&gt;&quot;</span>);
+        out.println(<span class="hljs-string">&quot;&lt;body&gt;&quot;</span>);
+        out.println(<span class="hljs-string">&quot;&lt;h1&gt;你好&lt;/h1&gt;&quot;</span>);
+        out.println(<span class="hljs-string">&quot;&lt;/body&gt;&quot;</span>);
+        out.println(<span class="hljs-string">&quot;&lt;/html&gt;&quot;</span>);
+    &#125;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doPost</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;
+        doGet(req, resp);
+    &#125;
+&#125;</code></pre>
+
+<p><code>index.jsp</code>中</p>
+<pre><code class="hljs jsp">&lt;html&gt;
+&lt;body&gt;
+&lt;h2&gt;Hello World!&lt;/h2&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p><code>header.html</code>中</p>
+<pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>我是导航栏<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+
+<p><code>web.xml</code>中</p>
+<pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">web-app</span> <span class="hljs-meta-keyword">PUBLIC</span></span>
+<span class="hljs-meta"> <span class="hljs-meta-string">&quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;</span></span>
+<span class="hljs-meta"> <span class="hljs-meta-string">&quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot;</span> &gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">web-app</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">display-name</span>&gt;</span>Archetype Created Web Application<span class="hljs-tag">&lt;/<span class="hljs-name">display-name</span>&gt;</span>
+
+  <span class="hljs-comment">&lt;!--  web.xml是web的核心应用</span>
+<span class="hljs-comment">注册servlet--&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>helloServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>com.heng.servlet.HelloServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span>
+  <span class="hljs-comment">&lt;!--  一个servlet对应一个mapping 映射--&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>helloServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span>
+    <span class="hljs-comment">&lt;!--    映射请求路径--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/heng<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span></code></pre>
+
+<p><strong>结果展示</strong></p>
+<p>默认通过<code>localhost:8080/hello</code> 展示如图，<code>index.jsp</code>文件展示出来</p>
+<p><img src="/2022/01/24/maven/33.png" srcset="/img/loading.gif" alt="image-20220128153227229"></p>
+<p>访问<code>header.html</code></p>
+<p><img src="/2022/01/24/maven/34.png" srcset="/img/loading.gif" alt="image-20220128153244534"></p>
+<p>通过<code>servlet</code>进行映射访问，编写的<code>HelloServlet</code>展示出来</p>
+<p><img src="/2022/01/24/maven/35.png" srcset="/img/loading.gif" alt="image-20220128153300993"></p>
 
             </div>
             <hr>
@@ -596,7 +680,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：36.7k</span>
+    <span class="post-count">总字数统计：38.2k</span>
 
     
   </div>
