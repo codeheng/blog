@@ -692,10 +692,10 @@
 <blockquote>
 <p>Forward是指内部转发。当一个Servlet处理请求的时候，它可以决定自己不继续处理，而是<strong>转发给另一个Servlet处理</strong>。</p>
 <p><strong>重定向</strong>是指当浏览器请求一个URL时，服务器返回一个重定向指令，告诉浏览器地址已经变了，麻烦使用<strong>新的URL再重新发送</strong>新请求。</p>
-<p>相同点：页面均会跳转</p>
-<p>不同：请求转发时，url不会发生变化，而重定向会</p>
+<p>相同点：页面均会跳转 </p>
+<p>不同：请求转发时，url不会发生变化(307)，而重定向(302)会  </p>
 </blockquote>
-<p>小案例 ==&gt; </p>
+<p><strong>小案例 ==&gt;</strong> </p>
 <p>通过<code>index.jsp</code>上form表单输入账号，密码，进行提交，跳转到另一个页面，显示成功</p>
 <p><strong>需要在表单上指定action具体路径</strong> <code>$&#123;pageContext.request.contextPath&#125;</code>指代当前项目</p>
 <p><code>index.jsp</code></p>
@@ -787,6 +787,12 @@
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/01/29/JDBC/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JDBC</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
@@ -953,7 +959,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：42k</span>
+    <span class="post-count">总字数统计：43.4k</span>
 
     
   </div>
