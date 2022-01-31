@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      2.4k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21
+      35
        分钟
     </span>
   
@@ -470,6 +470,157 @@ JDBC的本质到底是什么？
 <p>增删改：<code>statement.executeUpdate(sql);</code> 返回<code>int</code></p>
 <p> 查询： <code>statement.executeUpdate(sql);</code> 返回<code>ResultSet</code></p>
 </blockquote>
+<h1 id="3-示例"><a href="#3-示例" class="headerlink" title="3.示例"></a>3.示例</h1><blockquote>
+<p><strong>简单模仿登陆</strong></p>
+<p>1让用户输入 账号密码</p>
+<p>2 和sql中的数据，进行比较，若存在相同，则登陆成功，否则失败</p>
+</blockquote>
+<p>创建表</p>
+<p><img src="/2022/01/29/JDBC/04.png" srcset="/img/loading.gif" alt="image-20220131095024031"></p>
+<p>编写<code>JdbcLogin.java</code></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">JdbcLogin</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        <span class="hljs-comment">//1提供用户输入,初始化 返回 账号和密码</span>
+        Map&lt;String,String&gt; rs = init();
+        System.out.println(rs);
+
+        <span class="hljs-comment">//2.jdbc操作判断是否相等</span>
+        System.out.println(login(rs) == <span class="hljs-keyword">true</span> ? <span class="hljs-string">&quot;登陆成功&quot;</span> : <span class="hljs-string">&quot;失败!&quot;</span>);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">login</span><span class="hljs-params">(Map&lt;String, String&gt; rs)</span> </span>&#123;
+        Connection conn = <span class="hljs-keyword">null</span>;
+        Statement statement = <span class="hljs-keyword">null</span>;
+        ResultSet result = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">boolean</span> flagSuccess = <span class="hljs-keyword">false</span>; <span class="hljs-comment">//标志是否登陆成功</span>
+        <span class="hljs-keyword">try</span> &#123;
+            <span class="hljs-comment">//1 注册驱动</span>
+            Class.forName(<span class="hljs-string">&quot;com.mysql.jdbc.Driver&quot;</span>);
+            <span class="hljs-comment">//2 获取连接</span>
+            conn = DriverManager.getConnection(<span class="hljs-string">&quot;jdbc:mysql://localhost:3306/user&quot;</span>,<span class="hljs-string">&quot;root&quot;</span>,<span class="hljs-string">&quot;123&quot;</span>);
+            <span class="hljs-comment">//3获得sql对象</span>
+            statement = conn.createStatement();
+            <span class="hljs-comment">//4执行sql </span>
+            String sql = <span class="hljs-string">&quot;select name,password from t_user where name=&#x27;&quot;</span>+rs.get(<span class="hljs-string">&quot;inputName&quot;</span>)+<span class="hljs-string">&quot;&#x27; &quot;</span> +
+                    <span class="hljs-string">&quot;and password=&#x27;&quot;</span>+rs.get(<span class="hljs-string">&quot;inputPwd&quot;</span>)+<span class="hljs-string">&quot;&#x27;   &quot;</span>;
+            <span class="hljs-comment">//5 处理结果集</span>
+            result = statement.executeQuery(sql);
+            <span class="hljs-keyword">if</span> ( result.next() != <span class="hljs-keyword">false</span> ) &#123;
+                flagSuccess = <span class="hljs-keyword">true</span>;<span class="hljs-comment">//登陆成功！</span>
+            &#125;
+
+        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
+            e.printStackTrace();
+        &#125; <span class="hljs-keyword">finally</span> &#123;
+            <span class="hljs-comment">//6 释放资源</span>
+            <span class="hljs-keyword">if</span> (result !=<span class="hljs-keyword">null</span>) &#123;
+                        <span class="hljs-keyword">try</span> &#123;
+                            result.close();
+                &#125; <span class="hljs-keyword">catch</span> (SQLException e) &#123;
+                    e.printStackTrace();
+                &#125;
+            &#125;
+            <span class="hljs-keyword">if</span> (statement !=<span class="hljs-keyword">null</span>) &#123;
+                <span class="hljs-keyword">try</span> &#123;
+                    statement.close();
+                &#125; <span class="hljs-keyword">catch</span> (SQLException e) &#123;
+                    e.printStackTrace();
+                &#125;
+            &#125;
+            <span class="hljs-keyword">if</span> (conn !=<span class="hljs-keyword">null</span>) &#123;
+                <span class="hljs-keyword">try</span> &#123;
+                    conn.close();
+                &#125; <span class="hljs-keyword">catch</span> (SQLException e) &#123;
+                    e.printStackTrace();
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> flagSuccess;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Map&lt;String, String&gt; <span class="hljs-title">init</span><span class="hljs-params">()</span> </span>&#123;
+        Scanner s = <span class="hljs-keyword">new</span> Scanner(System.in);
+        System.out.print(<span class="hljs-string">&quot;用户名：&quot;</span>);
+        String inputName = s.nextLine(); <span class="hljs-comment">//获得输入，为字符串</span>
+        System.out.print(<span class="hljs-string">&quot;密码：&quot;</span>);
+        String inputPwd = s.nextLine();
+        HashMap&lt;String, String&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+        map.put(<span class="hljs-string">&quot;inputName&quot;</span>,inputName); <span class="hljs-comment">//组装成map(key,value)</span>
+        map.put(<span class="hljs-string">&quot;inputPwd&quot;</span>,inputPwd);
+
+        <span class="hljs-keyword">return</span> map;
+    &#125;
+&#125;</code></pre>
+
+<p>经过测试，当输入数据库存在的数据时，均登陆成功，但存在bug，会导致**SQL注入 ** 如图</p>
+<p><img src="/2022/01/29/JDBC/05.png" srcset="/img/loading.gif" alt="image-20220131095833876"></p>
+<p>此时输入<code>qza&#39; or &#39;1&#39;=&#39;1</code>  则会将<code>or</code>参与到sql语句中，导致sql语句查询恒为真   如图<code>debug</code>查看</p>
+<p><img src="/2022/01/29/JDBC/06.png" srcset="/img/loading.gif" alt="image-20220131100603852"></p>
+<blockquote>
+<p> 注入原因：输入的信息含sql关键字，并且这些关键字<strong>参与到了sql的编译</strong>，导致原意扭曲</p>
+</blockquote>
+<p>如何解决：</p>
+<p>只要提供的信息，不参与sql语句编译即可！</p>
+<p>利用<code>java.sql.preparedStatement</code> 此接口继承了<code>java.sql.Statement</code></p>
+<p>属于<strong>预编译的数据库操作对象</strong>  (预先对sql语句的框架进行编译，然后再给sql传值)</p>
+<p><strong>改进如下</strong></p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">login</span><span class="hljs-params">(Map&lt;String, String&gt; rs)</span> </span>&#123;
+        Connection conn = <span class="hljs-keyword">null</span>;
+        PreparedStatement ps = <span class="hljs-keyword">null</span>; <span class="hljs-comment">//采用预编译对象</span>
+        ResultSet result = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">boolean</span> flagSuccess = <span class="hljs-keyword">false</span>;
+        String name = rs.get(<span class="hljs-string">&quot;inputName&quot;</span>);<span class="hljs-comment">// 获取输入的用户和密码</span>
+        String pwd = rs.get(<span class="hljs-string">&quot;inputPwd&quot;</span>);
+        <span class="hljs-keyword">try</span> &#123;
+            <span class="hljs-comment">//1 注册驱动</span>
+            Class.forName(<span class="hljs-string">&quot;com.mysql.jdbc.Driver&quot;</span>);
+            <span class="hljs-comment">//2 获取连接</span>
+            conn = DriverManager.getConnection(<span class="hljs-string">&quot;jdbc:mysql://localhost:3306/user&quot;</span>,<span class="hljs-string">&quot;root&quot;</span>,<span class="hljs-string">&quot;123&quot;</span>);
+            <span class="hljs-comment">//3获得sql对象 ?代表占位符，用来接收一个值</span>
+            String sql = <span class="hljs-string">&quot;select name,password from t_user where name=? and password=?&quot;</span>;
+            ps = conn.prepareStatement(sql);
+            <span class="hljs-comment">//给问号传值，第一个?下标索引1...</span>
+            ps.setString(<span class="hljs-number">1</span>,name);
+            ps.setString(<span class="hljs-number">2</span>,pwd);
+            <span class="hljs-comment">//4执行sql</span>
+            result = ps.executeQuery();
+            <span class="hljs-comment">//5 处理结果集</span>
+            <span class="hljs-keyword">if</span> ( result.next() != <span class="hljs-keyword">false</span> ) &#123;
+                <span class="hljs-comment">//登陆成功！</span>
+                flagSuccess = <span class="hljs-keyword">true</span>;
+            &#125;
+        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
+            e.printStackTrace();
+        &#125; <span class="hljs-keyword">finally</span> &#123;
+            <span class="hljs-keyword">if</span> (result !=<span class="hljs-keyword">null</span>) &#123;
+                <span class="hljs-keyword">try</span> &#123;
+                    result.close();
+                &#125; <span class="hljs-keyword">catch</span> (SQLException e) &#123;
+                    e.printStackTrace();
+                &#125;
+            &#125;
+            <span class="hljs-keyword">if</span> (ps !=<span class="hljs-keyword">null</span>) &#123;
+                <span class="hljs-keyword">try</span> &#123;
+                    ps.close();
+                &#125; <span class="hljs-keyword">catch</span> (SQLException e) &#123;
+                    e.printStackTrace();
+                &#125;
+            &#125;
+            <span class="hljs-keyword">if</span> (conn !=<span class="hljs-keyword">null</span>) &#123;
+                <span class="hljs-keyword">try</span> &#123;
+                    conn.close();
+                &#125; <span class="hljs-keyword">catch</span> (SQLException e) &#123;
+                    e.printStackTrace();
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> flagSuccess;
+    &#125;</code></pre>
+
+<p>总结：</p>
+<p><code>Statement</code>存在sql注入问题，并且是编译一次执行一次，因为sql语句根据每次用户输入，都会变化</p>
+<p><code>PreparedStatement</code>解决了sql注入问题，编译一次，可执行N次，效率更好，而且在编译阶段会做安全检查</p>
+<p>故大多数用<code>PreparedStatement</code>，除非业务方面需要sql注入进行拼接，才使用<code>Statement</code>,比如商城按照xx排序即<code>order by desc</code>，则此是需要sql注入</p>
 
             </div>
             <hr>
@@ -665,7 +816,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：43.4k</span>
+    <span class="post-count">总字数统计：44.4k</span>
 
     
   </div>
