@@ -1,0 +1,926 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/resizeApi.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Yiheng">
+  <meta name="keywords" content="">
+  <title>过滤器和监听器 - 寻归往</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Yiheng.blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/article_img.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2022-02-04 09:09" pubdate>
+      2022年2月4日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      33
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">过滤器和监听器</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h1 id="MVC三层架构"><a href="#MVC三层架构" class="headerlink" title="MVC三层架构"></a>MVC三层架构</h1><blockquote>
+<p><code>Model</code> 模型：程序员编写程序应有的功能（实现算法等等）、数据库专家进行数据管理和数据库设计(可以实现具体的功能)。</p>
+<p><code>View</code> 视图 ： 界面设计人员进行图形界面设计。</p>
+<p><code>Controller控制器</code>:  负责转发请求，对请求进行处理。</p>
+</blockquote>
+<p><strong>以前的架构</strong></p>
+<p><img src="/2022/02/04/%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E7%9B%91%E5%90%AC%E5%99%A8/01.png" srcset="/img/loading.gif" alt="image-20220204091903472"></p>
+<blockquote>
+<p>servlet ==&gt; CRUD ==&gt; 数据库</p>
+<p>不利于维护</p>
+<p>如何解决：再加一层！</p>
+</blockquote>
+<p><strong>如今的架构(微服务之后又变了)</strong></p>
+<p><img src="/2022/02/04/%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E7%9B%91%E5%90%AC%E5%99%A8/02.png" srcset="/img/loading.gif" alt="image-20220204092139132"></p>
+<p><code>Model</code></p>
+<ul>
+<li>业务处理 : 业务相关的逻辑(Service)</li>
+<li>数据持久层: crud （dao)</li>
+</ul>
+<p><code>View</code></p>
+<ul>
+<li>展示数据</li>
+<li>提供链接发起<code>Servlet</code>请求（a标签，form，img….)</li>
+</ul>
+<p><code>Controller</code> (servlet)</p>
+<ul>
+<li>接收用户请求 (请求参数，session信息)</li>
+<li>交给业务层处理对应的代码</li>
+<li>控制视图的跳转</li>
+</ul>
+<blockquote>
+<p>登陆 ==&gt; 接收用户的登陆请求 ==&gt; 处理用的请求(获取登陆参数:用户名和密码) ==&gt; 交给业务层处理登陆业务(判断是否正确：事务) </p>
+<p>===&gt; Dao层查询用户和密码是否做正确  ==&gt; 数据库</p>
+</blockquote>
+<h1 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h1><blockquote>
+<p>  <strong>Filter</strong>是一个可重复使用的代码片段，可以用来转换HTTP请求、响应和头信息。Filter不像Servlet，它不能产生一个请求或者响应，它只是修改对某一资源的请求，或者修改从某一资源的响应。</p>
+</blockquote>
+<p><code>Filter</code> 过滤网站的数据</p>
+<ul>
+<li>处理乱码</li>
+<li>登陆验证….</li>
+</ul>
+<p><img src="/2022/02/04/%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E7%9B%91%E5%90%AC%E5%99%A8/03.png" srcset="/img/loading.gif" alt="image-20220204103114809"></p>
+<p><strong>1.添加<code>maven</code>依赖，导包</strong></p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- Servlet依赖--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>javax.servlet<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>javax.servlet-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>4.0.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>  
+     <span class="hljs-comment">&lt;!-- jsp依赖--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>javax.servlet.jsp<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>javax.servlet.jsp-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.3.3<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+     <span class="hljs-comment">&lt;!-- JSTL表达式依赖--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>javax.servlet.jsp.jstl<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>jstl-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+     <span class="hljs-comment">&lt;!-- standard标签库依赖--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>taglibs<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>standard<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.1.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+     <span class="hljs-comment">&lt;!-- JDBC依赖 mysql此时版本8.026--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>mysql<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mysql-connector-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>8.0.27<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span></code></pre>
+
+<p><strong>2、重写方法，并配置</strong></p>
+<p>​    <code>Filter01.java</code>中</p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.heng.filter;
+<span class="hljs-keyword">import</span> javax.servlet.*; <span class="hljs-comment">//是servlet中的 Filter</span>
+<span class="hljs-keyword">import</span> java.io.IOException;
+<span class="hljs-comment">//过滤 ==&gt; 编码均设为utf-8</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Filter01</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Filter</span> </span>&#123;
+    <span class="hljs-comment">//初始化，web服务器一启动就初始化，随时等待过滤</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(FilterConfig filterConfig)</span> <span class="hljs-keyword">throws</span> ServletException </span>&#123;
+        System.out.println(<span class="hljs-string">&quot;初始化....&quot;</span>);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doFilter</span><span class="hljs-params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="hljs-keyword">throws</span> IOException, ServletException </span>&#123;
+        servletRequest.setCharacterEncoding(<span class="hljs-string">&quot;utf-8&quot;</span>);<span class="hljs-comment">//设置编码</span>
+        servletResponse.setCharacterEncoding(<span class="hljs-string">&quot;utf-8&quot;</span>);
+        servletResponse.setContentType(<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span>);
+        System.out.println(<span class="hljs-string">&quot;执行前!!!&quot;</span>);
+        filterChain.doFilter(servletRequest,servletResponse);<span class="hljs-comment">//此时才执行，不写则无效，将停止</span>
+        System.out.println(<span class="hljs-string">&quot;执行后！！！&quot;</span>);
+    &#125;
+    <span class="hljs-comment">//销毁</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">destroy</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">&quot;销毁....&quot;</span>);
+    &#125;
+&#125;</code></pre>
+
+<p><code>ShowServlet.java</code> 提供页面文字，让过滤器过滤成正确文本</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ShowServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doGet</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;
+        resp.getWriter().write(<span class="hljs-string">&quot;你好！世界&quot;</span>);<span class="hljs-comment">//中文，若不设置编码，则出现乱码</span>
+    &#125;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doPost</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;
+        doGet(req, resp);
+    &#125;
+&#125;</code></pre>
+
+<p><code>web.xml</code>中</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>showServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/servlet/show<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>showServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/show<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">filter</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">filter-name</span>&gt;</span>filter01<span class="hljs-tag">&lt;/<span class="hljs-name">filter-name</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">filter-class</span>&gt;</span>com.heng.filter.Filter01<span class="hljs-tag">&lt;/<span class="hljs-name">filter-class</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">filter</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">filter-mapping</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">filter-name</span>&gt;</span>filter01<span class="hljs-tag">&lt;/<span class="hljs-name">filter-name</span>&gt;</span>
+    <span class="hljs-comment">&lt;!--        只要/servlet下任何请求，将经过过滤器--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/servlet/*<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">filter-mapping</span>&gt;</span></code></pre>
+
+<p>当访问<code>http://localhost:8080/show</code>时，则出现乱码</p>
+<p>当访问<code>http://localhost:8080/servlet/show</code>时，则正确输出，进行了过滤</p>
+<h1 id="监听器"><a href="#监听器" class="headerlink" title="监听器"></a>监听器</h1><blockquote>
+<p>​    <strong>Listener</strong>是监听器，通过Listener可以监听Web服务器中某一个执行动作，并根据其要求作出相应的响应。通俗的来说就是在Application，Session，Request三个对象创建、消亡或者往其中添加、修改、删除属性时自动执行代码功能的组件。</p>
+</blockquote>
+<p>先导包(和上面同)</p>
+<p>创建<code>Listener01.java</code></p>
+<pre><code class="hljs java"><span class="hljs-comment">//统计网站在线人数</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Listener01</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">HttpSessionListener</span> </span>&#123;
+    <span class="hljs-comment">//创建session监听,一旦创建session就会触发</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sessionCreated</span><span class="hljs-params">(HttpSessionEvent se)</span> </span>&#123;
+        ServletContext context = se.getSession().getServletContext();
+        System.out.println(se.getSession().getId());<span class="hljs-comment">//打印session的id</span>
+        Integer count = (Integer) context.getAttribute(<span class="hljs-string">&quot;count&quot;</span>);
+        <span class="hljs-keyword">if</span> (count == <span class="hljs-keyword">null</span>) &#123;
+            count = <span class="hljs-keyword">new</span> Integer(<span class="hljs-number">1</span>);
+        &#125;
+        <span class="hljs-keyword">else</span> &#123;
+            count = <span class="hljs-keyword">new</span> Integer( count.intValue() + <span class="hljs-number">1</span>);
+        &#125;
+        context.setAttribute(<span class="hljs-string">&quot;count&quot;</span>,count);
+    &#125;
+    <span class="hljs-comment">//销毁session监听</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sessionDestroyed</span><span class="hljs-params">(HttpSessionEvent se)</span> </span>&#123;
+        ServletContext context = se.getSession().getServletContext();
+        Integer count = (Integer) context.getAttribute(<span class="hljs-string">&quot;count&quot;</span>);
+        <span class="hljs-keyword">if</span> (count == <span class="hljs-keyword">null</span>) &#123;
+            count = <span class="hljs-keyword">new</span> Integer(<span class="hljs-number">0</span>);
+        &#125;
+        <span class="hljs-keyword">else</span> &#123;
+            count = <span class="hljs-keyword">new</span> Integer( count.intValue() - <span class="hljs-number">1</span>);
+        &#125;
+        context.setAttribute(<span class="hljs-string">&quot;count&quot;</span>,count);
+    &#125;
+&#125;</code></pre>
+
+<p><code>index.jsp</code>中添加</p>
+<pre><code class="hljs jsp">&lt;h1&gt; 当前有 &lt;span&gt; &lt;%=this.getServletConfig().getServletContext().getAttribute(&quot;count&quot;)%&gt; 人&lt;/span&gt; &lt;/h1&gt;</code></pre>
+
+<p>配置<code>web.xml </code>添加</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">listener</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">listener-class</span>&gt;</span>com.heng.listener.Listener01<span class="hljs-tag">&lt;/<span class="hljs-name">listener-class</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">listener</span>&gt;</span></code></pre>
+
+<p>运行可能会显示<code>3</code>个,再重新<code>redeploy部署</code>一下，此时将成为1人，当开启多个浏览器打开此页面时，人数将会变多，不同id打印输出</p>
+<p><img src="/2022/02/04/%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E7%9B%91%E5%90%AC%E5%99%A8/04.png" srcset="/img/loading.gif" alt="image-20220204121053597"></p>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><p><strong>权限拦截</strong></p>
+<ul>
+<li>用户登陆正确才可以进入主页，进入之后可以注销，注销了就不可以直接再进入了，除非再登陆，输入不对，则返回错误页面</li>
+<li>进入主页要判断是否已经登陆 (过滤器)</li>
+</ul>
+<p><code>login.jsp</code> 登陆页面</p>
+<pre><code class="hljs jsp">&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=<span class="hljs-string">&quot;/servlet/login&quot;</span> method=<span class="hljs-string">&quot;post&quot;</span> &gt;
+    用户:&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;username&quot;</span>&gt; &lt;br&gt;
+    密码:&lt;input type=<span class="hljs-string">&quot;password&quot;</span> name=<span class="hljs-string">&quot;password&quot;</span>&gt;
+    &lt;input type=<span class="hljs-string">&quot;submit&quot;</span>&gt;
+
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p><code>LoginServlet.java</code></p>
+<p> 对登陆页面进入处理，若输入用户名<code>root</code>和密码<code>123</code>则登陆成功，进行跳转重定向到<code>success.jsp</code>，否则到<code>error.jsp</code>中</p>
+<pre><code class="hljs java"><span class="hljs-meta">@WebServlet(urlPatterns = &quot;/servlet/login&quot;)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LoginServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doGet</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;
+        String username = req.getParameter(<span class="hljs-string">&quot;username&quot;</span>);
+        String password = req.getParameter(<span class="hljs-string">&quot;password&quot;</span>);
+        <span class="hljs-comment">//登陆成功</span>
+        <span class="hljs-keyword">if</span> (username.equals(<span class="hljs-string">&quot;root&quot;</span>) &amp;&amp; password.equals(<span class="hljs-string">&quot;123&quot;</span>)) &#123;
+            req.getSession().setAttribute(<span class="hljs-string">&quot;USER_SESSION&quot;</span>,req.getSession().getId());
+            resp.sendRedirect(<span class="hljs-string">&quot;/sys/success.jsp&quot;</span>);
+        &#125;
+        <span class="hljs-comment">//失败</span>
+        <span class="hljs-keyword">else</span> &#123;
+            resp.sendRedirect(<span class="hljs-string">&quot;/error.jsp&quot;</span>);
+        &#125;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doPost</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;
+        doGet(req, resp);
+    &#125;
+&#125;</code></pre>
+
+<p><code>success.jsp</code></p>
+<pre><code class="hljs jsp">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;登陆成功！&lt;/h1&gt;
+&lt;p&gt; &lt;a href=&quot;/servlet/logout&quot;&gt;注销&lt;/a&gt; &lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p><code>error.jsp</code></p>
+<pre><code class="hljs jsp">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;404&lt;/h1&gt;
+&lt;a href=&quot;/login.jsp&quot;&gt;返回登陆页面&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p><code>LogoutServlet.java</code> 登陆成功后，可进行注销，点击<strong>注销</strong>到此处进行处理</p>
+<pre><code class="hljs java"><span class="hljs-meta">@WebServlet(urlPatterns = &quot;/servlet/logout&quot;)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LogoutServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doGet</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;
+        Object user_session = req.getSession().getAttribute(Constant.USER_SESSION);<span class="hljs-comment">//取得信息</span>
+        <span class="hljs-keyword">if</span> (user_session != <span class="hljs-keyword">null</span>) &#123;
+            req.getSession().removeAttribute(<span class="hljs-string">&quot;USER_SESSION&quot;</span>);<span class="hljs-comment">//移除session的信息</span>
+            resp.sendRedirect(<span class="hljs-string">&quot;/login.jsp&quot;</span>);
+        &#125;
+        <span class="hljs-keyword">else</span> &#123;
+            resp.sendRedirect(<span class="hljs-string">&quot;/login.jsp&quot;</span>);
+        &#125;
+    &#125;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doPost</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;
+        doGet(req, resp);
+    &#125;
+&#125;</code></pre>
+
+<p>由于文件中多次使用<code>&quot;USER_SESSION&quot;</code> 故可以保存到一文件<code>Constant.java</code>中，作为常量，便于取出</p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.heng.util;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Constant</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> String USER_SESSION = <span class="hljs-string">&quot;USER_SESSION&quot;</span>; <span class="hljs-comment">//用户保存常量</span>
+&#125;</code></pre>
+
+<p><code>SysFilter.java</code> 实现过滤，没有登陆的信息，不可以登陆！</p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.heng.filter;
+<span class="hljs-keyword">import</span> javax.servlet.*;
+<span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;
+<span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;
+<span class="hljs-keyword">import</span> java.io.IOException;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SysFilter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Filter</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(FilterConfig filterConfig)</span> <span class="hljs-keyword">throws</span> ServletException </span>&#123;&#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doFilter</span><span class="hljs-params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="hljs-keyword">throws</span> IOException, ServletException </span>&#123;
+        HttpServletRequest request = (HttpServletRequest) servletRequest; <span class="hljs-comment">//强转为HttpServletRequest</span>
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        <span class="hljs-keyword">if</span> ( request.getSession().getAttribute(<span class="hljs-string">&quot;USER_SESSION&quot;</span>) == <span class="hljs-keyword">null</span> ) &#123;
+            response.sendRedirect(<span class="hljs-string">&quot;/error.jsp&quot;</span>);
+        &#125;
+        filterChain.doFilter(request,response); <span class="hljs-comment">//必须要有</span>
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">destroy</span><span class="hljs-params">()</span> </span>&#123;&#125;
+&#125;</code></pre>
+
+<p>配置 <code>web.xml</code></p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">filter</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">filter-name</span>&gt;</span>sysFilter<span class="hljs-tag">&lt;/<span class="hljs-name">filter-name</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">filter-class</span>&gt;</span>com.heng.filter.SysFilter<span class="hljs-tag">&lt;/<span class="hljs-name">filter-class</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">filter</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">filter-mapping</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">filter-name</span>&gt;</span>sysFilter<span class="hljs-tag">&lt;/<span class="hljs-name">filter-name</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/sys/*<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">filter-mapping</span>&gt;</span></code></pre>
+
+
+
+<p>访问<code>http://localhost:8080/login.jsp</code> 输入正确账号密码</p>
+<p><img src="/2022/02/04/%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E7%9B%91%E5%90%AC%E5%99%A8/05.png" srcset="/img/loading.gif" alt="image-20220204172704815"></p>
+<p>点击提交，进行跳转 <img src="/2022/02/04/%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E7%9B%91%E5%90%AC%E5%99%A8/06.png" srcset="/img/loading.gif" alt="image-20220204172717608"></p>
+<p>注销之后，若直接访问<code>http://localhost:8080/sys/success.jsp</code> 跳转至错误页面，被拦截</p>
+<p><img src="/2022/02/04/%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E7%9B%91%E5%90%AC%E5%99%A8/07.png" srcset="/img/loading.gif" alt="image-20220204172824426"></p>
+<p>结构如图：</p>
+<p><img src="/2022/02/04/%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E7%9B%91%E5%90%AC%E5%99%A8/08.png" srcset="/img/loading.gif" alt="image-20220204172935107"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaWeb/">JavaWeb</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BF%87%E6%BB%A4%E5%99%A8/">过滤器</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%9B%91%E5%90%AC%E5%99%A8/">监听器</a>
+                    
+                      <a class="hover-with-bg" href="/tags/MVC/">MVC</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/03/cookie%E5%92%8Csession/">
+                        <span class="hidden-mobile">cookie和session</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    function loadGitalk() {
+      addScript('https://cdn.staticfile.org/blueimp-md5/2.13.0/js/md5.min.js');
+      addScript('https://cdn.staticfile.org/gitalk/1.6.2/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: 'a6ecdddb59c8bed4c4e0',
+          clientSecret: 'deecdd08fa166e81db2222df7514d6c2d2f357a0',
+          repo: 'codeheng.github.io',
+          owner: 'codeheng',
+          admin: ["codeheng"],
+          id: md5(location.pathname),
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    }
+    waitElementVisible('gitalk-container', loadGitalk);
+  </script>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="http://cslearner.cn/" target="_blank" rel="nofollow noopener"><span>CSlearner</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">京ICP证123456号</a>
+    
+      <a
+        href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+        rel="nofollow noopener"
+        class="beian-police"
+        target="_blank"
+      >
+        <span class="beian-police-sep">&nbsp;|&nbsp;</span>
+        
+          <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon" />
+        
+        <span>京公网安备12345678号</span>
+      </a>
+     
+  </div>
+
+
+
+    我在次已等候你:
+<span id="momk"></span>
+<script language=javascript>
+function show_date_time(){
+  window.setTimeout("show_date_time()", 1000);
+  BirthDay=new Date("08-09-2020 20:00:00");//建站日期
+  today=new Date();
+  timeold=(today.getTime()-BirthDay.getTime());
+  sectimeold=timeold/1000
+  secondsold=Math.floor(sectimeold);
+  msPerDay=24*60*60*1000
+  e_daysold=timeold/msPerDay
+  daysold=Math.floor(e_daysold);
+  e_hrsold=(daysold-e_daysold)*-24;
+  hrsold=Math.floor(e_hrsold);
+  e_minsold=(hrsold-e_hrsold)*-60;
+  minsold=Math.floor((hrsold-e_hrsold)*-60);
+  seconds=Math.floor((minsold-e_minsold)*-60);
+  momk.innerHTML=daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒" ;
+}
+show_date_time();
+</script>
+<style>
+#momk{animation:change 10s infinite;font-weight:800; }
+@keyframes change{0%{color:#5cb85c;}25%{color:#556bd8;}50%{color:#e40707;}75%{color:#66e616;}100% {color:#67bd31;}}
+</style>
+
+    <i class="fa fa-area-chart"></i>
+    <span class="post-count">总字数统计：47.7k</span>
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "过滤器和监听器&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<script type="text/javascript" src="\js\FunnyTitle.js"></script>
