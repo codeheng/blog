@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      2.7k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      35
+      39
        分钟
     </span>
   
@@ -621,6 +621,55 @@ JDBC的本质到底是什么？
 <p><code>Statement</code>存在sql注入问题，并且是编译一次执行一次，因为sql语句根据每次用户输入，都会变化</p>
 <p><code>PreparedStatement</code>解决了sql注入问题，编译一次，可执行N次，效率更好，而且在编译阶段会做安全检查</p>
 <p>故大多数用<code>PreparedStatement</code>，除非业务方面需要sql注入进行拼接，才使用<code>Statement</code>,比如商城按照xx排序即<code>order by desc</code>，则此是需要sql注入</p>
+<h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h1><h2 id="1-maven配置"><a href="#1-maven配置" class="headerlink" title="1.maven配置"></a>1.maven配置</h2><p><code>pom.xml</code></p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
+    <span class="hljs-comment">&lt;!--mysql的驱动，注意mysql版本与之对应--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>mysql<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mysql-connector-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>8.0.27<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span></code></pre>
+<h2 id="2-idea中进行连接"><a href="#2-idea中进行连接" class="headerlink" title="2.idea中进行连接"></a>2.idea中进行连接</h2><p><img src="/2022/01/29/JDBC/07.png" srcset="/img/loading.gif" alt="image-20220204203513733"></p>
+<h2 id="3-编写代码"><a href="#3-编写代码" class="headerlink" title="3.编写代码"></a>3.编写代码</h2><p><code>Jdbc01.java</code></p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.heng.jdbc;
+<span class="hljs-keyword">import</span> java.sql.*;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Jdbc01</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> ClassNotFoundException, SQLException </span>&#123;
+        <span class="hljs-comment">//配置信息</span>
+        String url = <span class="hljs-string">&quot;jdbc:mysql://localhost:3306/user?useUnicode=true&amp;characterEncoding=utf-8&quot;</span>;
+        String username = <span class="hljs-string">&quot;root&quot;</span>;
+        String password = <span class="hljs-string">&quot;123&quot;</span>;
+        <span class="hljs-comment">//1驱动</span>
+        Class.forName(<span class="hljs-string">&quot;com.mysql.jdbc.Driver&quot;</span>);
+        <span class="hljs-comment">//2连接数据库</span>
+        Connection connection = DriverManager.getConnection(url, username, password);
+        <span class="hljs-comment">//3获得sql对象</span>
+        Statement statement = connection.createStatement();
+        <span class="hljs-comment">//4执行sql</span>
+        ResultSet rs = statement.executeQuery(<span class="hljs-string">&quot;select *from t_user &quot;</span>);
+        <span class="hljs-comment">//5结果集</span>
+        <span class="hljs-keyword">while</span> ( rs.next() ) &#123;
+            System.out.println(<span class="hljs-string">&quot;name = &quot;</span>+ rs.getObject(<span class="hljs-string">&quot;name&quot;</span>));
+            System.out.println(<span class="hljs-string">&quot;password =&quot;</span> + rs.getObject(<span class="hljs-string">&quot;password&quot;</span>));
+        &#125;
+        <span class="hljs-comment">//6断开连接,释放资源   </span>
+        rs.close();
+        statement.close();
+        connection.close();
+    &#125;
+&#125;</code></pre>
+
+<h2 id="4-事务"><a href="#4-事务" class="headerlink" title="4.事务"></a>4.事务</h2><p>要么都成功，要么都失败</p>
+<p><code>ACID</code> 保证数据的安全</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E5%8E%9F%E5%AD%90%E6%80%A7&action=edit&redlink=1">原子性</a>（atomicity，或称不可分割性）、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%B8%80%E8%87%B4%E6%80%A7_(%E6%95%B0%E6%8D%AE%E5%BA%93)">一致性</a>（consistency）、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%9A%94%E9%9B%A2%E6%80%A7">隔离性</a>（isolation，又称独立性）、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E6%8C%81%E4%B9%85%E6%80%A7&action=edit&redlink=1">持久性</a>（durability）</p>
+</blockquote>
+<pre><code class="hljs mysql">开启事务
+事务提交 commit()
+事务回滚 rollback()
+关闭事务</code></pre>
+
 
             </div>
             <hr>
@@ -822,7 +871,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：47.7k</span>
+    <span class="post-count">总字数统计：49.2k</span>
 
     
   </div>

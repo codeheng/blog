@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Yiheng">
   <meta name="keywords" content="">
-  <title>125.验证回文串 - 寻归往</title>
+  <title>Spring - 寻归往</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -162,8 +162,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2022-01-19 20:34" pubdate>
-      2022年1月19日 晚上
+    <time datetime="2022-02-05 06:10" pubdate>
+      2022年2月5日 早上
     </time>
   </div>
 
@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      231 字
+      1.3k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      17
        分钟
     </span>
   
@@ -213,39 +213,187 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">125.验证回文串</h1>
+            <h1 style="display: none">Spring</h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><blockquote>
-<p>给定一个字符串，验证它是否是回文串，<strong>只考虑字母和数字字符</strong>，可以忽略字母的大小写。<br>说明：本题中，我们将空字符串定义为有效的回文串。</p>
-<p> 示例 1:</p>
-<p>输入: “A man, a plan, a canal: Panama”<br>输出: true<br>解释：”amanaplanacanalpanama” 是回文串</p>
-<p>示例 2:</p>
-<p>输入: “race a car”<br>输出: false<br>解释：”raceacar” 不是回文串</p>
-<p>提示：</p>
-<p>1 &lt;= s.length &lt;= 2 * 105<br>字符串 s 由 ASCII 字符组成</p>
+              <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
+<p> Spring是一个<strong>轻量级</strong>的<strong>控制反转(IoC)**和</strong>面向切面(AOP)**的容器框架 (两个核心特性！！！)</p>
 </blockquote>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p><strong>自顶向下思考</strong> ==&gt;  从高层次(主干) 逻辑 入手 ==&gt;</p>
-<pre><code>1. filter out number &amp; char 
-2. reverse and compare</code></pre>
-<h2 id="解一"><a href="#解一" class="headerlink" title="解一"></a>解一</h2><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isPalindrome</span><span class="hljs-params">(String s)</span> </span>&#123;
-        String filterS = _filterNonNumberAndChar(s);
-        <span class="hljs-keyword">return</span> _reverse(filterS).equalsIgnoreCase(filterS); 
+<p>Spring框架是由于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/3448966">软件开发</a>的复杂性而创建的，简化开发</p>
+<p>Spring使用的是基本的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/JavaBean/529577">JavaBean</a>来完成以前只可能由<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/EJB/144195">EJB</a>完成的事情。然而，Spring的用途不仅仅限于服务器端的开发。从简单性、可测试性和松耦合性角度而言，绝大部分Java应用都可以从Spring中受益。</p>
+<ul>
+<li>创建 Spring 的主要目的是用来替代更加重量级的企业级 Java 技术</li>
+</ul>
+<p><strong>优点</strong></p>
+<ul>
+<li>简化开发，解耦，集成其它框架。</li>
+<li>低侵入式设计，代码污染级别较低。</li>
+<li>Spring的DI机制降低了业务对象替换的复杂性，提高了软件之间的解耦。</li>
+<li>Spring AOP支持将一些通用的任务进行集中式的管理，例如：安全，事务，日志等，从而使代码能更好的复用。</li>
+</ul>
+<p><strong>组成</strong></p>
+<p>七大部分</p>
+<p><img src="/2022/02/05/spring/01.png" srcset="/img/loading.gif"></p>
+<p>导入maven依赖</p>
+<pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-webmvc<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>5.3.15<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 
-    &#125;
-    <span class="hljs-comment">//filter out number &amp; char </span>
-    <span class="hljs-function"><span class="hljs-keyword">private</span> String  <span class="hljs-title">_filterNonNumberAndChar</span><span class="hljs-params">(String s)</span> </span>&#123;
-        <span class="hljs-keyword">return</span> s.replaceAll(<span class="hljs-string">&quot;[^A-Za-z0-9]&quot;</span>,<span class="hljs-string">&quot;&quot;</span>);  <span class="hljs-comment">//正则表达式</span>
-    &#125;
-    <span class="hljs-comment">//reverse</span>
-    <span class="hljs-function"><span class="hljs-keyword">private</span> String <span class="hljs-title">_reverse</span><span class="hljs-params">(String s)</span> </span>&#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> StringBuffer(s).reverse().toString(); 
+<span class="hljs-comment">&lt;!-- 整合jdbc --&gt;</span>
+<span class="hljs-comment">&lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-jdbc<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>5.3.15<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre>
+
+
+
+<h1 id="Ioc思想"><a href="#Ioc思想" class="headerlink" title="Ioc思想"></a>Ioc思想</h1><p><strong>(Inversion of Control)</strong></p>
+<p><strong>以前的思路</strong></p>
+<p>1.UserDao接口</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">UserDao</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">getUser</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">//定义接口</span>
+&#125;</code></pre>
+
+<p>2、UserDaoImpl实现类</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserDaoImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">UserDao</span></span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getUser</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">&quot;获取用户数据&quot;</span>);
     &#125;
 &#125;</code></pre>
 
-<p><strong>效率太低，又弄新字符串，又正则表达式</strong></p>
-<h2 id="解二"><a href="#解二" class="headerlink" title="解二"></a>解二</h2>
+<p>3、UserService业务接口</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">UserService</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">getUser</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre>
+
+<p>4、UserServiceImpl业务接口</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">UserService</span></span>&#123;
+    <span class="hljs-comment">//引入Dao</span>
+    <span class="hljs-keyword">private</span> UserDao userDao = <span class="hljs-keyword">new</span> UserDaoImpl();
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getUser</span><span class="hljs-params">()</span> </span>&#123;
+        userDao.getUser();<span class="hljs-comment">//业务层调用dao层</span>
+    &#125;
+&#125;</code></pre>
+
+<p><code>Test</code>类，用户测试</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyTest</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        <span class="hljs-comment">//实际调用业务层，dao层不接触</span>
+        UserService service = <span class="hljs-keyword">new</span> UserServiceImpl();
+        service.getUser();
+    &#125;
+&#125;</code></pre>
+
+<p>由于<code>  private UserDao userDao = new UserDaoImpl();</code>是程序<strong>主动创建对象</strong></p>
+<p>若又增加其他的内容，如<code>UsermysqlImpl</code>,<code>UserSqlserverImpl....</code></p>
+<p>此时，将需要进行对业务层<code>UserServiceImpl.java</code>进行修改代码(<strong>繁琐！！</strong>)</p>
+<p>如何解决？！</p>
+<p>将<code>UserServiceImpl.java</code> 中那条语句进行修改</p>
+<pre><code class="hljs java"><span class="hljs-keyword">private</span> UserDao userDao;
+<span class="hljs-comment">//利用set动态实现值的注入</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setUserDao</span><span class="hljs-params">(UserDao userDao)</span> </span>&#123;
+    <span class="hljs-keyword">this</span>.userDao = userDao;
+&#125;</code></pre>
+
+<p>  测试类<code>MyTest.java</code>进行调用</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyTest</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        <span class="hljs-comment">//实际调用业务层，dao层不接触</span>
+        UserService service = <span class="hljs-keyword">new</span> UserServiceImpl();
+        <span class="hljs-comment">//调用UserServiceImpl中set</span>
+        ( (UserServiceImpl) service).setUserDao(<span class="hljs-keyword">new</span> UserDaoImpl());
+        service.getUser();
+    &#125;
+&#125;</code></pre>
+
+<p>若有mysql</p>
+<pre><code class="hljs java"><span class="hljs-comment">//调mysql对应的</span>
+( (UserServiceImpl) service).setUserDao(<span class="hljs-keyword">new</span> UserMysqlImpl()); 
+<span class="hljs-comment">//只需完成业务实现代码 即UserMysqlImpl.java的实现，  然后改变测试类即可</span></code></pre>
+
+<p>此时使用set注入后，程序不再具有主动性，而是<strong>被动的接收对象</strong>！</p>
+<p>这种思想，使得程序员不需要管理对象的创建了，系统耦合性降低，只需要专注业务实现</p>
+<p>这中思想即<code>Ioc</code>的原型</p>
+<p><img src="/2022/02/05/spring/02.png" srcset="/img/loading.gif" alt="image-20220205072316986"></p>
+<p><strong>DI(依赖注入)是实现IoC的一种方法</strong></p>
+<p><code>Ioc</code>（控制反转）即获得依赖的方式反转了！  </p>
+<p>总：</p>
+<blockquote>
+<p><strong>控制反转是一种通过描述（XML或注解）并通过第三方去生产或获取特定对象的方式。</strong></p>
+<p><strong>在Spring中实现控制反转的是IoC容器，其实现方法是依赖注入（Dependency Injection,DI）。</strong></p>
+</blockquote>
+<p><strong>再探索</strong></p>
+<p>创建<code>Hello.java</code></p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.heng.pojo;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Hello</span> </span>&#123;
+    <span class="hljs-keyword">private</span> String name;<span class="hljs-comment">//字段</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setName</span><span class="hljs-params">(String name)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">()</span></span>&#123;
+        System.out.println(<span class="hljs-string">&quot;Hello,&quot;</span>+ name );
+    &#125;
+&#125;</code></pre>
+
+<p>在<code>resources</code>下创建<code>beans.xml</code>文件</p>
+<pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans&quot;</span></span>
+<span class="hljs-tag">       <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span>
+<span class="hljs-tag">       <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans</span></span>
+<span class="hljs-tag"><span class="hljs-string">        http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span>
+
+    <span class="hljs-comment">&lt;!--bean就是java对象 , 由Spring创建和管理--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;hello&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.heng.pojo.Hello&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Spring&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span></code></pre>
+
+<blockquote>
+<p>类型 变量名 = new 类型(); ==&gt; Hello hello = new Hello();</p>
+<p>在xml文件中</p>
+<p>bean中的id= 上方变量名，class = new的对象，property相当于给对象中的属性设值</p>
+</blockquote>
+<p>配置之后进行测试 <code>Test.java</code></p>
+<pre><code class="hljs java"><span class="hljs-keyword">import</span> com.heng.pojo.Hello;
+<span class="hljs-keyword">import</span> org.springframework.context.ApplicationContext;
+<span class="hljs-keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        <span class="hljs-comment">//解析beans.xml文件 , 生成管理相应的Bean对象</span>
+        <span class="hljs-comment">//获得上下文，拿到spring容器(核心！)当然，也可以不用xml配置</span>
+        ApplicationContext context = <span class="hljs-keyword">new</span> ClassPathXmlApplicationContext(<span class="hljs-string">&quot;beans.xml&quot;</span>);
+        <span class="hljs-comment">//getBean : 参数即为spring配置文件中bean的id .</span>
+        Hello hello = (Hello) context.getBean(<span class="hljs-string">&quot;hello&quot;</span>);
+        hello.show();
+    &#125;
+&#125;</code></pre>
+
+<p>运行测试类中的<code>main</code>  打印出<code>Hello,Spring</code></p>
+<ul>
+<li><p>对象谁创建的==&gt; <code>spring</code></p>
+</li>
+<li><p>属性如何设置的===&gt; <code>spring容器</code></p>
+</li>
+</ul>
+<p>即<strong>控制反转</strong>  </p>
+<ul>
+<li>控制 :  传统应用程序的对象是由程序本身控制创建的 , 使用Spring后 , <strong>对象是由Spring来创建的</strong></li>
+<li>反转 : 程序本身不创建对象 , 而变成<strong>被动的接收对象</strong> .</li>
+</ul>
+<p><strong>只需要在xml配置文件中进行修改 , 所谓的IoC即对象由Spring 来创建 , 管理 , 装配 !</strong></p>
+
             </div>
             <hr>
             <div>
@@ -254,7 +402,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                      <a class="hover-with-bg" href="/categories/JavaWeb/">JavaWeb</a>
                     
                   </div>
                 
@@ -262,9 +410,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+                      <a class="hover-with-bg" href="/tags/spring/">spring</a>
                     
                   </div>
                 
@@ -277,18 +423,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/01/20/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">java多线程</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/01/18/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/">
-                        <span class="hidden-mobile">java注解和反射</span>
+                      <a href="/2022/02/04/%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E7%9B%91%E5%90%AC%E5%99%A8/">
+                        <span class="hidden-mobile">过滤器和监听器</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -510,7 +650,7 @@ show_date_time();
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "125.验证回文串&nbsp;",
+        "Spring&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
