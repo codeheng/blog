@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.2k 字
+      2.5k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      32
+      37
        分钟
     </span>
   
@@ -255,7 +255,7 @@
     <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span></code></pre>
 
-<h2 id="2-创建mysql数据库"><a href="#2-创建mysql数据库" class="headerlink" title="2.创建mysql数据库"></a>2.创建mysql数据库</h2><p>创建表名为<code>mybatis</code>数据库，并且创建表，如下</p>
+<h2 id="2-创建mysql数据库"><a href="#2-创建mysql数据库" class="headerlink" title="2.创建mysql数据库"></a>2.创建mysql数据库</h2><p>创建名为<code>mybatis</code>数据库，并且创建表，如下</p>
 <pre><code class="hljs sql"><span class="hljs-keyword">use</span> mybatis;
 <span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> t_account(
     <span class="hljs-keyword">id</span> <span class="hljs-built_in">int</span> primary <span class="hljs-keyword">key</span> auto_increment,
@@ -357,6 +357,7 @@
 &#125;</code></pre>
 
 <p>在<code>Account</code>类上方加入注解，则可以不用写之前形式的构造方法，将默认有生成了构造方法</p>
+<p><code>lombok</code>中的用法！</p>
 <pre><code class="hljs java"><span class="hljs-keyword">package</span> com.heng.entity;
 <span class="hljs-keyword">import</span> lombok.AllArgsConstructor;
 <span class="hljs-keyword">import</span> lombok.Data;
@@ -506,7 +507,49 @@ sqlSession.close();</code></pre>
 
 <p>如图所示，id为2的已被删除</p>
 <p><strong><img src="/2022/02/08/mybatis/07.png" srcset="/img/loading.gif" alt="image-20220208160235781"></strong></p>
-<h1 id="Mapper-xml"><a href="#Mapper-xml" class="headerlink" title="Mapper.xml"></a>Mapper.xml</h1>
+<h1 id="Mapper-xml"><a href="#Mapper-xml" class="headerlink" title="Mapper.xml"></a>Mapper.xml</h1><ul>
+<li><p><code>statement</code>标签：select，update，delete，insert分别对应查询，修改，删除，添加</p>
+</li>
+<li><p><code>parameterType</code> ： 参数数据类型</p>
+<p>1、基本数据类型，如上方的id对应long，通过id查询Account</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;findById&quot;</span> <span class="hljs-attr">parameterType</span>=<span class="hljs-string">&quot;long&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;com.heng.entity.Account&quot;</span>&gt;</span>
+  select *from t_account where id = #&#123;id&#125;
+<span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span></code></pre>
+
+<p>2、String类型，比如通过name查询Account</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;findByName&quot;</span> <span class="hljs-attr">parameterType</span>=<span class="hljs-string">&quot;String&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;com.heng.entity.Account&quot;</span>&gt;</span>
+  select *from t_account where username = #&#123;username&#125;
+<span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span></code></pre>
+
+</li>
+</ul>
+<p>​        3、包装类，通过id查询Account</p>
+<p>上述的<code>parameterType=&quot;long&quot;</code> 可写成 <code>parameterType=&quot;java.lang.Long&quot;</code></p>
+<p>​        4、多个参数，通过name和age进行查询 （此时通过下标</p>
+<pre><code class="hljs java"><span class="hljs-comment">//AccountRepository接口中</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">AccountRepository</span> </span>&#123; 
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Account <span class="hljs-title">findByAgeAndName</span><span class="hljs-params">(<span class="hljs-keyword">int</span> age,String name)</span></span>;<span class="hljs-comment">//通过姓名和年龄查询</span>
+&#125;</code></pre>
+
+<p><code>AccountRepository.xml</code> 中，不用写parameterType</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;findByAgeAndName&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;com.heng.entity.Account&quot;</span>&gt;</span>
+    select *from t_account where age = #&#123;param1&#125; and  username = #&#123;param2&#125;
+<span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span></code></pre>
+
+<p>​        5、java bean  比如修改</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">update</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;update&quot;</span> <span class="hljs-attr">parameterType</span>=<span class="hljs-string">&quot;com.heng.entity.Account&quot;</span>&gt;</span>
+    update t_account set username=#&#123;username&#125;,password=#&#123;password&#125;,age=#&#123;age&#125; where id=#&#123;id&#125;
+<span class="hljs-tag">&lt;/<span class="hljs-name">update</span>&gt;</span></code></pre>
+
+<ul>
+<li>resultType 结果类型  (和<code>parameterType</code>基本相同)<ul>
+<li>基本数据类型</li>
+<li>包装类</li>
+<li>java bean</li>
+</ul>
+</li>
+</ul>
+<h1 id="级联操作"><a href="#级联操作" class="headerlink" title="级联操作"></a>级联操作</h1>
             </div>
             <hr>
             <div>
@@ -521,6 +564,12 @@ sqlSession.close();</code></pre>
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/02/14/linux/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">The Linux Command Line</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
@@ -687,7 +736,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：51.4k</span>
+    <span class="post-count">总字数统计：53.3k</span>
 
     
   </div>
