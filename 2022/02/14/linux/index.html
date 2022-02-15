@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.6k 字
+      3.1k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      17
+      35
        分钟
     </span>
   
@@ -229,7 +229,23 @@
 <h2 id="2-简单命令"><a href="#2-简单命令" class="headerlink" title="2.简单命令"></a>2.简单命令</h2><p><code>date</code></p>
 <p><code>cal</code></p>
 <p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202202141851256.png" srcset="/img/loading.gif" alt="image-20220214185140150"></p>
-<h3 id="2-1-文件系统中跳转"><a href="#2-1-文件系统中跳转" class="headerlink" title="2.1 文件系统中跳转"></a>2.1 文件系统中跳转</h3><h3 id="2-2-简单探究操作系统"><a href="#2-2-简单探究操作系统" class="headerlink" title="2.2 简单探究操作系统"></a>2.2 简单探究操作系统</h3><ul>
+<h3 id="2-1-文件系统中跳转"><a href="#2-1-文件系统中跳转" class="headerlink" title="2.1 文件系统中跳转"></a>2.1 文件系统中跳转</h3><ul>
+<li>pwd — 打印出当前工作目录名</li>
+</ul>
+<pre><code class="hljs shell">[root@iZ2ze9nu608mhi5at5aufaZ ~]# pwd
+/root</code></pre>
+
+<ul>
+<li>cd — 更改目录</li>
+</ul>
+<p>绝对路径：开始于根目录，紧跟着目录树的一个个分支，一直到达所期望的目录或文件</p>
+<p>比如</p>
+<pre><code class="hljs shell">[root@iZ2ze9nu608mhi5at5aufaZ ~]# cd /usr/bin/
+[root@iZ2ze9nu608mhi5at5aufaZ bin]#
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">#从根目录（用开头的”/”表示）开始，有一个叫 “usr” 的 目录包含了目录 “bin”</span></span></code></pre>
+
+<p>相对路径： 开始于工作目录</p>
+<h3 id="2-2-简单探究操作系统"><a href="#2-2-简单探究操作系统" class="headerlink" title="2.2 简单探究操作系统"></a>2.2 简单探究操作系统</h3><ul>
 <li><code>ls</code> — 列出目录内容</li>
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202202141905661.png" srcset="/img/loading.gif" alt="image-20220214190530605"></p>
@@ -361,6 +377,231 @@
 <td align="left">这个/var/log 目录包含日志文件、各种系统活动的记录。这些文件非常重要，并且 应该时时监测它们。其中最重要的一个文件是 /var/log/messages。注意，为了系统安全，在一些系统中， 你必须是超级用户才能查看这些日志文件。</td>
 </tr>
 </tbody></table>
+<h3 id="2-3操作文件和目录"><a href="#2-3操作文件和目录" class="headerlink" title="2.3操作文件和目录"></a>2.3操作文件和目录</h3><ul>
+<li><strong>cp — 复制文件和目录(Copy files and directories)</strong></li>
+</ul>
+<pre><code class="hljs shell">[root@iZ2ze9nu608mhi5at5aufaZ ~]# touch hello.c
+[root@iZ2ze9nu608mhi5at5aufaZ ~]# ls
+dir1  dir2  dir3  hello.c  install.sh  spring-boot-online-exam
+[root@iZ2ze9nu608mhi5at5aufaZ ~]# cp hello.c dir1
+[root@iZ2ze9nu608mhi5at5aufaZ ~]# ls
+dir1  dir2  dir3  hello.c  install.sh  spring-boot-online-exam
+[root@iZ2ze9nu608mhi5at5aufaZ ~]# ls dir1/
+hello.c</code></pre>
+
+<p><code>cp</code>中的选项</p>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-a, –archive</td>
+<td align="left">复制文件和目录，以及它们的属性，包括拥有者和所有权。 通常情况下，文件拷贝具有执行拷贝操作的用户的默认属性。</td>
+</tr>
+<tr>
+<td align="left">-i, –interactive</td>
+<td align="left">在覆盖已存在文件之前，提示用户确认。如果这个选项不指定， cp 命令会默认覆盖文件。</td>
+</tr>
+<tr>
+<td align="left">-r, –recursive</td>
+<td align="left">递归地复制目录及目录中的内容。当复制目录时， 需要这个选项（或者 -a 选项）。</td>
+</tr>
+<tr>
+<td align="left">-u, –update</td>
+<td align="left">当把文件从一个目录复制到另一个目录时，仅复制 目标目录中不存在的文件，或者是文件内容新于目标目录中已经存在文件的内容的文件。</td>
+</tr>
+<tr>
+<td align="left">-v, –verbose</td>
+<td align="left">显示翔实的命令操作信息</td>
+</tr>
+</tbody></table>
+<p>示例</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">复制文件 file1 和文件 file2 到目录 dir1。目录 dir1 必须存在。</span>
+[root@iZ2ze9nu608mhi5at5aufaZ ~]# cp file1 file2 dir1
+[root@iZ2ze9nu608mhi5at5aufaZ ~]# ls dir1/
+dir2  dir3  file1  file2  hello.c
+
+<span class="hljs-meta">#</span><span class="bash">在目录 dir1 中的所有文件都被复制到目录 dir2 中。 dir2 必须已经存在。</span>
+[root@iZ2ze9nu608mhi5at5aufaZ ~]# cp dir1/* dir2
+
+<span class="hljs-meta">#</span><span class="bash">复制目录 dir1 中的内容到目录 dir2。</span>
+<span class="hljs-meta">#</span><span class="bash">如果目录 dir2 不存在， 创建目录 dir2，操作完成后，目录 dir2 中的内容和 dir1 中的一样。 </span>
+<span class="hljs-meta">#</span><span class="bash">如果目录 dir2 存在，则目录 dir1 (和目录中的内容)将会被复制到 dir2 中</span>
+[root@iZ2ze9nu608mhi5at5aufaZ ~]# cp -r dir1 dir2
+
+<span class="hljs-meta">#</span><span class="bash">从 /etc 目录复制 passwd 文件到当前工作目录下</span>
+<span class="hljs-meta">#</span><span class="bash">使用命令末尾的一个圆点来简化当前工作目录的写法</span>
+[root@iZ2ze9nu608mhi5at5aufaZ ~]# cp /etc/passwd .</code></pre>
+
+
+
+<h4 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h4><table>
+<thead>
+<tr>
+<th align="left">通配符</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">*</td>
+<td align="left">匹配任意多个字符（包括零个或一个）</td>
+</tr>
+<tr>
+<td align="left">?</td>
+<td align="left">匹配任意一个字符（不包括零个）</td>
+</tr>
+<tr>
+<td align="left">[characters]</td>
+<td align="left">匹配任意一个属于字符集（characters）中的字符</td>
+</tr>
+<tr>
+<td align="left">[!characters]</td>
+<td align="left">匹配任意一个不是字符集中的字符</td>
+</tr>
+<tr>
+<td align="left">[[:class:]]</td>
+<td align="left">匹配任意一个属于指定字符类中的字符</td>
+</tr>
+</tbody></table>
+<p><strong>示例</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">模式</th>
+<th align="left">匹配对象</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">*</td>
+<td align="left">所有文件</td>
+</tr>
+<tr>
+<td align="left">g*</td>
+<td align="left">文件名以“g”开头的文件</td>
+</tr>
+<tr>
+<td align="left">b*.txt</td>
+<td align="left">以”b”开头，中间有零个或任意多个字符，并以”.txt”结尾的文件</td>
+</tr>
+<tr>
+<td align="left">Data???</td>
+<td align="left">以“Data”开头，其后紧接着3个字符的文件</td>
+</tr>
+<tr>
+<td align="left">[abc]*</td>
+<td align="left">文件名以”a”,”b”,或”c”开头的文件</td>
+</tr>
+<tr>
+<td align="left"><code>BACKUP.[0-9][0-9][0-9]</code></td>
+<td align="left">以”BACKUP.”开头，并紧接着3个数字的文件</td>
+</tr>
+<tr>
+<td align="left">[[:upper:]]*</td>
+<td align="left">以大写字母开头的文件</td>
+</tr>
+<tr>
+<td align="left">[![:digit:]]*</td>
+<td align="left">不以数字开头的文件</td>
+</tr>
+<tr>
+<td align="left">*[[:lower:]123]</td>
+<td align="left">文件名以小写字母结尾，或以 “1”，“2”，或 “3” 结尾的文件</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>mv — 移动/重命名文件和目录(Move/rename files and directories)</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>-i –interactive</th>
+<th>在覆盖一个已经存在的文件之前，提示用户确认信息。 <strong>如果不指定这个选项，mv 命令会默认覆盖文件内容。</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-u –update</td>
+<td>当把文件从一个目录移动另一个目录时，只是移动不存在的文件， 或者文件内容新于目标目录相对应文件的内容的文件。</td>
+</tr>
+<tr>
+<td>-v –verbose</td>
+<td>当操作 mv 命令时，显示翔实的操作信息。</td>
+</tr>
+</tbody></table>
+<pre><code class="hljs shell">[root@iZ2ze9nu608mhi5at5aufaZ ~]# mv -v hello.c test.c
+‘hello.c’ -&gt; ‘test.c’</code></pre>
+
+<ul>
+<li><strong>mkdir — 创建目录( Create directories)</strong></li>
+</ul>
+<pre><code class="hljs shell">[root@iZ2ze9nu608mhi5at5aufaZ ~]# mkdir dir1 dir2 dir3
+[root@iZ2ze9nu608mhi5at5aufaZ ~]# ls
+dir1  dir2  dir3  install.sh  spring-boot-online-exam</code></pre>
+
+<ul>
+<li><strong>rm — 删除文件和目录(Remove files and directories)</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>-i, –interactive</th>
+<th>在删除已存在的文件前，提示用户确认信息。 <strong>如果不指定这个选项，rm 会默默地删除文件</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-r, –recursive</td>
+<td>递归地删除文件，这意味着，如果要删除一个目录，而此目录 又包含子目录，那么子目录也会被删除。要删除一个目录，必须指定这个选项。</td>
+</tr>
+<tr>
+<td>-f, –force</td>
+<td>忽视不存在的文件，不显示提示信息。这选项覆盖了“–interactive”选项。</td>
+</tr>
+<tr>
+<td>-v, –verbose</td>
+<td>在执行 rm 命令时，显示翔实的操作信息。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>ps: 小心使用rm</strong></p>
+<p>使用带有通配符的 rm 命令时（除了仔细检查输入的内容外）， 先用 ls 命令来测试通配符。这会让你看到将要被删除的文件是什么。然后按下上箭头按键，重新调用 刚刚执行的命令，用 rm 替换 ls</p>
+</blockquote>
+<ul>
+<li><strong>ln — 创建硬链接和符号链接（Create hard and symbolic links）</strong></li>
+</ul>
+<p><strong>硬链接</strong>：是最初 Unix 创建链接的方式。每个文件默认会有一个硬链接， 这个硬链接给予文件名字。我们每创建一个硬链接，就为一个文件创建了一个额外的目录项</p>
+<p>​    当一个硬链接被删除时，这个链接 被删除，但是文件本身的内容仍然存在（这是说，它所占的磁盘空间不会被释放）， 直到所有关联这个文件的链接都删除掉</p>
+<pre><code class="hljs livecodeserver"><span class="hljs-built_in">ln</span> <span class="hljs-built_in">file</span> link</code></pre>
+
+<p><strong>符号链接</strong>生效，是通过创建一个 特殊类型的文件，这个文件包含一个关联文件或目录的<strong>文本指针</strong></p>
+<p>​    如果你往一个符号链接里面写入东西，那么相关联的文件也被写入。然而， 当你删除一个符号链接时，只有这个链接被删除，而不是文件自身</p>
+<pre><code class="hljs livecodeserver"><span class="hljs-built_in">ln</span> -s <span class="hljs-keyword">item</span> link</code></pre>
+
+
+
+<p>2.4使用命令</p>
+<ul>
+<li>type – 说明一个命令名是如何被解释的（这里的“解释”是一个计算机术语，例如，解释型语言）</li>
+</ul>
+<ul>
+<li>which – 显示会执行哪个可执行程序</li>
+</ul>
+<ul>
+<li>man – 显示命令手册页</li>
+</ul>
+<ul>
+<li>apropos – 显示一系列适合的命令</li>
+</ul>
+<ul>
+<li>info – 显示命令 info</li>
+</ul>
+<ul>
+<li>whatis – 显示一个命令的简洁描述</li>
+</ul>
+<ul>
+<li>alias – 创建命令别名</li>
+</ul>
 
             </div>
             <hr>
@@ -556,7 +797,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：53.3k</span>
+    <span class="post-count">总字数统计：54.9k</span>
 
     
   </div>
