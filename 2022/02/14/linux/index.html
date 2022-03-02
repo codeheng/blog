@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.1k 字
+      3.7k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      35
+      42
        分钟
     </span>
   
@@ -580,12 +580,13 @@ dir1  dir2  dir3  install.sh  spring-boot-online-exam</code></pre>
 
 
 
-<p>2.4使用命令</p>
-<ul>
-<li>type – 说明一个命令名是如何被解释的（这里的“解释”是一个计算机术语，例如，解释型语言）</li>
-</ul>
-<ul>
-<li>which – 显示会执行哪个可执行程序</li>
+<h3 id="2-4使用命令"><a href="#2-4使用命令" class="headerlink" title="2.4使用命令"></a>2.4使用命令</h3><ul>
+<li><p>type – 说明一个命令名是如何被解释的（这里的“解释”是一个计算机术语，例如，解释型语言）</p>
+<pre><code class="hljs shell">[root@iZ2ze9nu608mhi5at5aufaZ ~]# type ls
+ls is aliased to `ls --color=auto&#x27;</code></pre>
+</li>
+<li><p>which – 显示会执行哪个<strong>可执行</strong>程序</p>
+</li>
 </ul>
 <ul>
 <li>man – 显示命令手册页</li>
@@ -602,7 +603,89 @@ dir1  dir2  dir3  install.sh  spring-boot-online-exam</code></pre>
 <ul>
 <li>alias – 创建命令别名</li>
 </ul>
+<h2 id="3-I-O重定向"><a href="#3-I-O重定向" class="headerlink" title="3.I/O重定向"></a>3.I/O重定向</h2><p>通过这个机制，你可以将命令的<strong>输入来源以及输出地点</strong>重定向为文件，或把多个命令连接起来组成一个强大的<strong>命令管道</strong></p>
+<p><strong>标准输出重定向</strong></p>
+<pre><code class="hljs shell">[root@iZ2ze9nu608mhi5at5aufaZ ~]# ls -l /usr/bin/ &gt; ls_output.txt 
+[root@iZ2ze9nu608mhi5at5aufaZ ~]# ls -l ls_output.txt 
+-rw-r--r-- 1 root root 58529 Mar  2 07:26 ls_output.txt</code></pre>
 
+<blockquote>
+<p>怎样才能把重定向结果<strong>追加到</strong>文件内容后面，而不是从开头重写文件？为了这个目的，<br>我们使用”&gt;&gt;“重定向符</p>
+</blockquote>
+<ul>
+<li>cat － 连接文件</li>
+</ul>
+<p>你可以使用 cat 来显示文件而没有分页，cat 经常被用来显示<strong>简短的文本文件</strong></p>
+<p>如果 cat 没有给出任何参数，它会<strong>从标准输入读入数据</strong>，</p>
+<ul>
+<li>sort － 排序文本行</li>
+<li>uniq － 报道或省略重复行</li>
+<li>grep － **打印匹配行 **==&gt; 正则表达式</li>
+</ul>
+<blockquote>
+<p>“-i”使得 grep 在执行搜索时忽略大小写（通常，搜索是大小写敏感的）; “-v”选项会告诉 grep 只打印不匹配的行</p>
+</blockquote>
+<pre><code class="hljs shell">[root@iZ2ze9nu608mhi5at5aufaZ ~]# ls /bin /usr/bin/ | sort | uniq | grep zip
+bunzip2
+bzip2
+bzip2recover
+funzip
+gpg-zip
+gunzip
+gzip
+unzip
+unzipsfx
+zip
+zipcloak
+zipgrep
+zipinfo
+zipnote
+zipsplit</code></pre>
+
+<ul>
+<li>wc － 打印文件中<strong>换行符，字，和字节个数</strong></li>
+</ul>
+<pre><code class="hljs shell">[root@iZ2ze9nu608mhi5at5aufaZ ~]# wc test_word.txt 
+ 2  4 25 test_word.txt # 行数，单词数和字节数
+[root@iZ2ze9nu608mhi5at5aufaZ ~]# cat test_word.txt 
+hello world
+huang yiheng</code></pre>
+
+<ul>
+<li>head － 输出文件开头部分</li>
+<li>tail - 输出文件结尾部分</li>
+</ul>
+<blockquote>
+<p>tail 有一个选项允许你<strong>实时地浏览文件</strong>。当观察<strong>日志文件</strong>的进展时，这很有用，因为它们同时在<strong>被写入</strong></p>
+</blockquote>
+<ul>
+<li>tee - 从标准输入读取数据，并同时写到标准输出和文件</li>
+</ul>
+<pre><code class="hljs shell">[root@iZ2ze9nu608mhi5at5aufaZ ~]# ls /usr/bin/ | tee ls.txt | grep zip
+bunzip2
+bzip2
+bzip2recover
+funzip
+gpg-zip
+gunzip
+gzip
+unzip
+unzipsfx
+zip
+zipcloak
+zipgrep
+zipinfo
+zipnote
+zipsplit
+[root@iZ2ze9nu608mhi5at5aufaZ ~]# ls -l ls.txt 
+-rw-r--r-- 1 root root 8630 Mar  2 07:46 ls.txt</code></pre>
+
+<p><strong>管道</strong></p>
+<p>命令从<strong>标准输入读取数据并输送到标准输出</strong>的能力被一个称为<strong>管道线</strong>的 shell 功能所利用。<br>使用管道操作符”|”（竖杠），一个命令的标准输出可以通过管道送至另一个命令的标准输入</p>
+<blockquote>
+<p>管道线经常用来对数据完成<strong>复杂的</strong>操作。有可能会把几个命令放在一起组成一个管道线。<br>通常，以这种方式使用的命令被称为<strong>过滤器</strong></p>
+</blockquote>
+<h1 id="二、配置文件和-shell-环境"><a href="#二、配置文件和-shell-环境" class="headerlink" title="二、配置文件和 shell 环境"></a>二、配置文件和 shell 环境</h1><h1 id="三、常见任务和基本工具"><a href="#三、常见任务和基本工具" class="headerlink" title="三、常见任务和基本工具"></a>三、常见任务和基本工具</h1>
             </div>
             <hr>
             <div>
@@ -631,6 +714,12 @@ dir1  dir2  dir3  install.sh  spring-boot-online-exam</code></pre>
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/02/18/vue/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vue</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
@@ -797,7 +886,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：54.9k</span>
+    <span class="post-count">总字数统计：57.1k</span>
 
     
   </div>
