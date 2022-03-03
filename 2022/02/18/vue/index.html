@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      168 字
+      356 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      4
        分钟
     </span>
   
@@ -216,53 +216,65 @@
             <h1 style="display: none">vue</h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>vue的7大属性</p>
+              <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>官网<a target="_blank" rel="noopener" href="https://vuejs.bootcss.com/guide/">https://vuejs.bootcss.com/guide/</a></p>
+<ul>
+<li>JavaScript框架</li>
+<li>简化Dom操作</li>
+<li>响应式数据驱动</li>
+</ul>
+<p><strong>vue的7大属性</strong></p>
 <ul>
 <li><p><strong>el属性</strong></p>
-</li>
-<li><ul>
-<li>用来指示vue编译器从什么地方开始解析 vue的语法，可以说是一个占位符。</li>
-</ul>
+<p>用来指示vue编译器从什么地方开始解析 vue的语法，可以说是一个占位符。</p>
 </li>
 <li><p><strong>data属性</strong></p>
-</li>
-<li><ul>
-<li>用来组织从view中抽象出来的属性，可以说将视图的数据抽象出来存放在data中。</li>
-</ul>
+<p>用来组织从view中抽象出来的属性，可以说将视图的数据抽象出来存放在data中。</p>
 </li>
 <li><p><strong>template属性</strong></p>
-</li>
-<li><ul>
-<li>用来设置模板，会替换页面元素，包括占位符。</li>
-</ul>
+<p>用来设置模板，会替换页面元素，包括占位符。</p>
 </li>
 <li><p><strong>methods属性</strong></p>
-</li>
-<li><ul>
-<li>放置页面中的业务逻辑，js方法一般都放置在methods中</li>
-</ul>
+<p>放置页面中的业务逻辑，js方法一般都放置在methods中</p>
 </li>
 <li><p><strong>render属性</strong></p>
-</li>
-<li><ul>
-<li>创建真正的Virtual Dom</li>
-</ul>
+<p>创建真正的Virtual Dom</p>
 </li>
 <li><p><strong>computed属性</strong></p>
-</li>
-<li><ul>
-<li>用来计算</li>
-</ul>
+<p>用来计算</p>
 </li>
 <li><p><strong>watch属性</strong></p>
+<ul>
+<li><p>watch:function(new,old){}</p>
 </li>
-<li><ul>
-<li>watch:function(new,old){}</li>
-<li>监听data中数据的变化</li>
-<li>两个参数，一个返回新值，一个返回旧值，</li>
+<li><p>监听data中数据的变化</p>
+</li>
+<li><p>两个参数，一个返回新值，一个返回旧值，</p>
+</li>
 </ul>
 </li>
 </ul>
+<h1 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h1><p>利用<code>vscode</code> 并且下载插件<code>Live Server</code> 可在后侧边写边展示页面</p>
+<ul>
+<li>导入<strong>开发版本</strong>的Vue.js</li>
+<li>创建Vue实例对象，设置<code>el</code>属性和<code>data</code>属性</li>
+<li>利用简单模板语法把数据渲染到页面上</li>
+</ul>
+<pre><code class="hljs vue">&lt;body&gt;
+&lt;div id &#x3D; &quot;app&quot;&gt;
+&#123;&#123;message&#125;&#125;
+&lt;&#x2F;div&gt;
+&lt;!-- 开发环境版本，包含了有帮助的命令行警告 导入vue.js--&gt;
+&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;
+&lt;script&gt;
+    var app &#x3D; new Vue(&#123;
+        el:&quot;#app&quot;,
+        data:&#123;
+            message:&quot;你好 Vue!&quot;
+        &#125;
+    &#125;)
+&lt;&#x2F;script&gt;
+&lt;&#x2F;body&gt;</code></pre>
+
 
             </div>
             <hr>
@@ -464,7 +476,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：57.1k</span>
+    <span class="post-count">总字数统计：59.2k</span>
 
     
   </div>

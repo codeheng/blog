@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1.6k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      20
        分钟
     </span>
   
@@ -355,7 +355,107 @@ System.out.println(env.getProperty(<span class="hljs-string">&quot;msg2&quot;</s
 <span class="hljs-attribute"> world</span></code></pre>
 
 <p>3、**@ConfigurationProperties**</p>
-<h2 id="profile"><a href="#profile" class="headerlink" title="profile"></a>profile</h2><h2 id="内部和外部配置加载顺序"><a href="#内部和外部配置加载顺序" class="headerlink" title="内部和外部配置加载顺序"></a>内部和外部配置加载顺序</h2>
+<p><code>yml</code>中的对象</p>
+<pre><code class="hljs yaml"><span class="hljs-comment">#对象</span>
+<span class="hljs-attr">person:</span>
+  <span class="hljs-comment">#name: $&#123;name&#125;</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">zhangsan</span>
+  <span class="hljs-attr">age:</span> <span class="hljs-number">20</span></code></pre>
+
+<p>新创建<code>Person</code>类，与之进行对应，然后注入</p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.demo01.common;
+
+<span class="hljs-keyword">import</span> org.springframework.boot.context.properties.ConfigurationProperties;
+<span class="hljs-keyword">import</span> org.springframework.stereotype.Component;
+
+<span class="hljs-meta">@Component</span> <span class="hljs-comment">//让这个类成为bean，被识别</span>
+<span class="hljs-meta">@ConfigurationProperties(prefix = &quot;person&quot;)</span> <span class="hljs-comment">//提供前缀，识别yaml中的person对象，否则找的为普通的name</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>&#123;
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> age;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Person&#123;&quot;</span> +
+                <span class="hljs-string">&quot;name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +
+                <span class="hljs-string">&quot;, age=&quot;</span> + age +
+                <span class="hljs-string">&#x27;&#125;&#x27;</span>;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setName</span><span class="hljs-params">(String name)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getAge</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> age;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setAge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> age)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.age = age;
+    &#125;
+&#125;
+</code></pre>
+
+<p>在<code>HelloController.java</code>中，同理进行测试</p>
+<pre><code class="hljs java"><span class="hljs-comment">//第三种</span>
+<span class="hljs-meta">@Autowired</span>
+<span class="hljs-keyword">private</span> Person person;
+
+System.out.println(person);</code></pre>
+
+<p>运行，访问，控制台可得到</p>
+<p><code>Person&#123;name=&#39;zhangsan&#39;, age=20&#125;</code></p>
+<h2 id="profile"><a href="#profile" class="headerlink" title="profile"></a>profile</h2><p>开发spring boot时，通常同一套程序会被安装到不同环境，比如：开发，测试，生产等。其中数据库地址，服务器端等等配置均不同，如果每次打包时，都修改配置文件，会非常麻烦。**<code>profile</code>功能就是来进行动态配置切换的**</p>
+<h3 id="配置方式"><a href="#配置方式" class="headerlink" title="配置方式"></a>配置方式</h3><p><strong>1、多<code>profile</code>文件方式</strong></p>
+<p>新建springboot项目</p>
+<p>创建<code>application-dev.properties</code>文件(当然可以为<code>yml</code>文件)，里面为开发环境</p>
+<pre><code class="hljs properties"><span class="hljs-comment"># dev = develoment 开发环境</span>
+<span class="hljs-meta">server.port</span>=<span class="hljs-string">8081</span></code></pre>
+
+<p>在<code>application.properties</code> 中激活</p>
+<pre><code class="hljs properties"><span class="hljs-comment">#激活dev文件，使其生效</span>
+<span class="hljs-meta">spring.profiles.active</span>=<span class="hljs-string">dev </span></code></pre>
+
+<p>此时运行，可看到如下，端口号已生效</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203030700420.png" srcset="/img/loading.gif" alt="image-20220303070044353"></p>
+<p><strong>2、yml多文档方式</strong></p>
+<ul>
+<li>在<code>yml</code>中使用 <code>---</code>分割不同配置 (之前的配置方法已失效)</li>
+</ul>
+<pre><code class="hljs yml"><span class="hljs-comment"># 这个代表第一个文档块</span>
+<span class="hljs-attr">server:</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-number">8085</span>
+
+<span class="hljs-attr">spring:</span>
+  <span class="hljs-attr">profiles:</span>
+    <span class="hljs-attr">active:</span> <span class="hljs-string">dev</span> <span class="hljs-comment"># 当需要哪个环境配置的时候，只需要在这里修改值。</span>
+
+<span class="hljs-meta">---</span>
+<span class="hljs-comment"># 这个代表第二个文档块</span>
+<span class="hljs-attr">server:</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-number">8086</span>
+
+<span class="hljs-comment">#目前已被弃用</span>
+<span class="hljs-attr">spring:</span>
+  <span class="hljs-attr">profiles:</span> <span class="hljs-string">dev</span> <span class="hljs-comment"># 指定dev，代表开发环境 </span>
+
+<span class="hljs-meta">---</span>
+<span class="hljs-comment"># 这个代表第三个文档块</span>
+<span class="hljs-attr">server:</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-number">8087</span>
+
+<span class="hljs-attr">spring:</span>
+  <span class="hljs-attr">profiles:</span> <span class="hljs-string">pro</span> <span class="hljs-comment"># 指定pro，代表生产环境</span>
+</code></pre>
+
+<p><code>profiles</code>激活方式</p>
+<ul>
+<li>配置文件： <code>spring.profiles.active: dev</code></li>
+<li>虚拟机参数： 在<code>VM option</code>指定：<code>-Dspring.profiles.active=dev</code></li>
+<li>命令行参数：<code>java -jar xxx.jar --spring.profiles.active=dev</code></li>
+</ul>
+<h2 id="内部和外部配置加载顺序"><a href="#内部和外部配置加载顺序" class="headerlink" title="内部和外部配置加载顺序"></a>内部和外部配置加载顺序</h2><h3 id="内部配置"><a href="#内部配置" class="headerlink" title="内部配置"></a>内部配置</h3><p><strong><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203030752821.png" srcset="/img/loading.gif" alt="image-20220303075226606"></strong></p>
+<h3 id="外部配置"><a href="#外部配置" class="headerlink" title="外部配置"></a>外部配置</h3>
             </div>
             <hr>
             <div>
@@ -384,6 +484,12 @@ System.out.println(env.getProperty(<span class="hljs-string">&quot;msg2&quot;</s
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/03/03/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">人工智能基础</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
@@ -550,7 +656,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：57.1k</span>
+    <span class="post-count">总字数统计：59.2k</span>
 
     
   </div>
