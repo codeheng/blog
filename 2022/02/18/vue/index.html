@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      356 字
+      828 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      12
        分钟
     </span>
   
@@ -222,8 +222,7 @@
 <li>简化Dom操作</li>
 <li>响应式数据驱动</li>
 </ul>
-<p><strong>vue的7大属性</strong></p>
-<ul>
+<h2 id="七大属性"><a href="#七大属性" class="headerlink" title="七大属性"></a><strong>七大属性</strong></h2><ul>
 <li><p><strong>el属性</strong></p>
 <p>用来指示vue编译器从什么地方开始解析 vue的语法，可以说是一个占位符。</p>
 </li>
@@ -266,6 +265,7 @@
 &lt;!-- 开发环境版本，包含了有帮助的命令行警告 导入vue.js--&gt;
 &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;
 &lt;script&gt;
+    &#x2F;&#x2F;创建vue实例
     var app &#x3D; new Vue(&#123;
         el:&quot;#app&quot;,
         data:&#123;
@@ -274,6 +274,77 @@
     &#125;)
 &lt;&#x2F;script&gt;
 &lt;&#x2F;body&gt;</code></pre>
+
+<h2 id="el挂载点"><a href="#el挂载点" class="headerlink" title="el挂载点"></a>el挂载点</h2><p><strong>el是用来设置Vue挂载(管理)的元素</strong></p>
+<p>vue实例的作用范围</p>
+<blockquote>
+<p>vue会管理el选项命中的元素以及内部的后代元素</p>
+</blockquote>
+<p>可以使用其他的选择器，但建议使用<code>id选择器</code>、</p>
+<p>是否可以操作其他<code>dom</code>元素</p>
+<blockquote>
+<p>可以使用其他双标签，但是不能使用<code>html</code>和<code>body</code></p>
+</blockquote>
+<p><strong>data数据</strong></p>
+<pre><code class="hljs vue">&lt;div id&#x3D;&quot;app&quot;&gt;
+    &#123;&#123;message&#125;&#125;
+    &lt;h2&gt; &#123;&#123; school.name &#125;&#125; &lt;&#x2F;h2&gt;
+    &lt;ul&gt;
+        &lt;li&gt; &#123;&#123;campus[0]&#125;&#125; &lt;&#x2F;li&gt;
+        &lt;li&gt; &#123;&#123;campus[1]&#125;&#125; &lt;&#x2F;li&gt;
+    &lt;&#x2F;ul&gt;
+&lt;&#x2F;div&gt;
+
+&lt;script&gt;
+    var app &#x3D; new Vue(&#123;
+        el: &quot;#app&quot;,
+        data: &#123;
+            message: &quot;你好 Vue!&quot;,
+            school: &#123;
+                name: &quot;Yiheng&quot;,
+                mobile: 12314
+            &#125;,
+            campus: [&quot;北京&quot;, &quot;上海&quot;]
+        &#125;
+    &#125;)
+&lt;&#x2F;script&gt;</code></pre>
+
+<p>如图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203031429220.png" srcset="/img/loading.gif" alt="image-20220303142917004"></p>
+<h2 id="Vue指令"><a href="#Vue指令" class="headerlink" title="Vue指令"></a><strong>Vue指令</strong></h2><p>1、<code>v-text</code> 设置标签的内容</p>
+<p>默认会替换全部内容，使用<code>&#123;&#123;&#125;&#125; </code>可替换<strong>指定</strong>内容</p>
+<pre><code class="hljs vue">&lt;h2 v-text&#x3D;&quot;message + &#39;haha&#39; &quot;&gt; &lt;&#x2F;h2&gt;</code></pre>
+
+<p>页面将显示出<code>你好 Vue!haha</code></p>
+<p>2、<code>v-html</code> 设置标签的<code>innerHTML</code></p>
+<pre><code class="hljs vue">&lt;p v-html&#x3D;&quot;content&quot;&gt;&lt;&#x2F;p&gt;
+
+data: &#123;
+    content: &quot;&lt;a href&#x3D;&#39;http:&#x2F;&#x2F;www.baidu.com&#39;&gt;百度&lt;&#x2F;a&gt;&quot;
+&#125;</code></pre>
+
+<p>此时将出现<code>百度</code>的超链接，点击则跳转</p>
+<p>3、<code>v-on</code> 为元素绑定事件</p>
+<pre><code class="hljs vue">&lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;v-on指令&quot; v-on:click&#x3D;&quot;doIt&quot;&gt;
+&lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;v-on简写&quot; @click&#x3D;&quot;doIt&quot;&gt;
+&lt;h1 @click&#x3D;&quot;changeData&quot;&gt;&#123;&#123;food&#125;&#125;&lt;&#x2F;h1&gt;
+
+&lt;script&gt;
+    var app &#x3D; new Vue(&#123;
+        el: &quot;#app&quot;,
+        data: &#123;
+            food: &quot;土豆&quot;
+        &#125;,
+        methods: &#123;
+            doIt: function() &#123;
+                alert(&quot;hhhhhhhhhh&quot;) &#x2F;&#x2F;弹窗
+            &#125;,
+            changeData: function() &#123;
+                this.food +&#x3D; &quot;好吃&quot;  &#x2F;&#x2F;点击文字土豆，然后会拼接字符串
+            &#125;
+        &#125;
+    &#125;)
+&lt;&#x2F;script&gt;</code></pre>
 
 
             </div>
@@ -476,7 +547,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：59.2k</span>
+    <span class="post-count">总字数统计：59.7k</span>
 
     
   </div>
