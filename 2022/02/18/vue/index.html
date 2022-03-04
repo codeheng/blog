@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      828 字
+      1.2k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      18
        分钟
     </span>
   
@@ -346,6 +346,60 @@ data: &#123;
     &#125;)
 &lt;&#x2F;script&gt;</code></pre>
 
+<p>4、<code>v-show</code> 根据表达式真假，切换元素的显示和隐藏</p>
+<p>原理是修改元素的<code>display</code> </p>
+<pre><code class="hljs vue">&lt;img src&#x3D;&quot;http:&#x2F;&#x2F;img.duoziwang.com&#x2F;2021&#x2F;01&#x2F;1618792249721642.jpg&quot; v-show&#x3D;&quot;isShow&quot; alt&#x3D;&quot;小图像&quot;&gt;
+&lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;切换是否显示图片&quot; @click&#x3D;&quot;changeIsShow&quot;&gt;
+&lt;script&gt;
+    var app &#x3D; new Vue(&#123;
+        el: &quot;#app&quot;,
+        data: &#123;
+            isShow: false
+        &#125;,
+        methods: &#123;
+            changeIsShow: function() &#123;
+                this.isShow &#x3D; !this.isShow
+            &#125;
+        &#125;
+    &#125;)
+&lt;&#x2F;script&gt;</code></pre>
+
+<p>5、<code>v-if</code> 根据表达式真假切换元素的显示状态</p>
+<p>本质是操作<code>dom</code>元素来切换显示状态</p>
+<p>若为true，元素存在dom树中，为false，从dom树中移除</p>
+<pre><code class="hljs vue">&lt;p v-if&#x3D;&quot;isShow1&quot;&gt;come on!!&lt;&#x2F;p&gt;
+&lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;点我切换&quot; @click&#x3D;&quot;toggleIsShow&quot;&gt;
+isShow1: false
+toggleIsShow: function() &#123;
+    this.isShow1 &#x3D; !this.isShow1
+&#125;</code></pre>
+
+<p>6、<code>v-bind</code> 设置元素的<strong>属性</strong> ，比如(src,title,class)</p>
+<p>完整写法: <code>v-bind:属性名 </code> <strong>v-bind可以省略</strong></p>
+<pre><code class="hljs VUE">&lt;style&gt;
+    .active &#123;
+        border: 1px solid red;
+    &#125;
+&lt;&#x2F;style&gt;
+&lt;img :src&#x3D;&quot;imgSrc&quot; alt&#x3D;&quot;&quot; :title&#x3D;&quot;imgTitle&quot; :class&#x3D;&quot;&#123;active:isActive&#125;&quot; @click&#x3D;&quot;toggleActive &quot;&gt;
+&lt;script&gt;
+    var app &#x3D; new Vue(&#123;
+        el: &quot;#app &quot;,
+        data: &#123;
+            imgSrc: &quot;http:&#x2F;&#x2F;www.itheima.com&#x2F;images&#x2F;logo.png&quot;,
+            imgTitle: &quot;我是黑马！！&quot;,
+            isActive: false,
+        &#125;,
+        methods: &#123;
+
+            toggleActive: function() &#123;
+                this.isActive &#x3D; !this.isActive
+            &#125;
+        &#125;
+    &#125;)
+&lt;&#x2F;script&gt;</code></pre>
+
+<p>当点击图片时，class样式被激活，此时显示出来外边框</p>
 
             </div>
             <hr>
@@ -547,7 +601,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：59.7k</span>
+    <span class="post-count">总字数统计：60.1k</span>
 
     
   </div>
