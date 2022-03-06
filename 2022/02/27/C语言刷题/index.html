@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      395 字
+      520 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      7
        分钟
     </span>
   
@@ -264,8 +264,35 @@ a[<span class="hljs-number">10</span>]
 
 
 
+<p>4、</p>
+<pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
+    <span class="hljs-keyword">int</span> a[<span class="hljs-number">5</span>] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;
+    <span class="hljs-keyword">int</span> *p, **k;
+    p = a;
+    k = &amp;p;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, *(p++));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, **k);
+    <span class="hljs-keyword">return</span> (<span class="hljs-number">0</span>);
+&#125;</code></pre>
 
+<p>打印<code>12</code></p>
+<blockquote>
+<p><code>*(p++)</code> 等价 <code>*p++</code>  此时p自增后，但仍取*p之前的值，故为1，之后再打印为2</p>
+</blockquote>
+<p>5、</p>
+<pre><code class="hljs c"><span class="hljs-keyword">int</span> a[<span class="hljs-number">2</span>][<span class="hljs-number">3</span>];
+<span class="hljs-keyword">int</span> (*p)[<span class="hljs-number">3</span>]=a; 
+<span class="hljs-keyword">int</span> *q=*a;
 
+<span class="hljs-comment">//Q: 输出a[1][2]值的语句为</span>
+A:<span class="hljs-built_in">cout</span>&lt;&lt; *(*(a + <span class="hljs-number">1</span>) + <span class="hljs-number">2</span>);
+B:<span class="hljs-built_in">cout</span>&lt;&lt;p[<span class="hljs-number">1</span>][<span class="hljs-number">2</span>];
+C:<span class="hljs-built_in">cout</span>&lt;&lt;*(q+<span class="hljs-number">5</span>);
+D:<span class="hljs-built_in">cout</span>&lt;&lt;q[<span class="hljs-number">1</span>][<span class="hljs-number">2</span>];</code></pre>
+
+<p><img src="https://uploadfiles.nowcoder.com/images/20190922/997783280_1569150818042_329343038B0C7F2960226D5BD19DA8B0" srcset="/img/loading.gif" alt="img"></p>
 
             </div>
             <hr>
@@ -469,7 +496,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：60.1k</span>
+    <span class="post-count">总字数统计：62.1k</span>
 
     
   </div>

@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      1.9k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      15
+      20
        分钟
     </span>
   
@@ -226,6 +226,10 @@
 <p>Q : 如何让计算机识别是一只狗还是一只猫呢？</p>
 <p>特征！！ + 大量数据训练 &lt;===&gt;  类比认识新朋友，记住特征，也要常联系，多见面 </p>
 </blockquote>
+<p><strong>人工智能的发展</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203061450799.png" srcset="/img/loading.gif" alt="image-20220306144955539"></p>
+<p>辛顿(<code>BP算法</code> = 误差反向传播)</p>
+<p>杨立昆(<code>CNN</code> = 卷积神经网络)</p>
 <h2 id="机器学习形式"><a href="#机器学习形式" class="headerlink" title="机器学习形式"></a>机器学习形式</h2><ul>
 <li><strong>监督学习</strong> 训练数据包括正确的结果<ul>
 <li>线性回归，逻辑回归，决策树，神经网络，卷积神经网络，循环神经网络等</li>
@@ -265,15 +269,70 @@
 </blockquote>
 <blockquote>
 <p><strong>欠拟合</strong>是指模型不能在训练集上获得足够低的误差。换句换说，就是模型复杂度低，模型在训练集上就表现很差，没法学习到数据背后的规律。</p>
-<p>主要原因：没有选择好合适的特征值</p>
+<p>主要原因：<strong>没有选择好合适的特征值</strong></p>
 <p>欠拟合基本上都会发生在训练刚开始的时候，经过不断训练之后欠拟合应该不怎么考虑了。但是如果真的还是存在的话，可以通过<strong>增加网络复杂度</strong>或者在模型中<strong>增加特征</strong>，这些都是很好解决欠拟合的方法。</p>
 </blockquote>
 <p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202202281451431.png" srcset="/img/loading.gif" alt="image-20220228145117375"></p>
+<p><strong>神经网络</strong></p>
+<p> <code>M-P模型 </code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203061513084.png" srcset="/img/loading.gif" alt="image-20220306151322012"></p>
+<p><strong>多层神经元</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203061516750.png" srcset="/img/loading.gif" alt="image-20220306151656644"></p>
+<h2 id="人工智能框架"><a href="#人工智能框架" class="headerlink" title="人工智能框架"></a>人工智能框架</h2><p>1、Google的<code>TensorFlow</code></p>
+<p>2、Facebook的 <code>pytorch</code></p>
+<p>3、华为的<code>MindSpore</code>  </p>
+<ul>
+<li>自动并行</li>
+<li>二阶优化</li>
+<li>全场景协同</li>
+<li>信息安全性高</li>
+</ul>
+<h2 id="图像识别入门"><a href="#图像识别入门" class="headerlink" title="图像识别入门"></a>图像识别入门</h2><h3 id="视觉原理"><a href="#视觉原理" class="headerlink" title="视觉原理"></a>视觉原理</h3><p><code>神经认知模型</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203061532468.png" srcset="/img/loading.gif" alt="image-20220306153203366"></p>
+<h3 id="卷积神经网络CNN"><a href="#卷积神经网络CNN" class="headerlink" title="卷积神经网络CNN"></a>卷积神经网络CNN</h3><h4 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a><strong>卷积</strong></h4><p>利用数学方法提取出图像中的特征 </p>
+<p><code>卷积核</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203061539389.png" srcset="/img/loading.gif" alt="image-20220306153906228"></p>
+<p>然后不断平移卷积核,进行相对于的计算，得到<code>特征图</code></p>
+<p>数字大的很能表示之前图形的特征，即之前那个卷积核对应一个<strong>斜右下的线条</strong></p>
+<blockquote>
+<p>通过不同的<strong>卷积核</strong>，可对图像进行不同的处理，将得到不同的<strong>特征图</strong>，则知道此特征具体分布在什么位置</p>
+</blockquote>
+<h4 id="池化和激活"><a href="#池化和激活" class="headerlink" title="池化和激活"></a>池化和激活</h4><blockquote>
+<p>池化它实际上是一种形式的<strong>降采样</strong>。有多种不同形式的非线性池化函数，而其中“最大池化（Max pooling）”是最为常见的。它是将输入的图像划分为若干个矩形区域，对每个子区域输出<strong>最大值</strong></p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203061544740.png" srcset="/img/loading.gif" alt="image-20220306154449666"></p>
+<p><code>Sigmoid</code>函数<br>$$<br>f(x) = \frac{1}{1+e^{-x} }<br>$$</p>
+<blockquote>
+<p>Sigmoid函数是一个在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%94%9F%E7%89%A9%E5%AD%A6/1358">生物学</a>中常见的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/S%E5%9E%8B%E5%87%BD%E6%95%B0/19178062">S型函数</a>，也称为<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/S%E5%9E%8B%E7%94%9F%E9%95%BF%E6%9B%B2%E7%BA%BF/5581189">S型生长曲线</a>。 [1] 在信息科学中，由于其单增以及反函数单增等性质，**Sigmoid函数常被用作神经网络的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/2520792">激活函数</a>**，将变量映射到0,1之间</p>
+</blockquote>
+<p><img src="C:/Users/13564/AppData/Roaming/Typora/typora-user-images/image-20220306154940364.png" srcset="/img/loading.gif" alt="image-20220306154940364"></p>
+<p><strong>激活</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203061550518.png" srcset="/img/loading.gif" alt="image-20220306155053452"></p>
+<h4 id="算法、数据、算力"><a href="#算法、数据、算力" class="headerlink" title="算法、数据、算力"></a>算法、数据、算力</h4><p>人工智能处理器</p>
+<ul>
+<li><p><code>cpu</code>  中央处理器，通用性强，并行差</p>
+</li>
+<li><p><code>GPU</code> 图形处理器，互动性强，并行好</p>
+</li>
+<li><p><code>NPU</code> 神经网络处理器</p>
+</li>
+</ul>
 <h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p><strong>python</strong></p>
 <p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203031122108.png" srcset="/img/loading.gif" alt="image-20220303112202070"></p>
 <p>安装<code>anaconda</code> 继承了相关的工具</p>
 <p><a target="_blank" rel="noopener" href="https://www.anaconda.com/">https://www.anaconda.com/</a> </p>
 <p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203031123783.png" srcset="/img/loading.gif" alt="image-20220303112357673"></p>
+<p>要配置环境变量</p>
+<pre><code class="hljs latex">E:<span class="hljs-tag">\<span class="hljs-name">software</span></span><span class="hljs-tag">\<span class="hljs-name">Anaconda</span></span><span class="hljs-tag">\<span class="hljs-name">Library</span></span><span class="hljs-tag">\<span class="hljs-name">bin</span></span>
+E:<span class="hljs-tag">\<span class="hljs-name">software</span></span><span class="hljs-tag">\<span class="hljs-name">Anaconda</span></span>
+E:<span class="hljs-tag">\<span class="hljs-name">software</span></span><span class="hljs-tag">\<span class="hljs-name">Anaconda</span></span><span class="hljs-tag">\<span class="hljs-name">Scripts</span></span></code></pre>
+
+<p><code>terminal</code> 运行</p>
+<pre><code class="hljs shell">PS C:\Windows\System32&gt; conda -V
+conda 4.10.3</code></pre>
+
+
+
 <p><strong>numpy(矩阵运算)</strong></p>
 <blockquote>
 <p>科学计算的基础库，提供了多维数组处理，线代代数，傅里叶变换，随机数生成等工具</p>
@@ -333,6 +392,12 @@ plt.show( )</code></pre>
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/03/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E9%A2%98%E7%9B%AE/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">OS题目</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
@@ -499,7 +564,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：60.1k</span>
+    <span class="post-count">总字数统计：62.1k</span>
 
     
   </div>
