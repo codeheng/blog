@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      520 字
+      951 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      13
        分钟
     </span>
   
@@ -293,6 +293,74 @@ C:<span class="hljs-built_in">cout</span>&lt;&lt;*(q+<span class="hljs-number">5
 D:<span class="hljs-built_in">cout</span>&lt;&lt;q[<span class="hljs-number">1</span>][<span class="hljs-number">2</span>];</code></pre>
 
 <p><img src="https://uploadfiles.nowcoder.com/images/20190922/997783280_1569150818042_329343038B0C7F2960226D5BD19DA8B0" srcset="/img/loading.gif" alt="img"></p>
+<p>6、</p>
+<p>64位系统下，<code>*p=NULL</code>和<code>*p=new char[100]</code>， sizeof(p)各为多少？</p>
+<blockquote>
+<p>指针类型，32位就是4，64位就是8  故均为 8</p>
+</blockquote>
+<p>7.</p>
+<pre><code class="hljs c">指针函数是指带指针的函数，即本质是一个函数，函数返回类型是某一类型的指针。
+<span class="hljs-comment">//函数fun()是一个指针函数,返回值为一个整型的指针.</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> *<span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span></span>
+<span class="hljs-function"></span>&#123;
+函数体语句
+&#125;
+
+函数指针是指向函数的指针变量，即本质是一个指针变量。
+<span class="hljs-keyword">int</span> (*f) (<span class="hljs-keyword">int</span> x); <span class="hljs-comment">/*声明一个函数指针 */</span></code></pre>
+
+
+
+<p>8、</p>
+<pre><code class="hljs c"><span class="hljs-keyword">double</span> d = <span class="hljs-number">3.2</span>;
+<span class="hljs-keyword">int</span> x, y;
+x = <span class="hljs-number">1.2</span>;
+y = (x + <span class="hljs-number">3.8</span>)/<span class="hljs-number">5.0</span>;
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, d*y);</code></pre>
+
+<p>有坑，注意变量类型</p>
+<p>x为int类型，故y此时为 <code>(1+3.8) / 5.0 = 0</code> 最终打印0</p>
+<p>9、char是有符号还是无符号类型（）</p>
+<blockquote>
+<p><strong>取决于具体实现</strong>   </p>
+<p>int，short，long都是signed的；</p>
+<p>char可能是signed的，也可能是unsigned的；</p>
+</blockquote>
+<p>10、</p>
+<pre><code class="hljs c"><span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *p1 =<span class="hljs-string">&quot;hello&quot;</span>;
+<span class="hljs-keyword">char</span> *<span class="hljs-keyword">const</span> p2 = <span class="hljs-string">&quot;world&quot;</span>;</code></pre>
+
+<p>哪些合法？</p>
+<pre><code class="hljs c">A: p1++
+B: p1[<span class="hljs-number">2</span>] = <span class="hljs-string">&#x27;w&#x27;</span>;
+C: p2[<span class="hljs-number">2</span>] = <span class="hljs-string">&#x27;1&#x27;</span>;
+D: p2++;
+<span class="hljs-comment">//选A</span></code></pre>
+
+<blockquote>
+<p><strong>口诀：左定值，右定向。</strong></p>
+<p><strong>即</strong> <strong>const在*的左边不能改变字符串常量的值，故B错；</strong></p>
+<p><strong>const在*的右边不能改变指针的指向，故D错；</strong></p>
+<p><strong>由于</strong> <strong>“world“存储在字符常量区，不能直接修改其值，故C错；</strong></p>
+<p><strong>若要修改其值，应该改为char str []= “world”;</strong></p>
+</blockquote>
+<h1 id="day2"><a href="#day2" class="headerlink" title="day2"></a>day2</h1><p>1、</p>
+<pre><code class="hljs c"><span class="hljs-keyword">char</span> str[<span class="hljs-number">4</span>][<span class="hljs-number">12</span>] = &#123;<span class="hljs-string">&quot;aaa&quot;</span>, <span class="hljs-string">&quot;bbbb&quot;</span>, <span class="hljs-string">&quot;ccccc&quot;</span>, <span class="hljs-string">&quot;dddddd&quot;</span>&#125;, *strp[<span class="hljs-number">4</span>];
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++)
+    strp[i] = str[i];</code></pre>
+
+<p>对字符串的正确引用是（），其中0≤k&lt;4</p>
+<pre><code class="hljs c">A: *strp
+B： strp
+C ： str[k]
+D: strp[k]
+<span class="hljs-comment">//选ACD</span>
+
+A：*strp = strp[<span class="hljs-number">0</span>] = str[<span class="hljs-number">0</span>]。
+B：strp  = &amp;strp[<span class="hljs-number">0</span>] =  &amp;str[<span class="hljs-number">0</span>]
+C：str[k] = strp[k] = *(strp + k)
+D：strp[k] = *(strp + k) = str[k]</code></pre>
+
 
             </div>
             <hr>
@@ -496,7 +564,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：62.1k</span>
+    <span class="post-count">总字数统计：62.8k</span>
 
     
   </div>
