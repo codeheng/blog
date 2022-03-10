@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      2.2k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      17
+      33
        分钟
     </span>
   
@@ -249,6 +249,28 @@
     <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-jdbc<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>5.3.15<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre>
+
+<h1 id="javaBean"><a href="#javaBean" class="headerlink" title="javaBean"></a>javaBean</h1><blockquote>
+<p>JavaBean就是有一定规范的Java实体类</p>
+<p>跟普通类差不多，不同的是类内部提供了一些<strong>公共的方法</strong>以便外界对该对象内部属性进行操作\</p>
+</blockquote>
+<p>比如：</p>
+<pre><code class="hljs JAVA"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span></span>&#123;
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> age;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getAge</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-keyword">return</span> age;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setName</span><span class="hljs-params">(String name)</span></span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setAge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> age)</span></span>&#123;
+        <span class="hljs-keyword">this</span>.age = age;
+    &#125;
+&#125;</code></pre>
 
 
 
@@ -393,6 +415,202 @@
 <li>反转 : 程序本身不创建对象 , 而变成<strong>被动的接收对象</strong> .</li>
 </ul>
 <p><strong>只需要在xml配置文件中进行修改 , 所谓的IoC即对象由Spring 来创建 , 管理 , 装配 !</strong></p>
+<p><img src="https://images0.cnblogs.com/blog/281227/201305/30131727-a8268fe6370049028078e6b8a1cbc88f.png" srcset="/img/loading.gif" alt="img"></p>
+<h1 id="spring开发步骤"><a href="#spring开发步骤" class="headerlink" title="spring开发步骤"></a>spring开发步骤</h1><p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203100951372.png" srcset="/img/loading.gif" alt="image-20220310095135197"></p>
+<ul>
+<li>1、导入spring开发的基本包</li>
+</ul>
+<p><code>xml中</code></p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-context<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>5.1.7.RELEASE<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span></code></pre>
+
+<ul>
+<li>2、编写Dao接口以及实现类</li>
+</ul>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.heng.dao;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">UserDao</span> </span>&#123;
+<span class="hljs-comment">//定义接口</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">save</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre>
+
+<p>对应实现类</p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.heng.dao.iml;
+<span class="hljs-keyword">import</span> com.heng.dao.UserDao;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserDaoImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">UserDao</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">save</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">&quot;hello!!&quot;</span>);
+    &#125;
+&#125;</code></pre>
+
+<ul>
+<li>3、创建spring核心配置文件</li>
+</ul>
+<p>在<code>resources</code>下创建<code>applicationContext.xml</code></p>
+<pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans&quot;</span></span>
+<span class="hljs-tag">       <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span>
+<span class="hljs-tag">       <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;userDao&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.heng.dao.iml.UserDaoImpl&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span></code></pre>
+
+<ul>
+<li>4、在spring配置文件中配置<code>UserDaoImpl</code></li>
+</ul>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;userDao&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.heng.dao.iml.UserDaoImpl&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></code></pre>
+
+<ul>
+<li>5、使用spring的API获得<code>Bean</code>示例</li>
+</ul>
+<p>创建<code>UserDaoDemo.java</code>测试</p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.heng.demo;
+
+<span class="hljs-keyword">import</span> com.heng.dao.UserDao;
+<span class="hljs-keyword">import</span> org.springframework.context.ApplicationContext;
+<span class="hljs-keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserDaoDemo</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        ApplicationContext app = <span class="hljs-keyword">new</span> ClassPathXmlApplicationContext(<span class="hljs-string">&quot;applicationContext.xml&quot;</span>);
+        UserDao userDao =(UserDao) app.getBean(<span class="hljs-string">&quot;userDao&quot;</span>);
+        userDao.save(); <span class="hljs-comment">//此时将打印出  hello!!</span>
+    &#125;
+&#125;</code></pre>
+
+
+
+
+<h1 id="spring配置"><a href="#spring配置" class="headerlink" title="spring配置"></a>spring配置</h1><h2 id="Bean标签基本配置"><a href="#Bean标签基本配置" class="headerlink" title="Bean标签基本配置"></a>Bean标签基本配置</h2><p><strong><code>scope</code> 对象的作用范围 ：</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203101028520.png" srcset="/img/loading.gif" alt="image-20220310102804245"></p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;userDao&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.heng.dao.iml.UserDaoImpl&quot;</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">&quot;prototype&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></code></pre>
+
+<p>此时进行测试</p>
+<pre><code class="hljs java"><span class="hljs-keyword">import</span> com.heng.dao.UserDao;
+<span class="hljs-keyword">import</span> org.junit.Test;
+<span class="hljs-keyword">import</span> org.springframework.context.ApplicationContext;
+<span class="hljs-keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpringTest</span> </span>&#123;
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>&#123;
+        ApplicationContext app = <span class="hljs-keyword">new</span> ClassPathXmlApplicationContext(<span class="hljs-string">&quot;applicationContext.xml&quot;</span>);
+        UserDao userDao1 = (UserDao)app.getBean(<span class="hljs-string">&quot;userDao&quot;</span>);
+        UserDao userDao2 = (UserDao)app.getBean(<span class="hljs-string">&quot;userDao&quot;</span>);
+
+        System.out.println(userDao1);
+        System.out.println(userDao2);
+    &#125;
+
+&#125;</code></pre>
+
+<p>控制台打印</p>
+<p>com.heng.dao.iml.UserDaoImpl@6b57696f<br>com.heng.dao.iml.UserDaoImpl@5bb21b69</p>
+<p><strong><code>Bean</code>标签范围</strong> :</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203101043641.png" srcset="/img/loading.gif" alt="image-20220310104344523"></p>
+<p><code>Bean</code> 生命周期配置 <strong>(了解)</strong></p>
+<ul>
+<li><code>init-method</code> 指定类中的初始化方法名称</li>
+<li><code>destory-method</code> ：指定类中销毁方法名称</li>
+</ul>
+<p>在<code>UserDaoImpl.java</code>中</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span>&#123;
+    System.out.println(<span class="hljs-string">&quot;初始化。。。。&quot;</span>);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">destory</span><span class="hljs-params">()</span></span>&#123;
+    System.out.println(<span class="hljs-string">&quot;销毁。。。。&quot;</span>);
+&#125;</code></pre>
+
+<p>配置文件中</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;userDao&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.heng.dao.iml.UserDaoImpl&quot;</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">&quot;singleton&quot;</span> <span class="hljs-attr">init-method</span>=<span class="hljs-string">&quot;init&quot;</span> <span class="hljs-attr">destroy-method</span>=<span class="hljs-string">&quot;destory&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></code></pre>
+
+<p>进行测试</p>
+<pre><code class="hljs java"><span class="hljs-keyword">import</span> com.heng.dao.UserDao;
+<span class="hljs-keyword">import</span> org.junit.Test;
+<span class="hljs-keyword">import</span> org.springframework.context.ApplicationContext;
+<span class="hljs-keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpringTest</span> </span>&#123;
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>&#123;
+        ApplicationContext app = <span class="hljs-keyword">new</span> ClassPathXmlApplicationContext(<span class="hljs-string">&quot;applicationContext.xml&quot;</span>);
+        UserDao userDao1 = (UserDao)app.getBean(<span class="hljs-string">&quot;userDao&quot;</span>);
+        System.out.println(userDao1);
+    &#125;
+
+&#125;</code></pre>
+
+<blockquote>
+<p><strong>打印：</strong></p>
+<p>UserDaoImpl创建。。。。<br>初始化。。。。<br>com.heng.dao.iml.UserDaoImpl@e874448</p>
+</blockquote>
+<p>此时并没有打印<code>销毁</code> 因为没来得及打印就执行结束</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>&#123;
+    ClassPathXmlApplicationContext app = <span class="hljs-keyword">new</span> ClassPathXmlApplicationContext(<span class="hljs-string">&quot;applicationContext.xml&quot;</span>);
+    UserDao userDao1 = (UserDao)app.getBean(<span class="hljs-string">&quot;userDao&quot;</span>);
+    System.out.println(userDao1);
+    app.close();
+&#125;
+<span class="hljs-comment">/* 此时进行打印可得:</span>
+<span class="hljs-comment">UserDaoImpl创建。。。。</span>
+<span class="hljs-comment">初始化。。。。</span>
+<span class="hljs-comment">com.heng.dao.iml.UserDaoImpl@e874448</span>
+<span class="hljs-comment">销毁。。。。</span>
+<span class="hljs-comment">*/</span></code></pre>
+
+
+
+<p><strong>bean实例化的三种方式</strong></p>
+<ul>
+<li>无参构造**(重要)**</li>
+<li>工厂静态 方法</li>
+</ul>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.heng.factory;
+
+<span class="hljs-keyword">import</span> com.heng.dao.UserDao;
+<span class="hljs-keyword">import</span> com.heng.dao.iml.UserDaoImpl;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StaticFactory</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> UserDao <span class="hljs-title">getUserDao</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span>  <span class="hljs-keyword">new</span> UserDaoImpl(); <span class="hljs-comment">//返回对应实例</span>
+    &#125;
+&#125;</code></pre>
+
+<p>配置</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;userDao&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.heng.factory.StaticFactory&quot;</span> <span class="hljs-attr">factory-method</span>=<span class="hljs-string">&quot;getUserDao&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></code></pre>
+
+<ul>
+<li>工厂实例方法</li>
+</ul>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.heng.factory;
+
+<span class="hljs-keyword">import</span> com.heng.dao.UserDao;
+<span class="hljs-keyword">import</span> com.heng.dao.iml.UserDaoImpl;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StaticFactory</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> UserDao <span class="hljs-title">getUserDao</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span>  <span class="hljs-keyword">new</span> UserDaoImpl(); <span class="hljs-comment">//返回对应实例</span>
+    &#125;
+&#125;</code></pre>
+
+<p>配置</p>
+<pre><code class="hljs xml"><span class="hljs-comment">&lt;!--工厂实例方法--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;factory&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.heng.factory.StaticFactory&quot;</span> &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;userDao&quot;</span> <span class="hljs-attr">factory-bean</span>=<span class="hljs-string">&quot;factory&quot;</span> <span class="hljs-attr">factory-method</span>=<span class="hljs-string">&quot;getUserDao&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></code></pre>
+
+
+
+<h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h2><ul>
+<li>构造方法</li>
+<li>set方法</li>
+</ul>
 
             </div>
             <hr>
@@ -594,7 +812,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：62.8k</span>
+    <span class="post-count">总字数统计：64.1k</span>
 
     
   </div>
