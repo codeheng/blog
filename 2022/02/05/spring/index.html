@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.2k 字
+      4.9k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      33
+      73
        分钟
     </span>
   
@@ -517,8 +517,8 @@
 <p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203101043641.png" srcset="/img/loading.gif" alt="image-20220310104344523"></p>
 <p><code>Bean</code> 生命周期配置 <strong>(了解)</strong></p>
 <ul>
-<li><code>init-method</code> 指定类中的初始化方法名称</li>
-<li><code>destory-method</code> ：指定类中销毁方法名称</li>
+<li><code>init-method</code> 指定类中的<strong>初始化</strong>方法名称</li>
+<li><code>destory-method</code> ：指定类中<strong>销毁</strong>方法名称</li>
 </ul>
 <p>在<code>UserDaoImpl.java</code>中</p>
 <pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span>&#123;
@@ -605,13 +605,321 @@
 <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;factory&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.heng.factory.StaticFactory&quot;</span> &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;userDao&quot;</span> <span class="hljs-attr">factory-bean</span>=<span class="hljs-string">&quot;factory&quot;</span> <span class="hljs-attr">factory-method</span>=<span class="hljs-string">&quot;getUserDao&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></code></pre>
 
+<p>当有两个需要加载时，默认是按照书写的顺序进行</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;student&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.heng.entity.Student&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;card&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.heng.entity.Card&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></code></pre>
 
+<p>分别调用对应<code>构造方法</code> 打印，当进行测试时</p>
+<pre><code class="hljs routeros">Student被构造<span class="hljs-built_in">..</span><span class="hljs-built_in">..</span>
+Card被构造<span class="hljs-built_in">..</span>.</code></pre>
+
+<p>可以通过<code>depends-on</code> 来改变顺序</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;student&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.heng.entity.Student&quot;</span> <span class="hljs-attr">depends-on</span>=<span class="hljs-string">&quot;card&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;card&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.heng.entity.Card&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></code></pre>
+
+<p>此时打印</p>
+<pre><code class="hljs routeros">Card被构造<span class="hljs-built_in">..</span>.
+Student被构造<span class="hljs-built_in">..</span><span class="hljs-built_in">..</span></code></pre>
 
 <h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h2><ul>
 <li>构造方法</li>
 <li>set方法</li>
 </ul>
+<blockquote>
+<p>注入默认的类型，自己定义的类，集合，以及map</p>
+</blockquote>
+<ol>
+<li>先在类中进行相对应的定义</li>
+<li>写默认的<code>set方法(或构造方法)</code>，表示从外界进行注入时，就调用它</li>
+<li>配置<code>xml</code></li>
+<li>测试</li>
+</ol>
+<p><code>Student.java</code> 实体类中</p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.heng.entity;
 
+<span class="hljs-keyword">import</span> lombok.ToString;
+
+<span class="hljs-keyword">import</span> java.util.List;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+<span class="hljs-meta">@ToString</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span> </span>&#123;
+    String name; <span class="hljs-comment">//基本类型</span>
+    <span class="hljs-keyword">int</span> age;
+    Card card; <span class="hljs-comment">// 自己定义类,进行注入</span>
+    List&lt;Double&gt; list; <span class="hljs-comment">// 注入list(集合类型</span>
+    Map&lt;String,Double&gt; map; <span class="hljs-comment">// 通过map注入</span>
+
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setAge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> age)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.age = age;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setName</span><span class="hljs-params">(String name)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setCard</span><span class="hljs-params">(Card card)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.card = card;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setList</span><span class="hljs-params">(List&lt;Double&gt; list)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.list = list;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setMap</span><span class="hljs-params">(Map&lt;String, Double&gt; map)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.map = map;
+    &#125;
+&#125;</code></pre>
+
+<p>配置<code>xml</code> 文件</p>
+<pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans&quot;</span></span>
+<span class="hljs-tag">       <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span>
+<span class="hljs-tag">       <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!--    &lt;bean id=&quot;userDao&quot; class=&quot;com.heng.factory.StaticFactory&quot; factory-method=&quot;getUserDao&quot;&gt;&lt;/bean&gt;--&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;card&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.heng.entity.Card&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;student&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.heng.entity.Student&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;小明&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;age&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;20&quot;</span> &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;card&quot;</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;card&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;list&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">list</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">value</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;double&quot;</span>&gt;</span>100.0<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">value</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;double&quot;</span>&gt;</span>20.0<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">value</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;double&quot;</span>&gt;</span>30.0<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">list</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;map&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">map</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">entry</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;数学&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;100&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">entry</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">entry</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;语文&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;80&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">entry</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">map</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span></code></pre>
+
+<p>测试控制台打印</p>
+<pre><code class="hljs apache"><span class="hljs-attribute">Student</span>(name=小明, age=<span class="hljs-number">20</span>, card=com.heng.entity.Card@<span class="hljs-number">67784306</span>, list=[<span class="hljs-number">100</span>.<span class="hljs-number">0</span>, <span class="hljs-number">20</span>.<span class="hljs-number">0</span>, <span class="hljs-number">30</span>.<span class="hljs-number">0</span>], map=&#123;数学=<span class="hljs-number">100</span>.<span class="hljs-number">0</span>, 语文=<span class="hljs-number">80</span>.<span class="hljs-number">0</span>&#125;)</code></pre>
+
+<p>也可以不用默认的无参构造，而使用有参构造进行注入</p>
+<p>在<code>Student.java</code> 下 添加有参构造</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Student</span><span class="hljs-params">(String name, <span class="hljs-keyword">int</span> age)</span> </span>&#123;
+    <span class="hljs-keyword">this</span>.name = name;
+    <span class="hljs-keyword">this</span>.age = age;
+&#125;</code></pre>
+
+<p>配置<code>xml</code></p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;student&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.test.bean.Student&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">constructor-arg</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;heng&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">constructor-arg</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;age&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;22&quot;</span>/&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></code></pre>
+
+<p>此时已经注入</p>
+<h2 id="自动装配"><a href="#自动装配" class="headerlink" title="自动装配"></a>自动装配</h2><blockquote>
+<p>自动在容器中查找是否存在<strong>对应类型</strong>或是<strong>对应名称</strong>以及对应构造方法的Bean</p>
+</blockquote>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;card&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.test.bean.Card&quot;</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;student&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.test.bean.Student&quot;</span> <span class="hljs-attr">autowire</span>=<span class="hljs-string">&quot;byType&quot;</span>/&gt;</span></code></pre>
+
+
+
+<h1 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h1><p>(Aspect Oriented Programming)  面向切面编程</p>
+<p><strong>在运行时，动态地将代码切入到类的指定方法、指定位置上的编程思想就是面向切面的编程</strong></p>
+<blockquote>
+<p>旨在将**<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A8%AA%E5%88%87%E5%85%B3%E6%B3%A8%E7%82%B9">横切关注点</a>与业务主体<strong>进行进一步分离，以提高程序代码的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B">模块化</a>程度。通过在现有代码基础上增加额外的</strong>通知**（Advice）机制，能够对被声明为“切点（Pointcut）”的代码块进行统一管理与装饰，如“对所有方法名以<code>set*</code>开头的方法添加后台日志”。</p>
+<p>该思想使得开发人员能够将与代码核心业务逻辑关系不那么密切的功能（如日志功能）添加至程序中，同时又不降低业务代码的可读性。面向切面的程序设计思想也是面向切面软件开发的基础。</p>
+</blockquote>
+<p>相当于我们的整个业务流程，被直接斩断，并<strong>在断掉的位置添加了一个额外的操作</strong>，再连接起来，也就是在一个切点位置插入内容。<strong>它的原理实际上就是通过动态代理机制实现的</strong></p>
+<p><code>Spring</code>底层不是使用的<code>JDK</code>提供的动态代理，而是<strong>使用的第三方库</strong>实现，它能够以父类的形式代理，而不是接口</p>
+<h2 id="使用springAOP"><a href="#使用springAOP" class="headerlink" title="使用springAOP"></a>使用springAOP</h2><p>实际上它整合了<code>AspectJ</code>框架的一部分</p>
+<p>1、导入对应依赖</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-aspects<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>5.3.13<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre>
+
+<p>2、明确以下动作</p>
+<ul>
+<li>需要切入的类，类的哪个方法是需要被切入</li>
+<li>切入后执行什么动作</li>
+<li>是在方法前还是方法后进行切入</li>
+<li>如何告诉spring进行切入</li>
+</ul>
+<p>例如：</p>
+<p>先在<code>Student.java</code></p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.heng.entity;
+
+<span class="hljs-keyword">import</span> lombok.ToString;
+<span class="hljs-meta">@ToString</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span> </span>&#123;
+    String name;
+    <span class="hljs-keyword">int</span> age;
+    <span class="hljs-comment">//要在say之前和之后实现 切入(完成打印日志的操作)</span>
+    <span class="hljs-meta">@Deprecated</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">say</span><span class="hljs-params">(String meg)</span> </span>&#123;
+        System.out.println(<span class="hljs-string">&quot;我叫&quot;</span> + name + <span class="hljs-string">&quot;今年&quot;</span> + age + <span class="hljs-string">&quot;我说&quot;</span> + meg);
+    &#125;
+&#125;</code></pre>
+
+<p>定义单独的类，来完成相应的操作 ，在<code>AopTest.java</code> 中</p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.heng.aop;
+
+<span class="hljs-keyword">import</span> lombok.extern.java.Log;
+
+<span class="hljs-meta">@Log</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AopTest</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">after</span><span class="hljs-params">()</span> </span>&#123;
+        log.info(<span class="hljs-string">&quot;after....&quot;</span>);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">before</span><span class="hljs-params">()</span> </span>&#123;
+        log.info(<span class="hljs-string">&quot;before....&quot;</span>);
+    &#125;
+&#125;</code></pre>
+
+<p>现在将新对应的<code>Student</code> 和 <code>AopTest</code> 类 注册为<code>Bean</code> ，配置</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;student&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.test.bean.Student&quot;</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;aopTest&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.test.aop.AopTest&quot;</span>/&gt;</span></code></pre>
+
+<p>此时就交给了<code>spring</code> 进行管理</p>
+<p>改变<code>xml</code>头部，引入<code>aop</code> 相关标签</p>
+<pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans&quot;</span></span>
+<span class="hljs-tag">       <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span>
+<span class="hljs-tag">       <span class="hljs-attr">xmlns:aop</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/aop&quot;</span></span>
+<span class="hljs-tag">       <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</span></span>
+<span class="hljs-tag"><span class="hljs-string">       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd&quot;</span>&gt;</span>
+<span class="hljs-comment">&lt;!--    &lt;bean id=&quot;userDao&quot; class=&quot;com.heng.factory.StaticFactory&quot; factory-method=&quot;getUserDao&quot;&gt;&lt;/bean&gt;--&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;student&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.test.bean.Student&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span> = <span class="hljs-string">&quot;aopTest&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.heng.aop.AopTest&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">aop:config</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">aop:aspect</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;aopTest&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">aop:pointcut</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;stu&quot;</span> <span class="hljs-attr">expression</span>=<span class="hljs-string">&quot;execution(* com.heng.entity.Student.say(String))&quot;</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">aop:after-returning</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;after&quot;</span> <span class="hljs-attr">pointcut-ref</span>=<span class="hljs-string">&quot;stu&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">aop:after-returning</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">aop:aspect</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">aop:aspect</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;aopTest&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">aop:pointcut</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;stu2&quot;</span> <span class="hljs-attr">expression</span>=<span class="hljs-string">&quot;@annotation(Deprecated)&quot;</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">aop:before</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;before&quot;</span> <span class="hljs-attr">pointcut-ref</span>=<span class="hljs-string">&quot;stu2&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">aop:before</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">aop:aspect</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">aop:config</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span></code></pre>
+
+<p>在测试类<code>StudentDemo.java     </code>中运行测试</p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.heng.demo;
+
+<span class="hljs-keyword">import</span> com.heng.entity.Student;
+<span class="hljs-keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StudentDemo</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        ClassPathXmlApplicationContext app = <span class="hljs-keyword">new</span> ClassPathXmlApplicationContext(<span class="hljs-string">&quot;applicationContext.xml&quot;</span>);
+        Student student = (Student) app.getBean(Student.class);
+        System.out.println(student.getClass()); <span class="hljs-comment">//看一下对应的类</span>
+        student.say(<span class="hljs-string">&quot;你好&quot;</span>);
+
+    &#125;
+&#125;</code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203120707346.png" srcset="/img/loading.gif" alt="image-20220312070709204"></p>
+<p>发现在打印<code>say</code>前后，均打印出了日志</p>
+<p><strong>配置文件说明</strong></p>
+<p>​    通过<code>aop:config</code> 来添加一个新的<code>aop</code>配置</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">aop:config</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">aop:config</span>&gt;</span></code></pre>
+
+<p><code>aop:pointcut</code> 告诉spring，要切入的是哪个类/哪个方法</p>
+<p><code>expression</code>属性的<code>execution</code>填写格式如下：</p>
+<pre><code class="hljs gcode">修饰符 包名.类名.方法名称<span class="hljs-comment">(方法参数)</span></code></pre>
+
+<ul>
+<li>修饰符：<code>public</code>、<code>protected</code>、<code>private</code>、包括返回值类型、<code>static</code>等等（使用*代表任意修饰符）</li>
+<li>包名：如com.test（*代表全部，比如com.*代表com包下的全部包）</li>
+<li>类名：使用*也可以代表包下的所有类</li>
+<li>方法名称：可以使用*代表全部方法</li>
+<li>方法参数：填写对应的参数即可，比如(String, String)，也可以使用*来代表任意一个参数，使用..代表所有参数。</li>
+</ul>
+<p>也可以使用其他属性来进行匹配，比如<code>@annotation</code>可以用于表示标记了哪些注解的方法被切入。</p>
+<p>之后可添加执行前和执行后的动作 <code>aop:after-returning</code> 和 <code>aop:before</code></p>
+<blockquote>
+<p>我们想得到方法执行的<strong>一些参数</strong>，比如方法执行之后返回了什么，或是方法开始之前传入了什么参数等等。</p>
+</blockquote>
+<p>在对应方法上加上<code>JoinPoint point </code></p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">after</span><span class="hljs-params">(JoinPoint point)</span> </span>&#123;
+    System.out.println(Arrays.toString(point.getArgs()));<span class="hljs-comment">//获得传入的参数，打印[你好]</span>
+    log.info(<span class="hljs-string">&quot;after....&quot;</span>);
+&#125;</code></pre>
+
+<p><strong>环绕方法</strong></p>
+<p>在<code>aopTest.java</code> 中添加</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">around</span><span class="hljs-params">()</span></span>&#123;
+    System.out.println(<span class="hljs-string">&quot;around....&quot;</span>);
+&#125;</code></pre>
+
+<p><code>xml</code> 中</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">aop:aspect</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;aopTest&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">aop:pointcut</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;stu3&quot;</span> <span class="hljs-attr">expression</span>=<span class="hljs-string">&quot;@annotation(Deprecated)&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">aop:around</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;around&quot;</span> <span class="hljs-attr">pointcut-ref</span>=<span class="hljs-string">&quot;stu3&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">aop:around</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">aop:aspect</span>&gt;</span></code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203121548849.png" srcset="/img/loading.gif" alt="image-20220312154811727"></p>
+<p>发现之前的<code>say</code> 方法并没有打印输出了</p>
+<blockquote>
+<p>环绕方法相当于<strong>完全代理</strong>了此方法，它完全将此方法包含在中间，需要我们<strong>手动调用</strong>才可以执行此方法</p>
+</blockquote>
+<p><code>around</code>方法中提供参数<code>ProceedingJoinPoint joinPoint</code></p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">around</span><span class="hljs-params">(ProceedingJoinPoint joinPoint)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;
+    joinPoint.proceed();<span class="hljs-comment">//利用joinPoint这个对象，让原来方法执行</span>
+    System.out.println(<span class="hljs-string">&quot;around....&quot;</span>);
+&#125;</code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203121553345.png" srcset="/img/loading.gif" alt="image-20220312155327260"></p>
+<h2 id="使用接口实现AOP"><a href="#使用接口实现AOP" class="headerlink" title="使用接口实现AOP"></a>使用接口实现AOP</h2><p>新建<code>AopTest02.java</code></p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.heng.aop;
+
+<span class="hljs-keyword">import</span> org.springframework.aop.MethodBeforeAdvice;
+
+<span class="hljs-keyword">import</span> java.lang.reflect.Method;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+
+<span class="hljs-comment">//此处也可以继承AfterReturningAdvice 来实现方法之后的操作</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AopTest02</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MethodBeforeAdvice</span> </span>&#123;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">before</span><span class="hljs-params">(Method method, Object[] objects, Object o)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;
+        System.out.println(<span class="hljs-string">&quot;方法名字&quot;</span> + method.getName());
+        System.out.println(<span class="hljs-string">&quot;方法参数&quot;</span> + Arrays.toString(objects)); 
+        System.out.println(<span class="hljs-string">&quot;方法执行的对象&quot;</span> + o);
+        System.out.println(<span class="hljs-string">&quot;通过接口实现aop&quot;</span>);
+    &#125;
+&#125;</code></pre>
+
+<p>进行对应配置</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;aopTest02&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.heng.aop.AopTest02&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">aop:config</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">aop:pointcut</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;stu4&quot;</span> <span class="hljs-attr">expression</span>=<span class="hljs-string">&quot;execution(* com.heng.entity.Student.say(String))&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">aop:advisor</span> <span class="hljs-attr">advice-ref</span>=<span class="hljs-string">&quot;aopTest02&quot;</span> <span class="hljs-attr">pointcut-ref</span>=<span class="hljs-string">&quot;stu4&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">aop:advisor</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">aop:config</span>&gt;</span></code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203121614769.png" srcset="/img/loading.gif" alt="image-20220312161407696"></p>
+<p><strong>一些术语</strong></p>
+<ul>
+<li>通知（Advice）: AOP 框架中的增强处理，通知描述了切面何时执行以及如何执行增强处理，也就是我们上面编写的方法实现。</li>
+<li>连接点（join point）: 连接点表示应用执行过程中能够插入切面的一个点，这个点可以是方法的调用、异常的抛出，实际上就是我们在方法执行前或是执行后需要做的内容。</li>
+<li>切点（PointCut）: 可以插入增强处理的连接点，可以是方法执行之前也可以方法执行之后，还可以是抛出异常之类的。</li>
+<li>切面（Aspect）: 切面是通知和切点的结合，我们之前在xml中定义的就是切面，包括很多信息。</li>
+<li>引入（Introduction）：引入允许我们向现有的类添加新的方法或者属性。</li>
+<li>织入（Weaving）: 将增强处理添加到目标对象中，并创建一个被增强的对象，我们之前都是在将我们的增强处理添加到目标对象，也就是织入</li>
+</ul>
+<h1 id="使用注解开发"><a href="#使用注解开发" class="headerlink" title="使用注解开发"></a>使用注解开发</h1>
             </div>
             <hr>
             <div>
@@ -812,7 +1120,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：64.1k</span>
+    <span class="post-count">总字数统计：66.9k</span>
 
     
   </div>
