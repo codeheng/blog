@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Yiheng">
   <meta name="keywords" content="">
-  <title>20.有效的括号 - 寻归往</title>
+  <title>209.长度最小的子数组 - 寻归往</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -162,8 +162,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2022-03-23 14:55" pubdate>
-      2022年3月23日 下午
+    <time datetime="2022-03-24 19:13" pubdate>
+      2022年3月24日 晚上
     </time>
   </div>
 
@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      538 字
+      421 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      6
        分钟
     </span>
   
@@ -213,99 +213,71 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">20.有效的括号</h1>
+            <h1 style="display: none">209.长度最小的子数组</h1>
             
             <div class="markdown-body" id="post-body">
               <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><blockquote>
-<p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串 s ，<strong>判断字符串是否有效</strong>。</p>
-<p>有效字符串需满足：</p>
-<ul>
-<li>左括号必须用相同类型的右括号闭合。</li>
-<li>左括号必须以正确的顺序闭合。</li>
-</ul>
+<p>给定一个含有 <strong>n 个正整数</strong>的数组和一个<strong>正整数 target</strong> 。 </p>
+<p>找出该数组中满足其和 ≥ target 的<strong>长度最小的 连续子数组</strong> [numsl, numsl+1, …, numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0 。 </p>
 </blockquote>
 <pre><code class="hljs shell">示例 1：
-输入：s = &quot;()&quot;
-输出：true
+输入：target = 7, nums = [2,3,1,2,4,3]
+输出：2
+解释：子数组 [4,3] 是该条件下的长度最小的子数组。
 
 示例 2：
-输入：s = &quot;()[]&#123;&#125;&quot;
-输出：true
+输入：target = 4, nums = [1,4,4]
+输出：1
 
 示例 3：
-输入：s = &quot;(]&quot;
-输出：false
-
-示例 4：
-输入：s = &quot;([)]&quot;
-输出：false
-
-示例 5：
-输入：s = &quot;&#123;[]&#125;&quot;
-输出：true</code></pre>
+输入：target = 11, nums = [1,1,1,1,1,1,1,1]
+输出：0</code></pre>
 
 
-<p>提示：</p>
-<ul>
-<li>1 &lt;= s.length &lt;= 104</li>
-<li>s 仅由括号 ‘()[]{}’ 组成    </li>
-</ul>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><ul>
-<li>如果只有一种括号，怎么做？</li>
-<li>用栈？ 在简化问题中，能不能不用栈？</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203231502612.png" srcset="/img/loading.gif" alt="image-20220323150230545"></p>
-<p> <strong>任意位置右括号数量应 <code>&lt;=</code> 左括号数量 且 最终位置 右 <code>==</code> 左</strong></p>
-<p>此时简化问题，故只需统计左右括号数量即可</p>
-<pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isValid</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *s)</span> </span>&#123;
-    <span class="hljs-keyword">int</span> lnum = <span class="hljs-number">0</span>,rnum = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">int</span> len = <span class="hljs-built_in">strlen</span>(s);
-    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; len;i++) &#123;
-        <span class="hljs-keyword">switch</span> (s[i])&#123;
-            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;(&#x27;</span>: ++lnum;<span class="hljs-keyword">break</span>;
-            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;)&#x27;</span>: ++rnum;<span class="hljs-keyword">break</span>;
-            <span class="hljs-keyword">default</span>: <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+
+
+
+
+
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><h2 id="1-暴力求解"><a href="#1-暴力求解" class="headerlink" title="1.暴力求解"></a>1.暴力求解</h2><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">minSubArrayLen</span><span class="hljs-params">(<span class="hljs-keyword">int</span> target, <span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
+        <span class="hljs-comment">//result 用一个大的值，暂存,因为是要找最小的，sublen子序列长度</span>
+        <span class="hljs-keyword">int</span> result = nums.length + <span class="hljs-number">1</span>,sum,sublen = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length;i++) &#123;
+            sum = <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i; j &lt; nums.length;j++) &#123;
+                sum += nums[j];
+                <span class="hljs-comment">//若子序列超过了目标值，更新result</span>
+                <span class="hljs-keyword">if</span> ( sum &gt;= target) &#123;
+                    sublen = j - i + <span class="hljs-number">1</span>;
+                    result = (sublen &gt; result ? result : sublen);
+                    <span class="hljs-keyword">break</span>; <span class="hljs-comment">//找的最小，一找到直接break</span>
+                &#125;
+            &#125;
         &#125;
-        <span class="hljs-keyword">if</span> (lnum &gt;= rnum) <span class="hljs-keyword">continue</span>;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        <span class="hljs-comment">// 如果result没被更新的话，就返回0，说明没有符合条件的子序列</span>
+        <span class="hljs-keyword">return</span> result == nums.length + <span class="hljs-number">1</span> ? <span class="hljs-number">0</span> : result;
     &#125;
-    <span class="hljs-keyword">return</span> lnum == rnum;
 &#125;</code></pre>
 
-<p>这里 <code>rnum</code> 变量 可以不需要，进行优化</p>
-<ul>
-<li>碰到左括号 <code>+ 1</code> ，碰到右括号 <code>-1</code> ===&gt; <strong>这就是栈呀！！！ <code>lnum</code>就是栈顶指针，+1代表入栈，-1代表出栈</strong></li>
-</ul>
-<p>即栈可以处理具有<strong>完全包含关系</strong>的问题</p>
-<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203231532815.png" srcset="/img/loading.gif" alt="image-20220323153258704"></p>
-<p><strong>解法</strong></p>
+
+
+<h2 id="2-滑动窗口"><a href="#2-滑动窗口" class="headerlink" title="2.滑动窗口"></a>2.滑动窗口</h2><p>就是不断的调节子序列的<strong>起始位置和终止位置</strong>，从而得出我们要想的结果。</p>
 <pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isValid</span><span class="hljs-params">(String s)</span> </span>&#123;
-        <span class="hljs-comment">//声明一个stack</span>
-        Stack&lt;Character&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;Character&gt;();
-        <span class="hljs-comment">// 遍历s中所有的字符</span>
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> c : s.toCharArray()) &#123;
-            <span class="hljs-keyword">if</span> ( c == <span class="hljs-string">&#x27;(&#x27;</span>) stack.push(<span class="hljs-string">&#x27;)&#x27;</span>);
-            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;[&#x27;</span>) stack.push(<span class="hljs-string">&#x27;]&#x27;</span>);
-            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;&#123;&#x27;</span>) stack.push(<span class="hljs-string">&#x27;&#125;&#x27;</span>);
-            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( stack.isEmpty() || c != stack.pop()) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">minSubArrayLen</span><span class="hljs-params">(<span class="hljs-keyword">int</span> target, <span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> result = nums.length + <span class="hljs-number">1</span>,sum = <span class="hljs-number">0</span>,sublen = <span class="hljs-number">0</span>,j = <span class="hljs-number">0</span>; <span class="hljs-comment">//j为滑动窗口的起始位置</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length;i++) &#123;
+            sum += nums[i];<span class="hljs-comment">//得到子序列和</span>
+            <span class="hljs-keyword">while</span> ( target &lt;= sum ) &#123;
+                sublen = i - j + <span class="hljs-number">1</span>;
+                result = result &lt; sublen ? result : sublen;
+                sum -= nums[j ++]; <span class="hljs-comment">//不断变更起始位置 （关键）</span>
+            &#125;
         &#125;
-        <span class="hljs-keyword">return</span> stack.isEmpty();
+        <span class="hljs-keyword">return</span> result == nums.length + <span class="hljs-number">1</span> ? <span class="hljs-number">0</span> : result;
     &#125;
 &#125;</code></pre>
 
-
-
-<blockquote>
-<p>Java语言为内置数据类型char提供了<strong>包装类Character</strong>类。</p>
-</blockquote>
-<p>三种情况:</p>
-<ul>
-<li>已经遍历完了字符串，但是栈不为空，说明有相应的左括号没有右括号来匹配，所以return false</li>
-<li>遍历字符串匹配的过程中，发现栈里没有要匹配的字符。所以return false</li>
-<li>遍历字符串匹配的过程中，栈已经为空了，没有匹配的字符了，说明右括号没有找到对应的左括号return false</li>
-</ul>
-<p><strong>如图所示</strong><img src="https://code-thinking.cdn.bcebos.com/gifs/20.%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7.gif" srcset="/img/loading.gif" alt="img"></p>
 
             </div>
             <hr>
@@ -323,7 +295,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%A0%88/">栈</a>
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E7%BB%84/">数组</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">滑动窗口</a>
                     
                   </div>
                 
@@ -336,18 +310,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/24/%E9%98%9F%E5%88%97%E5%92%8C%E6%A0%88/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">队列和栈</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/03/18/DS/">
-                        <span class="hidden-mobile">顺序表和链表</span>
+                      <a href="/2022/03/24/%E9%98%9F%E5%88%97%E5%92%8C%E6%A0%88/">
+                        <span class="hidden-mobile">队列和栈</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -569,7 +537,7 @@ show_date_time();
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "20.有效的括号&nbsp;",
+        "209.长度最小的子数组&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

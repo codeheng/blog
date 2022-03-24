@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>209.长度最小的子数组</title>
+    <link href="/2022/03/24/leetcode10/"/>
+    <url>/2022/03/24/leetcode10/</url>
+    
+    <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><blockquote><p>给定一个含有 <strong>n 个正整数</strong>的数组和一个<strong>正整数 target</strong> 。 </p><p>找出该数组中满足其和 ≥ target 的<strong>长度最小的 连续子数组</strong> [numsl, numsl+1, …, numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0 。 </p></blockquote><pre><code class="hljs shell">示例 1：输入：target = 7, nums = [2,3,1,2,4,3]输出：2解释：子数组 [4,3] 是该条件下的长度最小的子数组。示例 2：输入：target = 4, nums = [1,4,4]输出：1示例 3：输入：target = 11, nums = [1,1,1,1,1,1,1,1]输出：0</code></pre><h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><h2 id="1-暴力求解"><a href="#1-暴力求解" class="headerlink" title="1.暴力求解"></a>1.暴力求解</h2><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">minSubArrayLen</span><span class="hljs-params">(<span class="hljs-keyword">int</span> target, <span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;        <span class="hljs-comment">//result 用一个大的值，暂存,因为是要找最小的，sublen子序列长度</span>        <span class="hljs-keyword">int</span> result = nums.length + <span class="hljs-number">1</span>,sum,sublen = <span class="hljs-number">0</span>;        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length;i++) &#123;            sum = <span class="hljs-number">0</span>;            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i; j &lt; nums.length;j++) &#123;                sum += nums[j];                <span class="hljs-comment">//若子序列超过了目标值，更新result</span>                <span class="hljs-keyword">if</span> ( sum &gt;= target) &#123;                    sublen = j - i + <span class="hljs-number">1</span>;                    result = (sublen &gt; result ? result : sublen);                    <span class="hljs-keyword">break</span>; <span class="hljs-comment">//找的最小，一找到直接break</span>                &#125;            &#125;        &#125;        <span class="hljs-comment">// 如果result没被更新的话，就返回0，说明没有符合条件的子序列</span>        <span class="hljs-keyword">return</span> result == nums.length + <span class="hljs-number">1</span> ? <span class="hljs-number">0</span> : result;    &#125;&#125;</code></pre><h2 id="2-滑动窗口"><a href="#2-滑动窗口" class="headerlink" title="2.滑动窗口"></a>2.滑动窗口</h2><p>就是不断的调节子序列的<strong>起始位置和终止位置</strong>，从而得出我们要想的结果。</p><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">minSubArrayLen</span><span class="hljs-params">(<span class="hljs-keyword">int</span> target, <span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;        <span class="hljs-keyword">int</span> result = nums.length + <span class="hljs-number">1</span>,sum = <span class="hljs-number">0</span>,sublen = <span class="hljs-number">0</span>,j = <span class="hljs-number">0</span>; <span class="hljs-comment">//j为滑动窗口的起始位置</span>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length;i++) &#123;            sum += nums[i];<span class="hljs-comment">//得到子序列和</span>            <span class="hljs-keyword">while</span> ( target &lt;= sum ) &#123;                sublen = i - j + <span class="hljs-number">1</span>;                result = result &lt; sublen ? result : sublen;                sum -= nums[j ++]; <span class="hljs-comment">//不断变更起始位置 （关键）</span>            &#125;        &#125;        <span class="hljs-keyword">return</span> result == nums.length + <span class="hljs-number">1</span> ? <span class="hljs-number">0</span> : result;    &#125;&#125;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>数组</tag>
+      
+      <tag>滑动窗口</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>队列和栈</title>
     <link href="/2022/03/24/%E9%98%9F%E5%88%97%E5%92%8C%E6%A0%88/"/>
     <url>/2022/03/24/%E9%98%9F%E5%88%97%E5%92%8C%E6%A0%88/</url>
@@ -15,7 +42,7 @@
       
       <category>计算机基础</category>
       
-      <category>数据结构#</category>
+      <category>数据结构</category>
       
     </categories>
     
