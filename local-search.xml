@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>20.有效的括号</title>
+    <link href="/2022/03/23/leetcode09/"/>
+    <url>/2022/03/23/leetcode09/</url>
+    
+    <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><blockquote><p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串 s ，<strong>判断字符串是否有效</strong>。</p><p>有效字符串需满足：</p><ul><li>左括号必须用相同类型的右括号闭合。</li><li>左括号必须以正确的顺序闭合。</li></ul></blockquote><pre><code class="hljs shell">示例 1：输入：s = &quot;()&quot;输出：true示例 2：输入：s = &quot;()[]&#123;&#125;&quot;输出：true示例 3：输入：s = &quot;(]&quot;输出：false示例 4：输入：s = &quot;([)]&quot;输出：false示例 5：输入：s = &quot;&#123;[]&#125;&quot;输出：true</code></pre><p>提示：</p><ul><li>1 &lt;= s.length &lt;= 104</li><li>s 仅由括号 ‘()[]{}’ 组成    </li></ul><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><ul><li>如果只有一种括号，怎么做？</li><li>用栈？ 在简化问题中，能不能不用栈？</li></ul><p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203231502612.png" alt="image-20220323150230545"></p><p> <strong>任意位置右括号数量应 <code>&lt;=</code> 左括号数量 且 最终位置 右 <code>==</code> 左</strong></p><p>此时简化问题，故只需统计左右括号数量即可</p><pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isValid</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *s)</span> </span>&#123;    <span class="hljs-keyword">int</span> lnum = <span class="hljs-number">0</span>,rnum = <span class="hljs-number">0</span>;    <span class="hljs-keyword">int</span> len = <span class="hljs-built_in">strlen</span>(s);    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; len;i++) &#123;        <span class="hljs-keyword">switch</span> (s[i])&#123;            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;(&#x27;</span>: ++lnum;<span class="hljs-keyword">break</span>;            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;)&#x27;</span>: ++rnum;<span class="hljs-keyword">break</span>;            <span class="hljs-keyword">default</span>: <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;        &#125;        <span class="hljs-keyword">if</span> (lnum &gt;= rnum) <span class="hljs-keyword">continue</span>;        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;    &#125;    <span class="hljs-keyword">return</span> lnum == rnum;&#125;</code></pre><p>这里 <code>rnum</code> 变量 可以不需要，进行优化</p><ul><li>碰到左括号 <code>+ 1</code> ，碰到右括号 <code>-1</code> ===&gt; <strong>这就是栈呀！！！ <code>lnum</code>就是栈顶指针，+1代表入栈，-1代表出栈</strong></li></ul><p>即栈可以处理具有<strong>完全包含关系</strong>的问题</p><p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203231532815.png" alt="image-20220323153258704"></p><p><strong>解法</strong></p><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isValid</span><span class="hljs-params">(String s)</span> </span>&#123;        <span class="hljs-comment">//声明一个stack</span>        Stack&lt;Character&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;Character&gt;();        <span class="hljs-comment">// 遍历s中所有的字符</span>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> c : s.toCharArray()) &#123;            <span class="hljs-keyword">if</span> ( c == <span class="hljs-string">&#x27;(&#x27;</span>) stack.push(<span class="hljs-string">&#x27;)&#x27;</span>);            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;[&#x27;</span>) stack.push(<span class="hljs-string">&#x27;]&#x27;</span>);            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;&#123;&#x27;</span>) stack.push(<span class="hljs-string">&#x27;&#125;&#x27;</span>);            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( stack.isEmpty() || c != stack.pop()) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;        &#125;        <span class="hljs-keyword">return</span> stack.isEmpty();    &#125;&#125;</code></pre><blockquote><p>Java语言为内置数据类型char提供了<strong>包装类Character</strong>类。</p></blockquote><p>三种情况:</p><ul><li>已经遍历完了字符串，但是栈不为空，说明有相应的左括号没有右括号来匹配，所以return false</li><li>遍历字符串匹配的过程中，发现栈里没有要匹配的字符。所以return false</li><li>遍历字符串匹配的过程中，栈已经为空了，没有匹配的字符了，说明右括号没有找到对应的左括号return false</li></ul><p><strong>如图所示</strong><img src="https://code-thinking.cdn.bcebos.com/gifs/20.%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7.gif" alt="img"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>栈</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>顺序表和链表</title>
     <link href="/2022/03/18/DS/"/>
     <url>/2022/03/18/DS/</url>
