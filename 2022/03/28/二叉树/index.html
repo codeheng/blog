@@ -1,0 +1,791 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/resizeApi.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Yiheng">
+  <meta name="keywords" content="">
+  <title>二叉树 - 寻归往</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Yiheng.blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/article_img.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2022-03-28 10:03" pubdate>
+      2022年3月28日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      963 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">二叉树</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h1 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h1><p><img src="https://pic1.zhimg.com/80/v2-00eb0b393ef3b9d629d823807980f8e8_720w.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><ul>
+<li>树的结点（node）：包含一个数据元素及若干指向子树的分支；</li>
+<li>孩子结点（child node）：结点的子树的根称为该结点的孩子；</li>
+<li>双亲结点：B 结点是A 结点的孩子，则A结点是B 结点的双亲；</li>
+<li>兄弟结点：同一双亲的孩子结点；堂兄结点：同一层上结点；</li>
+<li>祖先结点: 从根到该结点的所经分支上的所有结点</li>
+<li>子孙结点：以某结点为根的子树中任一结点都称为该结点的子孙</li>
+<li>结点层：根结点的层定义为1；根的孩子为第二层结点，依此类推；</li>
+<li><strong>树的深度：树中最大的结点层</strong></li>
+<li>结点的度：结点子树的个数</li>
+<li><strong>树的度：树中最大的结点度。</strong></li>
+<li>叶子结点：也叫终端结点，是度为 0 的结点；</li>
+<li>分枝结点：度不为0的结点；</li>
+</ul>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><ul>
+<li>在二叉树中，第 <code>i</code> 层上至多有<code>2^(i-1)</code>个节点（<code>i ≥ 1</code>）</li>
+<li>深度为<code>k</code>的二叉树至多有<code>2^(k−1)</code>个节点（<code>k≥1</code>）</li>
+<li>对一棵二叉树，如果叶子节点的个数为<code>n0</code>，度为2的节点个数为<code>n2</code>，则<code>n0=n2+1</code></li>
+<li>具有<code>n</code>个节点的完全二叉树的深度为<code>⌊log2n⌋+1</code></li>
+</ul>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><pre><code class="hljs c"><span class="hljs-comment">//节点的定义</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> &#123;</span>
+    <span class="hljs-keyword">int</span> val;
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> *<span class="hljs-title">lchild</span>,*<span class="hljs-title">rchild</span>;</span>
+&#125;Node;
+<span class="hljs-comment">//树定义</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Tree</span> &#123;</span>
+    Node *root;
+    <span class="hljs-keyword">int</span> n; <span class="hljs-comment">//代表多少个结点</span>
+&#125;Tree;</code></pre>
+
+
+
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><pre><code class="hljs c"><span class="hljs-comment">//结点初始化</span>
+<span class="hljs-function">Node *<span class="hljs-title">getNewNode</span><span class="hljs-params">(<span class="hljs-keyword">int</span> val)</span> </span>&#123;
+    Node *p = (Node *) <span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(Node));
+    p-&gt;val = val;
+    p-&gt;lchild = p-&gt;rchild = <span class="hljs-literal">NULL</span>;
+    <span class="hljs-keyword">return</span> p;
+&#125;
+<span class="hljs-comment">//树初始化</span>
+<span class="hljs-function">Tree *<span class="hljs-title">getNewTree</span><span class="hljs-params">()</span> </span>&#123;
+    Tree *tree = (Tree*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(Tree));
+    tree-&gt;n = <span class="hljs-number">0</span>;
+    tree-&gt;root = <span class="hljs-literal">NULL</span>;
+    <span class="hljs-keyword">return</span> tree;
+&#125;</code></pre>
+
+
+
+<h2 id="销毁"><a href="#销毁" class="headerlink" title="销毁"></a>销毁</h2><pre><code class="hljs c"><span class="hljs-comment">//销毁节点</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">clearNode</span><span class="hljs-params">(Node *node)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;
+    clearNode(node-&gt;lchild);
+    claerNode(node-&gt;rchild);
+    <span class="hljs-built_in">free</span>(node);
+    <span class="hljs-keyword">return</span>;
+&#125;
+<span class="hljs-comment">//销毁树</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">clearTree</span><span class="hljs-params">(Tree *tree)</span> </span>&#123;
+    clearNode(tree-&gt;root);
+    <span class="hljs-built_in">free</span>(tree);
+    <span class="hljs-keyword">return</span>;
+&#125;</code></pre>
+
+
+
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><pre><code class="hljs c"><span class="hljs-comment">//输出节点</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">outputNode</span><span class="hljs-params">(Node *node)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,node-&gt;val);
+    <span class="hljs-keyword">if</span> (node-&gt;lchild == <span class="hljs-literal">NULL</span> &amp;&amp; node-&gt;rchild == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; ( &quot;</span>);
+    outputNode(node-&gt;lchild);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;,&quot;</span>);
+    outputNode(node-&gt;rchild);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; )&quot;</span>);
+    <span class="hljs-keyword">return</span>;
+&#125;
+<span class="hljs-comment">//将树转为广义表输出</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">outputTree</span><span class="hljs-params">(Tree *tree)</span> </span>&#123;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Tree(%d) = &quot;</span>,tree-&gt;n);
+    outputNode(tree-&gt;root);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
+    <span class="hljs-keyword">return</span>;
+&#125;</code></pre>
+
+
+
+<h2 id="插入节点"><a href="#插入节点" class="headerlink" title="插入节点"></a>插入节点</h2><p>插入后，树的节点肯定增加，故要利用传出参数</p>
+<pre><code class="hljs c"><span class="hljs-comment">//插入节点,ret为传出参数</span>
+<span class="hljs-function">Node *<span class="hljs-title">insertNode</span><span class="hljs-params">(Node *root,<span class="hljs-keyword">int</span> val,<span class="hljs-keyword">int</span> *ret)</span> </span>&#123;
+    <span class="hljs-comment">//若为空，创建新节点</span>
+    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) &#123;
+        *ret = <span class="hljs-number">1</span>; <span class="hljs-comment">//为1代表插入成功</span>
+        <span class="hljs-keyword">return</span> getNewNode(val); <span class="hljs-comment">//创建节点</span>
+    &#125;
+    <span class="hljs-keyword">if</span> (root-&gt;val == val) <span class="hljs-keyword">return</span> root;
+    <span class="hljs-keyword">if</span> (root-&gt;val &gt; val) root-&gt;lchild = insertNode(root-&gt;lchild,val,ret);
+    <span class="hljs-keyword">else</span> root-&gt;rchild = insertNode(root-&gt;rchild,val,ret);
+    <span class="hljs-keyword">return</span> root;
+&#125;
+<span class="hljs-comment">//在树中进行插入,即二叉排序树</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(Tree *tree,<span class="hljs-keyword">int</span> val)</span> </span>&#123;
+    <span class="hljs-keyword">int</span> flag = <span class="hljs-number">0</span>;<span class="hljs-comment">//标志位，开始为0，若成功，则将传出参数为1带回，然后自增！</span>
+    tree-&gt;root = insertNode(tree-&gt;root,val,&amp;flag);
+    tree-&gt;n += flag;<span class="hljs-comment">//将树中结点数目进行更新</span>
+    <span class="hljs-keyword">return</span>;
+&#125;</code></pre>
+
+
+
+<h2 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h2><pre><code class="hljs c"><span class="hljs-comment">//前序遍历</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">preOrderNode</span><span class="hljs-params">(Node *pNode)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (pNode == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; %d&quot;</span>,pNode-&gt;val);
+    preOrderNode(pNode-&gt;lchild);
+    preOrderNode(pNode-&gt;rchild);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">preOrder</span><span class="hljs-params">(Tree *pTree)</span> </span>&#123;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;preOrder: &quot;</span> );
+    preOrderNode(pTree-&gt;root);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
+    <span class="hljs-keyword">return</span>;
+&#125;
+<span class="hljs-comment">//中序遍历</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">inOrderNode</span><span class="hljs-params">(Node *pNode)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (pNode == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;
+    inOrderNode(pNode-&gt;lchild);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; %d&quot;</span>,pNode-&gt;val);
+    inOrderNode(pNode-&gt;rchild);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">inOrder</span><span class="hljs-params">(Tree *pTree)</span> </span>&#123;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;inOrder: &quot;</span> );
+    inOrderNode(pTree-&gt;root);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
+    <span class="hljs-keyword">return</span>;
+&#125;
+<span class="hljs-comment">//后序遍历</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">postOrderNode</span><span class="hljs-params">(Node *pNode)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (pNode ==<span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;
+    postOrderNode(pNode-&gt;lchild);
+    postOrderNode(pNode-&gt;rchild);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; %d&quot;</span>,pNode-&gt;val);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">postOrder</span><span class="hljs-params">(Tree *pTree)</span> </span>&#123;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;postOrder: &quot;</span> );
+    postOrderNode(pTree-&gt;root);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
+    <span class="hljs-keyword">return</span>;
+&#125;</code></pre>
+
+
+
+<h2 id="main测试"><a href="#main测试" class="headerlink" title="main测试"></a>main测试</h2><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;time.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    srand(time(<span class="hljs-number">0</span>));
+    Tree *tree = getNewTree(); <span class="hljs-comment">//初始化树</span>
+    <span class="hljs-comment">//共五个节点，利用随机数生成</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>;i++) &#123;
+        <span class="hljs-keyword">int</span> val = rand() % <span class="hljs-number">100</span>;
+        insert(tree,val); <span class="hljs-comment">//插入节点</span>
+        outputTree(tree);
+    &#125;
+    preOrder(tree); <span class="hljs-comment">//前序</span>
+    inOrder(tree); <span class="hljs-comment">//中序</span>
+    postOrder(tree); <span class="hljs-comment">//后序</span>
+    clearTree(tree); <span class="hljs-comment">//销毁</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+
+<p>运行如图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203291011528.png" srcset="/img/loading.gif" alt="image-20220329101143472"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/03/29/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Mysql</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/25/leetcode11/">
+                        <span class="hidden-mobile">53.最大子数组和</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    function loadGitalk() {
+      addScript('https://cdn.staticfile.org/blueimp-md5/2.13.0/js/md5.min.js');
+      addScript('https://cdn.staticfile.org/gitalk/1.6.2/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: 'a6ecdddb59c8bed4c4e0',
+          clientSecret: 'deecdd08fa166e81db2222df7514d6c2d2f357a0',
+          repo: 'codeheng.github.io',
+          owner: 'codeheng',
+          admin: ["codeheng"],
+          id: md5(location.pathname),
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    }
+    waitElementVisible('gitalk-container', loadGitalk);
+  </script>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="http://cslearner.cn/" target="_blank" rel="nofollow noopener"><span>CSlearner</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">京ICP证123456号</a>
+    
+      <a
+        href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+        rel="nofollow noopener"
+        class="beian-police"
+        target="_blank"
+      >
+        <span class="beian-police-sep">&nbsp;|&nbsp;</span>
+        
+          <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon" />
+        
+        <span>京公网安备12345678号</span>
+      </a>
+     
+  </div>
+
+
+
+    我在次已等候你:
+<span id="momk"></span>
+<script language=javascript>
+function show_date_time(){
+  window.setTimeout("show_date_time()", 1000);
+  BirthDay=new Date("08-09-2020 20:00:00");//建站日期
+  today=new Date();
+  timeold=(today.getTime()-BirthDay.getTime());
+  sectimeold=timeold/1000
+  secondsold=Math.floor(sectimeold);
+  msPerDay=24*60*60*1000
+  e_daysold=timeold/msPerDay
+  daysold=Math.floor(e_daysold);
+  e_hrsold=(daysold-e_daysold)*-24;
+  hrsold=Math.floor(e_hrsold);
+  e_minsold=(hrsold-e_hrsold)*-60;
+  minsold=Math.floor((hrsold-e_hrsold)*-60);
+  seconds=Math.floor((minsold-e_minsold)*-60);
+  momk.innerHTML=daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒" ;
+}
+show_date_time();
+</script>
+<style>
+#momk{animation:change 10s infinite;font-weight:800; }
+@keyframes change{0%{color:#5cb85c;}25%{color:#556bd8;}50%{color:#e40707;}75%{color:#66e616;}100% {color:#67bd31;}}
+</style>
+
+    <i class="fa fa-area-chart"></i>
+    <span class="post-count">总字数统计：76.2k</span>
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "二叉树&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<script type="text/javascript" src="\js\FunnyTitle.js"></script>
