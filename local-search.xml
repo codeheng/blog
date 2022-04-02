@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>8.堆排序</title>
+    <link href="/2022/04/02/8%E5%A0%86%E6%8E%92%E5%BA%8F/"/>
+    <url>/2022/04/02/8%E5%A0%86%E6%8E%92%E5%BA%8F/</url>
+    
+    <content type="html"><![CDATA[<p>利用<strong>大根堆</strong>或者<strong>小根堆</strong> 进行排序</p><ul><li>大根堆，每次弹出最大值到最后，故最终<strong>从小到大排序</strong></li><li>小根堆，每次弹出最小值到最后，故最终<strong>从大到小</strong>排序</li></ul><p>因为每次弹出后，需要进行<strong>向下调整</strong>，使其再次满足树的条件</p><p><strong>封装对树的向下调整方法</strong></p><pre><code class="hljs c"><span class="hljs-comment">//对有n个元素的arr数组的index位置进行向下调整</span><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">downUpdate</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr,<span class="hljs-keyword">int</span> n,<span class="hljs-keyword">int</span> index)</span> </span>&#123;    <span class="hljs-comment">//若有子节点，则进行调整</span>    <span class="hljs-keyword">while</span> ( (index &lt;&lt; <span class="hljs-number">1</span>) &lt;= n ) &#123;        <span class="hljs-comment">//记录要调整的位置,左，右</span>        <span class="hljs-keyword">int</span> temp = index,l = index &lt;&lt; <span class="hljs-number">1</span>,r = index &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>;        <span class="hljs-comment">//建立大根堆，找最大的==&gt; 左右 分别与根比较</span>        <span class="hljs-keyword">if</span> (arr[l] &gt; arr[temp]) temp = l;        <span class="hljs-keyword">if</span> (r &lt;= n &amp;&amp; arr[r] &gt; arr[temp]) temp = r;        <span class="hljs-keyword">if</span> (index == temp) <span class="hljs-keyword">break</span>;        <span class="hljs-comment">//进行对应交换</span>        swap(arr[temp],arr[index]);        <span class="hljs-comment">//将根index重新指向</span>        index = temp;    &#125;    <span class="hljs-keyword">return</span>;&#125;</code></pre><p><strong>建堆，进行堆排序</strong></p><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">heap_sort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr,<span class="hljs-keyword">int</span> n)</span> </span>&#123;    <span class="hljs-comment">//保证下标从1开始,小tips，此时原先0位置需要arr[1]才可以访问</span>    arr -= <span class="hljs-number">1</span>;    <span class="hljs-comment">//调整结点，建立大根堆</span>    <span class="hljs-comment">//找到数组中，最后一个有元素的位置,即n/2,然后开始调整</span>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n &gt;&gt;<span class="hljs-number">1</span>;i &gt;= <span class="hljs-number">1</span>;i--)&#123;        downUpdate(arr,n,i);    &#125;    <span class="hljs-comment">//进行排序,n次最大值弹出，向下调整</span>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n;i &gt; <span class="hljs-number">1</span> ; i--) &#123;        <span class="hljs-comment">//最后元素和顶部元素交换</span>        swap(arr[<span class="hljs-number">1</span>],arr[i]);         <span class="hljs-comment">//调整arr数组，还剩i-1,对index=1位置，即堆顶进行调整</span>        downUpdate(arr,i<span class="hljs-number">-1</span>,<span class="hljs-number">1</span>);    &#125;    <span class="hljs-keyword">return</span>;&#125;</code></pre><p><strong>输出</strong></p><pre><code class="hljs c"><span class="hljs-comment">//输出数组</span><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">output</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> len)</span> </span>&#123;    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;arr[%d]: &quot;</span>,len);    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; len;i++) &#123;        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>, * (arr + i));    &#125;    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);&#125;</code></pre><p>main测试</p><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;time.h&gt;</span></span><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX_OP 20</span><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> swap(a,b) &#123; \</span>    __typeof(a) _temp = a; \    a = b,b = _temp; \&#125;<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;    srand(time(<span class="hljs-number">0</span>));     <span class="hljs-comment">//对数组分配空间</span>    <span class="hljs-keyword">int</span> *arr = (<span class="hljs-keyword">int</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>) * MAX_OP);     <span class="hljs-comment">//随机对数组元素赋值</span>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; MAX_OP;i++) &#123;        arr[i] = rand() % <span class="hljs-number">100</span>;    &#125;     <span class="hljs-comment">//输出长度为MAX_OP的数组arr</span>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;原数组:\n&quot;</span>);    output(arr,MAX_OP);     <span class="hljs-comment">//进行堆排序</span>    heap_sort(arr,MAX_OP);    <span class="hljs-comment">//排序完再进行输出</span>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;堆排序后：\n&quot;</span>);    output(arr,MAX_OP);    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;&#125;</code></pre><p>运行如图</p><p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202204021111390.png" alt="image-20220402111112351"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>计算机基础</category>
+      
+      <category>数据结构</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>堆排序</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>二叉树专题</title>
     <link href="/2022/03/31/leetcode12/"/>
     <url>/2022/03/31/leetcode12/</url>

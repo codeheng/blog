@@ -176,6 +176,64 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
+        <a href="/2022/04/02/8%E5%A0%86%E6%8E%92%E5%BA%8F/">8.堆排序</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/02/8%E5%A0%86%E6%8E%92%E5%BA%8F/">
+          
+          
+            
+          
+          利用大根堆或者小根堆 进行排序
+
+大根堆，每次弹出最大值到最后，故最终从小到大排序
+小根堆，每次弹出最小值到最后，故最终从大到小排序
+
+因为每次弹出后，需要进行向下调整，使其再次满足树的条件
+封装对树的向下调整方法
+//对有n个元素的arr数组的index位置进行向下调整
+void downUpdate(int *arr,int n,int index) &#123;
+    //若有子节点，则进
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-02 10:51" pubdate>
+              2022-04-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/">堆排序</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
         <a href="/2022/03/31/leetcode12/">二叉树专题</a>
       </h1>
 
@@ -695,62 +753,6 @@ SQL层结构
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2022/03/24/leetcode10/">209.长度最小的子数组</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/03/24/leetcode10/">
-          
-          
-            
-          
-          题目
-给定一个含有 n 个正整数的数组和一个正整数 target 。 
-找出该数组中满足其和 ≥ target 的长度最小的 连续子数组 [numsl, numsl+1, …, numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0 。 
-
-示例 1：
-输入：target = 7, nums = [2,3,1,2,4,3]
-输出：2
-解释：子数组 [4,3] 是该条件
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-24 19:13" pubdate>
-              2022-03-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/LeetCode/">LeetCode</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%95%B0%E7%BB%84/">数组</a>
-            
-              <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">滑动窗口</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
@@ -870,7 +872,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：77.6k</span>
+    <span class="post-count">总字数统计：78.2k</span>
 
     
   </div>
