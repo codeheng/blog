@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      852 字
+      1.4k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      21
        分钟
     </span>
   
@@ -259,22 +259,7 @@
 <li><code>addAll</code> 是传入一个List，将此List中的<strong>所有元素</strong>加入到当前List中，也就是当前List会增加的元素个数为传入的List的大小</li>
 </ul>
 <h4 id="法二"><a href="#法二" class="headerlink" title="法二"></a>法二</h4><p><strong>非递归遍历</strong></p>
-<pre><code class="hljs java"><span class="hljs-comment">/**</span>
-<span class="hljs-comment"> * Definition for a binary tree node.</span>
-<span class="hljs-comment"> * public class TreeNode &#123;</span>
-<span class="hljs-comment"> *     int val;</span>
-<span class="hljs-comment"> *     TreeNode left;</span>
-<span class="hljs-comment"> *     TreeNode right;</span>
-<span class="hljs-comment"> *     TreeNode() &#123;&#125;</span>
-<span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span>
-<span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span>
-<span class="hljs-comment"> *         this.val = val;</span>
-<span class="hljs-comment"> *         this.left = left;</span>
-<span class="hljs-comment"> *         this.right = right;</span>
-<span class="hljs-comment"> *     &#125;</span>
-<span class="hljs-comment"> * &#125;</span>
-<span class="hljs-comment"> */</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
     <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title">preorderTraversal</span><span class="hljs-params">(TreeNode root)</span> </span>&#123;
         List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
         <span class="hljs-comment">//非递归</span>
@@ -339,22 +324,7 @@
 
 
 <h4 id="法二-1"><a href="#法二-1" class="headerlink" title="法二"></a>法二</h4><p>非递归，利用栈</p>
-<pre><code class="hljs java"><span class="hljs-comment">/**</span>
-<span class="hljs-comment"> * Definition for a binary tree node.</span>
-<span class="hljs-comment"> * public class TreeNode &#123;</span>
-<span class="hljs-comment"> *     int val;</span>
-<span class="hljs-comment"> *     TreeNode left;</span>
-<span class="hljs-comment"> *     TreeNode right;</span>
-<span class="hljs-comment"> *     TreeNode() &#123;&#125;</span>
-<span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span>
-<span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span>
-<span class="hljs-comment"> *         this.val = val;</span>
-<span class="hljs-comment"> *         this.left = left;</span>
-<span class="hljs-comment"> *         this.right = right;</span>
-<span class="hljs-comment"> *     &#125;</span>
-<span class="hljs-comment"> * &#125;</span>
-<span class="hljs-comment"> */</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
     <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title">inorderTraversal</span><span class="hljs-params">(TreeNode root)</span> </span>&#123;
           List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
         <span class="hljs-keyword">if</span> (root == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> list;
@@ -382,7 +352,140 @@
 
 
 
-<h2 id="145-二叉树的后序遍历"><a href="#145-二叉树的后序遍历" class="headerlink" title="[145]二叉树的后序遍历"></a>[145]二叉树的后序遍历</h2>
+<h2 id="145-二叉树的后序遍历"><a href="#145-二叉树的后序遍历" class="headerlink" title="[145]二叉树的后序遍历"></a>[145]二叉树的后序遍历</h2><h3 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a>题目</h3><blockquote>
+<p>给你一棵二叉树的根节点 <code>root</code> ，返回其节点值的 <strong>后序遍历</strong></p>
+</blockquote>
+<pre><code class="hljs shell">示例1
+输入：root = [1,null,2,3]
+输出：[3,2,1]
+
+示例 2：
+输入：root = []
+输出：[]
+
+示例 3：
+输入：root = [1]
+输出：[1]</code></pre>
+
+
+
+<h3 id="解法-2"><a href="#解法-2" class="headerlink" title="解法"></a>解法</h3><h4 id="法一-2"><a href="#法一-2" class="headerlink" title="法一"></a>法一</h4><p>递归</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * Definition for a binary tree node.</span>
+<span class="hljs-comment"> * public class TreeNode &#123;</span>
+<span class="hljs-comment"> *     int val;</span>
+<span class="hljs-comment"> *     TreeNode left;</span>
+<span class="hljs-comment"> *     TreeNode right;</span>
+<span class="hljs-comment"> *     TreeNode() &#123;&#125;</span>
+<span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span>
+<span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span>
+<span class="hljs-comment"> *         this.val = val;</span>
+<span class="hljs-comment"> *         this.left = left;</span>
+<span class="hljs-comment"> *         this.right = right;</span>
+<span class="hljs-comment"> *     &#125;</span>
+<span class="hljs-comment"> * &#125;</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title">postorderTraversal</span><span class="hljs-params">(TreeNode root)</span> </span>&#123;
+        List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        <span class="hljs-keyword">if</span> (root == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> list; 
+        <span class="hljs-comment">//递归  (左==&gt; 右 ==&gt; 根)</span>
+        list.addAll(postorderTraversal(root.left));
+        list.addAll(postorderTraversal(root.right));
+        list.add(root.val);
+        <span class="hljs-keyword">return</span> list;   
+    &#125;
+&#125;</code></pre>
+
+<h4 id="法二-2"><a href="#法二-2" class="headerlink" title="法二"></a>法二</h4><p>非递归</p>
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title">postorderTraversal</span><span class="hljs-params">(TreeNode root)</span> </span>&#123;
+        List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        <span class="hljs-keyword">if</span> (root == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> list;
+        <span class="hljs-comment">//左 右 根 &lt;==&gt; 访问 根 右 左 然后反转 (和前序异曲同工！)</span>
+        Stack&lt;TreeNode&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();
+        <span class="hljs-comment">//若根不为null或栈不空，一直循环</span>
+        <span class="hljs-keyword">while</span> (root != <span class="hljs-keyword">null</span> || !stack.isEmpty()) &#123;
+            <span class="hljs-comment">//若根不为空，则一直向右走</span>
+            <span class="hljs-keyword">while</span> (root != <span class="hljs-keyword">null</span>) &#123;
+                list.add(root.val);
+                stack.push(root);
+                root = root.right;
+            &#125;
+            TreeNode node = stack.pop();
+            root = node.left;
+        &#125;
+        <span class="hljs-comment">//进行反转</span>
+        Collections.reverse(list);
+        <span class="hljs-keyword">return</span> list;
+    &#125;
+&#125;</code></pre>
+
+
+
+<h2 id="前中后序非递归总结"><a href="#前中后序非递归总结" class="headerlink" title="前中后序非递归总结"></a>前中后序非递归总结</h2><p><strong>前序</strong>  ： 根==&gt; 左==&gt; 右 </p>
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title">preorderTraversal</span><span class="hljs-params">(TreeNode root)</span> </span>&#123;
+        List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        Stack&lt;TreeNode&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();
+        <span class="hljs-comment">//根不空，或栈不空 循环遍历</span>
+        <span class="hljs-keyword">while</span> (root != <span class="hljs-keyword">null</span> || !stack.isEmpty()) &#123;
+            <span class="hljs-comment">//根不空时，先将根的值放到容器中，根压栈，然后向左子树走</span>
+            <span class="hljs-keyword">while</span> (root != <span class="hljs-keyword">null</span>) &#123;
+                list.add(root.val);
+                stack.push(root);
+                root = root.left;
+            &#125;
+            <span class="hljs-comment">//当走到空的时候，没法继续走了，弹栈，访问右边</span>
+            TreeNode node = stack.pop();
+            root = node.right;
+        &#125;
+        <span class="hljs-keyword">return</span> list;
+    &#125;
+&#125;</code></pre>
+
+<p>**中序 **： 左 ==&gt; 根==&gt; 右</p>
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title">inorderTraversal</span><span class="hljs-params">(TreeNode root)</span> </span>&#123;
+        List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;()
+        Stack&lt;TreeNode&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();
+        <span class="hljs-comment">//进行循环</span>
+        <span class="hljs-keyword">while</span> (root != <span class="hljs-keyword">null</span> || !stack.isEmpty()) &#123;
+            <span class="hljs-comment">//若根不空，先入栈，访问左边</span>
+            <span class="hljs-keyword">while</span> (root != <span class="hljs-keyword">null</span>) &#123;
+                stack.push(root);
+                root = root.left;
+            &#125;
+            <span class="hljs-comment">//此时左边访问完毕，再弹栈，将对应值放入容器，再访问右子树</span>
+            root = stack.pop();
+            list.add(root.val); <span class="hljs-comment">//添加到容器中</span>
+            root = root.right;
+        &#125;
+        <span class="hljs-keyword">return</span> list;
+    &#125;
+&#125;</code></pre>
+
+<p>后序： 左 ==&gt; 右 ==&gt; 根</p>
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title">postorderTraversal</span><span class="hljs-params">(TreeNode root)</span> </span>&#123;
+        List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        Stack&lt;TreeNode&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();
+        <span class="hljs-comment">//左 右 根 &lt;== 先访问 根 右 左 反转 (即和前序异曲同工)</span>
+        <span class="hljs-keyword">while</span> (root != <span class="hljs-keyword">null</span> || !stack.isEmpty()) &#123;
+            <span class="hljs-keyword">while</span> (root != <span class="hljs-keyword">null</span>) &#123;
+                list.add(root.val);
+                stack.push(root);
+                root = root.right;<span class="hljs-comment">//和前序的差异，前序是向左走</span>
+            &#125;
+            TreeNode node = stack.pop();
+            root = node.left;<span class="hljs-comment">//和前序的差异</span>
+        &#125;
+        Collections.reverse(list);
+        <span class="hljs-keyword">return</span> list;
+    &#125;
+&#125;</code></pre>
+
+<h2 id="173-二叉搜索树迭代器"><a href="#173-二叉搜索树迭代器" class="headerlink" title="[173]二叉搜索树迭代器"></a>[173]二叉搜索树迭代器</h2>
             </div>
             <hr>
             <div>
@@ -583,7 +686,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：78.2k</span>
+    <span class="post-count">总字数统计：79.8k</span>
 
     
   </div>

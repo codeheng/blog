@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Yiheng">
   <meta name="keywords" content="">
-  <title>人工智能基础 - 寻归往</title>
+  <title>9排序 - 寻归往</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -162,8 +162,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2022-03-03 11:19" pubdate>
-      2022年3月3日 上午
+    <time datetime="2022-04-02 20:30" pubdate>
+      2022年4月2日 晚上
     </time>
   </div>
 
@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.9k 字
+      1k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      20
+      16
        分钟
     </span>
   
@@ -213,159 +213,192 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">人工智能基础</h1>
+            <h1 style="display: none">9排序</h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="人工智能基础"><a href="#人工智能基础" class="headerlink" title="人工智能基础"></a>人工智能基础</h1><p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203031121734.png" srcset="/img/loading.gif" alt="image-20220303112113639"></p>
-<p><strong>机器学习是一种功能，方法，或者说是一种算法，能赋予机器进行学习的能力，从而使机器完成一些通过编程无法直接实现的功能</strong></p>
-<blockquote>
-<p>机器学习是人工智能的核心</p>
-</blockquote>
-<p>即，<strong>利用大量数据训练出一个最优模型</strong>，然后利用此模型预测出其他数据的一种方法</p>
-<blockquote>
-<p>Q : 如何让计算机识别是一只狗还是一只猫呢？</p>
-<p>特征！！ + 大量数据训练 &lt;===&gt;  类比认识新朋友，记住特征，也要常联系，多见面 </p>
-</blockquote>
-<p><strong>人工智能的发展</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203061450799.png" srcset="/img/loading.gif" alt="image-20220306144955539"></p>
-<p>辛顿(<code>BP算法</code> = 误差反向传播)</p>
-<p>杨立昆(<code>CNN</code> = 卷积神经网络)</p>
-<h2 id="机器学习形式"><a href="#机器学习形式" class="headerlink" title="机器学习形式"></a>机器学习形式</h2><ul>
-<li><strong>监督学习</strong> 训练数据包括正确的结果<ul>
-<li>线性回归，逻辑回归，决策树，神经网络，卷积神经网络，循环神经网络等</li>
-</ul>
-</li>
-<li><strong>无监督学习</strong> 训练数据不包括正确的结果<ul>
-<li>聚类算法</li>
-</ul>
-</li>
-<li><strong>半监督学习</strong> 训练数据包含少量正确的结果</li>
-<li><strong>强化学习</strong>   根据每次结果收获的奖惩进行学习，根据结果实现优化</li>
-</ul>
-<h2 id="常用术语"><a href="#常用术语" class="headerlink" title="常用术语"></a>常用术语</h2><ol>
-<li><strong>模型</strong> ==&gt; 股票预测模型……..房价，天气，</li>
-<li>数据集  ( 训练集 和 测试集 )</li>
-<li>样本&amp;特征</li>
-<li>向量和矩阵</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202202281439650.png" srcset="/img/loading.gif" alt="image-20220228143911448"></p>
-<p><strong>假设函数</strong> y = f(x)</p>
-<p><strong>损失函数</strong>L(x) 又称目标函数,此时的x为假设函数得出的y，<strong>返回的越小则表示预测越接近</strong>“真实值”</p>
-<p><strong>优化方法</strong></p>
-<ul>
-<li>梯度下降法</li>
-<li>牛顿方与拟牛顿法</li>
-<li>共轭梯度法</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202202281444796.png" srcset="/img/loading.gif" alt="image-20220228144437739"></p>
-<p><strong>拟合&amp;过拟合&amp;欠拟合</strong></p>
-<blockquote>
-<p>拟合形象的说，拟合就是把平面上一系列的点，用一条光滑的曲线连接起来。因为这条曲线有无数种可能，从而有各种拟合方法</p>
-</blockquote>
-<blockquote>
-<p><strong>过拟合</strong>是指训练误差和测试误差之间的差距太大。换句换说，就是模型复杂度高于实际问题，<strong>模型在训练集上表现很好，但在测试集上却表现很差</strong> </p>
-<p><strong>为什么会出现过拟合现象？</strong></p>
-<p>造成原因主要有以下几种：<br>1、<strong>训练数据集样本单一，样本不足</strong>。如果训练样本只有负样本，然后那生成的模型去预测正样本，这肯定预测不准。所以训练样本要尽可能的全面，覆盖所有的数据类型。<br>2、<strong>训练数据中噪声干扰过大</strong>。噪声指训练数据中的干扰数据。过多的干扰会导致记录了很多噪声特征，忽略了真实输入和输出之间的关系。<br>3、<strong>模型过于复杂。</strong>模型太复杂，已经能够“死记硬背”记下了训练数据的信息，但是遇到没有见过的数据的时候不能够变通，泛化能力太差。我们希望模型对不同的模型都有稳定的输出。模型太复杂是过拟合的重要因素。</p>
-</blockquote>
-<blockquote>
-<p><strong>欠拟合</strong>是指模型不能在训练集上获得足够低的误差。换句换说，就是模型复杂度低，模型在训练集上就表现很差，没法学习到数据背后的规律。</p>
-<p>主要原因：<strong>没有选择好合适的特征值</strong></p>
-<p>欠拟合基本上都会发生在训练刚开始的时候，经过不断训练之后欠拟合应该不怎么考虑了。但是如果真的还是存在的话，可以通过<strong>增加网络复杂度</strong>或者在模型中<strong>增加特征</strong>，这些都是很好解决欠拟合的方法。</p>
-</blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202202281451431.png" srcset="/img/loading.gif" alt="image-20220228145117375"></p>
-<p><strong>神经网络</strong></p>
-<p> <code>M-P模型 </code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203061513084.png" srcset="/img/loading.gif" alt="image-20220306151322012"></p>
-<p><strong>多层神经元</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203061516750.png" srcset="/img/loading.gif" alt="image-20220306151656644"></p>
-<h2 id="人工智能框架"><a href="#人工智能框架" class="headerlink" title="人工智能框架"></a>人工智能框架</h2><p>1、Google的<code>TensorFlow</code></p>
-<p>2、Facebook的 <code>pytorch</code></p>
-<p>3、华为的<code>MindSpore</code>  </p>
-<ul>
-<li>自动并行</li>
-<li>二阶优化</li>
-<li>全场景协同</li>
-<li>信息安全性高</li>
-</ul>
-<h2 id="图像识别入门"><a href="#图像识别入门" class="headerlink" title="图像识别入门"></a>图像识别入门</h2><h3 id="视觉原理"><a href="#视觉原理" class="headerlink" title="视觉原理"></a>视觉原理</h3><p><code>神经认知模型</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203061532468.png" srcset="/img/loading.gif" alt="image-20220306153203366"></p>
-<h3 id="卷积神经网络CNN"><a href="#卷积神经网络CNN" class="headerlink" title="卷积神经网络CNN"></a>卷积神经网络CNN</h3><h4 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a><strong>卷积</strong></h4><p>利用数学方法提取出图像中的特征 </p>
-<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203311014462.png" srcset="/img/loading.gif" alt="image-20220331101432429"></p>
-<p>物理意义大概可以理解为：<strong>系统某一时刻的输出是由多个输入共同作用（叠加）的结果</strong></p>
-<p><code>卷积核</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203061539389.png" srcset="/img/loading.gif" alt="image-20220306153906228"></p>
-<p>然后不断平移卷积核,进行相对于的计算，得到<code>特征图</code></p>
-<p>数字大的很能表示之前图形的特征，即之前那个卷积核对应一个<strong>斜右下的线条</strong></p>
-<blockquote>
-<p>通过不同的<strong>卷积核</strong>，可对图像进行不同的处理，将得到不同的<strong>特征图</strong>，则知道此特征具体分布在什么位置</p>
-</blockquote>
-<h4 id="池化和激活"><a href="#池化和激活" class="headerlink" title="池化和激活"></a>池化和激活</h4><blockquote>
-<p>池化它实际上是一种形式的<strong>降采样</strong>。有多种不同形式的非线性池化函数，而其中“最大池化（Max pooling）”是最为常见的。它是将输入的图像划分为若干个矩形区域，对每个子区域输出<strong>最大值</strong></p>
-</blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203061544740.png" srcset="/img/loading.gif" alt="image-20220306154449666"></p>
-<p><code>Sigmoid</code>函数</p>
-<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203311014291.png" srcset="/img/loading.gif" alt="image-20220331101410261"></p>
-<blockquote>
-<p>Sigmoid函数是一个在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%94%9F%E7%89%A9%E5%AD%A6/1358">生物学</a>中常见的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/S%E5%9E%8B%E5%87%BD%E6%95%B0/19178062">S型函数</a>，也称为<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/S%E5%9E%8B%E7%94%9F%E9%95%BF%E6%9B%B2%E7%BA%BF/5581189">S型生长曲线</a>。 [1] 在信息科学中，由于其单增以及反函数单增等性质，**Sigmoid函数常被用作神经网络的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/2520792">激活函数</a>**，将变量映射到0,1之间</p>
-</blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203311013707.png" srcset="/img/loading.gif" alt="image-20220331101326648"></p>
-<p><strong>激活</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203061550518.png" srcset="/img/loading.gif" alt="image-20220306155053452"></p>
-<h4 id="算法、数据、算力"><a href="#算法、数据、算力" class="headerlink" title="算法、数据、算力"></a>算法、数据、算力</h4><p>人工智能处理器</p>
-<ul>
-<li><p><code>cpu</code>  中央处理器，通用性强，并行差</p>
-</li>
-<li><p><code>GPU</code> 图形处理器，互动性强，并行好</p>
-</li>
-<li><p><code>NPU</code> 神经网络处理器</p>
-</li>
-</ul>
-<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p><strong>python</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203031122108.png" srcset="/img/loading.gif" alt="image-20220303112202070"></p>
-<p>安装<code>anaconda</code> 继承了相关的工具</p>
-<p><a target="_blank" rel="noopener" href="https://www.anaconda.com/">https://www.anaconda.com/</a> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203031123783.png" srcset="/img/loading.gif" alt="image-20220303112357673"></p>
-<p>要配置环境变量</p>
-<pre><code class="hljs latex">E:<span class="hljs-tag">\<span class="hljs-name">software</span></span><span class="hljs-tag">\<span class="hljs-name">Anaconda</span></span><span class="hljs-tag">\<span class="hljs-name">Library</span></span><span class="hljs-tag">\<span class="hljs-name">bin</span></span>
-E:<span class="hljs-tag">\<span class="hljs-name">software</span></span><span class="hljs-tag">\<span class="hljs-name">Anaconda</span></span>
-E:<span class="hljs-tag">\<span class="hljs-name">software</span></span><span class="hljs-tag">\<span class="hljs-name">Anaconda</span></span><span class="hljs-tag">\<span class="hljs-name">Scripts</span></span></code></pre>
+              <h1 id="稳定排序"><a href="#稳定排序" class="headerlink" title="稳定排序"></a>稳定排序</h1><p><strong>从小到大排序</strong></p>
+<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><pre><code class="hljs c"><span class="hljs-comment">//对数组长度为n的arr排序</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insert_sort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr,<span class="hljs-keyword">int</span> n)</span> </span>&#123;
+     <span class="hljs-comment">//进行n-1轮</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;i &lt; n;i++) &#123;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i; j &gt; <span class="hljs-number">0</span> &amp;&amp; arr[j] &lt; arr[j<span class="hljs-number">-1</span>];j--) &#123;
+            swap(arr[j],arr[j<span class="hljs-number">-1</span>]);
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span>;
+&#125;</code></pre>
 
-<p><code>terminal</code> 运行</p>
-<pre><code class="hljs shell">PS C:\Windows\System32&gt; conda -V
-conda 4.10.3</code></pre>
+<h2 id="冒泡"><a href="#冒泡" class="headerlink" title="冒泡"></a>冒泡</h2><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bubble_sort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr,<span class="hljs-keyword">int</span> n)</span> </span>&#123;
+    <span class="hljs-keyword">int</span> flag = <span class="hljs-number">1</span>;<span class="hljs-comment">//用于优化冒泡</span>
+    <span class="hljs-comment">//进行n-1轮循环</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;i &lt; n &amp;&amp; flag != <span class="hljs-number">0</span>;i++) &#123;
+        flag = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>;j &lt; n-i;j++) &#123;
+            <span class="hljs-keyword">if</span> (arr[j] &lt;= arr[j+<span class="hljs-number">1</span>]) <span class="hljs-keyword">continue</span>;
+            swap(arr[j],arr[j+<span class="hljs-number">1</span>]);
+            flag ++;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span>;
+&#125;</code></pre>
 
 
 
-<p><strong>numpy(矩阵运算)</strong></p>
-<blockquote>
-<p>科学计算的基础库，提供了多维数组处理，线代代数，傅里叶变换，随机数生成等工具</p>
-</blockquote>
-<p><strong>pandas（读取文件）</strong></p>
-<blockquote>
-<p>Pandas 属于 Python 第三方数据处理库，它基于 NumPy 构建而来，主要用于数据的处理与分析。我们知道对于机器学习而言数据是尤为重要，如果没有数据就无法训练模型。Pandas 提供了一个简单高效的 DataFrame 对象（类似于电子表格），它能够完成数据的清洗、预处理以及数据可视化工作等。除此之外，Pandas 能够非常轻松地实现对任何文件格式的读写操作，比如 CSV 文件、json 文件、excel 文件。视化软件包之一，支持跨平台运行，它是 Python 常用的 2D 绘图库，同时它也提供了一部分 3D 绘图接口。Matplotlib 通常与 NumPy、Pandas 一起使用，是数据分析中不可或缺的重要工具之一。</p>
-</blockquote>
-<pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib
-<span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot <span class="hljs-keyword">as</span> plt
-%matplotlib inline
-x = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]
-y = [<span class="hljs-number">5</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>]
-<span class="hljs-comment"># 绘制连线图</span>
-plt.plot(x,y)
-plt.title(<span class="hljs-string">&#x27;y vs x&#x27;</span>)
-plt.xlabel(<span class="hljs-string">&#x27;x&#x27;</span>)
-plt.ylabel(<span class="hljs-string">&#x27;y&#x27;</span>)
-plt.show( )
+<h2 id="归并"><a href="#归并" class="headerlink" title="归并"></a>归并</h2><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">merge_sort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr,<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span> </span>&#123;
+    <span class="hljs-comment">//若元素太少，&lt; 2</span>
+    <span class="hljs-keyword">if</span> ( r - l &lt; <span class="hljs-number">1</span>) &#123;
+        <span class="hljs-comment">//此时两个元素,并且前面值大，则进行交换</span>
+        <span class="hljs-keyword">if</span> (r -l == <span class="hljs-number">1</span> &amp;&amp; arr[l] &gt; arr[r]) swap(arr[l],arr[r]);
+        <span class="hljs-keyword">return</span>;
+    &#125;
+    <span class="hljs-comment">//保存中间结点</span>
+    <span class="hljs-keyword">int</span> mid = (l+r) &gt;&gt; <span class="hljs-number">1</span>;
+    <span class="hljs-comment">//两边分别递归，进行排序</span>
+    merge_sort(arr,l,mid);
+    merge_sort(arr,mid+<span class="hljs-number">1</span>,r);
+    <span class="hljs-comment">//递归排序完，两两有序，进行归并过程</span>
+    <span class="hljs-comment">//开辟新空间</span>
+    <span class="hljs-keyword">int</span> *temp = (<span class="hljs-keyword">int</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>) * (r-l+<span class="hljs-number">1</span>));
+    <span class="hljs-comment">//p1指向第一个数组第一个位置,p2指向归并的第二个数组的第一个位置，k指向新开辟的的第一个位置</span>
+    <span class="hljs-keyword">int</span> p1 = l,p2 = mid + <span class="hljs-number">1</span>,k = <span class="hljs-number">0</span>;
+    <span class="hljs-comment">//当一个数组或者第二个数组有元素时,进行循环</span>
+    <span class="hljs-keyword">while</span> (p1 &lt;= mid || p2 &lt;= r) &#123;
+        <span class="hljs-comment">//归并，放到临时存储区</span>
+        <span class="hljs-comment">//当 第二个数组为空，或者第一个不空且满足第一个值小 p1指向进行赋值，否则p2指向赋值</span>
+        <span class="hljs-keyword">if</span> (p2 &gt; r || p1 &lt;= mid &amp;&amp; arr[p1] &lt;= arr[p2])  &#123;
+            temp[k++] = arr[p1++];
+        &#125;
+        <span class="hljs-keyword">else</span> &#123;
+            temp[k++] = arr[p2++];
+        &#125;
+    &#125;
+    <span class="hljs-comment">//此时已有序，再将数据拷贝到原数组中</span>
+    <span class="hljs-comment">//复制temp指向内存内容的前 sizeof(int)*(r-l+1) 个字节到arr+l所指的内存地址上</span>
+    <span class="hljs-built_in">memcpy</span>(arr+l,temp,<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>) * (r-l+<span class="hljs-number">1</span>));
 
-<span class="hljs-comment">#绘制散点图</span>
-plt.scatter(x,y)
-plt.show( )</code></pre>
+&#125; </code></pre>
 
-<p><strong>Scikit-Learn（算法库）</strong></p>
-<p>（官网：<a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/%EF%BC%89">https://scikit-learn.org/stable/）</a></p>
-<blockquote>
-<p>它是一个基于 Python 语言的机器学习算法库。Scikit-Learn 主要用 Python 语言开发，建立在 NumPy、Scipy 与 Matplotlib 之上，它提供了大量机器学习算法接口（API），因此你可以把它看做一本“百科全书”。由于 Scikit-Learn 的存在极大地提高了机器学习的效率，让开发者无须关注数学层面的公式、计算过程，有更多的更多的时间与精力专注于业务层面，从而解决实际的应用问题。</p>
-<p>Scikit-Learn 的基本功能主要被分为六大部分：<strong>分类，回归，聚类，数据降维，模型选择和数据预处理</strong></p>
-</blockquote>
+<h2 id="main测试"><a href="#main测试" class="headerlink" title="main测试"></a>main测试</h2><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;time.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX_LEN 20</span>
+<span class="hljs-comment">//异或此方式适用于两个是不同元素</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> swap(a,b) &#123; \</span>
+  a ^= b;b ^= a; a ^= b;\
+&#125;
+
+<span class="hljs-comment">//输出数组</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">output</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> len)</span> </span>&#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; len;i++) &#123;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>, * (arr + i));
+    &#125;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
+    <span class="hljs-keyword">return</span>;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    srand(time(<span class="hljs-number">0</span>));
+    <span class="hljs-comment">//定义一个长度为MAX_LEN的数组arr</span>
+    <span class="hljs-keyword">int</span> arr[MAX_LEN];
+    <span class="hljs-comment">//对元素随机赋值 (0-100)</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; MAX_LEN;i++) &#123;
+        arr[i] = rand() % <span class="hljs-number">100</span>;
+    &#125;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;原数组：&quot;</span>);
+    output(arr,MAX_LEN);
+
+    insert_sort(arr,MAX_LEN);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;插入排序：&quot;</span>);
+    output(arr,MAX_LEN);
+
+    bubble_sort(arr,MAX_LEN);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;冒泡排序：&quot;</span>);
+    output(arr,MAX_LEN);
+
+    merge_sort(arr,<span class="hljs-number">0</span>,MAX_LEN<span class="hljs-number">-1</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;归并排序: &quot;</span>);
+    output(arr,MAX_LEN);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+
+<p>运行如图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202204022104919.png" srcset="/img/loading.gif" alt="image-20220402210438861"></p>
+<h1 id="非稳定排序"><a href="#非稳定排序" class="headerlink" title="非稳定排序"></a>非稳定排序</h1><h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">select_sort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr,<span class="hljs-keyword">int</span> n)</span> </span>&#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; n<span class="hljs-number">-1</span>;i++) &#123;
+        <span class="hljs-keyword">int</span> index = i;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i+<span class="hljs-number">1</span>;j &lt; n;j++) &#123;
+            <span class="hljs-keyword">if</span> (arr[index] &gt; arr[j]) index = j;
+        &#125;
+        swap(arr[i],arr[index]);
+    &#125;
+    <span class="hljs-keyword">return</span>;
+&#125;</code></pre>
+
+
+
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">quick_sort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr,<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (r &lt;= l) <span class="hljs-keyword">return</span>;
+    <span class="hljs-comment">//x指向头，y指向尾，index为基准值，选择第一个为基准</span>
+    <span class="hljs-keyword">int</span> x = l,y = r,index = arr[l]; 
+    <span class="hljs-comment">//若左边位置 &lt; 右边位置 一直循环</span>
+    <span class="hljs-keyword">while</span> (x &lt; y) &#123;
+        <span class="hljs-comment">//循环进行寻找，至 右边对应值&gt;基准值,则y减小</span>
+        <span class="hljs-keyword">while</span> (x &lt; y &amp;&amp; arr[y] &gt;= index) --y;
+        <span class="hljs-comment">//此时若满足 左 &lt; 右,则将右边值放到左边，则x对应位置自增</span>
+        <span class="hljs-keyword">if</span> (x &lt; y) arr[x+=] = arr[y];
+        <span class="hljs-comment">//同理操作左边</span>
+        <span class="hljs-keyword">while</span> (x &lt; y &amp;&amp; arr[x] &lt;= index) ++x;
+        <span class="hljs-keyword">if</span> (x &lt; y) arr[y--] = arr[x];
+    &#125;
+    <span class="hljs-comment">//此时头尾相交,赋值，然后左右分别进行快排</span>
+    arr[x] = index;
+    quick_sort(arr,l,x<span class="hljs-number">-1</span>);
+    quick_sort(arr,x+<span class="hljs-number">1</span>,r);
+    <span class="hljs-keyword">return</span>;
+&#125;</code></pre>
+
+<h2 id="main测试-1"><a href="#main测试-1" class="headerlink" title="main测试"></a>main测试</h2><pre><code class="hljs c"><span class="hljs-meta"># <span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;time.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX_LEN 20</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> swap(a,b) &#123; \</span>
+    __typeof(a) _temp = a; \
+    a = b,b = _temp; \
+&#125;
+
+<span class="hljs-comment">//输出数组</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">output</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> len)</span> </span>&#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; len;i++) &#123;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>, * (arr + i));
+    &#125;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
+    <span class="hljs-keyword">return</span>;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    srand(time(<span class="hljs-number">0</span>));
+    <span class="hljs-keyword">int</span> arr[MAX_LEN];
+    <span class="hljs-comment">//对数组进行赋值</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; MAX_LEN;i++) &#123;
+        arr[i] = rand() % <span class="hljs-number">100</span>;
+    &#125;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;原数组：&quot;</span>);
+    output(arr,MAX_LEN);
+
+    select_sort(arr,MAX_LEN);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;选择排序：&quot;</span>);
+    output(arr,MAX_LEN);
+
+    quick_sort(arr,<span class="hljs-number">0</span>,MAX_LEN<span class="hljs-number">-1</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;快速排序：&quot;</span>);
+    output(arr,MAX_LEN);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+
+<p>运行如图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202204022126776.png" srcset="/img/loading.gif" alt="image-20220402212644727"></p>
 
             </div>
             <hr>
@@ -375,7 +408,9 @@ plt.show( )</code></pre>
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a>
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
                     
                   </div>
                 
@@ -383,7 +418,7 @@ plt.show( )</code></pre>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80/">人工智能基础</a>
+                      <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
                     
                   </div>
                 
@@ -396,18 +431,12 @@ plt.show( )</code></pre>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E9%A2%98%E7%9B%AE/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">OS题目</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/03/02/SpringBoot%E5%85%A5%E9%97%A8/">
-                        <span class="hidden-mobile">SpringBoot入门</span>
+                      <a href="/2022/04/02/8%E5%A0%86%E6%8E%92%E5%BA%8F/">
+                        <span class="hidden-mobile">8.堆排序</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -629,7 +658,7 @@ show_date_time();
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "人工智能基础&nbsp;",
+        "9排序&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
