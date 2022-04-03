@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      1.8k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21
+      28
        分钟
     </span>
   
@@ -485,7 +485,80 @@
     &#125;
 &#125;</code></pre>
 
-<h2 id="173-二叉搜索树迭代器"><a href="#173-二叉搜索树迭代器" class="headerlink" title="[173]二叉搜索树迭代器"></a>[173]二叉搜索树迭代器</h2>
+<h2 id="173-二叉搜索树迭代器"><a href="#173-二叉搜索树迭代器" class="headerlink" title="[173]二叉搜索树迭代器"></a>[173]二叉搜索树迭代器</h2><blockquote>
+<p>实现一个<strong>二叉搜索树</strong>迭代器类<code>BSTIterator</code> ，表示一个按<strong>中序遍历</strong>二叉搜索树（BST）的迭代器：</p>
+<ul>
+<li><code>BSTIterator(TreeNode root)</code> 初始化 <code>BSTIterator</code> 类的一个对象。BST 的根节点 root 会作为构造函数的一部分给出。指针应初始化为一个不存在于 BST 中的数字，且该数字小于 BST 中的任何元素。</li>
+<li><code>boolean hasNext()</code>如果向指针右侧遍历存在数字，则返回 <code>true</code> ；否则返回<code> false</code> 。</li>
+<li><code>int next()</code>将指针向右移动，然后返回指针处的数字</li>
+</ul>
+</blockquote>
+<pre><code class="hljs shell">输入
+[&quot;BSTIterator&quot;, &quot;next&quot;, &quot;next&quot;, &quot;hasNext&quot;, &quot;next&quot;, &quot;hasNext&quot;, &quot;next&quot;, &quot;hasNext&quot;, &quot;next&quot;, &quot;hasNext&quot;]
+[[[7, 3, 15, null, null, 9, 20]], [], [], [], [], [], [], [], [], []]
+输出
+[null, 3, 7, true, 9, true, 15, true, 20, false]
+
+解释
+BSTIterator bSTIterator = new BSTIterator([7, 3, 15, null, null, 9, 20]);
+bSTIterator.next();    // 返回 3
+bSTIterator.next();    // 返回 7
+bSTIterator.hasNext(); // 返回 True
+bSTIterator.next();    // 返回 9
+bSTIterator.hasNext(); // 返回 True
+bSTIterator.next();    // 返回 15
+bSTIterator.hasNext(); // 返回 True
+bSTIterator.next();    // 返回 20
+bSTIterator.hasNext(); // 返回 False</code></pre>
+
+<p><strong>实现</strong></p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * Definition for a binary tree node.</span>
+<span class="hljs-comment"> * public class TreeNode &#123;</span>
+<span class="hljs-comment"> *     int val;</span>
+<span class="hljs-comment"> *     TreeNode left;</span>
+<span class="hljs-comment"> *     TreeNode right;</span>
+<span class="hljs-comment"> *     TreeNode() &#123;&#125;</span>
+<span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span>
+<span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span>
+<span class="hljs-comment"> *         this.val = val;</span>
+<span class="hljs-comment"> *         this.left = left;</span>
+<span class="hljs-comment"> *         this.right = right;</span>
+<span class="hljs-comment"> *     &#125;</span>
+<span class="hljs-comment"> * &#125;</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BSTIterator</span> </span>&#123;
+
+    <span class="hljs-comment">//定义一个索引和容器</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> index;
+    <span class="hljs-keyword">private</span> List&lt;Integer&gt; list;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BSTIterator</span><span class="hljs-params">(TreeNode root)</span> </span>&#123;
+        <span class="hljs-comment">//初始化位置为0</span>
+        index = <span class="hljs-number">0</span>;
+        list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        inOrder(root,list);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">next</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-comment">//获取值</span>
+        <span class="hljs-keyword">return</span> list.get(index++);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-comment">//判断是否为需要走</span>
+        <span class="hljs-keyword">return</span> index &lt; list.size();
+    &#125;
+      <span class="hljs-comment">//中序</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">inOrder</span><span class="hljs-params">(TreeNode root, List&lt;Integer&gt; list)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (root == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span>;
+        inOrder(root.left,list);
+        list.add(root.val);
+        inOrder(root.right,list);
+    &#125;
+&#125;</code></pre>
+
+
             </div>
             <hr>
             <div>
@@ -686,7 +759,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：80.6k</span>
+    <span class="post-count">总字数统计：81k</span>
 
     
   </div>
