@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Yiheng">
   <meta name="keywords" content="">
-  <title>27.移除元素 - 寻归往</title>
+  <title>11平衡二叉树 - 寻归往</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -162,8 +162,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2022-01-12 09:40" pubdate>
-      2022年1月12日 上午
+    <time datetime="2022-04-03 18:01" pubdate>
+      2022年4月3日 晚上
     </time>
   </div>
 
@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      765 字
+      138 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      1
        分钟
     </span>
   
@@ -213,109 +213,44 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">27.移除元素</h1>
+            <h1 style="display: none">11平衡二叉树</h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><pre><code class="hljs java">给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。
-不要使用额外的数组空间，你必须仅使用 O(<span class="hljs-number">1</span>) 额外空间并 原地 修改输入数组。
-元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
-
- 
-
-说明:
-
-为什么返回数值是整数，但输出的答案是数组呢?
-
-请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。
-
-你可以想象内部操作如下:
-
-<span class="hljs-comment">// nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝</span>
-<span class="hljs-keyword">int</span> len = removeElement(nums, val);
-
-<span class="hljs-comment">// 在函数里修改输入数组对于调用者是可见的。</span>
-<span class="hljs-comment">// 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。</span>
-<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; i++) &#123;
-    print(nums[i]);
-&#125;
- 
-
-示例 <span class="hljs-number">1</span>：
-输入：nums = [<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], val = <span class="hljs-number">3</span>
-输出：<span class="hljs-number">2</span>, nums = [<span class="hljs-number">2</span>,<span class="hljs-number">2</span>]
-解释：函数应该返回新的长度 <span class="hljs-number">2</span>, 并且 nums 中的前两个元素均为 <span class="hljs-number">2</span>。你不需要考虑数组中超出新长度后面的元素。例如，函数返回的新长度为 <span class="hljs-number">2</span> ，而 nums = [<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>] 或 nums = [<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>]，也会被视作正确答案。
-
-示例 <span class="hljs-number">2</span>：
-输入：nums = [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">0</span>,<span class="hljs-number">4</span>,<span class="hljs-number">2</span>], val = <span class="hljs-number">2</span>
-输出：<span class="hljs-number">5</span>, nums = [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">0</span>,<span class="hljs-number">3</span>]
-解释：函数应该返回新的长度 <span class="hljs-number">5</span>, 并且 nums 中的前五个元素为 <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4</span>。注意这五个元素可为任意顺序。你不需要考虑数组中超出新长度后面的元素。
- 
-
-提示：
-<span class="hljs-number">0</span> &lt;= nums.length &lt;= <span class="hljs-number">100</span>
-<span class="hljs-number">0</span> &lt;= nums[i] &lt;= <span class="hljs-number">50</span>
-<span class="hljs-number">0</span> &lt;= val &lt;= <span class="hljs-number">100</span>
-</code></pre>
-
-
-
-
-
-
-
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="法一"><a href="#法一" class="headerlink" title="法一"></a>法一</h2><p>暴力算法===&gt; 找到相同的进行覆盖，然后长度缩短</p>
-<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">removeElement</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> val)</span> </span>&#123;
-        <span class="hljs-keyword">int</span> length = nums.length;
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; length ; i++) &#123;
-            <span class="hljs-comment">//找到相同元素</span>
-            <span class="hljs-keyword">if</span> ( nums[i] == val ) &#123;
-                <span class="hljs-comment">//进行移动数组</span>
-                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt; length; j++) &#123;
-                    nums[j - <span class="hljs-number">1</span>] = nums[j];
-                &#125;
-                length --;
-                i --;  <span class="hljs-comment">//因为数组下标i之后元素都前移了，故i也要前移一位</span>
-            &#125;
-        &#125;
-        <span class="hljs-keyword">return</span> length;
-    &#125;
-&#125;</code></pre>
-
-<blockquote>
-<p>执行结果：</p>
-<p>通过</p>
-<p>显示详情</p>
-<p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户</p>
-<p>内存消耗：36.8 MB, 在所有 Java 提交中击败了77.63%的用户</p>
-<p>通过测试用例：113 / 113</p>
-</blockquote>
-<p><strong>时间复杂度为 0(n^2)</strong></p>
-<h2 id="法二"><a href="#法二" class="headerlink" title="法二"></a>法二</h2><p>双指针 （重点掌握！</p>
-<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">removeElement</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> val)</span> </span>&#123;
-        <span class="hljs-keyword">int</span> slow = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span>( <span class="hljs-keyword">int</span> fast = <span class="hljs-number">0</span>; fast &lt; nums.length; fast++) &#123;
-            <span class="hljs-keyword">if</span>( val != nums[fast] ) &#123;
-                nums[slow ++] = nums[fast];
-            &#125;
-        &#125;
-        <span class="hljs-keyword">return</span> slow;
-    &#125;
-&#125;</code></pre>
-
-
-
-<blockquote>
-<p>执行结果：</p>
-<p>通过</p>
-<p>显示详情</p>
-<p>执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户</p>
-<p>内存消耗：37.2 MB, 在所有 Java 提交中击败了5.72%的用户</p>
-<p>通过测试用例：113 / 113</p>
-</blockquote>
-<p><strong>时间复杂度为 O(n)</strong></p>
-
+              <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><strong>平衡二叉树</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202204031801614.png" srcset="/img/loading.gif" alt="image-20220403180149432"></p>
+<p>高度为H的<strong>二叉排序树(BS)**，所含有的</strong>节点数量**在什么范围之内？</p>
+<ul>
+<li><code> H~2^H -1</code> </li>
+</ul>
+<p>高度为H的<strong>平衡二叉树(AVL)**，所含有的</strong>节点数量**在什么范围之内？</p>
+<ul>
+<li>和斐波那契数列值类似  <code>low(H-2) + low(H-1) + 1&lt;= size(H) &lt;= 2^H -1 </code> </li>
+<li>其中low(1) = 1,low(2) = 2,low(3) = 4,low(4) = 7…….</li>
+</ul>
+<p>插入和删除结点</p>
+<p><strong>左旋调整</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202204031814970.png" srcset="/img/loading.gif" alt="image-20220403181434823"></p>
+<p><strong>右旋调整</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202204031815394.png" srcset="/img/loading.gif" alt="image-20220403181520308"></p>
+<p><strong>失衡类型</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202204031817221.png" srcset="/img/loading.gif" alt="image-20220403181722115"></p>
+<ul>
+<li>LL型，右旋调整</li>
+</ul>
+<p><img src="https://img-blog.csdn.net/20170429150914755?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanl5MzA1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" srcset="/img/loading.gif"></p>
+<ul>
+<li>RR型，左旋调整</li>
+</ul>
+<p><img src="https://img-blog.csdn.net/20170429151546105?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanl5MzA1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" srcset="/img/loading.gif"></p>
+<ul>
+<li>LR型</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202204031832333.png" srcset="/img/loading.gif" alt="image-20220403183258237"></p>
+<ul>
+<li>RL型</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202204031833986.png" srcset="/img/loading.gif" alt="image-20220403183314884"></p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1>
             </div>
             <hr>
             <div>
@@ -324,7 +259,9 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
                     
                   </div>
                 
@@ -332,9 +269,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E7%BB%84/">数组</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>
                     
                   </div>
                 
@@ -347,18 +282,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/01/15/css/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">css</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/01/11/leetcode06/">
-                        <span class="hidden-mobile">977.有序数组的平方</span>
+                      <a href="/2022/04/03/10%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/">
+                        <span class="hidden-mobile">10二叉搜索树</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -580,7 +509,7 @@ show_date_time();
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "27.移除元素&nbsp;",
+        "11平衡二叉树&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

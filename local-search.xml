@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>11平衡二叉树</title>
+    <link href="/2022/04/03/11%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    <url>/2022/04/03/11%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
+    
+    <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><strong>平衡二叉树</strong></p><p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202204031801614.png" alt="image-20220403180149432"></p><p>高度为H的<strong>二叉排序树(BS)**，所含有的</strong>节点数量**在什么范围之内？</p><ul><li><code> H~2^H -1</code> </li></ul><p>高度为H的<strong>平衡二叉树(AVL)**，所含有的</strong>节点数量**在什么范围之内？</p><ul><li>和斐波那契数列值类似  <code>low(H-2) + low(H-1) + 1&lt;= size(H) &lt;= 2^H -1 </code> </li><li>其中low(1) = 1,low(2) = 2,low(3) = 4,low(4) = 7…….</li></ul><p>插入和删除结点</p><p><strong>左旋调整</strong></p><p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202204031814970.png" alt="image-20220403181434823"></p><p><strong>右旋调整</strong></p><p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202204031815394.png" alt="image-20220403181520308"></p><p><strong>失衡类型</strong></p><p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202204031817221.png" alt="image-20220403181722115"></p><ul><li>LL型，右旋调整</li></ul><p><img src="https://img-blog.csdn.net/20170429150914755?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanl5MzA1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"></p><ul><li>RR型，左旋调整</li></ul><p><img src="https://img-blog.csdn.net/20170429151546105?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanl5MzA1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"></p><ul><li>LR型</li></ul><p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202204031832333.png" alt="image-20220403183258237"></p><ul><li>RL型</li></ul><p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202204031833986.png" alt="image-20220403183314884"></p><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>计算机基础</category>
+      
+      <category>数据结构</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>二叉树</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>10二叉搜索树</title>
     <link href="/2022/04/03/10%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/"/>
     <url>/2022/04/03/10%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
