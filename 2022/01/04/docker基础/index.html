@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      1.3k 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16
+      17
        分钟
     </span>
   
@@ -414,6 +414,13 @@ sudo systemctl restart docker</code></pre>
 <p><strong>docker为何比虚拟机快？</strong></p>
 <p><img src="/2022/01/04/Docker%E5%9F%BA%E7%A1%80/07.png" srcset="/img/loading.gif" alt="image-20220103101338942"></p>
 <p><img src="/2022/01/04/Docker%E5%9F%BA%E7%A1%80/08.png" srcset="/img/loading.gif" alt="image-20220103101646104"></p>
+<h2 id="4-Docker安装MySQL"><a href="#4-Docker安装MySQL" class="headerlink" title="4.Docker安装MySQL"></a>4.Docker安装MySQL</h2><p>安装MySQL</p>
+<pre><code class="hljs shell">docker pull mysql 5.7(版本号)</code></pre>
+
+<p>启动mysql</p>
+<pre><code class="hljs shell">[root@iZ2ze9nu608mhi5at5aufaZ etc]# docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:8.0
+</code></pre>
+
 
             </div>
             <hr>
@@ -615,7 +622,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：83.2k</span>
+    <span class="post-count">总字数统计：83.8k</span>
 
     
   </div>
