@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Yiheng">
   <meta name="keywords" content="">
-  <title>5.二叉树线索化 - 寻归往</title>
+  <title>二叉树线索化 - 寻归往</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">5.二叉树线索化</h1>
+            <h1 style="display: none">二叉树线索化</h1>
             
             <div class="markdown-body" id="post-body">
               <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>希望得到二叉树中<strong>某一个结点的前驱或者后继结点</strong>时，普通的二叉树，只能进行遍历一次二叉树，十分不方便</p>
@@ -231,8 +231,6 @@
     <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> *<span class="hljs-title">lchild</span>,*<span class="hljs-title">child</span>;</span>
 &#125;Node;</code></pre>
 
-
-
 <h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><pre><code class="hljs c"><span class="hljs-function">Node *<span class="hljs-title">getNewNode</span><span class="hljs-params">(<span class="hljs-keyword">int</span> val)</span> </span>&#123;
     Node *node = (Node *)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(Node));
     node-&gt;val = val;
@@ -240,8 +238,6 @@
     node-&gt;rtag = node-&gt;ltag = NORMAL; <span class="hljs-comment">//宏定义，此时为0，表明为左右子树，而非线索</span>
     <span class="hljs-keyword">return</span> node;
 &#125;</code></pre>
-
-
 
 <h2 id="销毁"><a href="#销毁" class="headerlink" title="销毁"></a>销毁</h2><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">clear</span><span class="hljs-params">(Node *node)</span> </span>&#123;
     <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;
@@ -252,10 +248,6 @@
     <span class="hljs-keyword">return</span>;
 &#125;</code></pre>
 
-
-
-
-
 <h2 id="插入结点"><a href="#插入结点" class="headerlink" title="插入结点"></a>插入结点</h2><pre><code class="hljs c"><span class="hljs-comment">//插入结点 (排序二叉树)</span>
 <span class="hljs-function">Node *<span class="hljs-title">insert</span><span class="hljs-params">(Node *root,<span class="hljs-keyword">int</span> val)</span> </span>&#123;
     <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> getNewNode(val);
@@ -264,8 +256,6 @@
     <span class="hljs-keyword">else</span> root-&gt;lchild = insert(root-&gt;lchild,val);
     <span class="hljs-keyword">return</span> root;
 &#125;</code></pre>
-
-
 
 <h2 id="中序线索化"><a href="#中序线索化" class="headerlink" title="中序线索化"></a>中序线索化</h2><pre><code class="hljs c"><span class="hljs-comment">//中序遍历线索化, 对于root为根节点的，建立线索化</span>
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">build_thread</span><span class="hljs-params">(Node *root)</span> </span>&#123;
@@ -296,8 +286,6 @@
     <span class="hljs-keyword">return</span>;
 &#125;</code></pre>
 
-
-
 <h2 id="沿线索进行输出"><a href="#沿线索进行输出" class="headerlink" title="沿线索进行输出"></a>沿线索进行输出</h2><pre><code class="hljs c"><span class="hljs-comment">//找中序第一个结点</span>
 <span class="hljs-function">Node *<span class="hljs-title">letfMost</span> <span class="hljs-params">(Node *p)</span> </span>&#123;
     <span class="hljs-keyword">while</span> (p &amp;&amp; p-&gt;ltag == NORMAL &amp;&amp; p-&gt;lchild) p = p-&gt;lchild;
@@ -317,10 +305,6 @@
     &#125;
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
 &#125;</code></pre>
-
-
-
-
 
 <h2 id="main测试"><a href="#main测试" class="headerlink" title="main测试"></a>main测试</h2><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
@@ -552,7 +536,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：83.8k</span>
+    <span class="post-count">总字数统计：78.5k</span>
 
     
   </div>
@@ -614,7 +598,7 @@ show_date_time();
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "5.二叉树线索化&nbsp;",
+        "二叉树线索化&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
