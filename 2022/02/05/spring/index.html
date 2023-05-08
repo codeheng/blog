@@ -217,7 +217,7 @@
             
             <div class="markdown-body" id="post-body">
               <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
-<p> Spring是一个<strong>轻量级</strong>的<strong>控制反转(IoC)**和</strong>面向切面(AOP)**的容器框架 (两个核心特性！！！)</p>
+<p> Spring是一个<strong>轻量级</strong>的**控制反转(IoC)<strong>和</strong>面向切面(AOP)**的容器框架 (两个核心特性！！！)</p>
 </blockquote>
 <p>Spring框架是由于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/3448966">软件开发</a>的复杂性而创建的，简化开发</p>
 <p>Spring使用的是基本的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/JavaBean/529577">JavaBean</a>来完成以前只可能由<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/EJB/144195">EJB</a>完成的事情。然而，Spring的用途不仅仅限于服务器端的开发。从简单性、可测试性和松耦合性角度而言，绝大部分Java应用都可以从Spring中受益。</p>
@@ -383,9 +383,9 @@
 <span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span></code></pre>
 
 <blockquote>
-<p>类型 变量名 = new 类型(); ==&gt; Hello hello = new Hello();</p>
+<p>类型 变量名 &#x3D; new 类型(); &#x3D;&#x3D;&gt; Hello hello &#x3D; new Hello();</p>
 <p>在xml文件中</p>
-<p>bean中的id= 上方变量名，class = new的对象，property相当于给对象中的属性设值</p>
+<p>bean中的id&#x3D; 上方变量名，class &#x3D; new的对象，property相当于给对象中的属性设值</p>
 </blockquote>
 <p>配置之后进行测试 <code>Test.java</code></p>
 <pre><code class="hljs java"><span class="hljs-keyword">import</span> com.heng.pojo.Hello;
@@ -404,9 +404,9 @@
 
 <p>运行测试类中的<code>main</code>  打印出<code>Hello,Spring</code></p>
 <ul>
-<li><p>对象谁创建的==&gt; <code>spring</code></p>
+<li><p>对象谁创建的&#x3D;&#x3D;&gt; <code>spring</code></p>
 </li>
-<li><p>属性如何设置的===&gt; <code>spring容器</code></p>
+<li><p>属性如何设置的&#x3D;&#x3D;&#x3D;&gt; <code>spring容器</code></p>
 </li>
 </ul>
 <p>即<strong>控制反转</strong>  </p>
@@ -649,7 +649,7 @@ Student被构造<span class="hljs-built_in">..</span><span class="hljs-built_in"
     Card card; <span class="hljs-comment">// 自己定义类,进行注入</span>
     List&lt;Double&gt; list; <span class="hljs-comment">// 注入list(集合类型</span>
     Map&lt;String,Double&gt; map; <span class="hljs-comment">// 通过map注入</span>
-
+    
 
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setAge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> age)</span> </span>&#123;
         <span class="hljs-keyword">this</span>.age = age;
@@ -658,7 +658,7 @@ Student被构造<span class="hljs-built_in">..</span><span class="hljs-built_in"
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setName</span><span class="hljs-params">(String name)</span> </span>&#123;
         <span class="hljs-keyword">this</span>.name = name;
     &#125;
-
+    
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setCard</span><span class="hljs-params">(Card card)</span> </span>&#123;
         <span class="hljs-keyword">this</span>.card = card;
     &#125;
@@ -812,7 +812,7 @@ Student被构造<span class="hljs-built_in">..</span><span class="hljs-built_in"
 
 <span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span></code></pre>
 
-<p>在测试类<code>StudentDemo.java     </code>中运行测试</p>
+<p>在测试类<code>StudentDemo.java 	</code>中运行测试</p>
 <pre><code class="hljs java"><span class="hljs-keyword">package</span> com.heng.demo;
 
 <span class="hljs-keyword">import</span> com.heng.entity.Student;
@@ -831,12 +831,12 @@ Student被构造<span class="hljs-built_in">..</span><span class="hljs-built_in"
 <p><img src="https://cdn.jsdelivr.net/gh/codeheng/personPic@main/imgBlog/202203120707346.png" srcset="/img/loading.gif" alt="image-20220312070709204"></p>
 <p>发现在打印<code>say</code>前后，均打印出了日志</p>
 <p><strong>配置文件说明</strong></p>
-<p>​    通过<code>aop:config</code> 来添加一个新的<code>aop</code>配置</p>
+<p>​	通过<code>aop:config</code> 来添加一个新的<code>aop</code>配置</p>
 <pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">aop:config</span>&gt;</span>
-
+    
 <span class="hljs-tag">&lt;/<span class="hljs-name">aop:config</span>&gt;</span></code></pre>
 
-<p><code>aop:pointcut</code> 告诉spring，要切入的是哪个类/哪个方法</p>
+<p><code>aop:pointcut</code> 告诉spring，要切入的是哪个类&#x2F;哪个方法</p>
 <p><code>expression</code>属性的<code>execution</code>填写格式如下：</p>
 <pre><code class="hljs gcode">修饰符 包名.类名.方法名称<span class="hljs-comment">(方法参数)</span></code></pre>
 
@@ -1078,7 +1078,7 @@ Student被构造<span class="hljs-built_in">..</span><span class="hljs-built_in"
 <span class="hljs-meta">@EnableAspectJAutoProxy</span>
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainConfig</span> </span>&#123;&#125;</code></pre>
 
-<p>在<code>Student.java</code> 中添加对应的方法，比如<code>say</code>表明要在此方法前/后切入对应的操作</p>
+<p>在<code>Student.java</code> 中添加对应的方法，比如<code>say</code>表明要在此方法前&#x2F;后切入对应的操作</p>
 <pre><code class="hljs java"><span class="hljs-meta">@Deprecated</span> 
 <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">say</span><span class="hljs-params">(String msg)</span> </span>&#123;
     System.out.println(<span class="hljs-string">&quot;我是say...&quot;</span>);
@@ -1158,9 +1158,9 @@ Student被构造<span class="hljs-built_in">..</span><span class="hljs-built_in"
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/02/08/mybatis/">
+                      <a href="/2022/02/14/linux/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">mybatis</span>
+                        <span class="hidden-mobile">The Linux Command Line</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -1329,7 +1329,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：79.2k</span>
+    <span class="post-count">总字数统计：76.4k</span>
 
     
   </div>

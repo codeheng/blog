@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      10k 字
+      10.1k 字
     </span>
   
 
@@ -222,39 +222,39 @@
 <p><img src="/2021/07/17/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/2.png" srcset="/img/loading.gif"></p>
 <blockquote>
 <p>错误：编译错误&amp;链接错误</p>
-<p>​    编译错误：双击就可以定位到第几行</p>
-<p>​    链接错误：库函数可能写错了！看对应函数符号</p>
+<p>​	编译错误：双击就可以定位到第几行</p>
+<p>​	链接错误：库函数可能写错了！看对应函数符号</p>
 </blockquote>
-<p>​    </p>
+<p>​	</p>
 <p>编辑main.c —&gt; 编译main.obj —&gt;和库函数进行链接—&gt;main.exe—-&gt;执行</p>
 <p><strong>写代码——增量编写法，写一点进行测试测试</strong>，<strong>保证正确</strong>，<strong>再继续写</strong></p>
-<h3 id="一、数据类型"><a href="#一、数据类型" class="headerlink" title="一、数据类型"></a>一、数据类型</h3><p>​    1. <strong>基本类型</strong></p>
+<h3 id="一、数据类型"><a href="#一、数据类型" class="headerlink" title="一、数据类型"></a>一、数据类型</h3><p>​	1. <strong>基本类型</strong></p>
 <ul>
 <li>整型 int</li>
 </ul>
-<p>​            表示范围：-2^31 到 2^31 - 1</p>
-<p>​                short 表示范围：-2 ^ 15 到 2 ^ 15 - 1</p>
-<p>​                long 32位机器(4个字节)，64位机器(8个字节)  -2 ^ 63 到 -2 ^63 - 1</p>
-<p>​                unsigned int 变化范围： 0 到 2^32 - 1</p>
+<p>​			表示范围：-2^31 到 2^31 - 1</p>
+<p>​				short 表示范围：-2 ^ 15 到 2 ^ 15 - 1</p>
+<p>​				long 32位机器(4个字节)，64位机器(8个字节)  -2 ^ 63 到 -2 ^63 - 1</p>
+<p>​				unsigned int 变化范围： 0 到 2^32 - 1</p>
 <ul>
 <li>字符型 char</li>
 </ul>
-<p>​                    \n  光标到下一行行首</p>
-<p>​                    \r   光标回到当前行行首</p>
-<p>​                    \b  向前退一格</p>
+<p>​					\n  光标到下一行行首</p>
+<p>​					\r   光标回到当前行行首</p>
+<p>​					\b  向前退一格</p>
 <ul>
 <li>实型(浮点型)：</li>
 </ul>
-<p>​                单精度实型float(四个字节)；  有效数字：6-7位</p>
-<p>​                双精度double(八个字节)       有效数字：15-16位</p>
-<p>​    2.<strong>构造类型</strong></p>
+<p>​				单精度实型float(四个字节)；  有效数字：6-7位</p>
+<p>​				双精度double(八个字节)       有效数字：15-16位</p>
+<p>​	2.<strong>构造类型</strong></p>
 <blockquote>
 <p>数组类型[]</p>
 <p>结构类型struct</p>
 <p>联合类型union</p>
 <p>枚举类型 enum</p>
 </blockquote>
-<p>​    3.*<em>指针类型 **</em></p>
+<p>​	3.**指针类型 ***</p>
 <ol start="4">
 <li><strong>空类型(无值类) ：void</strong></li>
 </ol>
@@ -320,16 +320,16 @@ c = getchar();<span class="hljs-comment">//并不会再次阻塞，等待继续�
 
 
 
-<h3 id="三、运算符"><a href="#三、运算符" class="headerlink" title="三、运算符"></a>三、运算符</h3><p>*<em>1、算术运算符（ + - * / %）*</em></p>
-<p><strong>2、关系运算符( &gt; ,&lt;, ==, &gt;= ,&lt;= , !=)</strong></p>
+<h3 id="三、运算符"><a href="#三、运算符" class="headerlink" title="三、运算符"></a>三、运算符</h3><p><strong>1、算术运算符（ + - * &#x2F; %）</strong></p>
+<p><strong>2、关系运算符( &gt; ,&lt;, &#x3D;&#x3D;, &gt;&#x3D; ,&lt;&#x3D; , !&#x3D;)</strong></p>
 <p><strong>3、逻辑运算符( !,&amp;&amp;,|| )</strong></p>
 <p><strong>4、位运算符( &lt;&lt;, &gt;&gt;, ~, | , ^ , &amp;)</strong></p>
-<p>​            左移&lt;&lt; : 高位丢弃，低位补0，<strong>相当于乘2</strong>，但效率比乘法高</p>
-<p>​            右移&gt;&gt;：**相当于除2 **  正数(unsigned)的话，低位丢弃，高位补0(直接除2);负数的话，低位丢弃，高位补1(减1再除2)</p>
-<p><strong>5、赋值运算符 （ = 及其扩展赋值运算符 ）</strong></p>
+<p>​			左移&lt;&lt; : 高位丢弃，低位补0，<strong>相当于乘2</strong>，但效率比乘法高</p>
+<p>​			右移&gt;&gt;：**相当于除2 **  正数(unsigned)的话，低位丢弃，高位补0(直接除2);负数的话，低位丢弃，高位补1(减1再除2)</p>
+<p><strong>5、赋值运算符 （ &#x3D; 及其扩展赋值运算符 ）</strong></p>
 <p><strong>6、条件运算符( ? : )  即三目运算符</strong></p>
 <p><strong>7、逗号运算符 ( , )</strong></p>
-<p>*<em>8、指针运算符 （ * 和 &amp;）*</em></p>
+<p><strong>8、指针运算符 （ * 和 &amp;）</strong></p>
 <p><strong>9、求字节数运算符（ sizeof() )</strong></p>
 <p><strong>10、强制类型转换运算符 （ （类型） ）</strong></p>
 <p><strong>11、分量运算符 (  .  -&gt; )</strong></p>
@@ -339,14 +339,14 @@ c = getchar();<span class="hljs-comment">//并不会再次阻塞，等待继续�
 <p><img src="/2021/07/17/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/6_1.png" srcset="/img/loading.gif"></p>
 <p><strong>算术运算符优先级高于关系运算符</strong></p>
 <p><strong>关系运算符高于逻辑与和逻辑或</strong></p>
-<p>a = 5  ==&gt;范围 -6到5</p>
+<p>a &#x3D; 5  &#x3D;&#x3D;&gt;范围 -6到5</p>
 <p> 0000 0101</p>
-<p>1111 1010 ==&gt; 0000 0110 ==&gt; -6 </p>
-<p>1111 1011 ==&gt;0000 0101 ==&gt; -5</p>
-<p>ps:若要拿到任意一个数的最低位为1的那个数，不利用循环如何实现？<br>     1、若是循环，则此数字每一位和1进行&amp;运算，若为0，则1&lt;&lt;1，再进行下一位比较，为1则找到了<br>        2、利用 i &amp; -i = 最终低位为1的那个数字 ===&gt;该数与其对应补码进行&amp;操作</p>
+<p>1111 1010 &#x3D;&#x3D;&gt; 0000 0110 &#x3D;&#x3D;&gt; -6 </p>
+<p>1111 1011 &#x3D;&#x3D;&gt;0000 0101 &#x3D;&#x3D;&gt; -5</p>
+<p>ps:若要拿到任意一个数的最低位为1的那个数，不利用循环如何实现？<br>     1、若是循环，则此数字每一位和1进行&amp;运算，若为0，则1&lt;&lt;1，再进行下一位比较，为1则找到了<br>        2、利用 i &amp; -i &#x3D; 最终低位为1的那个数字 &#x3D;&#x3D;&#x3D;&gt;该数与其对应补码进行&amp;操作</p>
 <p>异或^：</p>
-<p>​    <strong>任何数与自身异或为 0</strong> </p>
-<p>​    <strong>任何数与0异或为其自身</strong></p>
+<p>​	<strong>任何数与自身异或为 0</strong> </p>
+<p>​	<strong>任何数与0异或为其自身</strong></p>
 <p>可利用异或对两个数进行交换，而不使用中间变量</p>
 <p>交换两个数，三种方法</p>
 <pre><code class="hljs c"><span class="hljs-comment">//1、利用异或，但必须有两个空间，不会出现溢出</span>
@@ -402,7 +402,7 @@ label:
     <span class="hljs-keyword">if</span>( i &lt;= <span class="hljs-number">100</span>)&#123;
         <span class="hljs-keyword">goto</span> label;
     &#125;
-
+    
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;sum = %d\n&quot;</span>,sum);
 </code></pre>
 
@@ -418,7 +418,7 @@ label:
     arr[<span class="hljs-number">5</span>] = <span class="hljs-number">6</span>;
     arr[<span class="hljs-number">6</span>] = <span class="hljs-number">7</span>;
     arr[<span class="hljs-number">7</span>] = <span class="hljs-number">8</span>;
-
+    
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;i = %d\n&quot;</span>,i);<span class="hljs-comment">//此时i变为8了，在vs中</span>
 </code></pre>
 
@@ -453,16 +453,16 @@ sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">1</span>]
 <p><img src="/2021/07/17/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/10.png" srcset="/img/loading.gif"></p>
 <p><img src="/2021/07/17/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/11.png" srcset="/img/loading.gif">当利用第二种方法存字符数组时，会在最后添上\0</p>
 <pre><code class="hljs C">gets(c);<span class="hljs-comment">//会在最后添上\0，不会把\n读取到内存中   类似于scanf 也可能不安全，会访问越界</span>
-
+ 
  <span class="hljs-built_in">puts</span>(c)<span class="hljs-comment">//会在最后打印一个\n</span>
  <span class="hljs-comment">//等价于printf(&quot;%s\n&quot;,c);</span>
-
+ 
  <span class="hljs-comment">//循环输入字符串,并打印。按ctrl+z则会退出</span>
  <span class="hljs-keyword">char</span> c[<span class="hljs-number">50</span>];
  <span class="hljs-keyword">while</span>( gets(c) != <span class="hljs-literal">NULL</span> ) &#123;
      <span class="hljs-built_in">puts</span>(c);
  &#125;
-
+ 
  <span class="hljs-comment">//安全，不会访问越界，当＞sizeof(c)时，系统不允许输入</span>
  <span class="hljs-comment">//并且会把\n读到内存中</span>
  fgets(c,<span class="hljs-keyword">sizeof</span>(c),<span class="hljs-built_in">stdin</span>);
@@ -696,11 +696,11 @@ p = c;
 <pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p[][<span class="hljs-number">4</span>],<span class="hljs-keyword">int</span> row)</span> </span>&#123;
     <span class="hljs-keyword">int</span> i,j;
     <span class="hljs-keyword">for</span>( i = <span class="hljs-number">0</span>;i &lt; row; i ++) &#123;
-         <span class="hljs-keyword">for</span>(j = <span class="hljs-number">0</span>;j &lt; <span class="hljs-keyword">sizeof</span>(*p) /<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span> );j++)&#123;
-             <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,*(*(p+i)+j));
-             <span class="hljs-comment">//等价printf(&quot;%3d&quot;,p[i][j]);</span>
-             <span class="hljs-comment">//等价printf(&quot;%3d&quot;,*(p[i]+ j));</span>
-         &#125;
+     	<span class="hljs-keyword">for</span>(j = <span class="hljs-number">0</span>;j &lt; <span class="hljs-keyword">sizeof</span>(*p) /<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span> );j++)&#123;
+     		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,*(*(p+i)+j));
+     		<span class="hljs-comment">//等价printf(&quot;%3d&quot;,p[i][j]);</span>
+     		<span class="hljs-comment">//等价printf(&quot;%3d&quot;,*(p[i]+ j));</span>
+     	&#125;
      &#125;
 &#125;
 main() &#123;
@@ -764,7 +764,7 @@ main() &#123;
 </code></pre>
 
 <h3 id="六、函数"><a href="#六、函数" class="headerlink" title="六、函数"></a>六、函数</h3><p> <strong>1、函数声明，定义，及调用</strong></p>
-<p>​    通常将程序内容分别放在若干个源文件中，再由若干原程序文件组成一个C程序，便于<strong>分别编写，分别编译，提高调试效率</strong></p>
+<p>​	通常将程序内容分别放在若干个源文件中，再由若干原程序文件组成一个C程序，便于<strong>分别编写，分别编译，提高调试效率</strong></p>
 <p>点击’运行’即代表增量编译，如果之前运行过，则在运行的基础上进行编译(耗时很短)</p>
 <p>右键–&gt;重新生成 则代表重新编译一次(但意义并不大，运行也慢)</p>
 <p>函数不能嵌套定义</p>
@@ -801,9 +801,9 @@ main() &#123;
 <p>(2) 用户自己定义的函数</p>
 </blockquote>
 <p>不同函数之间传递数据：</p>
-<p>​    参数：通过形参和实参(调用完，空间则释放掉)</p>
-<p>​    返回值：用return语句返回计算结果</p>
-<p>​    全局变量：外部变量(不好，因为会一直占用着空间，也导致阅读困难)</p>
+<p>​	参数：通过形参和实参(调用完，空间则释放掉)</p>
+<p>​	返回值：用return语句返回计算结果</p>
+<p>​	全局变量：外部变量(不好，因为会一直占用着空间，也导致阅读困难)</p>
 <p>3、函数的嵌套调用</p>
 <pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
@@ -843,10 +843,10 @@ jmp_buf envbuf;<span class="hljs-comment">//全局变量</span>
 </code></pre>
 
 <p>5、变量及函数的作用域</p>
-<p>​    局部变量和全局变量(内部变量和外部变量)</p>
+<p>​	局部变量和全局变量(内部变量和外部变量)</p>
 <p><strong>变量在离自己最近的大括号内有效</strong></p>
 <p>static—&gt;修饰局部变量，全局变量，函数</p>
-<p><code>static int i = 0;</code>//静态变量只会初始化一次</p>
+<p><code>static int i = 0;</code>&#x2F;&#x2F;静态变量只会初始化一次</p>
 <pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f</span><span class="hljs-params">()</span> </span>&#123;
 <span class="hljs-comment">//局部变量加static</span>
     <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<span class="hljs-comment">//若没有static，则会多次执行此条语句</span>
@@ -938,7 +938,7 @@ pStudent_t p1,p2;<span class="hljs-comment">//p1，p2均为结构体指针</span
 <p>写链表首先先定义结点！</p>
 <pre><code class="hljs C"><span class="hljs-comment">//结点定义</span>
 <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">student</span> &#123;</span>
-    <span class="hljs-keyword">int</span> num;    
+    <span class="hljs-keyword">int</span> num;	
     <span class="hljs-keyword">float</span> score;
     <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">student</span> *<span class="hljs-title">pNext</span>;</span> 
 &#125;;
@@ -1032,16 +1032,16 @@ pStudent_t p1,p2;<span class="hljs-comment">//p1，p2均为结构体指针</span
     <span class="hljs-keyword">while</span> (<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;num) != EOF) &#123;
         listHeadInsert(&amp;pHead,&amp;pTail,<span class="hljs-keyword">int</span> num);<span class="hljs-comment">//要将地址进行传入</span>
     &#125;
-
+    
 &#125;
 </code></pre>
 
 <pre><code class="hljs C"><span class="hljs-comment">//删除链表中的结点</span>
 <span class="hljs-comment">/*</span>
-<span class="hljs-comment">    判断是否为空==&gt;为空打印，链表为空</span>
-<span class="hljs-comment">    判断删除值是不是头结点==&gt;是的话==&gt;头结点的pNext赋值给头结点，free删除的结点空间，如果删除结点后链表为空，设置尾指针为NULL</span>
-<span class="hljs-comment">    不是的话==&gt;遍历链表，找到要删除的值，将前一个结点的pNext的指针指向删除结点的下一个结点，判断删除结点地址值是否等于尾指针，相等==&gt;说明删除为尾结点，尾指针指向前一个结点，之后free删除的结点；若没有找到删除的结点，打印没有发现删除结点的值</span>
-<span class="hljs-comment">    </span>
+<span class="hljs-comment">	判断是否为空==&gt;为空打印，链表为空</span>
+<span class="hljs-comment">	判断删除值是不是头结点==&gt;是的话==&gt;头结点的pNext赋值给头结点，free删除的结点空间，如果删除结点后链表为空，设置尾指针为NULL</span>
+<span class="hljs-comment">	不是的话==&gt;遍历链表，找到要删除的值，将前一个结点的pNext的指针指向删除结点的下一个结点，判断删除结点地址值是否等于尾指针，相等==&gt;说明删除为尾结点，尾指针指向前一个结点，之后free删除的结点；若没有找到删除的结点，打印没有发现删除结点的值</span>
+<span class="hljs-comment">	</span>
 <span class="hljs-comment">*/</span>
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">listDelete</span><span class="hljs-params">(pStudent_t *head,pStudent_t *tail,<span class="hljs-keyword">int</span> deleteNum)</span> </span>&#123;
     <span class="hljs-comment">//pCur用来指向被删除的结点，一直遍历，pPre指向pCur的前一个结点</span>
@@ -1219,7 +1219,7 @@ pStudent_t p1,p2;<span class="hljs-comment">//p1，p2均为结构体指针</span
 
 <h5 id="3-、二叉树"><a href="#3-、二叉树" class="headerlink" title="(3)、二叉树"></a>(3)、二叉树</h5><p><strong>每个结点最多有两个子树的树结构！</strong></p>
 <p>二叉树常用于实现 <strong>二叉查找树 和 二叉堆</strong></p>
-<p><strong>层次建树==&gt;辅助队列</strong></p>
+<p><strong>层次建树&#x3D;&#x3D;&gt;辅助队列</strong></p>
 <p>k层，总节点数 2^k - 1</p>
 <p>完全二叉树：只允许最后一层有空缺且在右边。对任一结点，其右子树的深度为j，则左子树深度必为j或j+1,度为1的点只有1个或0个</p>
 <pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 10</span>
@@ -1334,7 +1334,7 @@ pStudent_t p1,p2;<span class="hljs-comment">//p1，p2均为结构体指针</span
             j++;<span class="hljs-comment">//插入完之后，跑到B位置等待左右孩子插入其中(j初始为0)</span>
         &#125;
     &#125;
-
+    
     <span class="hljs-comment">//2、辅助队列进行层次建树</span>
     ElemType val;
     pNode_t treeRoot = <span class="hljs-literal">NULL</span>;
@@ -1352,7 +1352,7 @@ pStudent_t p1,p2;<span class="hljs-comment">//p1，p2均为结构体指针</span
 
 
 <h5 id="4-、排序算法"><a href="#4-、排序算法" class="headerlink" title="(4)、排序算法"></a>(4)、排序算法</h5><p>时间复杂度和空间复杂 </p>
-<p>时间复杂度====&gt;大O符号表示</p>
+<p>时间复杂度&#x3D;&#x3D;&#x3D;&#x3D;&gt;大O符号表示</p>
 <p><img src="/2021/07/17/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/16.png" srcset="/img/loading.gif"></p>
 <p><strong>掌握八种算法：冒泡，选择，插入，希尔，快排，堆排，归并，基排</strong>.  </p>
 <blockquote>
@@ -1436,9 +1436,9 @@ pStudent_t p1,p2;<span class="hljs-comment">//p1，p2均为结构体指针</span
             <span class="hljs-keyword">else</span> 
             &#123;
                 <span class="hljs-keyword">break</span>;
-            &#125;    
+            &#125;	
         &#125;
-        arr[j + <span class="hljs-number">1</span>] = InsertVal;    
+        arr[j + <span class="hljs-number">1</span>] = InsertVal;	
     &#125;
 &#125;
 </code></pre>
@@ -1460,12 +1460,12 @@ pStudent_t p1,p2;<span class="hljs-comment">//p1，p2均为结构体指针</span
                 <span class="hljs-keyword">else</span> 
                 &#123;
                     <span class="hljs-keyword">break</span>;
-                &#125;    
+                &#125;	
             &#125;
-            arr[j + gap] = InsertVal;    
+            arr[j + gap] = InsertVal;	
         &#125;
     &#125;
-
+    
 &#125;
 </code></pre>
 
@@ -1499,13 +1499,13 @@ pStudent_t p1,p2;<span class="hljs-comment">//p1，p2均为结构体指针</span
 
 </code></pre>
 
-<h5 id="lt-6-gt-堆排"><a href="#lt-6-gt-堆排" class="headerlink" title="&lt;6&gt;堆排"></a>&lt;6&gt;堆排</h5><p>什么是堆===&gt;用数组去存一棵树</p>
-<p>左孩子 son = 2 * dad + 1 (位置而言)</p>
+<h5 id="lt-6-gt-堆排"><a href="#lt-6-gt-堆排" class="headerlink" title="&lt;6&gt;堆排"></a>&lt;6&gt;堆排</h5><p>什么是堆&#x3D;&#x3D;&#x3D;&gt;用数组去存一棵树</p>
+<p>左孩子 son &#x3D; 2 * dad + 1 (位置而言)</p>
 <p><strong>大根堆(大顶堆)：若父结点的值恒大于等于子结点的值</strong>，若从小到大排序，需要建立大顶堆</p>
 <p><strong>小根堆(小顶堆)：若父结点的值小于等于子结点的值</strong></p>
 <p><img src="/2021/07/17/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/18.png" srcset="/img/loading.gif"></p>
 <pre><code class="hljs C"><span class="hljs-comment">/*</span>
-<span class="hljs-comment">    堆排序</span>
+<span class="hljs-comment">	堆排序</span>
 <span class="hljs-comment">*/</span>
 
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">adjust_max_heap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr,<span class="hljs-keyword">int</span> adjust_pos,<span class="hljs-keyword">int</span> len)</span> </span>
@@ -1601,10 +1601,10 @@ pStudent_t p1,p2;<span class="hljs-comment">//p1，p2均为结构体指针</span
 &#125;
 </code></pre>
 
-<h5 id="lt-8-gt-计数排序"><a href="#lt-8-gt-计数排序" class="headerlink" title="&lt;8&gt;计数排序"></a>&lt;8&gt;计数排序</h5><p>空间换时间！====  数据的范围必须是有限的</p>
+<h5 id="lt-8-gt-计数排序"><a href="#lt-8-gt-计数排序" class="headerlink" title="&lt;8&gt;计数排序"></a>&lt;8&gt;计数排序</h5><p>空间换时间！&#x3D;&#x3D;&#x3D;&#x3D;  数据的范围必须是有限的</p>
 <pre><code class="hljs C"><span class="hljs-comment">//申请一个被排序数的范围大小的空间arr_count,遍历数组，统计数组中每个值出现的次数</span>
 <span class="hljs-comment">//遍历arr_count，根据每个值出现的次数，对要排序的数组进行填充</span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>     M 100</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>	 M 100</span>
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">arrCount</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr)</span></span>
 <span class="hljs-function"></span>&#123;
     <span class="hljs-keyword">int</span> i,j,k;
@@ -1628,7 +1628,7 @@ pStudent_t p1,p2;<span class="hljs-comment">//p1，p2均为结构体指针</span
 </code></pre>
 
 <h4 id="一些题目"><a href="#一些题目" class="headerlink" title="一些题目"></a>一些题目</h4><p> <img src="/2021/07/17/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/19.png" srcset="/img/loading.gif"> </p>
-<p>涉及到磁盘的===&gt;尽可能少读磁盘，速度太慢</p>
+<p>涉及到磁盘的&#x3D;&#x3D;&#x3D;&gt;尽可能少读磁盘，速度太慢</p>
 <p> <img src="/2021/07/17/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/20.png" srcset="/img/loading.gif"> </p>
 <p> <img src="/2021/07/17/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/21.png" srcset="/img/loading.gif"> </p>
 <p> <img src="/2021/07/17/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/22.png" srcset="/img/loading.gif"> </p>
@@ -1744,9 +1744,9 @@ error:
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
-                    
                       <a class="hover-with-bg" href="/tags/C%E8%AF%AD%E8%A8%80/">C语言</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
                     
                   </div>
                 
@@ -1930,7 +1930,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：79.2k</span>
+    <span class="post-count">总字数统计：76.4k</span>
 
     
   </div>

@@ -236,12 +236,12 @@
 <li>idea整合docker</li>
 <li>docker Compose</li>
 <li>docker swarm</li>
-<li>CI/CD jenkins</li>
+<li>CI&#x2F;CD jenkins</li>
 </ul>
-<h2 id="2-概述"><a href="#2-概述" class="headerlink" title="2.概述"></a>2.概述</h2><h3 id="Docker为何会出现？"><a href="#Docker为何会出现？" class="headerlink" title="Docker为何会出现？"></a>Docker为何会出现？</h3><p>一款产品：开发==&gt; 上线  应用环境，应用配置</p>
+<h2 id="2-概述"><a href="#2-概述" class="headerlink" title="2.概述"></a>2.概述</h2><h3 id="Docker为何会出现？"><a href="#Docker为何会出现？" class="headerlink" title="Docker为何会出现？"></a>Docker为何会出现？</h3><p>一款产品：开发&#x3D;&#x3D;&gt; 上线  应用环境，应用配置</p>
 <p>即开发 &amp; 运维。但常常有一个问题：在我的电脑可以运行，版本更新以及其他问题导致服务不可以，对于运维，考验就很大</p>
-<p>而且环境配置是十分麻烦的，每一个机器都要部署环境（集群Redis，ES，hadoop）===&gt; 费事费力！</p>
-<p>发布一个项目jar包（需要redis，mysql，jdk，es等环境）===&gt; 如果等<strong>带着jar包 和 环境</strong>一起发布岂不妙！</p>
+<p>而且环境配置是十分麻烦的，每一个机器都要部署环境（集群Redis，ES，hadoop）&#x3D;&#x3D;&#x3D;&gt; 费事费力！</p>
+<p>发布一个项目jar包（需要redis，mysql，jdk，es等环境）&#x3D;&#x3D;&#x3D;&gt; 如果等<strong>带着jar包 和 环境</strong>一起发布岂不妙！</p>
 <p>docker的作用就是如此！</p>
 <blockquote>
 <p>传统：开发jar，其余运维来做</p>
@@ -253,7 +253,7 @@
 <blockquote>
 <p>docker的思想来自于 集装箱 ！</p>
 <p>jre – 多个应用，可能会产生端口冲突</p>
-<p>隔离 ===&gt; docker的核心思想，打包装箱，每个箱子是互相隔离的</p>
+<p>隔离 &#x3D;&#x3D;&#x3D;&gt; docker的核心思想，打包装箱，每个箱子是互相隔离的</p>
 <p>故docker利用隔离机制，可以将服务器利用到极致！</p>
 </blockquote>
 <h3 id="docker历史"><a href="#docker历史" class="headerlink" title="docker历史"></a>docker历史</h3><p><img src="/2022/01/04/Docker%E5%9F%BA%E7%A1%80/01.png" srcset="/img/loading.gif" alt="image-20220102155224157"></p>
@@ -267,7 +267,7 @@
 <p><img src="/2022/01/04/Docker%E5%9F%BA%E7%A1%80/2.png" srcset="/img/loading.gif" alt="docker"></p>
 <p><strong>镜像(image)</strong>:</p>
 <blockquote>
-<p>​    docker镜像就好比是一个模板，可以通过这个模板来创建容器服务，tomcat镜像===&gt; run ===&gt; tomcat01容器(提供服务器)，</p>
+<p>​	docker镜像就好比是一个模板，可以通过这个模板来创建容器服务，tomcat镜像&#x3D;&#x3D;&#x3D;&gt; run &#x3D;&#x3D;&#x3D;&gt; tomcat01容器(提供服务器)，</p>
 <p>可以通过这个镜像创建多个容器（最终服务运行或项目运行就在容器</p>
 </blockquote>
 <p><strong>容器(container)</strong></p>
@@ -284,9 +284,9 @@
 </blockquote>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><strong>环境准备：</strong></p>
 <blockquote>
-<p>​    1、会linux命令</p>
-<p>​    2、CentOS</p>
-<p>​    3、使用ssh(例如xshell等….)</p>
+<p>​	1、会linux命令</p>
+<p>​	2、CentOS</p>
+<p>​	3、使用ssh(例如xshell等….)</p>
 </blockquote>
 <p><strong>环境查看</strong>：</p>
 <pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 系统内核是3.10以上的</span>
@@ -311,7 +311,7 @@ CENTOS_MANTISBT_PROJECT_VERSION=&quot;7&quot;
 REDHAT_SUPPORT_PRODUCT=&quot;centos&quot;
 REDHAT_SUPPORT_PRODUCT_VERSION=&quot;7&quot;</code></pre>
 
-<p> <strong>安装</strong> ===&gt; 根据官方文档</p>
+<p> <strong>安装</strong> &#x3D;&#x3D;&#x3D;&gt; 根据官方文档</p>
 <pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 1、Uninstall old versions</span>
 sudo yum remove docker \
                   docker-client \
@@ -321,24 +321,24 @@ sudo yum remove docker \
                   docker-latest-logrotate \
                   docker-logrotate \
                   docker-engine
-
+                  
 <span class="hljs-meta">#</span><span class="bash"> 2.安装需要的安装包</span>
  sudo yum install -y yum-utils
-
+ 
 <span class="hljs-meta">#</span><span class="bash"> 3.设置镜像的仓库</span>
 sudo yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo # 默认是从国外下载
-
+   
 <span class="hljs-meta">#</span><span class="bash"> 更新一下yum索引</span>
 yum makecache fast
 
 <span class="hljs-meta">#</span><span class="bash"> 4安装docker相关内容</span>
  sudo yum install docker-ce docker-ce-cli containerd.io
-
+ 
 <span class="hljs-meta"> #</span><span class="bash"> 5 启动docker</span>
  sudo systemctl start docker
-
+ 
 <span class="hljs-meta"> #</span><span class="bash"> 6 查看是否安装成功</span>
 [root@iZ2ze9nu608mhi5at5aufaZ ~]# docker version
 Client: Docker Engine - Community
@@ -622,7 +622,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：79.2k</span>
+    <span class="post-count">总字数统计：76.4k</span>
 
     
   </div>

@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      55
+      56
        分钟
     </span>
   
@@ -218,7 +218,7 @@
             <div class="markdown-body" id="post-body">
               <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h1><p>(行为层)</p>
 <h2 id="1-1什么是JavaScript？"><a href="#1-1什么是JavaScript？" class="headerlink" title="1.1什么是JavaScript？"></a>1.1什么是JavaScript？</h2><p><img src="/2022/01/21/JavaScript/01.png" srcset="/img/loading.gif" alt="image-20220121194910154"></p>
-<p><em>合格的后端开发人员必须<strong>精通</strong> JavaScript！</em></p>
+<p><em>合格的后端开发人员必须*<em>精通</em></em> JavaScript！*</p>
 <p><strong>JavaScript框架</strong></p>
 <p><img src="/2022/01/21/JavaScript/02.png" srcset="/img/loading.gif" alt="image-20220121194953823"></p>
 <p><strong>主流框架：VUE.js</strong></p>
@@ -281,7 +281,7 @@ student.toLowerCase()</code></pre>
 ===  <span class="hljs-comment">// 绝对等于(类型一样并且值也要一样)</span></code></pre>
 
 <blockquote>
-<p>ps: NaN == NaN 为false，即NaN与所有的数值均不等，包括自己</p>
+<p>ps: NaN &#x3D;&#x3D; NaN 为false，即NaN与所有的数值均不等，包括自己</p>
 <p>只能通过isNaN(NaN) 来判断是否为NaN</p>
 </blockquote>
 <p>浮点数问题  (会有精度) </p>
@@ -398,7 +398,7 @@ num.forEach(<span class="hljs-function"><span class="hljs-keyword">function</spa
 <p><img src="/2022/01/21/JavaScript/05.png" srcset="/img/loading.gif" alt="image-20220122181527949"></p>
 <p>问题：因为arguments获取所有的参数，如果我们想获取除传递以外的参数，如何办？</p>
 <blockquote>
-<p>rest ===&gt; es6引入的新特性，可获取除定义外的所有参数</p>
+<p>rest &#x3D;&#x3D;&#x3D;&gt; es6引入的新特性，可获取除定义外的所有参数</p>
 </blockquote>
 <pre><code class="hljs js"><span class="hljs-comment">//以前获取</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params">a,b</span>) </span>&#123;
@@ -421,7 +421,7 @@ num.forEach(<span class="hljs-function"><span class="hljs-keyword">function</spa
 &#125;
 x = x +<span class="hljs-number">2</span>;<span class="hljs-comment">//Uncaught ReferenceError: x is not defined</span></code></pre>
 
-<p>若函数外想访问里面的变量，如何操作===&gt;  <strong>闭包</strong></p>
+<p>若函数外想访问里面的变量，如何操作&#x3D;&#x3D;&#x3D;&gt;  <strong>闭包</strong></p>
 <pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>&#123;
     <span class="hljs-keyword">var</span> x = <span class="hljs-number">1</span>;<span class="hljs-comment">//内部函数可以访问外部函数,反之可以</span>
     <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f2</span>(<span class="hljs-params"></span>) </span>&#123;
@@ -431,7 +431,7 @@ x = x +<span class="hljs-number">2</span>;<span class="hljs-comment">//Uncaught 
 &#125;</code></pre>
 
 <blockquote>
-<p>提升作用域问题===&gt;  <strong>故所有的变量定义均放在头部(规范)</strong></p>
+<p>提升作用域问题&#x3D;&#x3D;&#x3D;&gt;  <strong>故所有的变量定义均放在头部(规范)</strong></p>
 </blockquote>
 <pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params"></span>) </span>&#123;
     <span class="hljs-keyword">var</span> x = <span class="hljs-string">&quot;x &quot;</span> + y;
@@ -450,7 +450,7 @@ x = x +<span class="hljs-number">2</span>;<span class="hljs-comment">//Uncaught 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>) </span>&#123;
     <span class="hljs-keyword">var</span> x = <span class="hljs-number">1</span>, 
         y = x + <span class="hljs-number">1</span>, 
-        z,i,a;<span class="hljs-comment">//undefined    </span>
+        z,i,a;<span class="hljs-comment">//undefined	</span>
     <span class="hljs-comment">//之后进行使用，若再需要新变量，上面继续添加</span>
 &#125;</code></pre>
 
@@ -466,7 +466,7 @@ f1();
 <blockquote>
 <p>规范：</p>
 <p>因为<strong>所有的全局变量均绑定到我们的windows对象上</strong>(alert也是在windows上的)，故如果不同的js文件，若使用了相同的全局变量。</p>
-<p>则造成冲突，如何解决？===&gt;</p>
+<p>则造成冲突，如何解决？&#x3D;&#x3D;&#x3D;&gt;</p>
 <p><strong>把自己的代码全部放在自己定义的唯一空间名字中，降低全局命名冲突的问题</strong></p>
 </blockquote>
 <pre><code class="hljs js"><span class="hljs-keyword">var</span> Yiheng = &#123;&#125;; <span class="hljs-comment">//自己定义的唯一全局变量  ===&gt;  jQuery就是如此操作的</span>
@@ -476,8 +476,8 @@ Yiheng.add = <span class="hljs-function"><span class="hljs-keyword">function</sp
     <span class="hljs-keyword">return</span> a + b;
 &#125;</code></pre>
 
-<p><strong>局部作用域 ==&gt; <code>let</code>关键字定义变量</strong></p>
-<p><strong>常量</strong> ==&gt; <code>const</code></p>
+<p><strong>局部作用域 &#x3D;&#x3D;&gt; <code>let</code>关键字定义变量</strong></p>
+<p><strong>常量</strong> &#x3D;&#x3D;&gt; <code>const</code></p>
 <blockquote>
 <p>在es6之前，定义常量是规定用大写字母进行定义，然后建议不修改！(有点扯….2333)</p>
 <p>故es6引入了const用于修饰常量</p>
@@ -497,7 +497,7 @@ heng.name;
 <span class="hljs-comment">//调方法</span>
 heng.age();</code></pre>
 
-<p>在js中，可以控制this的指向 ===&gt; 通过<code>apply</code>,所有的函数均有</p>
+<p>在js中，可以控制this的指向 &#x3D;&#x3D;&#x3D;&gt; 通过<code>apply</code>,所有的函数均有</p>
 <pre><code class="hljs js"><span class="hljs-comment">//可将方法定义在外面</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getAge</span>(<span class="hljs-params"></span>) </span>&#123;
     <span class="hljs-keyword">var</span> now = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getFullYear();   
@@ -508,9 +508,9 @@ heng.age();</code></pre>
     brith : <span class="hljs-string">&#x27;2000&#x27;</span>,    
     <span class="hljs-comment">//方法    </span>
     age : getAge&#125;
-<span class="hljs-comment">//调用调用    </span>
-heng.age() <span class="hljs-comment">//打印22    </span>
-getAge()  <span class="hljs-comment">//打印NaN  this并没有指向heng    </span>
+<span class="hljs-comment">//调用调用	</span>
+heng.age() <span class="hljs-comment">//打印22	</span>
+getAge()  <span class="hljs-comment">//打印NaN  this并没有指向heng	</span>
 getAge.apply(heng,[]);  <span class="hljs-comment">//此时this指向了heng，打印22</span></code></pre>
 
 
@@ -603,8 +603,8 @@ date.toGMTString()
 <p>指的是一套综合了多项技术的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%80%8F%E8%A6%BD%E5%99%A8">浏览器</a>端<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%B6%B2%E9%A0%81">网页</a>开发技术</p>
 </blockquote>
 <ul>
-<li>原生的js写法 ==&gt; xhr 异步请求</li>
-<li>jQuery封装的方法 ==&gt; $(“#name”).ajax(“”)</li>
+<li>原生的js写法 &#x3D;&#x3D;&gt; xhr 异步请求</li>
+<li>jQuery封装的方法 &#x3D;&#x3D;&gt; $(“#name”).ajax(“”)</li>
 <li>axios请求</li>
 </ul>
 <h1 id="5操作Dom元素"><a href="#5操作Dom元素" class="headerlink" title="5操作Dom元素"></a>5操作Dom元素</h1><p>Document Object Model  文档对象化模型</p>
@@ -717,7 +717,7 @@ navigator.platform
 <p>不建议使用这个属性来判断或编写代码，因为会被人为修改</p>
 <h2 id="6-3-screen"><a href="#6-3-screen" class="headerlink" title="6.3 screen"></a>6.3 screen</h2><pre><code class="hljs js">screen.width1536 <span class="hljs-comment">//pxscreen.height864 //px</span></code></pre>
 
-<h2 id="6-4-location"><a href="#6-4-location" class="headerlink" title="6.4 location"></a>6.4 location</h2><p>定位==&gt; <strong>Location 对象包含有关当前 URL 的信息</strong></p>
+<h2 id="6-4-location"><a href="#6-4-location" class="headerlink" title="6.4 location"></a>6.4 location</h2><p>定位&#x3D;&#x3D;&gt; <strong>Location 对象包含有关当前 URL 的信息</strong></p>
 <pre><code class="hljs awk">location.reload()  <span class="hljs-regexp">//</span>重新加载页面，即刷新<span class="hljs-regexp">//</span> 跳转到指定页面,设置新的地址location.assign(<span class="hljs-string">&quot;URL&quot;</span>)</code></pre>
 
 <h2 id="6-5-Document"><a href="#6-5-Document" class="headerlink" title="6.5 Document"></a>6.5 Document</h2><p><strong>代表当前页面</strong>，html dom文档树</p>
@@ -735,12 +735,12 @@ test_dl  可获取具体内容
 //可获取cookie
 document.cookie</code></pre>
 
-<p>当<a target="_blank" rel="noopener" href="https://www.taobao.com/">淘宝</a>在网址上登陆时，此时<a target="_blank" rel="noopener" href="https://www.tmall.com/">天猫</a>也进行同步登陆了===&gt; 拿到cookie就可以访问你的信息，故尽量不要暴露cookie</p>
+<p>当<a target="_blank" rel="noopener" href="https://www.taobao.com/">淘宝</a>在网址上登陆时，此时<a target="_blank" rel="noopener" href="https://www.tmall.com/">天猫</a>也进行同步登陆了&#x3D;&#x3D;&#x3D;&gt; 拿到cookie就可以访问你的信息，故尽量不要暴露cookie</p>
 <p>服务器端可以设置cookie：httpOnly</p>
 <h2 id="6-6-History"><a href="#6-6-History" class="headerlink" title="6.6 History"></a>6.6 History</h2><p>代表浏览器的历史记录</p>
 <pre><code class="hljs awk">history.back() <span class="hljs-regexp">//</span>后退history.forward() <span class="hljs-regexp">//</span>前进</code></pre>
 
-<h2 id="6-7-操作表单"><a href="#6-7-操作表单" class="headerlink" title="6.7 操作表单"></a>6.7 操作表单</h2><p>网站怎样与用户进行交互？==&gt;使用HTML表单(form)。</p>
+<h2 id="6-7-操作表单"><a href="#6-7-操作表单" class="headerlink" title="6.7 操作表单"></a>6.7 操作表单</h2><p>网站怎样与用户进行交互？&#x3D;&#x3D;&gt;使用HTML表单(form)。</p>
 <p><strong>表单是可以把浏览者输入的数据传送到服务器端，这样服务器端程序就可以处理表单传过来的数据。</strong><br> 语法：<code>&lt;form method=&quot;传送方式&quot; action=&quot;服务器文件&quot;&gt;</code></p>
 <p>什么是表单？</p>
 <ul>
@@ -751,7 +751,7 @@ document.cookie</code></pre>
 <li>隐藏框 hidden</li>
 <li>密码框 password…..</li>
 </ul>
-<p>表单的目的  ===&gt;  <strong>提交信息</strong></p>
+<p>表单的目的  &#x3D;&#x3D;&#x3D;&gt;  <strong>提交信息</strong></p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;post&quot;</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>用户名:<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
@@ -983,7 +983,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：79.2k</span>
+    <span class="post-count">总字数统计：76.4k</span>
 
     
   </div>

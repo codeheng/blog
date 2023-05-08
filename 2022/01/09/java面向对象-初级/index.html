@@ -240,9 +240,9 @@
 <h2 id="2-构造方法"><a href="#2-构造方法" class="headerlink" title="2.构造方法"></a>2.构造方法</h2><p>又称为构造器，是类的一种特殊方法，完成对新对象的初始化</p>
 <blockquote>
 <p>特点：</p>
-<p>​    1.方法名和类名相同</p>
-<p>​    2.没有返回值</p>
-<p>​    3.在创建对象时，系统会自动的调用该类的构造器完成对象的初始化</p>
+<p>​	1.方法名和类名相同</p>
+<p>​	2.没有返回值</p>
+<p>​	3.在创建对象时，系统会自动的调用该类的构造器完成对象的初始化</p>
 <p>基本语法：</p>
 <p>[修饰符] 方法名(形参列表) { 方法体; }</p>
 </blockquote>
@@ -251,7 +251,7 @@
 <li>构造器没有返回值<ol start="3">
 <li>方法名 和类名字必须一样<ol start="4">
 <li>参数列表 和 成员方法一样的规则<ol start="5">
-<li>构造器的调用, 由系统完成  </li>
+<li>构造器的调用, 由系统完成</li>
 </ol>
 </li>
 </ol>
@@ -289,12 +289,12 @@
 
 <h3 id="2-2包-package"><a href="#2-2包-package" class="headerlink" title="2.2包(package"></a>2.2包(package</h3><blockquote>
 <p>作用：1.区分相同名字的类；2当类很多时，可以很好的管理类(看java API文档) 3.控制访问范围</p>
-<p>包本质：就是创建不同的文件夹/目录保存类文件</p>
+<p>包本质：就是创建不同的文件夹&#x2F;目录保存类文件</p>
 <p>命名规则：只能包含数字，字母，下划线，小圆点，但不可以数字开头，不能是关键字</p>
 </blockquote>
 <p>规范：<strong>com.公司名.项目名.业务模块名</strong></p>
 <p>例如：com.sina.crm.user 用户模块</p>
-<p>如何引入包 ===&gt; import 包名;</p>
+<p>如何引入包 &#x3D;&#x3D;&#x3D;&gt; import 包名;</p>
 <h3 id="2-3-访问修饰符"><a href="#2-3-访问修饰符" class="headerlink" title="2.3 访问修饰符"></a>2.3 访问修饰符</h3><p>用于控制方法和属性(成员变量)的访问权限(范围)</p>
 <ol>
 <li>公开级别 <strong>public</strong> ，对外公开</li>
@@ -316,11 +316,11 @@
     &#125;
     <span class="hljs-comment">//ok 返回值和形参均不同</span>
     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">a</span><span class="hljs-params">(<span class="hljs-keyword">byte</span> i)</span> </span>&#123;
-
+        
     &#125;
     <span class="hljs-comment">// 错误，仅返回值类型不同不能重载</span>
     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">a</span><span class="hljs-params">()</span> </span>&#123;
-
+        
     &#125;
 &#125;</code></pre>
 
@@ -359,10 +359,10 @@
 <p>封装的实现步骤：</p>
 <p><img src="/2022/01/09/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%88%9D%E7%BA%A7/08.png" srcset="/img/loading.gif"></p>
 </blockquote>
-<h2 id="4-继承-extends"><a href="#4-继承-extends" class="headerlink" title="4.继承(extends)"></a>4.继承(extends)</h2><p>​        继承解决代码复用，当多个类存在相同的属性(变量)和方法时，可以从这些类中抽象出父类，在父类中定义这些相同的属性和方法，所有的子类不需要重新定义这些属性和方法，只需要通过extends来声明继承父类即可。</p>
+<h2 id="4-继承-extends"><a href="#4-继承-extends" class="headerlink" title="4.继承(extends)"></a>4.继承(extends)</h2><p>​		继承解决代码复用，当多个类存在相同的属性(变量)和方法时，可以从这些类中抽象出父类，在父类中定义这些相同的属性和方法，所有的子类不需要重新定义这些属性和方法，只需要通过extends来声明继承父类即可。</p>
 <p><img src="/2022/01/09/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E5%88%9D%E7%BA%A7/09.png" srcset="/img/loading.gif" alt="image-20211231185044322"></p>
 <pre><code class="hljs angelscript">语法：
-<span class="hljs-keyword">class</span> 子类 <span class="hljs-symbol">extends</span> 父类 &#123;    
+<span class="hljs-keyword">class</span> 子类 <span class="hljs-symbol">extends</span> 父类 &#123;	
 &#125;
 
 <span class="hljs-number">1.</span>子类就会自动拥有父类定义的属性和方法
@@ -390,7 +390,7 @@
 <p>同一个行为具有多个不同表现形式或形态的能力。即同样的方法，因实现类的不同，执行结果也不同</p>
 </blockquote>
 <h3 id="5-1方法的重写"><a href="#5-1方法的重写" class="headerlink" title="5.1方法的重写"></a>5.1方法的重写</h3><blockquote>
-<p>注意区分和重载的区别==&gt;</p>
+<p>注意区分和重载的区别&#x3D;&#x3D;&gt;</p>
 <p>重载：原有方法的逻辑不变，可以支持更多的参数实现</p>
 <p>重写：直接覆盖原有的方法</p>
 </blockquote>
@@ -407,12 +407,12 @@
 <pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
      SportsStudent student = <span class="hljs-keyword">new</span> SportsStudent(<span class="hljs-string">&quot;lbw&quot;</span>, <span class="hljs-number">20</span>);
      student.study();   <span class="hljs-comment">//输出子类定义的内容</span>
-&#125;     </code></pre>
+&#125; 	</code></pre>
 
 <blockquote>
 <p>ps:静态方法不可以被重写，是属于类的一部分</p>
 </blockquote>
-<p>如果在重写时，要使用自己的逻辑，也想执行父类的逻辑，怎么办===&gt; super</p>
+<p>如果在重写时，要使用自己的逻辑，也想执行父类的逻辑，怎么办&#x3D;&#x3D;&#x3D;&gt; super</p>
 <pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">study</span><span class="hljs-params">()</span> </span>&#123;
     <span class="hljs-keyword">super</span>.study();
     System.out.println(<span class="hljs-string">&quot;给你看点好康的！&quot;</span>);
@@ -435,7 +435,7 @@ student.study();     <span class="hljs-comment">//得到依然是具体实现的
 SportsStudent student1 = (SportsStudent)student;  <span class="hljs-comment">//让它变成一个具体的子类</span>
 student1.sport();  <span class="hljs-comment">//调用具体实现类的方法</span></code></pre>
 
-<h3 id="5-3-instanceof关键字"><a href="#5-3-instanceof关键字" class="headerlink" title="5.3 instanceof关键字"></a>5.3 instanceof关键字</h3><p>如果只是得到一个父类引用，但是不知道它到底是哪一个子类的实现怎么办？ ==&gt; instanceof 进行类型判断</p>
+<h3 id="5-3-instanceof关键字"><a href="#5-3-instanceof关键字" class="headerlink" title="5.3 instanceof关键字"></a>5.3 instanceof关键字</h3><p>如果只是得到一个父类引用，但是不知道它到底是哪一个子类的实现怎么办？ &#x3D;&#x3D;&gt; instanceof 进行类型判断</p>
 <p>可以明确类的具体实现到底是哪个类！</p>
 <pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">(Student student)</span></span>&#123;
     <span class="hljs-keyword">if</span> (student <span class="hljs-keyword">instanceof</span> SportsStudent)&#123;
@@ -479,7 +479,7 @@ student1.sport();  <span class="hljs-comment">//调用具体实现类的方法</
 <span class="hljs-comment">//只能创建带实现的匿名内部类</span>
 Student s = <span class="hljs-keyword">new</span> Student() &#123;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>&#123;
-
+        
     &#125;
 &#125;</code></pre>
 
@@ -513,7 +513,7 @@ Student s = <span class="hljs-keyword">new</span> Student() &#123;
 <pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SportStudent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Student</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Eat</span>,... </span>&#123;
     <span class="hljs-meta">@override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span> </span>&#123;
-
+        
     &#125;
 &#125;
 
@@ -525,7 +525,7 @@ Student s = <span class="hljs-keyword">new</span> Student() &#123;
 <h2 id="6-内部类"><a href="#6-内部类" class="headerlink" title="6.内部类"></a>6.内部类</h2><h3 id="成员内部类"><a href="#成员内部类" class="headerlink" title="成员内部类"></a>成员内部类</h3><p>我们的类中可以在嵌套一个类：</p>
 <pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;
     <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Inner</span></span>&#123;   <span class="hljs-comment">//类中定义的一个内部类</span>
-
+        
     &#125;
 &#125;
 <span class="hljs-comment">//就是Inner Class的实例不能单独存在，必须依附于一个Outer Class的实例</span></code></pre>
@@ -553,7 +553,7 @@ Student s = <span class="hljs-keyword">new</span> Student() &#123;
         <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Inner</span></span>&#123;
 
         &#125;
-
+        
         Inner inner = <span class="hljs-keyword">new</span> Inner();
     &#125;
 &#125;</code></pre>
@@ -776,7 +776,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：79.2k</span>
+    <span class="post-count">总字数统计：76.4k</span>
 
     
   </div>

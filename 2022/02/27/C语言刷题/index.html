@@ -298,7 +298,9 @@ D:<span class="hljs-built_in">cout</span>&lt;&lt;q[<span class="hljs-number">1</
 <blockquote>
 <p>指针类型，32位就是4，64位就是8  故均为 8</p>
 </blockquote>
-<p>7.</p>
+<ol start="7">
+<li></li>
+</ol>
 <pre><code class="hljs c">指针函数是指带指针的函数，即本质是一个函数，函数返回类型是某一类型的指针。
 <span class="hljs-comment">//函数fun()是一个指针函数,返回值为一个整型的指针.</span>
 <span class="hljs-function"><span class="hljs-keyword">int</span> *<span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span></span>
@@ -341,7 +343,7 @@ D: p2++;
 <p><strong>即</strong> <strong>const在*的左边不能改变字符串常量的值，故B错；</strong></p>
 <p><strong>const在*的右边不能改变指针的指向，故D错；</strong></p>
 <p><strong>由于</strong> <strong>“world“存储在字符常量区，不能直接修改其值，故C错；</strong></p>
-<p><strong>若要修改其值，应该改为char str []= “world”;</strong></p>
+<p><strong>若要修改其值，应该改为char str []&#x3D; “world”;</strong></p>
 </blockquote>
 <p>11、</p>
 <pre><code class="hljs c"><span class="hljs-keyword">char</span> str[<span class="hljs-number">4</span>][<span class="hljs-number">12</span>] = &#123;<span class="hljs-string">&quot;aaa&quot;</span>, <span class="hljs-string">&quot;bbbb&quot;</span>, <span class="hljs-string">&quot;ccccc&quot;</span>, <span class="hljs-string">&quot;dddddd&quot;</span>&#125;, *strp[<span class="hljs-number">4</span>];
@@ -354,7 +356,7 @@ B： strp
 C ： str[k]
 D: strp[k]
 <span class="hljs-comment">//选ACD</span>
-
+    
 A：*strp = strp[<span class="hljs-number">0</span>] = str[<span class="hljs-number">0</span>]。
 B：strp  = &amp;strp[<span class="hljs-number">0</span>] =  &amp;str[<span class="hljs-number">0</span>]
 C：str[k] = strp[k] = *(strp + k)
@@ -563,7 +565,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：79.2k</span>
+    <span class="post-count">总字数统计：76.4k</span>
 
     
   </div>

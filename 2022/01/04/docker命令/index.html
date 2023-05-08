@@ -251,7 +251,7 @@ Options:
       --format string   Pretty-print search using a Go template
       --limit int       Max number of search results (default 25)
       --no-trunc        Don&#x27;t truncate output
-
+      
 <span class="hljs-meta">#</span><span class="bash">例如：找出mysql中stars大于3000的</span>
 [root@iZ2ze9nu608mhi5at5aufaZ ~]# docker search mysql --filter=STARS=3000
 NAME      DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
@@ -389,7 +389,7 @@ ctrl + P + Q # 容器不停止退出
 [root@25c39385df34 /]# [root@iZ2ze9nu608mhi5at5aufaZ /]#</code></pre>
 
 <p><strong>删除容器</strong></p>
-<pre><code class="hljs shell">docker rm 容器id     #删除指定的容器，不能删除正在运行的容器，如果要强制 rm -f
+<pre><code class="hljs shell">docker rm 容器id 	#删除指定的容器，不能删除正在运行的容器，如果要强制 rm -f
 docker rm -f $(docker ps -aq) #删除所有的容器
 docker ps -a -q|xargs docker rm # 删除所有的容器</code></pre>
 
@@ -600,7 +600,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：79.2k</span>
+    <span class="post-count">总字数统计：76.4k</span>
 
     
   </div>

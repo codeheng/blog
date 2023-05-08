@@ -281,7 +281,7 @@
         TestThread_03 t = <span class="hljs-keyword">new</span> TestThread_03();
         <span class="hljs-comment">//创建线程对象，通过对象，开启线程 ==&gt; ( 代理 )</span>
         <span class="hljs-keyword">new</span> Thread(t).start();
-
+        
         <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;
             System.out.println(<span class="hljs-string">&quot;我在学习main线程&quot;</span> + i);
         &#125;
@@ -334,7 +334,7 @@ PrimeRun p = <span class="hljs-keyword">new</span> PrimeRun();
 
 <h2 id="3-实现callable接口"><a href="#3-实现callable接口" class="headerlink" title="3.实现callable接口"></a>3.实现callable接口</h2><p>(了解)</p>
 <p><img src="/2022/01/20/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/04.png" srcset="/img/loading.gif" alt="image-20220126104754812"></p>
-<p>  具体==&gt; 多线程下载图片  (利用callable) </p>
+<p>  具体&#x3D;&#x3D;&gt; 多线程下载图片  (利用callable) </p>
 <pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestCallable</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Callable</span>&lt;<span class="hljs-title">Boolean</span>&gt; </span>&#123;
     <span class="hljs-keyword">private</span> String url; <span class="hljs-comment">//图片地址</span>
     <span class="hljs-keyword">private</span> String name; <span class="hljs-comment">//图片名字</span>
@@ -389,7 +389,7 @@ PrimeRun p = <span class="hljs-keyword">new</span> PrimeRun();
 &#125;</code></pre>
 
 <h2 id="4-静态代理"><a href="#4-静态代理" class="headerlink" title="4.静态代理"></a>4.静态代理</h2><p>真实对象和代理对象都要实现同一个接口</p>
-<p>代理对象要代理真实目标角色    </p>
+<p>代理对象要代理真实目标角色	</p>
 <blockquote>
 <p><strong>代理模式</strong>给某一个对象提供一个代理对象，并<strong>由代理对象控制对原对象的引用</strong>  即</p>
 <p>就是提供一个对象相当于中介者，他可以帮我们调用目标的功能，同时我们可以在使用目标功能的同时扩展其他功能，而不需要直接改到目标类。</p>
@@ -539,11 +539,9 @@ PrimeRun p = <span class="hljs-keyword">new</span> PrimeRun();
               System.out.println(<span class="hljs-string">&quot;this thread stopped!&quot;</span>);
           &#125;
       &#125;
-  &#125;
-&#125;</code></pre>
-
-</li>
+  &#125;</code></pre></li>
 </ul>
+<p>&amp;#125;:hexoPostRenderEscape–&gt;</p>
 <h2 id="2-线程睡眠"><a href="#2-线程睡眠" class="headerlink" title="2.线程睡眠"></a>2.线程睡眠</h2><p><img src="/2022/01/20/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/07.png" srcset="/img/loading.gif" alt="image-20220127113355513"> </p>
  <pre><code class="hljs java"><span class="hljs-comment">//倒计时</span>
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestSleep</span> </span>&#123;
@@ -554,7 +552,7 @@ PrimeRun p = <span class="hljs-keyword">new</span> PrimeRun();
             e.printStackTrace();
         &#125;
     &#125;
-
+    
      <span class="hljs-comment">//获取系统时间,并进行比变化</span>
         Date date = <span class="hljs-keyword">new</span> Date(System.currentTimeMillis());
         <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;
@@ -566,7 +564,7 @@ PrimeRun p = <span class="hljs-keyword">new</span> PrimeRun();
                 e.printStackTrace();
             &#125;
         &#125;
-
+    
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">tenDown</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;
         <span class="hljs-keyword">int</span> num = <span class="hljs-number">10</span>;
         <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;
@@ -583,7 +581,7 @@ PrimeRun p = <span class="hljs-keyword">new</span> PrimeRun();
 <h2 id="3-线程礼让"><a href="#3-线程礼让" class="headerlink" title="3.线程礼让"></a>3.线程礼让</h2><ul>
 <li>让正在执行的线程暂停，但不阻塞</li>
 <li>将线程从运行变为就绪</li>
-<li>cpu重新调度，是否礼让成功，根据cpu而定，仍然又可能让了之后，还继续执行 </li>
+<li>cpu重新调度，是否礼让成功，根据cpu而定，仍然又可能让了之后，还继续执行</li>
 </ul>
 <pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestYield</span> </span>&#123;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
@@ -635,12 +633,11 @@ PrimeRun p = <span class="hljs-keyword">new</span> PrimeRun();
 <li><p>java提供了一个线程调度器来监控程序中启动后进入就绪状态的所有线程，线程调度器按照优先级决定应该调度哪个线程来执行</p>
 </li>
 <li><p>优先级用数字表示，0~10</p>
-<pre><code class="hljs JAVA">Thread.MIN_PRIORITY = <span class="hljs-number">1</span>;
-Thread.MAX_PRIORITY = <span class="hljs-number">10</span>;
-Thread.NORM_PRIORITY = <span class="hljs-number">5</span>;</code></pre>
-</li>
-<li><p>使用<code>getPriority().setPriority(int xx)</code>改变优先级</p>
-</li>
+<pre><code class="hljs JAVA">Thread.MIN_PRIORITY = <span class="hljs-number">1</span>;</code></pre></li>
+</ul>
+<p>Thread.MAX_PRIORITY &#x3D; <span class="hljs-number">10</span>;<br>Thread.NORM_PRIORITY &#x3D; <span class="hljs-number">5</span>;:hexoPostRenderEscape–&gt;</p>
+<ul>
+<li>使用<code>getPriority().setPriority(int xx)</code>改变优先级</li>
 </ul>
 <blockquote>
 <p>优先级低，不代表调度概论低，要看cpu调度</p>
@@ -674,7 +671,7 @@ Thread.NORM_PRIORITY = <span class="hljs-number">5</span>;</code></pre>
 <ul>
 <li>线程分为<strong>用户线程和守护线程</strong></li>
 <li>虚拟机必须确保用户线程执行完毕</li>
-<li>虚拟机不用等待守护线程执行完毕 ==&gt; 如：后台记录操作日志，监控内存，垃圾回收…..</li>
+<li>虚拟机不用等待守护线程执行完毕 &#x3D;&#x3D;&gt; 如：后台记录操作日志，监控内存，垃圾回收…..</li>
 </ul>
 <pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestDaemon</span> </span>&#123;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
@@ -972,7 +969,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：79.2k</span>
+    <span class="post-count">总字数统计：76.4k</span>
 
     
   </div>

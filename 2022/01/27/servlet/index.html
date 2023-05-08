@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      59
+      60
        分钟
     </span>
   
@@ -232,7 +232,7 @@
 </blockquote>
 <h1 id="2-Servlet项目"><a href="#2-Servlet项目" class="headerlink" title="2.Servlet项目"></a>2.Servlet项目</h1><p>(1). 建立<strong>普通的maven项目</strong>，删除里面的src目录，之后再建立项目，就在此项目中建立<code>Model</code>即可，即<strong>主工程</strong></p>
 <p><img src="/2022/01/27/servlet/01.png" srcset="/img/loading.gif" alt="image-20220128173531354"></p>
-<p>添加<code>servlet-api</code> 和 <code>jsp-api</code>依赖 ==&gt; <code>setting.xml</code>如图</p>
+<p>添加<code>servlet-api</code> 和 <code>jsp-api</code>依赖 &#x3D;&#x3D;&gt; <code>setting.xml</code>如图</p>
 <pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span>
 <span class="hljs-tag">         <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span>
@@ -260,7 +260,7 @@
             <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.3.3<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span>
-
+    
 <span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span> </code></pre>
 
 <p>(2).里面可进行<strong>新建web-maven项目</strong>，如图</p>
@@ -301,7 +301,7 @@
             <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span>
-
+    
     <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
         <span class="hljs-comment">&lt;!--dependency&gt;</span>
 <span class="hljs-comment">      &lt;groupId&gt;com.heng&lt;/groupId&gt;</span>
@@ -330,7 +330,7 @@
 <p><strong>(3).maven环境进行优化</strong></p>
 <ul>
 <li>修改web.xml</li>
-<li>将maven结构弄完成 ==&gt;  main下添加<code>java</code> 和 <code>resources文件夹</code></li>
+<li>将maven结构弄完成 &#x3D;&#x3D;&gt;  main下添加<code>java</code> 和 <code>resources文件夹</code></li>
 </ul>
 <p><strong>目录结构</strong></p>
 <p><img src="/2022/01/27/servlet/04.png" srcset="/img/loading.gif" alt="image-20220128192003127"></p>
@@ -381,7 +381,7 @@
 <p>查看结果</p>
 <p><img src="/2022/01/27/servlet/09.png" srcset="/img/loading.gif" alt="image-20220128192055844"></p>
 <p><img src="/2022/01/27/servlet/10.png" srcset="/img/loading.gif" alt="image-20220128192111911"></p>
-<h1 id="3-servlet原理-本质"><a href="#3-servlet原理-本质" class="headerlink" title="3.servlet原理/本质"></a>3.servlet原理/本质</h1><blockquote>
+<h1 id="3-servlet原理-x2F-本质"><a href="#3-servlet原理-x2F-本质" class="headerlink" title="3.servlet原理&#x2F;本质"></a>3.servlet原理&#x2F;本质</h1><blockquote>
 <p>浏览器发送一个HTTP请求，HTTP请求由<strong>Web容器</strong>(比如tomcat)分配给特定的Servlet进行处理<br><strong>Servlet的本质是一个Java对象</strong>，这个对象拥有一系列的方法来处理HTTP请求。常见的方法有**doGet()，doPost()**等。</p>
 <p>Web容器中包含了多个Servlet，特定的HTTP请求该由哪一个Servlet来处理是由Web容器中的<code>web.xml</code>来决定的。</p>
 </blockquote>
@@ -425,29 +425,28 @@
 <p>当输入<code>http://localhost:8080/s1/hello</code>或 <code>http://localhost:8080/s1/hello1</code>或<code>http://localhost:8080/s1/hello2</code></p>
 <p>均可以访问</p>
 <ul>
-<li>一个servlet可以指定通用映射路径    </li>
+<li>一个servlet可以指定通用映射路径</li>
 </ul>
+<p>	</p>
 <pre><code class="hljs xml"><span class="hljs-comment">&lt;!--3 通用映射--&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>hello<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/hello/*<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span></code></pre>
 
-<p>当访问<code>/hello/xxxx</code> xxxx即*  ==&gt; 代指任何均可以访问</p>
+<p>当访问<code>/hello/xxxx</code> xxxx即*  &#x3D;&#x3D;&gt; 代指任何均可以访问</p>
 <p>若改为<code>&lt;url-pattern&gt;*&lt;/url-pattern&gt;</code>则报错<br>若改为<code> &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</code> 则默认启动即相应的页面，<code>index.jsp</code>内容无法看到</p>
 <ul>
 <li><p>可以指定前缀或后缀</p>
 <pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>hello<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>*.heng<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span></code></pre>
-
-<p>只要访问是以<code>.heng</code>为后缀则访问成功</p>
-</li>
+  <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>*.heng<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span></code></pre></li>
 </ul>
+<p><span class="hljs-tag">&lt;&#x2F;<span class="hljs-name">servlet-mapping</span>&gt;</span>:hexoPostRenderEscape–&gt;</p>
+<p>  只要访问是以<code>.heng</code>为后缀则访问成功</p>
 <h2 id="2-优先级"><a href="#2-优先级" class="headerlink" title="2.优先级"></a>2.优先级</h2><ul>
 <li><p>指定了固有的路径优先级最高，如果找不到找默认的</p>
-<p>示例：编写<code>ErrorServlet</code>  目的==&gt; 访问错误到自己的页面，显示404</p>
+<p>示例：编写<code>ErrorServlet</code>  目的&#x3D;&#x3D;&gt; 访问错误到自己的页面，显示404</p>
 </li>
 </ul>
 <pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ErrorServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;
@@ -695,7 +694,7 @@
 <p>相同点：页面均会跳转 </p>
 <p>不同：请求转发时，url不会发生变化(307)，而重定向(302)会  </p>
 </blockquote>
-<p><strong>小案例 ==&gt;</strong> </p>
+<p><strong>小案例 &#x3D;&#x3D;&gt;</strong> </p>
 <p>通过<code>index.jsp</code>上form表单输入账号，密码，进行提交，跳转到另一个页面，显示成功</p>
 <p><strong>需要在表单上指定action具体路径</strong> <code>$&#123;pageContext.request.contextPath&#125;</code>指代当前项目</p>
 <p><code>index.jsp</code></p>
@@ -959,7 +958,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：79.2k</span>
+    <span class="post-count">总字数统计：76.4k</span>
 
     
   </div>

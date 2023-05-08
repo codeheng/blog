@@ -228,16 +228,16 @@
 <li>网页动画(特效)</li>
 </ol>
 <h2 id="1-1什么是css"><a href="#1-1什么是css" class="headerlink" title="1.1什么是css"></a>1.1什么是css</h2><p>Cascading Style Sheet(层叠级联样式表)</p>
-<p>css ==&gt; 表现(用于美化网页)</p>
+<p>css &#x3D;&#x3D;&gt; 表现(用于美化网页)</p>
 <p>包括：字体，颜色，边距，高度，宽度，背景图片，网页定位，网页浮动…..</p>
 <p><img src="/2022/01/15/css/00.png" srcset="/img/loading.gif" alt="image-20220121194547522"></p>
 <p><strong>CSS预处理器</strong></p>
 <p><img src="/2022/01/15/css/000.png" srcset="/img/loading.gif" alt="image-20220121194650495"></p>
-<h2 id="1-2-发展史"><a href="#1-2-发展史" class="headerlink" title="1.2 发展史"></a>1.2 发展史</h2><p>CSS1.0  ==&gt; 只能美化一些基础的</p>
-<p>CSS2.0 ==&gt; div(块) + css，提出html与css结构分离的思想，网页变得简单</p>
-<p>CSS2.1===&gt;  浮动，定位</p>
-<p>CSS3.0 ===&gt; 圆角，阴影，动画…..（需要浏览器兼容性</p>
-<h2 id="1-3-快速入门"><a href="#1-3-快速入门" class="headerlink" title="1.3 快速入门"></a>1.3 快速入门</h2><p>书写标准格式==&gt;</p>
+<h2 id="1-2-发展史"><a href="#1-2-发展史" class="headerlink" title="1.2 发展史"></a>1.2 发展史</h2><p>CSS1.0  &#x3D;&#x3D;&gt; 只能美化一些基础的</p>
+<p>CSS2.0 &#x3D;&#x3D;&gt; div(块) + css，提出html与css结构分离的思想，网页变得简单</p>
+<p>CSS2.1&#x3D;&#x3D;&#x3D;&gt;  浮动，定位</p>
+<p>CSS3.0 &#x3D;&#x3D;&#x3D;&gt; 圆角，阴影，动画…..（需要浏览器兼容性</p>
+<h2 id="1-3-快速入门"><a href="#1-3-快速入门" class="headerlink" title="1.3 快速入门"></a>1.3 快速入门</h2><p>书写标准格式&#x3D;&#x3D;&gt;</p>
 <p><img src="/2022/01/15/css/01.png" srcset="/img/loading.gif" alt="image-20220115095910933"></p>
 <pre><code class="hljs css">&lt;!<span class="hljs-selector-tag">--</span>
     规范:&lt;<span class="hljs-selector-tag">style</span>&gt;编写<span class="hljs-selector-tag">css</span>代码，每一个声明，最好用分号结尾
@@ -294,21 +294,17 @@
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;css/style.css&quot;</span>&gt;</span></code></pre>
 </li>
 <li><p>导入式(css2.1中使用)</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
-<span class="css">    <span class="hljs-keyword">@import</span> <span class="hljs-string">&quot;css/style.css&quot;</span>;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span></code></pre>
-
-
-
-</li>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span></code></pre></li>
 </ul>
+<p><span class="css">    <span class="hljs-keyword">@import</span> <span class="hljs-string">&quot;css&#x2F;style.css&quot;</span>;</span><br><span class="hljs-tag">&lt;&#x2F;<span class="hljs-name">style</span>&gt;</span>:hexoPostRenderEscape–&gt;</p>
 <h1 id="2-选择器-重要"><a href="#2-选择器-重要" class="headerlink" title="2.选择器(重要)"></a>2.选择器(重要)</h1><blockquote>
 <p>选择页面上的某一个或某一类元素</p>
 </blockquote>
 <h2 id="2-1-基本选择器"><a href="#2-1-基本选择器" class="headerlink" title="2.1 基本选择器"></a><strong>2.1 基本选择器</strong></h2><h3 id="标签选择器"><a href="#标签选择器" class="headerlink" title="标签选择器"></a>标签选择器</h3><p>会选择到这个页面上的所有标签</p>
 <h3 id="类选择器"><a href="#类选择器" class="headerlink" title="类选择器"></a>类选择器</h3><pre><code>格式:
 .class的名称&#123;   &#125;
-好处：可以多个标签归类，是同一个class，可复用</code></pre>
+好处：可以多个标签归类，是同一个class，可复用
+</code></pre>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
 <span class="css">    <span class="hljs-selector-class">.name</span>&#123;</span>
         color: red;
@@ -327,7 +323,8 @@
 
 <h3 id="id选择器"><a href="#id选择器" class="headerlink" title="id选择器"></a>id选择器</h3><pre><code>格式： #id名称&#123;   &#125;
 必须全局唯一，不可以复用 
-不遵循就近原则  生效原则：id选择器 &gt; 类选择器 &gt; 标签选择器     </code></pre>
+不遵循就近原则  生效原则：id选择器 &gt; 类选择器 &gt; 标签选择器	 
+</code></pre>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
 <span class="css">    <span class="hljs-selector-id">#test</span>&#123;</span>
         color: blue;
@@ -345,7 +342,7 @@
     <span class="hljs-attribute">color</span>: blue;
 &#125;</code></pre>
 
-<h4 id="相邻兄弟选择器"><a href="#相邻兄弟选择器" class="headerlink" title="相邻兄弟选择器"></a>相邻兄弟选择器</h4><p>(同辈) ===&gt; 向下的相邻</p>
+<h4 id="相邻兄弟选择器"><a href="#相邻兄弟选择器" class="headerlink" title="相邻兄弟选择器"></a>相邻兄弟选择器</h4><p>(同辈) &#x3D;&#x3D;&#x3D;&gt; 向下的相邻</p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
 <span class="css">    <span class="hljs-selector-class">.test</span> + <span class="hljs-selector-tag">p</span>&#123;</span>
     color: blueviolet;
@@ -372,7 +369,7 @@
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></code></pre>
 
 <p>此时p2 p3均为变颜色</p>
-<h3 id="2-结构伪类选择器"><a href="#2-结构伪类选择器" class="headerlink" title="2.结构伪类选择器"></a>2.结构伪类选择器</h3><p>带冒号这种==&gt; 即伪类 (代表条件判断 )</p>
+<h3 id="2-结构伪类选择器"><a href="#2-结构伪类选择器" class="headerlink" title="2.结构伪类选择器"></a>2.结构伪类选择器</h3><p>带冒号这种&#x3D;&#x3D;&gt; 即伪类 (代表条件判断 )</p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>p1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>p2<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
@@ -392,14 +389,14 @@
 <span class="css">    <span class="hljs-selector-tag">ul</span> <span class="hljs-selector-tag">li</span><span class="hljs-selector-pseudo">:last-child</span>&#123;</span>
         color: blueviolet;
     &#125;
-
+    
     /*首先找到当前p元素的父级元素，然后选中父级元素的第一个，并且类型要是当前元素才生效 （按顺序进行选择
     此时p1会变颜色
     */
 <span class="css">    <span class="hljs-selector-tag">p</span><span class="hljs-selector-pseudo">:nth-child(1)</span> &#123;</span>
         color: blue;
     &#125;
-
+    
 <span class="css">    <span class="hljs-comment">/*选中父元素下的p元素的第二个  此时p2变颜色 (按类型进行选择)  */</span> </span>
 <span class="css">    <span class="hljs-selector-tag">p</span><span class="hljs-selector-pseudo">:nth-of-type(2)</span> &#123;</span>
         background-color: blue;
@@ -417,11 +414,12 @@
 <span class="hljs-selector-tag">a</span><span class="hljs-selector-attr">[class *= <span class="hljs-string">&quot;links&quot;</span>]</span> &#123; &#125;</code></pre>
 
 <h1 id="3-美化网页元素"><a href="#3-美化网页元素" class="headerlink" title="3 美化网页元素"></a>3 美化网页元素</h1><p><strong>为何需要美化</strong></p>
-<pre><code>-     更有效传递网页信息
--     页面好看，才能吸引用户
--     凸显页面主题
--     提高用户体验</code></pre>
-<p>span==&gt; 想重点突出的字，约定用 span套起来，然后表示</p>
+<pre><code>-	 更有效传递网页信息
+-	 页面好看，才能吸引用户
+-	 凸显页面主题
+-	 提高用户体验
+</code></pre>
+<p>span&#x3D;&#x3D;&gt; 想重点突出的字，约定用 span套起来，然后表示</p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
 <span class="css">    <span class="hljs-selector-id">#java</span>&#123;</span>
         color: red;
@@ -456,7 +454,7 @@ font: 字体粗细 行/高 字体格式  或 font:字体风格 字体粗细 大�
 </li>
 <li><p>行高</p>
 <p><code>height:300px;</code></p>
-<p><code>line-height:300px;</code>  &lt;== 行高</p>
+<p><code>line-height:300px;</code>  &lt;&#x3D;&#x3D; 行高</p>
 <p>当 行高 与块高度相同时，则可实现上下居中</p>
 </li>
 <li><p>装饰</p>
@@ -511,7 +509,7 @@ background: red url(&quot;../images/d.gif&quot;) 270px 10px no-repeat;</code></p
 &lt;/div&gt;</code></pre>
 
 <blockquote>
-<p> 给出 50 * 50 ==&gt; 盒子模型尺寸计算指：margin + border + padding + 内容元素 = 50 * 50</p>
+<p> 给出 50 * 50 &#x3D;&#x3D;&gt; 盒子模型尺寸计算指：margin + border + padding + 内容元素 &#x3D; 50 * 50</p>
 </blockquote>
 <p><strong>圆角边框</strong></p>
 <p>4个角</p>
@@ -535,14 +533,14 @@ background: red url(&quot;../images/d.gif&quot;) 270px 10px no-repeat;</code></p
 <p>行内元素：不独占一行</p>
 <pre><code class="hljs stylus"><span class="hljs-selector-tag">span</span>  a标签 <span class="hljs-selector-tag">img</span> <span class="hljs-selector-tag">strong</span>....</code></pre>
 
-<p><strong>display</strong> 也是实现行内元素排列的方式，但多用float  ===&gt; <strong>方向不可以控制，不会出现父级边框塌陷问题</strong></p>
+<p><strong>display</strong> 也是实现行内元素排列的方式，但多用float  &#x3D;&#x3D;&#x3D;&gt; <strong>方向不可以控制，不会出现父级边框塌陷问题</strong></p>
 <pre><code class="hljs css"><span class="hljs-selector-tag">block</span> 块元素
 <span class="hljs-selector-tag">inline</span> 行内元素
 <span class="hljs-selector-tag">inline-block</span> 是块元素，但是可以内联，在一行
 
 none ==&gt; 消失 </code></pre>
 
-<p><strong>float浮动</strong>()  ===&gt;  <strong>浮动的话可能会脱离标准文档流，所以要解决父级边框塌陷</strong></p>
+<p><strong>float浮动</strong>()  &#x3D;&#x3D;&#x3D;&gt;  <strong>浮动的话可能会脱离标准文档流，所以要解决父级边框塌陷</strong></p>
 <p>right,left <strong>左右浮动</strong></p>
 <pre><code class="hljs css"><span class="hljs-selector-tag">clear</span><span class="hljs-selector-pseudo">:both</span>; <span class="hljs-comment">/*两侧均不许有浮动元素，即按照正常元素向下排布*/</span>
 <span class="hljs-selector-tag">clear</span><span class="hljs-selector-pseudo">:right</span>;
@@ -867,7 +865,7 @@ show_date_time();
 </style>
 
     <i class="fa fa-area-chart"></i>
-    <span class="post-count">总字数统计：79.2k</span>
+    <span class="post-count">总字数统计：76.4k</span>
 
     
   </div>
